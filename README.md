@@ -9,6 +9,6 @@
 
 ## Team Members
 Alex Cakic,
-Mark Thomas,
+Mark Thomas - [Engineering Journal](https://gist.github.com/MarkPThomas/7ce6b7a2a48820ad1995afc5ee6ba506),
 Steven Harder,
 Vinh Huynh
