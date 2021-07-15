@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('webpackHtmlPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.jsx',
@@ -11,14 +11,17 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/i,
-        exclude: 'node_modules',
+        exclude: path.resolve(__dirname, 'node_modules'),
         use: {
           loader: 'babel-loader',
-          options: [ '@babel/preset-env', '@babel/preset-react' ],
+          options: {
+            presets: [ '@babel/preset-env', '@babel/preset-react' ],
+          },
+        },
       },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/dist/index.html' })
+    new HtmlWebpackPlugin({ title: 'Atelier' }),
   ],
 };
