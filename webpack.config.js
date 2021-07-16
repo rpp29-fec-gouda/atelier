@@ -7,10 +7,12 @@ module.exports = {
     path: path.resolve(__dirname, 'client/dist'),
     filename: "bundle.js",
   },
+  mode: 'development',
+  resolve: { extensions: ["*", ".js", ".jsx"] },
   module: {
     rules: [
       {
-        test: /\.jsx?/i,
+        test: /\.(js|jsx)$/,
         exclude: path.resolve(__dirname, 'node_modules', 'coverage'),
         use: {
           loader: 'babel-loader',
@@ -19,6 +21,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      }
     ],
   },
   plugins: [
