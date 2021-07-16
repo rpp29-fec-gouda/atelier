@@ -57,6 +57,11 @@
       "shared"
     ],
     "^react(.*)$": "<rootDir>/vendor/react-master$1",
-    "^config$": "<rootDir>/configs/app-config.js"
+    "^config$": "<rootDir>/configs/app-config.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/docs/",
+      "<rootDir>/client/src/stylesheets/"
+    ]
   }
 }
