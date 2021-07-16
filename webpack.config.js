@@ -11,7 +11,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/i,
-        exclude: path.resolve(__dirname, 'node_modules'),
+        exclude: path.resolve(__dirname, 'node_modules', 'coverage'),
         use: {
           loader: 'babel-loader',
           options: {
