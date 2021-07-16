@@ -8,7 +8,7 @@
 - **npm run build** for webpack/react/index.html
 
 ## Team Members
-Alex Cakic,
-Mark Thomas,
-Steven Harder,
-Vinh Huynh
+- Alex Cakic
+- [Mark Thomas](https://gist.github.com/MarkPThomas) - [Engineering Journal](https://gist.github.com/MarkPThomas/7ce6b7a2a48820ad1995afc5ee6ba506)
+- Steven Harder
+- Vinh Huynh
