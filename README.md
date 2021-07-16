@@ -8,7 +8,7 @@
 - **npm run build** for webpack/react/index.html
 
 ## Testing
-- Jest is the framework chosen to test React and probably all JavaScript code in the app.
+- [Jest](https://jestjs.io/) is the framework chosen to test React and probably all JavaScript code in the app.
 - Tests are located in the **tests** directory
 - **npm test** to run the tests
 
