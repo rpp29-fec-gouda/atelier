@@ -1,19 +1,19 @@
 # Atelier
 
 ## Setup
-- **clone/pull repo**
-- **npm install**
-- create a GitHub authorization token and store it in config.js (make sure it's .gitignored)
-- **npm start** for the server
-- **npm run build** for webpack/react/index.html
+- **Clone/pull repo**
+- ```npm install```
+- Create a GitHub authorization token and store it in **`config.js`** (make sure it's `.gitignored`).
+- ```npm start``` for the server
+- ```npm run build``` for webpack/react/index.html
 
 ## Testing
 - [Jest](https://jestjs.io/) is the framework chosen to test React and probably all JavaScript code in the app.
-- Tests are located in the **tests** directory
-- **npm test** to run the tests
+- Tests are located in the **`./tests`** directory
+- ```npm test``` to run the tests
 
 ## Documentation
-- Documentation such as diagrams for the app and UX styling guidelines are stored in the **docs** directory.
+- Documentation such as diagrams for the app and UX styling guidelines are stored in the **`./docs`** directory.
 
 ## Team Members
 - [Alex Cakic](https://github.com/aleksandar-cakic) - [Engineering Journal](https://gist.github.com/aleksandar-cakic/1f46fd75b3cefb7857a5bdbae9a6a53b)
