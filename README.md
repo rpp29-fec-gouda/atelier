@@ -18,5 +18,5 @@
 ## Team Members
 - [Alex Cakic](https://github.com/aleksandar-cakic) - [Engineering Journal](https://gist.github.com/aleksandar-cakic/1f46fd75b3cefb7857a5bdbae9a6a53b)
 - [Mark Thomas](https://github.com/MarkPThomas) - [Engineering Journal](https://gist.github.com/MarkPThomas/7ce6b7a2a48820ad1995afc5ee6ba506)
-- Steven Harder - [Engineering Journal](https://gist.github.com/stevenharderjr/b2f158790eddc6b6257553fba2875694.js)
+- [Steven Harder](https://github.com/stevenharderjr) - [Engineering Journal](https://gist.github.com/stevenharderjr/b2f158790eddc6b6257553fba2875694.js)
 - Vinh Huynh
