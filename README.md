@@ -6,7 +6,7 @@
 - Create a GitHub authorization token and store it in **`config.js`** (make sure it's `.gitignored`).
 - ```npm start``` for the server
 - ```npm run build``` for webpack/react/index.html
-- Install `pomander` before attempting to push commits:
+- Install Pomander before attempting to push commits:
 - `curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash`
 
 ## Testing
