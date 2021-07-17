@@ -6,6 +6,8 @@
 - Create a GitHub authorization token and store it in **`config.js`** (make sure it's `.gitignored`).
 - ```npm start``` for the server
 - ```npm run build``` for webpack/react/index.html
+- Install `pomander` before attempting to push commits:
+- `curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash`
 
 ## Testing
 - [Jest](https://jestjs.io/) is the framework chosen to test React and probably all JavaScript code in the app.
