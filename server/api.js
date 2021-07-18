@@ -4,70 +4,35 @@ const config = require('../config.js');
 axios.defaults.baseURL = config.API;
 axios.defaults.headers.common['Authorization'] = config.GITHUB_TOKEN;
 
-const retrieve = (endpoint, callback) => {
-  console.log('GET request to ' + endpoint);
-  return axios.get(endpoint)
-    .then(res => {
-      console.log('Data recieved from API:', res.data);
-      callback(null, res.data);
-    })
-    .catch(err => {
-      console.log('API', err);
-      callback(err, null);
-    });
-};
-
 module.exports = {
-  products: {
-    get: (req, callback) => {
-      console.log(req.url, req.params, req.body);
-      callback(null, 'OK');
+  fwd: (req, callback) => {
+    console.log('API query:\n', req.url, req.params[0], req.query);
+
+    if (req.method === 'GET') {
+      return axios.get(req.url)
+        .then(response => {
+          callback(null, response.data);
+        })
+        .catch(err => {
+          callback(err, null);
+        });
     }
-  },
-  reviews: {
-    get: () => {},
-    post: () => {},
-    put: () => {}
-  },
-  qa: {
-    get: () => {},
-    post: () => {},
-    put: () => {}
-  },
-  cart: {
-    get: () => {},
-    post: () => {},
-    put: () => {}
-  },
-  interactions: {
-    get: () => {},
-    post: () => {},
-    put: () => {}
-  },
-  getProducts: (callback) => {
-    return axios.get('/products')
-      .then(res => {
-        // console.log('Data recieved from API:', res.data);
-        callback(null, res.data);
-      })
-      .catch(err => {
-        // console.log('API', err);
-        callback(err, null);
-      });
-  },
-  fwd: (req, res, callback) => {
-    const endpoint = req.url;
-    console.log(endpoint);
+
     if (req.method === 'POST') {
-
+      return axios.post(req.url, req.body)
+        .then(response => {
+          callback(null, response.data);
+        })
+        .catch(err => {
+          callback(err, null);
+        });
     }
 
-    return axios.get(req.url)
+    return axios.put(req.url, req.body)
       .then(response => {
         callback(null, response.data);
       })
       .catch(err => {
-        // console.log('API', err.stack);
         callback(err, null);
       });
   }
