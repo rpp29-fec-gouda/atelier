@@ -4,7 +4,7 @@ const config = require('../config.js');
 axios.defaults.baseURL = config.API;
 axios.defaults.headers.common['Authorization'] = config.GITHUB_TOKEN;
 
-const getByEndpoint = (endpoint, callback) => {
+const retrieve = (endpoint, callback) => {
   console.log('GET request to ' + endpoint);
   return axios.get(endpoint)
     .then(res => {
@@ -18,12 +18,31 @@ const getByEndpoint = (endpoint, callback) => {
 };
 
 module.exports = {
-  get: {
-    products: (cb, id = null) => (getByEndpoint('/products', cb)),
-    reviews: (cb, id = null) => (getByEndpoint('/reviews/', cb)),
-    qa: (cb, id = null) => (getByEndpoint('/reviews'))
-
-
+  products: {
+    get: (req, callback) => {
+      console.log(req.url, req.params, req.body);
+      callback(null, 'OK');
+    }
+  },
+  reviews: {
+    get: () => {},
+    post: () => {},
+    put: () => {}
+  },
+  qa: {
+    get: () => {},
+    post: () => {},
+    put: () => {}
+  },
+  cart: {
+    get: () => {},
+    post: () => {},
+    put: () => {}
+  },
+  interactions: {
+    get: () => {},
+    post: () => {},
+    put: () => {}
   },
   getProducts: (callback) => {
     return axios.get('/products')
