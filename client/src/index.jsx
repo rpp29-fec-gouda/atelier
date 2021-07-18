@@ -7,6 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleUpdate.bind(this);
+
     this.state = {
       products: []
     };
