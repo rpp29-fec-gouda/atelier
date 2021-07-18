@@ -1,6 +1,5 @@
 const api = require('./server/api.js');
 const path = require('path');
-const products = require('./server/productsRouter.js');
 const express = require('express');
 const app = express();
 
