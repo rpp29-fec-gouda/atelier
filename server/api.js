@@ -4,51 +4,35 @@ const config = require('../config.js');
 axios.defaults.baseURL = config.API;
 axios.defaults.headers.common['Authorization'] = config.GITHUB_TOKEN;
 
-const getByEndpoint = (endpoint, callback) => {
-  console.log('GET request to ' + endpoint);
-  return axios.get(endpoint)
-    .then(res => {
-      console.log('Data recieved from API:', res.data);
-      callback(null, res.data);
-    })
-    .catch(err => {
-      console.log('API', err);
-      callback(err, null);
-    });
-};
-
 module.exports = {
-  get: {
-    products: (cb, id = null) => (getByEndpoint('/products', cb)),
-    reviews: (cb, id = null) => (getByEndpoint('/reviews/', cb)),
-    qa: (cb, id = null) => (getByEndpoint('/reviews'))
+  fwd: (req, callback) => {
+    console.log('API query:\n', req.url, req.params[0], req.query);
 
-
-  },
-  getProducts: (callback) => {
-    return axios.get('/products')
-      .then(res => {
-        // console.log('Data recieved from API:', res.data);
-        callback(null, res.data);
-      })
-      .catch(err => {
-        // console.log('API', err);
-        callback(err, null);
-      });
-  },
-  fwd: (req, res, callback) => {
-    const endpoint = req.url;
-    console.log(endpoint);
-    if (req.method === 'POST') {
-
+    if (req.method === 'GET') {
+      return axios.get(req.url)
+        .then(response => {
+          callback(null, response.data);
+        })
+        .catch(err => {
+          callback(err, null);
+        });
     }
 
-    return axios.get(req.url)
+    if (req.method === 'POST') {
+      return axios.post(req.url, req.body)
+        .then(response => {
+          callback(null, response.data);
+        })
+        .catch(err => {
+          callback(err, null);
+        });
+    }
+
+    return axios.put(req.url, req.body)
       .then(response => {
         callback(null, response.data);
       })
       .catch(err => {
-        // console.log('API', err.stack);
         callback(err, null);
       });
   }
