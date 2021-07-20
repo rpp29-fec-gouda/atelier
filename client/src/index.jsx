@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
+import RelatedProductsList from './components/RelatedProductsList.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class App extends React.Component {
     this.handleUpdate.bind(this);
 
     this.state = {
-      products: []
+      products: [],
+      related: []
     };
   }
 
@@ -42,6 +44,8 @@ class App extends React.Component {
             <p>Loading...</p>
           )
         }
+        <RelatedProductsList products={ products } />
+        {/* { products prop should be supplied by this.state.relatedProducts } */}
       </div>
     );
   }

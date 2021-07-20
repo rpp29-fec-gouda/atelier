@@ -4,11 +4,11 @@
  *   https://github.com/reactorcore/eslint-config-hackreactor
  */
 
- module.exports = {
-  parser: "babel-eslint",
+module.exports = {
+  parser: '@babel/eslint-parser',
   parserOptions: {
-      "sourceType": "module",
-      "allowImportExportEverywhere": true
+    'sourceType': 'module',
+    'allowImportExportEverywhere': true
   },
   // env: {
   //   'es6': true
@@ -47,4 +47,4 @@
     'comma-style': [2, 'last'],
     'quotes': [1, 'single']
   }
-  };
+};
