@@ -7,6 +7,8 @@
 - `npm start` for the server
 - `npm run build` (in a separate terminal) for webpack/react/index.html
 - Navigate to `http://localhost:3000` in browser
+
+## Contributing
 - Install Pomander before attempting to push commits:
 - `curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash`
 
