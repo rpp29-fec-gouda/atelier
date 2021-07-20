@@ -2,10 +2,11 @@
 
 ## Setup
 - **Clone/pull repo**
-- ```npm install```
+- `npm install`
 - Create a GitHub authorization token and store it in **`config.js`** (make sure it's `.gitignored`).
-- ```npm start``` for the server
-- ```npm run build``` for webpack/react/index.html
+- `npm start` for the server
+- `npm run build` (in a separate terminal) for webpack/react/index.html
+- Navigate to `http://localhost:3000` in browser
 - Install Pomander before attempting to push commits:
 - `curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash`
 
