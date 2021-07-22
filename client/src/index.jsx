@@ -10,6 +10,7 @@ class App extends React.Component {
     this.handleUpdate.bind(this);
 
     this.state = {
+      ready: false,
       products: [],
       selectedProduct: null
     };
@@ -30,27 +31,27 @@ class App extends React.Component {
   componentDidMount() {
     this.handleUpdate('/products', 'products')
       .then(() => {
-        const selectedProduct = this.state.products[0].id;
-        this.setState({ selectedProduct: selectedProduct });
-        console.log(selectedProduct);
+        const initialProductId = this.state.products[0].id;
+        this.setState({
+          selectedProduct: initialProductId,
+          ready: true
+        });
       });
   }
 
   render() {
-    const { products } = this.state;
+    const { products, ready } = this.state;
     return (
-      <div id='App'>
-        <h3>Temporary Product Selector</h3>
-        <select name='tempProductSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
-          {
-            products.length ? (
-              products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>))
-            ) : (
-              <p>Loading...</p>
-            )
-          }
-        </select>
-      </div>
+      ready ? (
+        <div id='App'>
+          <h3>Temporary Product Selector</h3>
+          <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
+            { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
+          </select>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )
     );
   }
 }
