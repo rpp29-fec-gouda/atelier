@@ -7,3 +7,7 @@ body {
   display: flex;
   flex-flow: column;
 }
+
+select {
+  width: 24em;
+}

@@ -37,13 +37,15 @@ class App extends React.Component {
     return (
       <div id='App'>
         <h3>Behold, some data:</h3>
-        {
-          products.length ? (
-            products.map(product => (<div key={product.id}>{product.name}</div>))
-          ) : (
-            <p>Loading...</p>
-          )
-        }
+        <select name='productSelector' onChange={(e) => { console.log(e.currentTarget.value); }}>
+          {
+            products.length ? (
+              products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>))
+            ) : (
+              <p>Loading...</p>
+            )
+          }
+        </select>
         <RelatedProductsList products={ products } />
         {/* { products prop should be supplied by this.state.relatedProducts } */}
       </div>
