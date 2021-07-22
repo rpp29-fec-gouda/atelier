@@ -47,6 +47,8 @@ class App extends React.Component {
   }
 }
 
+export default App;
+
 const div = document.createElement('div');
 div.setAttribute('id', 'Atelier');
 document.body.appendChild(div);
