@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
-import RelatedProductsList from './components/RelatedProductsList.jsx';
+import RelatedProducts from './components/RelatedProducts.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,13 +11,14 @@ class App extends React.Component {
     this.handleUpdate.bind(this);
 
     this.state = {
+      ready: false,
       products: [],
-      related: []
+      selectedProduct: null
     };
   }
 
   handleUpdate(urlToReload, stateKeyToUpdate) {
-    axios.get(urlToReload)
+    return axios.get(urlToReload)
       .then(res => {
         this.setState({
           [stateKeyToUpdate]: res.data
@@ -29,29 +30,36 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.handleUpdate('/products', 'products');
+    this.handleUpdate('/products', 'products')
+      .then(() => {
+        const initialProductId = this.state.products[0].id;
+        this.setState({
+          selectedProduct: initialProductId,
+          ready: true
+        });
+        console.log(initialProductId);
+      });
   }
 
   render() {
-    const { products } = this.state;
+    const { products, ready } = this.state;
     return (
-      <div id='App'>
-        <h3>Behold, some data:</h3>
-        <select name='productSelector' onChange={(e) => { console.log(e.currentTarget.value); }}>
-          {
-            products.length ? (
-              products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>))
-            ) : (
-              <p>Loading...</p>
-            )
-          }
-        </select>
-        <RelatedProductsList products={ products } />
-        {/* { products prop should be supplied by this.state.relatedProducts } */}
-      </div>
+      ready ? (
+        <div id='App'>
+          <h3>Temporary Product Selector</h3>
+          <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
+            { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
+          </select>
+          <RelatedProducts selectedProduct={ this.state.selectedProduct } />
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )
     );
   }
 }
+
+export default App;
 
 const div = document.createElement('div');
 div.setAttribute('id', 'Atelier');
