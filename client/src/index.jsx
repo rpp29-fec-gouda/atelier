@@ -10,12 +10,13 @@ class App extends React.Component {
     this.handleUpdate.bind(this);
 
     this.state = {
-      products: []
+      products: [],
+      selectedProduct: null
     };
   }
 
   handleUpdate(urlToReload, stateKeyToUpdate) {
-    axios.get(urlToReload)
+    return axios.get(urlToReload)
       .then(res => {
         this.setState({
           [stateKeyToUpdate]: res.data
@@ -27,21 +28,28 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.handleUpdate('/products', 'products');
+    this.handleUpdate('/products', 'products')
+      .then(() => {
+        const selectedProduct = this.state.products[0].id;
+        this.setState({ selectedProduct: selectedProduct });
+        console.log(selectedProduct);
+      });
   }
 
   render() {
     const { products } = this.state;
     return (
       <div id='App'>
-        <h3>Behold, some data:</h3>
-        {
-          products.length ? (
-            products.map(product => (<div key={product.id}>{product.name}</div>))
-          ) : (
-            <p>Loading...</p>
-          )
-        }
+        <h3>Temporary Product Selector</h3>
+        <select name='tempProductSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
+          {
+            products.length ? (
+              products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>))
+            ) : (
+              <p>Loading...</p>
+            )
+          }
+        </select>
       </div>
     );
   }
