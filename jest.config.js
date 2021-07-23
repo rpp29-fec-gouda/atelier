@@ -26,9 +26,9 @@ module.exports = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: [
+    '/node_modules/'
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -69,13 +69,14 @@ module.exports = {
   moduleDirectories: [
     'node_modules',
     'bower_components',
-    'shared'
+    'shared',
+    'utils'
   ],
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
     'js',
-    'js'
+    'jsx'
   ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
@@ -129,7 +130,10 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: [
+    // 'jest-enzyme'
+    '<rootDir>/tests/setupTests.js'
+  ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -138,7 +142,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jsdom', //'enzyme', //'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
