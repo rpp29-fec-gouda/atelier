@@ -1,4 +1,4 @@
 module.exports = {
   presets: ['@babel/preset-env', '@babel/preset-react'],
-  plugins: ["react-html-attrs"]
+  plugins: ['react-html-attrs']
 };
