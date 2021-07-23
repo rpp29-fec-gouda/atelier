@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
+import RatingsAndReviews from './components/RatingsAndReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class App extends React.Component {
           <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
             { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
           </select>
+          <RatingsAndReviews />
         </div>
       ) : (
         <p>Loading...</p>
