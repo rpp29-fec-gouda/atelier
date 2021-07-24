@@ -1,6 +1,6 @@
 import React from 'react'
 
-function RatingsAndReviews (props) {
+function RatingsAndReviews(props) {
 
   return (<div>Ratings and Reviews</div>)
 }

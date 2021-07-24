@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
 import RatingsAndReviews from './components/RatingsAndReviews.jsx';
+import QA from './components/QA/QA_index.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class App extends React.Component {
             { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
           </select>
           <RatingsAndReviews />
+          <QA />
         </div>
       ) : (
         <p>Loading...</p>
