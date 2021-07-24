@@ -9,8 +9,8 @@ import App from '../../../client/src/index.jsx';
 // For Enzyme usage, see: https://github.com/enzymejs/enzyme-matchers/tree/master/packages/jest-enzyme
 
 describe('Test App Entry point', function () {
-  it('should have a header tag with Behold, some data:', function () {
+  it('should have a header tag with "Temporary Product Selector":', function () {
     const wrapper = shallow(<App/>);
-    expect(wrapper.find('h3').text()).toEqual('Behold, some data:');
+    expect(wrapper.find('h3').text()).toEqual('Temporary Product Selector');
   });
 });
