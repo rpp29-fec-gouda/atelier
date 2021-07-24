@@ -3,7 +3,7 @@ import '../css/RelatedProducts.css';
 
 const stars = [1, 1, 1, .8, 0];
 
-const RelatedProductCard = (props) => {
+const ProductCard = (props) => {
   const { product } = props;
   let key = 0;
   return (
@@ -26,4 +26,4 @@ const RelatedProductCard = (props) => {
   );
 };
 
-export default RelatedProductCard;
+export default ProductCard;

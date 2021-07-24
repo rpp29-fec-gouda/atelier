@@ -10,13 +10,14 @@ class RelatedProducts extends React.Component {
 
     this.state = {
       ready: false,
+      selectedProduct: this.props.selectedProduct,
       products: [],
       outfit: []
     };
   }
 
-  loadRelatedProducts(id) {
-    axios.get(`/products/${id}/related`)
+  loadRelatedProducts(product) {
+    axios.get(`/products/${product.id}/related`)
     .then(res => {
       this.setState({ products: res.data });
     })
@@ -26,30 +27,26 @@ class RelatedProducts extends React.Component {
   }
 
   selectProduct(product) {
-    this.loadRelatedProducts(product.id);
+    this.loadRelatedProducts(product);
     this.props.selectProduct(product);
   }
 
   componentDidMount() {
-    const id = this.props.selectedProduct;
     // In the future this will also need to identify the user and bring up their selected outfit from their past session
-    this.loadRelatedProducts(id);
+    this.loadRelatedProducts(this.props.selectedProduct);
   }
 
   render() {
     const { products, outfit } = this.state;
     return (
-      products.length ? (
-        <div id='RelatedProdcuts'>
-          <RelatedProductsCarousel products={products} />
-          <OutfitCarousel outfit={outfit} />
-          {/* <RelatedProductsOutfit /> */}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )
+      <div id='RelatedProdcuts'>
+        <RelatedProductsCarousel products={products} />
+        <OutfitCarousel outfit={outfit} />
+        {/* <RelatedProductsOutfit /> */}
+      </div>
     );
   }
 }
+
 
 export default RelatedProducts;

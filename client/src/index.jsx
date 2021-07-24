@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
-import RelatedProducts from './components/relatedProducts/RelatedProducts.jsx';
+import RelatedProducts from './components/related/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
 
 class App extends React.Component {
@@ -32,7 +32,7 @@ class App extends React.Component {
 
   selectProduct(product) {
     this.setState({
-      selectedProduct: product.id
+      selectedProduct: product
     });
   }
 
@@ -53,10 +53,9 @@ class App extends React.Component {
         <div id='App'>
           <h3>Temporary Product Selector</h3>
           <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
-            { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
+            { products.map(product => (<option key={product.id} value={product}>{product.name}</option>)) }
           </select>
           <RelatedProducts selectedProduct={ this.state.selectedProduct } selectProduct={ this.selectProduct } />
-          {/* <RatingsAndReviews /> */}
         </div>
       ) : (
         <p>Loading...</p>
