@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import RelatedProductCard from './RelatedProductCard.jsx';
-import './css/RelatedProducts.css';
+import '../css/RelatedProducts.css';
 
 class RelatedProductsCarousel extends React.Component {
   constructor(props) {

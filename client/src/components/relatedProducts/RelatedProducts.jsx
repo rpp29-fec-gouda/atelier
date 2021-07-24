@@ -2,7 +2,7 @@ import React from 'react';
 import RelatedProductsCarousel from './RelatedProductsCarousel.jsx';
 // import RelatedProductsOutfit from './RelatedProductsOutift.jsx';
 import axios from 'axios';
-import './css/RelatedProducts.css';
+import '../css/RelatedProducts.css';
 
 class RelatedProducts extends React.Component {
   constructor(props) {

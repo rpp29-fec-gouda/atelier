@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
-import RelatedProducts from './components/RelatedProducts.jsx';
+import RelatedProducts from './components/relatedProducts/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
 
 class App extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style.css';
+import '../css/RelatedProducts.css';
 
 const stars = [1, 1, 1, .8, 0];
 
@@ -12,11 +12,11 @@ const RelatedProductCard = (props) => {
         <img src=''></img>
         <a className='relatedProductStar' title="Add to outfit" onClick={() => { props.updateOutfit(product); }}>{String.fromCharCode(9734)}</a>
       </div>
-      <div class='relatedProductInfo'>
+      <div className='relatedProductInfo'>
         <span className='relatedProductCategory'>{product.category.toUpperCase()}</span>
         <span className='relatedProductTitle' title='View product detail'>{`${product.name}: ${product.slogan.toLowerCase()}`}</span>
-        <span class='relatedProductPrice'>{'$' + product.default_price}</span>
-        <div class='starRating' title='See reviews'>
+        <span className='relatedProductPrice'>{'$' + product.default_price}</span>
+        <div className='starRating' title='See reviews'>
           {stars.map(star => (
             <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
           ))}
