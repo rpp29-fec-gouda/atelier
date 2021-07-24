@@ -1,7 +1,7 @@
-import Enzyme from 'enzyme';
-import {mount, shallow} from 'enzyme'
-import React from 'react'
-import RatingsAndReviews from '../../../client/src/components/RatingsAndReviews.jsx'
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import RatingsAndReviews from '../../../../../client/src/components/ratingsReviews/RatingsAndReviews.jsx';
 
 // ==== Test Template ====
 // ====== index.jsx ======
