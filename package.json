@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test-init": "jest --init",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "nodemon server.js",
     "build": "webpack --mode development --watch",
     "dev": "npm run build & npm run start & npm run test"
@@ -31,6 +32,7 @@
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "babel-plugin-react-html-attrs": "^3.0.5",
+    "coveralls": "^3.1.1",
     "css-loader": "^6.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
