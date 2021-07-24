@@ -22,7 +22,7 @@ script:
 
 # Tell Travis CI to monitor only 'main' branch
 branches:
-  only: testing
+  only: continuousIntegration
 
 # You can delete the cache using travis-ci web interface
 cache:
