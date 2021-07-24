@@ -30,9 +30,9 @@
 # Continuous Integration
 Basic test of JavaScript continuous integration.
 
-Travis CI: [![Build Status](https://travis-ci.com/MarkPThomas/continuous-integration-js.svg?branch=master)](https://travis-ci.com/MarkPThomas/continuous-integration-js)
+Travis CI: [![Build Status](https://travis-ci.com/rpp29-fec-gouda/atelier.svg?branch=main)](https://travis-ci.com/rpp29-fec-gouda/atelier.svg?branch=main)
 
-Coveralls: [![Coverage Status](https://coveralls.io/repos/github/MarkPThomas/continuous-integration-js/badge.svg)](https://coveralls.io/github/MarkPThomas/continuous-integration-js)
+Coveralls: [![Coverage Status](https://coveralls.io/repos/github/rpp29-fec-gouda/atelier/badge.svg?branch=main)](https://coveralls.io/github/rpp29-fec-gouda/atelier?branch=main)
 
 # SonarCloud
 
