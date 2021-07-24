@@ -30,15 +30,19 @@ class App extends React.Component {
       });
   }
 
+  selectProduct(product) {
+    this.setState({
+      selectedProduct: product.id
+    });
+  }
+
   componentDidMount() {
     this.handleUpdate('/products', 'products')
       .then(() => {
-        const initialProductId = this.state.products[0].id;
+        this.selectProduct(this.state.products[0]);
         this.setState({
-          selectedProduct: initialProductId,
           ready: true
         });
-        console.log(initialProductId);
       });
   }
 
@@ -51,7 +55,8 @@ class App extends React.Component {
           <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
             { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
           </select>
-          <RelatedProducts selectedProduct={ this.state.selectedProduct } />
+          <RelatedProducts selectedProduct={ this.state.selectedProduct } selectProduct={ this.selectProduct } />
+          {/* <RatingsAndReviews /> */}
         </div>
       ) : (
         <p>Loading...</p>
