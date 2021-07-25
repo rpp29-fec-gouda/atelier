@@ -46,11 +46,7 @@ class App extends React.Component {
   componentDidMount() {
     this.handleUpdate('/products', 'products')
       .then(() => {
-<<<<<<< HEAD
         this.selectProduct(this.state.products[0]);
-=======
-        const initialProductId = this.state.products[0]?.id;
->>>>>>> 9ad52647eeba71387bb3324365316a8eb50d05e1
         this.setState({
           ready: true
         });
