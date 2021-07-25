@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import RelatedProductCard from './ProductCard.jsx';
+import ProductCard from './ProductCard.jsx';
 import '../css/RelatedProducts.css';
 
-const RelatedProductsCarousel = (props) => {
+const ProductsCarousel = (props) => {
   const { products } = props;
 
   return (
@@ -13,7 +13,7 @@ const RelatedProductsCarousel = (props) => {
       <div className='cardContainer'>{
         products.length ? (
           products.map(product => (
-            <RelatedProductCard key={product.id} product={product} updateOutfit={(p) => {}} />
+            <ProductCard key={product.id} product={product} updateOutfit={(p) => {}} />
           ))
         ) : (
           <p>Loading...</p>
@@ -23,4 +23,4 @@ const RelatedProductsCarousel = (props) => {
   );
 }
 
-export default RelatedProductsCarousel;
+export default ProductsCarousel;

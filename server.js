@@ -17,13 +17,20 @@ app.get('/', (req, res) => {
 });
 
 app.all('*', (req, res) => (
-  api.fwd(req, (err, results) => {
+  api.fwd(req, (err, result) => {
     if (err) {
-      console.log('From API:', err.response.data);
-      res.sendStatus(err.response.status);
+      const error = (err.response ? err.response.data : err) + '\n';
+      console.log('API response:\n', error);
+      res.send(error);
     } else {
-      console.log('API response:\n', JSON.stringify(results));
-      res.json(results);
+      console.log('API response:');
+      if (Array.isArray(result)) {
+        console.log(result.map(result => (JSON.stringify(result))));
+        res.json(result);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
     }
     res.end();
   })

@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.handleUpdate('/products', 'products')
+    this.handleUpdate('/products?count=1000000', 'products')
       .then(() => {
         this.selectProduct(this.state.products[0]);
         this.setState({
@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { products, ready } = this.state;
+    const { products, selectedProduct, ready } = this.state;
     return (
       ready ? (
         <div id='App'>
@@ -62,7 +62,7 @@ class App extends React.Component {
           <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
             { products.map(product => (<option key={product.id} value={product}>{product.name}</option>)) }
           </select>
-          <RelatedProducts selectedProduct={ this.state.selectedProduct } selectProduct={ this.selectProduct } />
+          <RelatedProducts products={products} selectedProduct={ selectedProduct } selectProduct={ this.selectProduct } />
         </div>
       ) : (
         <p>Loading...</p>
