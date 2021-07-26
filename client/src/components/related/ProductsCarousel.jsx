@@ -20,7 +20,6 @@ const ProductsCarousel = (props) => {
               selectProduct={ selectProduct }
               selectedProduct={ selectedProduct }
               updateOutfit={ (p) => {} }
-              main= { props.main }
             />
           ))
         ) : (

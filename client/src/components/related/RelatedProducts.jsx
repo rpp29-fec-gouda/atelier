@@ -10,18 +10,22 @@ class RelatedProducts extends React.Component {
 
     this.selectProduct = this.selectProduct.bind(this);
 
+    this.products = [];
+
+    this.map = {
+      products: new Map(),
+      related: new Map()
+      // outfit: undefined
+    };
+
     this.state = {
-      // ready: false,
-      selectedProduct: this.props.selectedProduct,
-      products: [],
-      productMap: undefined,
       related: [],
       outfit: []
     };
   }
 
   collectRelatedProducts(product) {
-    console.log('Refreshing related products');
+    console.log('reset related products');
     this.fetchRelatedIds(product, (ids) => {
       this.setState({
         related: this.collectProductsById(ids)
@@ -30,64 +34,51 @@ class RelatedProducts extends React.Component {
   }
 
   fetchRelatedIds(product, callback = () => {}) {
-    axios.get(`/products/${product.id}/related`)
-    .then(res => {
-      callback(res.data);
-      // this.setState({ related: res.data });
-    })
-    .catch(err => {
-      console.log(err.stack);
-    });
+    const id = product.id;
+    const { related } = this.map;
+    let ids = related.get(product.id);
+
+    if (ids) {
+      callback(ids);
+    } else {
+      axios.get(`/products/${id}/related`)
+        .then(res => {
+          ids = res.data;
+          related.set(id, ids)
+          callback(ids);
+          // this.setState({ related: res.data });
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+    }
+  }
+
+  collectProductsById(ids) {
+    const { products } = this.map;
+    if (ids && products) {
+      // console.log(ids);
+      const relatedProducts = ids.map(id => (products.get(id)));
+      // console.log(relatedProducts);
+      return relatedProducts;
+    }
+    return [];
   }
 
   mapAllProductsById() {
     return axios.get('/products?count=1000000')
       .then(res => {
-        const products = res.data, productMap = new Map();
-        for (let i = 0, end = products.length; i < end; i++) {
-          productMap.set(products[i].id, products[i]);
+        const { products: map } = this.map;
+        const allProducts = res.data;
+        for (let i = 0, end = allProducts.length; i < end; i++) {
+          const product = allProducts[i];
+          map.set(product.id, product);
         }
-        this.setState({
-          products: products,
-          productMap: productMap
-        });
-        // console.log(this.state.productMap.get(this.props.selectedProduct.id));
-        // callback(productMap.get(id));
+        this.products = allProducts;
       })
       .catch(err => {
         console.log(err.stack);
       });
-  }
-
-  // collectProductsById(ids) {
-  //   if (ids.length) {
-  //     const { products } = this.props;
-  //     console.log(ids);
-  //     const collection = ids.reduce((relatedProducts, id) => {
-  //       for (let i = 0, length = products.length; i < length; i++) {
-  //         if (products[i].id === id) {
-  //           relatedProducts.push(products[i]);
-  //         }
-  //         return relatedProducts;
-  //       }
-  //     }, []);
-  //     console.log(collection);
-  //     return collection;
-  //   }
-  //   // console.log(relatedProducts);
-  //   // return relatedProducts;
-  //   return [];
-  // }
-
-  collectProductsById(ids) {
-    if (ids && this.state.productMap) {
-      const { productMap } = this.state;
-      // console.log(ids);
-      const relatedProducts = ids.map(id => (productMap.get(id)));
-      // console.log(relatedProducts);
-      return relatedProducts;
-    }
-    return [];
   }
 
   selectProduct(product) {
@@ -97,27 +88,39 @@ class RelatedProducts extends React.Component {
 
   componentDidMount() {
     // In the future this will also need to identify the user and bring up their selected outfit from their past session
-    // this.mapProductsById(this.props.products);
-    // this.collectRelatedProducts(this.props.selectedProduct);
     this.mapAllProductsById()
       .then(() => {
-        this.props.updateProductMap(this.state.products, this.state.productMap);
-        this.collectRelatedProducts(this.state.selectedProduct);
+        this.props.updateProductMap(this.products, this.map.products);
+        this.collectRelatedProducts(this.props.selectedProduct);
       })
       .catch(err => {
         console.log(err.stack);
       });
   }
 
-  render() {
-    const { selectedProduct, related, outfit } = this.state;
-    const { selectProduct, productMap } = this.props;
+  componentDidUpdate() {
+    const { related } = this.map;
+    if (!related.get(this.props.selectedProduct.id)) {
+      this.collectRelatedProducts(this.props.selectedProduct);
+    }
+  }
 
-    // const relatedProducts = this.collectProductsById(related);
+  render() {
+    const { related, outfit } = this.state;
+    const { selectedProduct, selectProduct } = this.props;
+
+    console.log('RelatedProducts re-render');
     return (
       <div id='RelatedProdcuts'>
-        <ProductsCarousel products={ related } selectedProduct={ selectedProduct } selectProduct={ this.selectProduct } main={ this.props.main } />
-        <OutfitCarousel outfit={ outfit } />
+        <ProductsCarousel
+          // key={ selectedProduct }
+          products={ related }
+          selectedProduct={ selectedProduct }
+          selectProduct={ this.selectProduct }
+        />
+        <OutfitCarousel
+          outfit={ outfit }
+        />
         {/* <RelatedProductsOutfit /> */}
       </div>
     );

@@ -8,9 +8,9 @@
   padding: .5em;
 }
 
-/* .componentTitle {
-  margin-top: 2em;
-} */
+.componentTitle {
+  user-select: none;
+}
 
 .cardContainer {
   display: flex;

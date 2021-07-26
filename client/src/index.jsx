@@ -11,17 +11,23 @@ class App extends React.Component {
 
     this.handleUpdate = this.handleUpdate.bind(this);
     this.selectProduct = this.selectProduct.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.updateProductMap = this.updateProductMap.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.updateProductData = this.updateProductData.bind(this);
     // this.fetchProductById.bind(this);
     // this.mapAllProductsById.bind(this);
-    this.productMap = undefined;
-    this.label = 'Main';
+    this.map = {
+      products: undefined,
+      questions: undefined,
+      ratings: undefined,
+      related: undefined
+    }
+    // this.ratingMap = undefined;
+    // this.relatedMap = undefined;
+    // this.productMap = undefined;
 
     this.state = {
       ready: false,
       products: [],
-      productMap: undefined,
       selectedProduct: null
     };
   }
@@ -52,18 +58,18 @@ class App extends React.Component {
     });
   }
 
-  updateProductMap(products, productMap) {
-    console.log(this.label, this.state.selectedProduct.name);
-    this.productMap = productMap;
+  updateProductData(productList, productMap) {
+    this.map.products = productMap;
     this.setState({
-      products: products
+      products: productList
     });
   }
 
-  handleSelect(e) {
+  handleSelectChange(e) {
+    const { products } = this.map;
     const productId = parseInt(e.currentTarget.value);
-    const selectedProduct = this.productMap.get(productId);
-    this.setState({ selectedProduct: selectedProduct });
+    const selectedProduct = products.get(productId);
+    this.selectProduct(selectedProduct);
     // console.log(product);
   }
 
@@ -76,26 +82,24 @@ class App extends React.Component {
           selectedProduct: products[Math.floor(Math.random() * products.length)],
           ready: true
         });
-        // this.mapAllProductsById();
       });
   }
 
   render() {
     const { products, selectedProduct, ready } = this.state;
     // const productMap = this.productMap;
-    console.log('index.jsx re-render');
+    console.log('App re-render');
 
     return (
       ready ? (
         <div id='App'>
           <h3>{`${selectedProduct.name} selected`}</h3>
-          <select name='productSelector' defaultValue={ selectedProduct.id } onChange={ this.handleSelect }>
+          <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
             { products.map(product => (<option key={`product${product.id}`} value={product.id}>{product.name}</option>)) }
           </select>
           <RelatedProducts
-            products={ products }
             selectedProduct={ selectedProduct }
-            updateProductMap={ this.updateProductMap }
+            updateProductMap={ this.updateProductData }
             selectProduct={ this.selectProduct }
             // fetchProductById={ (id, callback) => { this.fetchProductById(id, callback) }}
           />
