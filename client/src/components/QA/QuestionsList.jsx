@@ -1,26 +1,38 @@
 import React from 'react';
-import IndividualQuestion from './IndividualQuestion.jsx';
+import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
-const QuestionsList = (props) => {
-  const questions = props.questions.results;
-  //console.log('question list', questions);
-  if (questions) {
+
+class QuestionsList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayQuestions: 2
+    };
+  }
+
+  renderQuestions(questions) {
+    let questionsList = [];
+    for (let i = 0; i < this.state.displayQuestions; i++) {
+      questionsList.push(questions[i]);
+    }
     return (
       <div>
-        <IndividualQuestion questions={questions}/>
+        <Question questions={questionsList} />
         <AddQuestion />
       </div>
     );
-  } else {
-    return (<AddQuestion />);
   }
 
-  // return (
-  //   <AddQuestion />
-  // )
-
-};
+  render() {
+    const questions = this.props.questions.results;
+    if (questions) {
+      return this.renderQuestions(questions);
+    } else {
+      return (<AddQuestion />);
+    }
+  }
+}
 
 
 export default QuestionsList;
