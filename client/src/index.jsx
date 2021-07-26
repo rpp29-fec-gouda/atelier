@@ -13,17 +13,13 @@ class App extends React.Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.updateProductData = this.updateProductData.bind(this);
-    // this.fetchProductById.bind(this);
-    // this.mapAllProductsById.bind(this);
+
     this.map = {
       products: undefined,
       questions: undefined,
       ratings: undefined,
       related: undefined
     }
-    // this.ratingMap = undefined;
-    // this.relatedMap = undefined;
-    // this.productMap = undefined;
 
     this.state = {
       ready: false,
@@ -70,7 +66,6 @@ class App extends React.Component {
     const productId = parseInt(e.currentTarget.value);
     const selectedProduct = products.get(productId);
     this.selectProduct(selectedProduct);
-    // console.log(product);
   }
 
   componentDidMount() {
@@ -87,9 +82,8 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
-    // const productMap = this.productMap;
-    console.log('App re-render');
 
+    console.log('App re-render');
     return (
       ready ? (
         <div id='App'>
@@ -99,9 +93,8 @@ class App extends React.Component {
           </select>
           <RelatedProducts
             selectedProduct={ selectedProduct }
-            updateProductMap={ this.updateProductData }
+            updateProductData={ this.updateProductData }
             selectProduct={ this.selectProduct }
-            // fetchProductById={ (id, callback) => { this.fetchProductById(id, callback) }}
           />
         </div>
       ) : (

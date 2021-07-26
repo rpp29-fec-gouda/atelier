@@ -90,7 +90,7 @@ class RelatedProducts extends React.Component {
     // In the future this will also need to identify the user and bring up their selected outfit from their past session
     this.mapAllProductsById()
       .then(() => {
-        this.props.updateProductMap(this.products, this.map.products);
+        this.props.updateProductData(this.products, this.map.products);
         this.collectRelatedProducts(this.props.selectedProduct);
       })
       .catch(err => {
