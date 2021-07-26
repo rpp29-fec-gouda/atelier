@@ -18,12 +18,12 @@ app.get('/', (req, res) => {
 
 app.all('*', (req, res) => (
   api.fwd(req, (err, result) => {
+    console.log('API response:');
     if (err) {
       const error = (err.response ? err.response.data : err) + '\n';
-      console.log('API response:\n', error);
+      console.log(error);
       res.send(error);
     } else {
-      console.log('API response:');
       if (Array.isArray(result)) {
         console.log(result.map(result => (JSON.stringify(result))));
         res.json(result);

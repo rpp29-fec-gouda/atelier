@@ -4,7 +4,8 @@ import ProductCard from './ProductCard.jsx';
 import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
-  const { products } = props;
+  const { products, selectProduct, selectedProduct } = props;
+  let key = 0;
 
   return (
     <div id='RelatedProductsCarousel'>
@@ -13,7 +14,14 @@ const ProductsCarousel = (props) => {
       <div className='cardContainer'>{
         products.length ? (
           products.map(product => (
-            <ProductCard key={product.id} product={product} updateOutfit={(p) => {}} />
+            <ProductCard
+              key={ `related${key++}` }
+              product={ product }
+              selectProduct={ selectProduct }
+              selectedProduct={ selectedProduct }
+              updateOutfit={ (p) => {} }
+              main= { props.main }
+            />
           ))
         ) : (
           <p>Loading...</p>
