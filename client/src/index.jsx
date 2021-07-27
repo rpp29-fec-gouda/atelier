@@ -19,7 +19,7 @@ class App extends React.Component {
       questions: undefined,
       ratings: undefined,
       related: undefined
-    }
+    };
 
     this.state = {
       ready: false,
@@ -84,22 +84,20 @@ class App extends React.Component {
     const { products, selectedProduct, ready } = this.state;
 
     console.log('App re-render');
-    return (
-      ready ? (
-        <div id='App'>
-          <h3>{`${selectedProduct.name} selected`}</h3>
-          <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
-            { products.map(product => (<option key={`product${product.id}`} value={product.id}>{product.name}</option>)) }
-          </select>
-          <RelatedProducts
-            selectedProduct={ selectedProduct }
-            updateProductData={ this.updateProductData }
-            selectProduct={ this.selectProduct }
-          />
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )
+    return ready ? (
+      <div id='App'>
+        <h3>{`${selectedProduct.name} selected`}</h3>
+        <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
+          { products.map(product => (<option key={`product${product.id}`} value={product.id}>{product.name}</option>)) }
+        </select>
+        <RelatedProducts
+          selectedProduct={ selectedProduct }
+          updateProductData={ this.updateProductData }
+          selectProduct={ this.selectProduct }
+        />
+      </div>
+    ) : (
+      <p>Loading...</p>
     );
   }
 }
