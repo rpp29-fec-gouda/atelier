@@ -1,4 +1,8 @@
 config.js
 node_modules
 coverage
+<<<<<<< HEAD
 *.DS_Store
+=======
+__snapshots__
+>>>>>>> 6e93501980714567ba1d6aa6cf9ea191f5c62ab4

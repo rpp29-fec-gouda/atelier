@@ -3,10 +3,9 @@ import React from 'react';
 
 const AddQuestion = () => {
   return (
-    <div>
 
-      <button>ADD QUESTION</button>
-    </div>
+    <button id='addQuestion'>ADD QUESTION</button>
+
   );
 
 };
