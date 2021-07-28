@@ -1,6 +1,6 @@
 import React from 'react';
-import Helpfulness from './Helpfulness';
-import Report from './Report';
+import Helpfulness from '../shared/Helpfulness';
+import Report from '../shared/Report';
 
 class Answer extends React.Component {
   constructor(props) {

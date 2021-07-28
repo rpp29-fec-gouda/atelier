@@ -1,6 +1,6 @@
 import React from 'react';
 import AddAnswer from './AddAnswer';
-import Helpfulness from './Helpfulness';
+import Helpfulness from '../shared/Helpfulness';
 
 import Answer from './AnswersList';
 
