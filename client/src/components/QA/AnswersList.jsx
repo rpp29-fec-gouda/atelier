@@ -56,8 +56,9 @@ class Answer extends React.Component {
             <div>{answer.body}</div>
             <div className='answerBy'>
               <div class='inline'> by {answer.answerer_name} | </div>
-              <Helpfulness answer={answer} />
-              <Report answerId={answerId}/>
+              <Helpfulness answer={answer} /> 
+              <div class='inline'> | </div>   
+              <Report answerId={answerId}/> 
             </div>
           </div>
         );

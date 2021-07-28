@@ -45,7 +45,6 @@ class Report extends React.Component {
     if (!this.state.clicked) {
       return (
         <div class='inline'>
-          |
           <a href='#' onClick={() => this.reportFn(this.state.link)}>Report</a>
         </div>
       );
