@@ -1,15 +1,7 @@
 import React from 'react';
 import AddAnswer from './AddAnswer';
 import Helpfulness from '../shared/Helpfulness';
-
 import Answer from './AnswersList';
-
-
-
-const handleUpdate = () => {
-
-}
-
 
 const Question = (props) => {
   const questions = props.questions;
@@ -40,17 +32,11 @@ const Question = (props) => {
     );
   });
 
-
   return (
     <div>
       {individualQuestion}
     </div>
   );
 };
-
-
-
-
-
 
 export default Question;

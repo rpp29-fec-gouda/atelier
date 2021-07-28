@@ -24,8 +24,6 @@ class QA extends React.Component {
       });
   }
 
-
-
   render() {
     if (this.state.questions.length !== 0) {
       const questions = this.state.questions.results;
