@@ -30,7 +30,7 @@ jobs:
       #     pkg-manager: yarn
       - run:
           name: Run tests
-          command: npm test --coverage && coveralls < tests/coverage/lcov.info
+          command: npm test
       - store_artifacts:
           path: coverage
 
