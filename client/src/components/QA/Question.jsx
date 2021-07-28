@@ -1,25 +1,37 @@
 import React from 'react';
 import AddAnswer from './AddAnswer';
+import Helpfulness from './Helpfulness';
 
 import Answer from './AnswersList';
+
+
+
+const handleUpdate = () => {
+
+}
 
 
 const Question = (props) => {
   const questions = props.questions;
   const individualQuestion = questions.map(question => {
     const answers = question.answers;
+    const helpfulCount = question.question_helpfulness;
+    const questionId = question.question_id;
     return (
-      <div key={question.question_id}>
+      <div key={questionId}>
         <table className='question_table'>
           <tbody>
             <tr>
               <td width='5px' className='character'>Q:</td>
               <td width='200px'> {question.question_body}</td>
-              <td width='100px'>Helful? Yes({question.question_helpfulness}) | Add Answer</td>
+              <td width='50px' className='helpfulness'>
+                <Helpfulness question={question} />
+              </td>
+              <td width='50px'><AddAnswer /></td>
             </tr>
-            <tr>
+            <tr>  
               <td width='5px' className='character'>A:</td>
-              <td width='200px'> <div><Answer answers={answers}/></div></td>
+              <td width='200px'> <div><Answer answers={answers} /></div></td>
               <td> </td>
             </tr>
           </tbody>

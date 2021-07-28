@@ -40,7 +40,7 @@ td {
 }
 .answerBy {
   margin: 5px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #addQuestion, #moreQuestions {
@@ -55,4 +55,11 @@ td {
 }
 #moreQuestion {
   width: 250px
+}
+
+.helpfulness {
+  text-align: right;
+}
+.inline {
+  display: inline;
 }

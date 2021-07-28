@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Helpfulness from './Helpfulness';
+import Report from './Report';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -52,8 +53,12 @@ class Answer extends React.Component {
       if (key < this.state.answersDisplay) {
         return (
           <div key={answerId}>
-            {answer.body} <br></br>
-            <div className='answerBy'>by {answer.answerer_name} | Helful? Yes ({answer.helpfulness}) | Report </div>
+            <div>{answer.body}</div>
+            <div className='answerBy'>
+              <div class='inline'> by {answer.answerer_name} | </div>
+              <Helpfulness answer={answer} />
+              <Report answerId={answerId}/>
+            </div>
           </div>
         );
       }
