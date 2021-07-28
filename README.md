@@ -30,7 +30,7 @@
 # Continuous Integration
 Basic test of JavaScript continuous integration.
 
-Travis CI: [![Build Status](https://travis-ci.com/rpp29-fec-gouda/atelier.svg?branch=main)](https://travis-ci.com/rpp29-fec-gouda/atelier.svg?branch=main)
+Circle CI: [![rpp29-fec-gouda](https://circleci.com/gh/rpp29-fec-gouda/atelier.svg?style=svg)](https://app.circleci.com/pipelines/github/rpp29-fec-gouda/atelier)
 
 Coveralls: [![Coverage Status](https://coveralls.io/repos/github/rpp29-fec-gouda/atelier/badge.svg?branch=main)](https://coveralls.io/github/rpp29-fec-gouda/atelier?branch=main)
 

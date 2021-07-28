@@ -2,3 +2,4 @@ config.js
 node_modules
 coverage
 __snapshots__
+sonar-project.properties
