@@ -87,3 +87,10 @@
   cursor: pointer;
   /* flex-grow: 2; */
 }
+
+.addToOutfit {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}

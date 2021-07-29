@@ -16,13 +16,28 @@ app.get('/', (req, res) => {
   res.end();
 });
 
+app.get('/multipleProducts', (req, res) => {
+  console.log('Fetching', req.query.ids);
+  api.fetchMultiple('/products?product_id=', req.query.ids)
+    .then(result => {
+      console.log(JSON.stringify(result.data));
+      res.json(result.data);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    })
+    .then(() => {
+      res.end();
+    });
+});
+
 app.all('*', (req, res) => (
   api.fwd(req, (err, result) => {
     console.log('API response:');
     if (err) {
       const error = (err.response ? err.response.data : err) + '\n';
       console.log(error);
-      res.send(error);
+      res.sendStatus(500);
     } else {
       if (Array.isArray(result)) {
         console.log(result.map(result => (JSON.stringify(result))));
