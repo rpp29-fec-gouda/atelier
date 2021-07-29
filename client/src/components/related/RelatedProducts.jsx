@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductsCarousel from './ProductsCarousel.jsx';
-import OutfitCarousel from './OutfitCarousel.jsx';
+import Outfit from './Outfit.jsx';
+// import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
 import '../css/RelatedProducts.css';
 
@@ -10,7 +11,7 @@ class RelatedProducts extends React.Component {
 
     this.selectProduct = this.selectProduct.bind(this);
 
-    this.products = [];
+    this.products = this.props.products;
 
     this.store = {
       products: new Map(),
@@ -27,15 +28,7 @@ class RelatedProducts extends React.Component {
   collectRelatedProducts(product) {
     console.log('reset related products');
     this.fetchRelatedIds(product, (ids) => {
-      this.collectProductsById(ids)
-        .then(res => {
-          this.setState({
-            related: res.data
-          });
-        })
-        .catch(err => {
-          console.log(err.stack);
-        });
+      this.collectProductsById(ids);
     });
   }
 
@@ -61,9 +54,9 @@ class RelatedProducts extends React.Component {
   }
 
   collectProductsById(ids) {
-    // Update to choose between cached data or API call on a per-produict basis
+    // Update to choose between cached data or API call on a per-product basis
     const { products } = this.store;
-    let load = [];
+    let toLoad = [];
     let loaded = [];
 
     ids.forEach(id => {
@@ -71,39 +64,51 @@ class RelatedProducts extends React.Component {
       if (product) {
         loaded.push(product);
       } else {
-        load.push(id);
+        toLoad.push(id);
       }
     });
 
-    if (load.length) {
+    this.setState({
+      related: loaded
+    });
 
-      return axios.get(`/multipleProducts?ids=${load.join('&ids=')}`)
-        .then(res => {
-          console.log(res.data);
-          if (loaded.length) {
-            loaded.concat(res.data);
-          } else {
-            loaded = res.data;
-          }
-        })
-        .catch(err => {
-          console.log(err.stack);
-        });
-    } else {
-      if (loaded.length) {
-        return Promise.resolve(loaded);
-      } else {
-        return Promise.reject('No product data');
-      }
+    if (toLoad.length) {
+      toLoad.forEach(id => {
+        axios.get(`/products/${id}`)
+          .then(res => {
+            const product = res.data;
+            const relatedProducts = this.state.related.slice();
+            console.log(product);
+            this.products.push(product);
+            products.set(id, product);
+            this.setState({
+              related: [product, ...relatedProducts]
+            });
+          })
+          .catch(err => {
+            console.log(err.stack);
+          });
+      });
     }
-    // const { products } = this.map;
-    // if (ids && products) {
-    //   // console.log(ids);
-    //   const relatedProducts = ids.map(id => (products.get(id)));
-    //   // console.log(relatedProducts);
-    //   return relatedProducts;
+    //   return axios.get(`/multipleProducts?ids=${load.join('&ids=')}`)
+    //     .then(res => {
+    //       console.log(res.data);
+    //       if (loaded.length) {
+    //         loaded.concat(res.data);
+    //       } else {
+    //         loaded = res.data;
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.log(err.stack);
+    //     });
+    // } else {
+    //   if (loaded.length) {
+    //     return Promise.resolve(loaded);
+    //   } else {
+    //     return Promise.reject('No product data');
+    //   }
     // }
-    // return [];
   }
 
   mapAllProductsById() {
@@ -123,7 +128,9 @@ class RelatedProducts extends React.Component {
   }
 
   selectProduct(product) {
-    this.collectRelatedProducts(product);
+    const { updateProductData, selectProduct } = this.props;
+    updateProductData(this.products, this.store.products);
+    // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
   }
 
@@ -145,6 +152,7 @@ class RelatedProducts extends React.Component {
     if (!related.get(this.props.selectedProduct.id)) {
       this.collectRelatedProducts(this.props.selectedProduct);
     }
+
   }
 
   render() {
@@ -159,11 +167,10 @@ class RelatedProducts extends React.Component {
           products={ related }
           selectedProduct={ selectedProduct }
           selectProduct={ this.selectProduct }
-        />
-        <OutfitCarousel
-          products={this.store.products}
-          outfit={ outfit }
-        />
+          />
+        <Outfit
+          selectedProduct={ selectedProduct }
+          selectProduct={ this.selectProduct }        />
         {/* <RelatedProductsOutfit /> */}
       </div>
     );

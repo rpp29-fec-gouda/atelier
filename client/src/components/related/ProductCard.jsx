@@ -4,18 +4,31 @@ import '../css/RelatedProducts.css';
 const stars = [1, 1, 1, .8, 0];
 
 const ProductCard = (props) => {
-  const { product, selectedProduct, selectProduct } = props;
-  const maxTitleLength = 60;
-  let trimmedTitle = `${product.name}: ${product.slogan.toLowerCase()}`;
-  if (trimmedTitle.length > maxTitleLength) {
-    trimmedTitle = trimmedTitle.slice(0, trimmedTitle.indexOf(' ', maxTitleLength - 10)) + '...';
+  const { product, selectedProduct, selectProduct, type, action } = props;
+  let hoverText, actionClass, actionSymbol;
+
+  if (type === 'outfit') {
+    hoverText = `Remove ${product.name} from outfit`;
+    actionClass = 'removeFromOutfitSymbol';
+    actionSymbol = '+';
+  } else {
+    hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
+    actionClass = 'compareProductSymbol';
+    actionSymbol = String.fromCharCode(9734)
   }
+
+  const maxTitleTextLength = 60;
+  let trimmedTitle = `${product.name}: ${product.slogan.toLowerCase()}`;
+  if (trimmedTitle.length > maxTitleTextLength) {
+    trimmedTitle = trimmedTitle.slice(0, trimmedTitle.indexOf(' ', maxTitleTextLength - 10)) + '...';
+  }
+
   let key = 0;
   return (
     <div className='relatedProductCard' title={`Select ${product.name}`} onClick={(e) => { selectProduct(product); }}>
       <div className='imageBacker'>
         <img src=''></img>
-        <a className='compareProductStar' title={`Compare ${product.name} with ${selectedProduct.name}`} onClick={() => { props.compare(product) }}>{String.fromCharCode(9734)}</a>
+        <div className={actionClass} title={hoverText} onClick={product => { action(product); }}>{actionSymbol}</div>
       </div>
       <div className='relatedProductInfo'>
         <span className='relatedProductCategory'>{product.category.toUpperCase()}</span>
