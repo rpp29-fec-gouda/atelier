@@ -8,7 +8,7 @@ orbs:
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   # Also: https://circleci.com/developer/orbs/orb/coveralls/coveralls
   node: circleci/node@4.1
-  coveralls: coveralls/coveralls@1.0.6
+  #coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
@@ -34,7 +34,7 @@ jobs:
           command: npm test
       - store_artifacts:
           path: coverage
-      - coveralls/upload
+      #- coveralls/upload
 
 workflows:
   # Below is the definition of your workflow.

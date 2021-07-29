@@ -4,7 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "test": "jest --coverage --testResultsProcessor=jest-sonar-reporter && coveralls < tests/coverage/lcov.info",
+    "test": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
     "test-init": "jest --init",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "nodemon server.js",
