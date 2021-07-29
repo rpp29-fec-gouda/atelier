@@ -3,3 +3,4 @@ node_modules
 coverage
 __snapshots__
 sonar-project.properties
+__archive__
