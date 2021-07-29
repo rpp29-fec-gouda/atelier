@@ -36,20 +36,22 @@ Coveralls: [![Coverage Status](https://coveralls.io/repos/github/rpp29-fec-gouda
 
 # SonarCloud
 
-Quality: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=alert_status)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=alert_status)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Maintainability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Quality: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=alert_status)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Reliability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Maintainability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Security: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=security_rating)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Reliability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Lines of Code: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=ncloc)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Security: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=security_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Coverage: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=coverage)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Lines of Code: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=ncloc)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Bugs: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=bugs)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Coverage: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=coverage)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Code Smells: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=code_smells)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Bugs: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=bugs)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
-Technical Debt: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=continuous-integration-js&metric=sqale_index)](https://sonarcloud.io/dashboard?id=continuous-integration-js)
+Code Smells: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=code_smells)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Technical Debt: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_index)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
