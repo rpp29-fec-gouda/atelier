@@ -23,7 +23,7 @@ const ProductsCarousel = (props) => {
             />
           ))
         ) : (
-          <p>Loading...</p>
+          <div className='relatedProductCard addToOutfit'>Loading...</div>
         )}
       </div>
     </div>
