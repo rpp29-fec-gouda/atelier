@@ -16,14 +16,36 @@ app.get('/', (req, res) => {
   res.end();
 });
 
+app.get('/multipleProducts', (req, res) => {
+  console.log('Fetching', req.query.ids);
+  api.fetchMultiple('/products?product_id=', req.query.ids)
+    .then(result => {
+      console.log(JSON.stringify(result.data));
+      res.json(result.data);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    })
+    .then(() => {
+      res.end();
+    });
+});
+
 app.all('*', (req, res) => (
-  api.fwd(req, (err, results) => {
+  api.fwd(req, (err, result) => {
+    console.log('API response:');
     if (err) {
-      console.log('From API:', err.response.data);
-      res.sendStatus(err.response.status);
+      const error = (err.response ? err.response.data : err) + '\n';
+      console.log(error);
+      res.sendStatus(500);
     } else {
-      console.log('API response:\n', JSON.stringify(results));
-      res.json(results);
+      if (Array.isArray(result)) {
+        console.log(result.map(result => (JSON.stringify(result))));
+        res.json(result);
+      } else {
+        console.log(result);
+        res.send(result);
+      }
     }
     res.end();
   })

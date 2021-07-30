@@ -1,5 +1,11 @@
 body {
   font-family: sans-serif;
+  color: #444;
+}
+
+#App {
+  display: flex;
+  flex-flow: column;
 }
 
 select {

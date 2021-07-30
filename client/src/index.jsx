@@ -2,13 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
+import RelatedProducts from './components/related/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleUpdate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.selectProduct = this.selectProduct.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.updateProductData = this.updateProductData.bind(this);
+
+    this.store = {
+      products: new Map(),
+      questions: new Map(),
+      ratings: new Map(),
+      related: new Map()
+    };
 
     this.state = {
       ready: false,
@@ -36,31 +47,62 @@ class App extends React.Component {
       });
   }
 
+  selectProduct(product) {
+    console.log(`${product.name} selected`);
+    this.setState({
+      selectedProduct: product
+    });
+  }
+
+  updateProductData(productList, productMap) {
+    this.store.products = productMap;
+    this.setState({
+      products: productList
+    });
+  }
+
+  handleSelectChange(e) {
+    const { products } = this.store;
+    const productId = parseInt(e.currentTarget.value);
+    const selectedProduct = products.get(productId);
+    this.selectProduct(selectedProduct);
+  }
+
   componentDidMount() {
-    this.handleUpdate('/products', 'products')
-      .then(() => {
-        const initialProductId = this.state.products[0]?.id;
+    axios.get('/products')
+      .then(res => {
+        const products = res.data;
+        products.forEach(product => {
+          this.store.products.set(product.id, product);
+        });
         this.setState({
-          selectedProduct: initialProductId,
+          products: products,
+          selectedProduct: products[Math.floor(Math.random() * products.length)],
           ready: true
         });
       });
   }
 
   render() {
-    const { products, ready } = this.state;
-    return (
-      ready ? (
-        <div id='App'>
-          <h3>Temporary Product Selector</h3>
-          <select name='productSelector' onChange={(e) => { this.setState({ selectedProduct: e.currentTarget.value }); }}>
-            { products.map(product => (<option key={product.id} value={product.id}>{product.name}</option>)) }
-          </select>
-          <RatingsAndReviews />
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )
+    const { products, selectedProduct, ready } = this.state;
+
+    console.log('App re-render');
+    let key = 0;
+    return ready ? (
+      <div id='App'>
+        <h3>{`${selectedProduct.name} selected`}</h3>
+        <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
+          { products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>)) }
+        </select>
+        <RelatedProducts
+          products={ products }
+          selectedProduct={ selectedProduct }
+          updateProductData={ this.updateProductData }
+          selectProduct={ this.selectProduct }
+        />
+      </div>
+    ) : (
+      <p>Loading...</p>
     );
   }
 }
