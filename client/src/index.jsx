@@ -100,9 +100,13 @@ class App extends React.Component {
           updateProductData={ this.updateProductData }
           selectProduct={ this.selectProduct }
         />
+        <br></br>
+          <RatingsAndReviews
+            selectedProduct={ selectedProduct }/>
       </div>
     ) : (
       <p>Loading...</p>
+
     );
   }
 }
