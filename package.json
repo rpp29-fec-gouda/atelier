@@ -4,7 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
     "test-init": "jest --init",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "nodemon server.js",
@@ -39,7 +39,9 @@
     "enzyme-to-json": "^3.6.2",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.0.6",
+    "jest-cli": "^27.0.6",
     "jest-css-modules-transform": "^4.3.0",
+    "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.12",
     "style-loader": "^3.1.0",
     "webpack": "^5.44.0",
@@ -55,5 +57,11 @@
   "jest": {
     "^react(.*)$": "<rootDir>/vendor/react-master$1",
     "^config$": "<rootDir>/configs/app-config.js"
+  },
+  "jestSonar": {
+    "sonar56x": true,
+    "reportPath": "testResults",
+    "reportFile": "sonar-report.xml",
+    "indent": 4
   }
 }
