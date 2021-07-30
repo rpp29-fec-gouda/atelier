@@ -12,11 +12,6 @@
 - Install Pomander before attempting to push commits:
 - `curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash`
 
-## Testing
-- [Jest](https://jestjs.io/) is the framework chosen to test React and probably all JavaScript code in the app.
-- Tests are located in the **`./tests`** directory
-- ```npm test``` to run the tests
-
 ## Documentation
 - Documentation such as diagrams for the app and UX styling guidelines are stored in the **`./docs`** directory.
 
@@ -25,3 +20,38 @@
 - [Mark Thomas](https://github.com/MarkPThomas) - [Engineering Journal](https://gist.github.com/MarkPThomas/7ce6b7a2a48820ad1995afc5ee6ba506)
 - [Steven Harder](https://github.com/stevenharderjr) - [Engineering Journal](https://gist.github.com/stevenharderjr/b2f158790eddc6b6257553fba2875694)
 - [Vinh Huynh](https://gist.github.com/VinhH2402) - [Engineering Journal](https://gist.github.com/VinhH2402/28cd9f47f11ed1aef2836052cf96654d)
+
+
+## Testing
+- [Jest](https://jestjs.io/) is the framework chosen to test React and probably all JavaScript code in the app.
+- Tests are located in the **`./tests`** directory
+- ```npm test``` to run the tests
+
+# Continuous Integration
+Basic test of JavaScript continuous integration.
+
+Circle CI: [![rpp29-fec-gouda](https://circleci.com/gh/rpp29-fec-gouda/atelier.svg?style=svg)](https://app.circleci.com/pipelines/github/rpp29-fec-gouda/atelier)
+
+Coveralls: [![Coverage Status](https://coveralls.io/repos/github/rpp29-fec-gouda/atelier/badge.svg?branch=main)](https://coveralls.io/github/rpp29-fec-gouda/atelier?branch=main)
+
+# SonarCloud
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=alert_status)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Quality: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=alert_status)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Maintainability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Reliability: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Security: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=security_rating)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Lines of Code: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=ncloc)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Coverage: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=coverage)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Bugs: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=bugs)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Code Smells: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=code_smells)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+Technical Debt: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_index)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)

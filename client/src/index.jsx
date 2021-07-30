@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
-import RatingsAndReviews from './components/RatingsAndReviews.jsx';
+import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +18,13 @@ class App extends React.Component {
   }
 
   handleUpdate(urlToReload, stateKeyToUpdate) {
+    if (this.props.isTesting) {
+      return new Promise((resolve, reject) => {
+        resolve();
+        reject();
+      });
+    }
+
     return axios.get(urlToReload)
       .then(res => {
         this.setState({
@@ -32,7 +39,7 @@ class App extends React.Component {
   componentDidMount() {
     this.handleUpdate('/products', 'products')
       .then(() => {
-        const initialProductId = this.state.products[0].id;
+        const initialProductId = this.state.products[0]?.id;
         this.setState({
           selectedProduct: initialProductId,
           ready: true

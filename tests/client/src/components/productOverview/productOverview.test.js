@@ -1,11 +1,7 @@
-import Enzyme from 'enzyme';
-// import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-// Enzyme.configure({ adapter: new Adapter() });
-
-import {mount, shallow} from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import ProductOverview from '../../../client/src/components/ProductOverview.jsx';
+import ProductOverview from '../../../../../client/src/components/productOverview/ProductOverview.jsx';
 
 // ==== Test Template ====
 // ====== index.jsx ======
