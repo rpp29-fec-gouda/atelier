@@ -5,10 +5,11 @@ import Checkout from './Checkout';
 
 const Cart = (props) => {
   return (
-    <div>
-      Cart
-      <SizeSelector />
-      <QuantitySelector />
+    <div id="cart column">
+      <div class="row">
+        <SizeSelector />
+        <QuantitySelector />
+      </div>
       <Checkout />
     </div>
   );

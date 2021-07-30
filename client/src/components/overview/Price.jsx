@@ -2,8 +2,8 @@ import React from 'react';
 
 const Price = (props) => {
   return (
-    <div>
-      Price
+    <div id="price" class="row-margin">
+      $ { props.defaultPrice }
     </div>
   );
 };

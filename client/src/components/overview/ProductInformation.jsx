@@ -5,16 +5,17 @@ import Price from './Price';
 
 const ProductInformation = (props) => {
   return (
-    <div>
-      ProductInformation
-      <span>
+    <div id="product-information">
+      {/* id={ id } */}
+      <span id="product-rating" class="row row-margin">
         <StarRating />
         <ReadAllReviews />
       </span>
-      <h3>CATEGORY</h3>
-      <h1>Expanded Product Name</h1>
-      <Price />
-      More Product Information
+      <h2 class="uppercase">{ props.category }</h2>
+      <h1>{ props.name }</h1>
+      <Price
+        defaultPrice = { props.defaultPrice }
+      />
     </div>
   );
 };

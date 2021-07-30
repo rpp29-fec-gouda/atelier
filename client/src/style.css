@@ -1,13 +1,178 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); */
+
 body {
-  font-family: sans-serif;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: .5em;
   color: #444;
+  font-size: .8em;
 }
 
-#App {
+#app {
   display: flex;
   flex-flow: column;
 }
 
+
+
+.row {
+  display: flex;
+  flex-flow: row;
+  padding: 1em, 0, 1em, 0;
+}
+
+.column {
+  display: flex;
+  flex-flow: column;
+}
+
+
+
+h1 {
+  font-size: 2.5em;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  font-weight: bold;
+  user-select: none;
+}
+
+h2, .h2 {
+  font-size: 1em;
+  display: inline;
+  font-weight: 400;
+  text-transform: uppercase;
+  user-select: none;
+  flex-flow: row;
+}
+
+a {
+  font-size: 0.6em;
+  margin: 0 1em;
+}
+
+.button {
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+  display: inline;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
+
 select {
-  width: 24em;
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+  display: inline;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
+
+
+.bold {
+  font-weight: bold;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.no-select {
+  user-select: none;
+}
+
+
+
+.button:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+.row-margin {
+  margin: 1em 0;
+}
+
+
+/* Stars  */
+.star-rating {
+  display: flex;
+  flex-flow: row;
+}
+
+.star-0 {
+  content: "\2606";
+}
+
+.star-25 {
+  content: "\2BE8";
+}
+
+.star-50 {
+  content: "\2BE8";
+}
+
+.star-75 {
+  content: "\2BE8";
+}
+
+.star-100 {
+  content: "\2605";
+}
+
+/* Scrolling Arrows */
+.scrolling-arrows:hover {
+  cursor: pointer;
+}
+
+
+/* Image navigator */
+.image-navigator:hover {
+  cursor: pointer;
+}
+
+/* Style Module */
+.style {
+  border: 1px black solid;
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  margin: 0.7em 0.7em 0.7em 0;
+}
+
+.style:hover {
+  cursor: pointer;
+}
+
+.style-selected {
+  border: 1px black solid;
+  border-radius: 50%;
+  content: "\2713";
+  width: 0.75em;
+  height: 0.75em;
+  padding: 0 0.20em 0.3em 0.20em;
+}
+
+
+
+#product-information {
+  flex-flow: column;
+  width: 33%;
+}
+
+#image-gallery {
+  background-color: gray;
+  width: 67%;
+}
+
+.expanded-view:hover {
+  cursor: pointer;
+}
+
+.collapsed-view:hover {
+  cursor: pointer;
 }

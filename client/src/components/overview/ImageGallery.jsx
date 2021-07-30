@@ -9,15 +9,30 @@ class ImageGallery extends React.Component {
     this.state = {
       isExpanded: false
     };
+
+    this.handleExpandedView = this.handleExpandedView.bind(this);
+    this.handleCollapsedView = this.handleCollapsedView.bind(this);
+  }
+
+  handleExpandedView() {
+    this.setState({
+      isExpanded: true
+    });
+  }
+
+  handleCollapsedView() {
+    this.setState({
+      isExpanded: false
+    });
   }
 
   render() {
+    console.log('Rendering image gallery');
     return (
-      <div>
-        ImageGallery
+      <div id="image-gallery">
         { this.state.isExpanded
-          ? <ExpandedView />
-          : <DefaultView />
+          ? <ExpandedView onClick={this.handleCollapsedView} />
+          : <DefaultView onClick={this.handleExpandedView} />
         }
       </div>
     );

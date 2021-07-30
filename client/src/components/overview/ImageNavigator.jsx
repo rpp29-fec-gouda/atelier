@@ -2,7 +2,7 @@ import React from 'react';
 
 const ImageNavigator = (props) => {
   return (
-    <div>
+    <div class="image-navigator">
       ImageNavigator
     </div>
   );

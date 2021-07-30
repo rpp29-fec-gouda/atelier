@@ -2,8 +2,7 @@ import React from 'react';
 
 const QuantitySelector = (props) => {
   return (
-    <div>
-      QuantitySelector
+    <div id="quantity-selector">
       <select id="quantity" name="quantity">
         <option value="1">1</option>
         <option value="2">2</option>

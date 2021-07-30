@@ -4,6 +4,7 @@ import axios from 'axios';
 import './style.css';
 import RelatedProducts from './components/related/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
+import ProductOverview from './components/overview/ProductOverview';
 
 class App extends React.Component {
   constructor(props) {
@@ -89,11 +90,14 @@ class App extends React.Component {
     console.log('App re-render');
     let key = 0;
     return ready ? (
-      <div id='App'>
+      <div id='app'>
         <h3>{`${selectedProduct.name} selected`}</h3>
         <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
           { products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>)) }
         </select>
+        <ProductOverview
+          selectedProduct={ selectedProduct }
+        />
         <RelatedProducts
           products={ products }
           selectedProduct={ selectedProduct }
