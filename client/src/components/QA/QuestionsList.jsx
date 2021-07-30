@@ -88,7 +88,6 @@ class QuestionsList extends React.Component {
       <div>
         {this.renderQuestions()}
         {this.addQuestionForm()}
-        <AddAnswer />
       </div>
 
     );

@@ -6,6 +6,7 @@ class AddAnswer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      questionsId: '',
       username: '',
       email: '',
       answer: '',
@@ -70,13 +71,8 @@ class AddAnswer extends React.Component {
       name: this.state.username,
       email: this.state.email
     };
-    const test = {
-      body: 'test',
-      name: 'test',
-      email: 'test@gmail.com'
-    };
-    if (!this.checkingRequire()) {
-      axios.post('/qa/questions/232566/answers', test)
+    if (this.checkingRequire()) {
+      axios.post('/qa/questions/' + this.props.questionId + '/answers', data)
         .then(res => {
           console.log('post answer success', res);
           this.setState({
@@ -94,7 +90,7 @@ class AddAnswer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='inner-popup'>
         <form onSubmit={this.submit.bind(this)}>
           <label>
             Username:

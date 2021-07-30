@@ -96,7 +96,7 @@ class App extends React.Component {
             { products.map(product => (<option key={`product${product.id}`} value={product.id}>{product.name}</option>)) }
           </select>
           <RatingsAndReviews />
-          <QA />
+          <QA productId={selectedProduct.id}/>
           <RelatedProducts
             selectedProduct={ selectedProduct }
             updateProductData={ this.updateProductData }

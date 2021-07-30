@@ -15,7 +15,8 @@ class QA extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/qa/questions?product_id=28212&count=20')
+    console.log(this.props.productId)
+    axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
       .then(res => {
         this.setState({
           questions: res.data.results
@@ -33,20 +34,20 @@ class QA extends React.Component {
   }
 
   render() {
-    console.log('questions', this.state.questions);
     if (this.state.questions.length !== 0) {
       let questions;
       if (this.state.questionsFiltered.length === 0) {
         questions = this.state.questions;
       } else {
+        console.log('else', this.state.questionsFiltered);
         questions = this.state.questionsFiltered;
       }
-
+   
       return (
         <div className='QAComponent'>
           <h2>QUESTIONS & ANSWERS</h2>
           <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
-          <QuestionsList questions={this.state.questions} />
+          <QuestionsList questions={questions} />
         </div>
       );
     } else {

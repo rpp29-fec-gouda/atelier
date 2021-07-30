@@ -3,14 +3,13 @@ import React from 'react';
 
 const SearchQuestions = (props) => {
   const questions = props.questions;
-
-  console.log(questions)
-  const callback = props.callback
+  const callback = props.callback;
   let questionsFiltered = [];
 
 
   const changeHandle = (e) => {
     const searchText = e.target.value;
+    console.log('searchtext', searchText)
     if (searchText.length >= 3) {
       questions.forEach(question => {
         const body = question.question_body;
