@@ -69,7 +69,7 @@ class AddQuestion extends React.Component {
       body: this.state.question,
       name: this.state.username,
       email: this.state.email,
-      'product_id': 28212
+      'product_id': this.props.productId
     };
   
     if (this.checkingRequire()) {

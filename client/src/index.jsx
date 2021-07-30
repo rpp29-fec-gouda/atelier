@@ -18,11 +18,11 @@ class App extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.updateProductData = this.updateProductData.bind(this);
 
-    this.map = {
-      products: undefined,
-      questions: undefined,
-      ratings: undefined,
-      related: undefined
+
+    this.store = {
+      products: new Map(),
+      questions: new Map(),
+      ratings: new Map(),
     };
 
     this.state = {
@@ -59,14 +59,14 @@ class App extends React.Component {
   }
 
   updateProductData(productList, productMap) {
-    this.map.products = productMap;
+    this.store.products = productMap;
     this.setState({
       products: productList
     });
   }
 
   handleSelectChange(e) {
-    const { products } = this.map;
+    const { products } = this.store;
     const productId = parseInt(e.currentTarget.value);
     const selectedProduct = products.get(productId);
     this.selectProduct(selectedProduct);
@@ -76,6 +76,9 @@ class App extends React.Component {
     axios.get('/products')
       .then(res => {
         const products = res.data;
+        products.forEach(product => {
+          this.store.products.set(product.id, product);
+        });
         this.setState({
           products: products,
           selectedProduct: products[Math.floor(Math.random() * products.length)],
@@ -86,26 +89,29 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
-
+    console.log('select product', selectedProduct)
     console.log('App re-render');
-    return (
-      ready ? (
-        <div id='App'>
-          <h3>{`${selectedProduct.name} selected`}</h3>
-          <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
-            { products.map(product => (<option key={`product${product.id}`} value={product.id}>{product.name}</option>)) }
-          </select>
-          <RatingsAndReviews />
-          <QA productId={selectedProduct.id}/>
-          <RelatedProducts
-            selectedProduct={ selectedProduct }
-            updateProductData={ this.updateProductData }
-            selectProduct={ this.selectProduct }
-          />
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )
+    let key = 0;
+    return ready ? (
+      <div id='App'>
+        <h3>{`${selectedProduct.name} selected`}</h3>
+        <select name='productSelector' value={selectedProduct.id} onChange={this.handleSelectChange}>
+          {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
+        </select>
+        <RelatedProducts
+          products={products}
+          selectedProduct={selectedProduct}
+          updateProductData={this.updateProductData}
+          selectProduct={this.selectProduct}
+        />
+        <QA productId={selectedProduct.id} />
+        <br></br>
+        <RatingsAndReviews
+          selectedProduct={selectedProduct} />
+      </div>
+    ) : (
+      <p>Loading...</p>
+
     );
   }
 }

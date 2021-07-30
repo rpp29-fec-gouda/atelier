@@ -10,7 +10,8 @@ class QA extends React.Component {
     super(props);
     this.state = {
       questions: [],
-      questionsFiltered: []
+      questionsFiltered: [],
+      addQuestionButton: true
     };
   }
 
@@ -24,6 +25,18 @@ class QA extends React.Component {
       .catch(err => {
         console.log(err.stack);
       });
+  }
+
+  addQuestionClick() {
+    if (this.state.addQuestionButton) {
+      this.setState({
+        addQuestionButton: false
+      });
+    } else {
+      this.setState({
+        addQuestionButton: true
+      });
+    }
   }
 
   updateQuestionsList(filtered) {
@@ -41,18 +54,23 @@ class QA extends React.Component {
         console.log('else', this.state.questionsFiltered);
         questions = this.state.questionsFiltered;
       }
-   
+
       return (
         <div className='QAComponent'>
           <h2>QUESTIONS & ANSWERS</h2>
           <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
-          <QuestionsList questions={questions} />
+          <QuestionsList questions={questions} productId={this.props.productId}/>
         </div>
       );
     } else {
       return (
         <div className='QAComponent'>
-          <AddQuestion />
+          <h2>QUESTIONS & ANSWERS</h2>
+          {this.state.addQuestionButton ?
+            <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
+            <AddQuestion productId={this.props.productId}/>
+          }
+
         </div>
       );
     }

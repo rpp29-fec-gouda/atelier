@@ -51,7 +51,7 @@ class QuestionsList extends React.Component {
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
-        <AddQuestion />
+        <AddQuestion productId={this.props.productId}/>
       );
     }
   }

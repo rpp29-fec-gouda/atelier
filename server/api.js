@@ -5,9 +5,15 @@ axios.defaults.baseURL = config.API;
 axios.defaults.headers.common['Authorization'] = config.GITHUB_TOKEN;
 
 module.exports = {
-  retrieveList: (req, callback) => {
-    console.log(req.body);
-    callback(null, 'Test complete');
+  fetchMultiple: (endpoint, ids) => {
+    console.log(ids);
+    return Promise.all(ids.map(id => (
+      axios.get(`/products?product_id=${id}`)
+        .then(res => {
+          // console.log(res.data);
+          return res.data;
+        })
+    )));
   },
 
   fwd: (req, callback) => {
