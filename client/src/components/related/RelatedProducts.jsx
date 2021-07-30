@@ -21,12 +21,13 @@ class RelatedProducts extends React.Component {
 
     this.state = {
       related: [],
-      outfit: []
+      outfit: [],
+      loading: true
     };
   }
 
   collectRelatedProducts(product) {
-    console.log('reset related products');
+    // console.log('reset related products');
     this.fetchRelatedIds(product, (ids) => {
       this.collectProductsById(ids);
     });
@@ -80,7 +81,7 @@ class RelatedProducts extends React.Component {
           .then(res => {
             const product = res.data;
             const relatedProducts = this.state.related.slice();
-            console.log(`Related product ${product.name} retrieved`);
+            // console.log(`Related product ${product.name} retrieved`);
             this.productList.push(product);
             products.set(id, product);
             this.setState({
@@ -116,7 +117,7 @@ class RelatedProducts extends React.Component {
   loadOutfit() {
     const { localStorage } = window;
     const outfitIds = localStorage.getItem('outfit');
-    console.log('Outfit Ids:', outfitIds);
+    console.log('Outfit Ids stored in browser:', outfitIds);
 
     if (outfitIds) {
       const { products } = this.store;
@@ -128,7 +129,7 @@ class RelatedProducts extends React.Component {
 
         if (product) {
           loaded[index++] = product;
-          console.log(`${product.name} already loaded`);
+          // console.log(`${product.name} already loaded`);
           this.setState({ products: [...loaded] });
         } else {
           let asyncIndex = index++;
@@ -136,7 +137,7 @@ class RelatedProducts extends React.Component {
             .then(res => {
               const product = res.data;
               loaded[asyncIndex] = product;
-              console.log(`${product.name} loaded from server/API`);
+              // console.log(`${product.name} loaded from server/API`);
               this.setState({ products: [...loaded] });
             })
             .catch(err => {
@@ -173,6 +174,7 @@ class RelatedProducts extends React.Component {
     updateProductData(this.productList, this.store.products);
     // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
+    this.setState({ loading: true });
   }
 
   componentDidMount() {
@@ -190,11 +192,14 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate() {
-    const relatedProductIds = this.store.related.get(this.props.selectedProduct.id);
-    if (relatedProductIds) {
-      // this.collectProductsById(relatedProductIds);
-    } else {
-      this.collectRelatedProducts(this.props.selectedProduct);
+    if (this.state.loading) {
+      this.setState({ loading: false });
+      const relatedProductIds = this.store.related.get(this.props.selectedProduct.id);
+      if (relatedProductIds) {
+        // this.collectProductsById(relatedProductIds);
+      } else {
+        this.collectRelatedProducts(this.props.selectedProduct);
+      }
     }
   }
 
@@ -202,9 +207,9 @@ class RelatedProducts extends React.Component {
     const { related, outfit } = this.state;
     const { selectedProduct, selectProduct } = this.props;
 
-    console.log('Related products:', related);
+    // console.log('Related products:', related);
 
-    console.log('RelatedProducts re-render');
+    // console.log('RelatedProducts re-render');
     return (
       <div id='RelatedProdcuts'>
         <ProductsCarousel

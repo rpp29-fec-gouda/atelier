@@ -11,7 +11,7 @@ const ProductCard = (props) => {
   let hoverText, actionClass, actionSymbol;
 
   if (type === 'outfit') {
-    hoverText = `Remove ${product.name} from outfit`;
+    hoverText = `Remove ${product.name} from your outfit`;
     actionClass = 'removeFromOutfitSymbol';
     actionSymbol = '+';
   } else {
