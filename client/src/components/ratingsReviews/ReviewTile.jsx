@@ -10,11 +10,11 @@ const ReviewTile = (props) => {
         {reviews.map((review) => (
           <div key={key++}>
             <div className='userStamp'>
-              <span className='ReviewRating'>{review.rating}</span>
-              <span className='ReviewerName'>{review.reviewer_name}</span>
-              <span className='ReviewDate'>{new Date(review.date).toDateString()}</span>
+              <span className='ReviewRating'>{review.rating} stars</span>
+              {/* <span className='ReviewerName'>{review.reviewer_name}</span> */}
+              <span className='ReviewDate'>{review.reviewer_name}, {new Date(review.date).toDateString()}</span>
             </div>
-            <br></br>
+            <br></br><br></br>
             <div className='Review'>
               <div className='ReviewSummary'>{review.summary}</div>
               <br></br>

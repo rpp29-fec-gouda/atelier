@@ -11,17 +11,17 @@
 }
 
 .ReviewRating {
-  justify-content: flex-start;
-}
-
-.ReviewerName {
-  justify-content: flex-end;
+  float: left;
 }
 
 .ReviewDate {
-  justify-content: flex-end;
-
+  float: right;
 }
+
+.ReviewerName {
+  float: right;
+}
+
 
 .ReviewSummary{
   font-weight:bold;

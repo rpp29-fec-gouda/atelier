@@ -3,12 +3,13 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingList = (props) => {
-  const { ratings, characteristics, recommended } = props;
+  const { reviews, ratings, characteristics, recommended } = props;
 
   return (
     <div id='RatingList'>
       <RatingBreakdown
         ratings={ratings}
+        reviews={reviews}
         recommended={recommended}
       />
       <br></br>

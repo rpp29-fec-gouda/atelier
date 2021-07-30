@@ -82,6 +82,7 @@ class RatingsAndReviews extends React.Component {
             reviews={this.state.reviews}/>
           <RatingList
             ratings={this.state.ratings}
+            reviews={this.state.reviews}
             characteristics={this.state.characteristics}
             recommended={this.state.recommended}/>
         </div>
