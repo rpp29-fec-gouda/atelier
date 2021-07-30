@@ -21,7 +21,7 @@ class Outfit extends React.Component {
     };
 
     this.state = {
-      products: []
+      products: this.props.products
     };
   }
 
@@ -33,10 +33,10 @@ class Outfit extends React.Component {
       products: newOutfit
     });
 
-    this.props.updateOutfit(newOutfit);
+    // this.props.updateOutfit(newOutfit);
   }
 
-  addToOutfit() {
+  addToOutfit(e) {
     // e.stopPropagation();
     const { selectedProduct } = this.props;
     let oldOutfit = this.state.products.slice();
@@ -49,9 +49,9 @@ class Outfit extends React.Component {
   }
 
   removeFromOutfit(product) {
-    const match = product.id;
-    console.log('Remove', match);
+    console.log('product to remove:', product.id);
     let outfit = this.state.products.slice();
+    let match = product.id;
     let i = outfit.length;
     while (i--) {
       if (outfit[i].id === match) {
@@ -60,6 +60,9 @@ class Outfit extends React.Component {
     }
     this.updateOutfit(outfit);
   }
+  // componentDidMount() {
+  //   this.loadOutfit();
+  // }
 
   render() {
     const { selectedProduct, selectProduct } = this.props;
@@ -78,7 +81,7 @@ class Outfit extends React.Component {
           </div>
           {products.length ? (
             products.map(product => (
-              <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ this.removeFromOutfit } />
+              <ProductCard key={ key++ } type='outfit' product={ product } selectProduct={ selectProduct } action={ this.removeFromOutfit } />
             ))) : null
           }
         </div>

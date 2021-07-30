@@ -10,7 +10,6 @@ class RelatedProducts extends React.Component {
     super(props);
 
     this.selectProduct = this.selectProduct.bind(this);
-    this.updateOutfit = this.updateOutfit.bind(this);
 
     this.productList = this.props.products;
 
