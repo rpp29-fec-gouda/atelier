@@ -2,6 +2,7 @@ import React from 'react';
 import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import axios from 'axios';
+import AddAnswer from './AddAnswer.jsx';
 
 
 class QuestionsList extends React.Component {
@@ -10,7 +11,7 @@ class QuestionsList extends React.Component {
     this.state = {
       questionsDisplay: 0,
       moreQuesionButton: false,
-      addQuestionButton: true
+      addQuestionButton: false
     };
   }
 
@@ -87,6 +88,7 @@ class QuestionsList extends React.Component {
       <div>
         {this.renderQuestions()}
         {this.addQuestionForm()}
+        <AddAnswer />
       </div>
 
     );

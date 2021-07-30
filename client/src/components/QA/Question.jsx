@@ -19,11 +19,11 @@ const Question = (props) => {
               <td width='50px' className='helpfulness'>
                 <Helpfulness question={question} />
               </td>
-              <td width='50px'><AddAnswer /></td>
+              <td width='50px'> | <a href='#' > Add answer </a></td>
             </tr>
             <tr>
               <td width='5px' className='character'>A:</td>
-              <td width='200px'> <div><Answer answers={answers} /></div></td>
+              <td width='200px'> <div> <Answer answers={answers} /></div></td>
               <td> </td>
             </tr>
           </tbody>

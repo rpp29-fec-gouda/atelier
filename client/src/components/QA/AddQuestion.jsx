@@ -74,15 +74,9 @@ class AddQuestion extends React.Component {
       email: this.state.email,
       'product_id': 28212
     };
-    const test = {
-      "body": "test",
-      "name": "tester",
-      "email": "testemail@gmail.com",
-      "product_id": 28212
-}
   
-    if (!this.checkingRequire()) {
-      axios.post('/qa/questions?product_id=28212&page=1&count=25', test)
+    if (this.checkingRequire()) {
+      axios.post('/qa/questions', data)
         .then(res => {
           console.log('post question success', res);
           this.setState({
@@ -121,7 +115,7 @@ class AddQuestion extends React.Component {
               value={this.state.email}
               onChange={this.handleOnChange.bind(this)}>
             </input><p style={{ color: 'red' }}>{this.state.requires.email}</p>
-            <p className='warningText'>Why did you like the product or not?</p>
+            <p className='warningText'>For authentication reasons, you will not be emailed</p>
           </label>
           <label>
             Question:
