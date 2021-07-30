@@ -12,8 +12,15 @@ class Answer extends React.Component {
   }
 
   componentDidMount() {
+    const questionId = this.props.questionId;
     this.checkRemainAnswers();
   }
+
+  //axios get answers count 
+  //if count = 0 , and count > 0
+  //compare count to show
+  //hide/show button
+
 
   checkRemainAnswers() {
     const answersLength = Object.keys(this.props.answers).length;
@@ -48,6 +55,7 @@ class Answer extends React.Component {
       }
     };
 
+
     const renderAnswer = Object.keys(answers).map((answerId, key) => {
       const answer = answers[answerId];
       if (key < this.state.answersDisplay) {
@@ -56,14 +64,15 @@ class Answer extends React.Component {
             <div>{answer.body}</div>
             <div className='answerBy'>
               <div class='inline'> by {answer.answerer_name} | </div>
-              <Helpfulness answer={answer} /> 
-              <div class='inline'> | </div>   
-              <Report answerId={answerId}/> 
+              <Helpfulness answer={answer} />
+              <div class='inline'> | </div>
+              <Report answerId={answerId} />
             </div>
           </div>
         );
       }
     });
+
 
     return (
       <div>

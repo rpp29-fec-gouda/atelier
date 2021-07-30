@@ -5,6 +5,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // Display any parameters appended to the URL:
 // app.use((req, res, next) => {
 //   console.log(req.query);

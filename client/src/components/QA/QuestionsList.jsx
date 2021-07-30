@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import axios from 'axios';
 
 
 class QuestionsList extends React.Component {
@@ -8,7 +9,8 @@ class QuestionsList extends React.Component {
     super(props);
     this.state = {
       questionsDisplay: 0,
-      moreQuesionButton: false
+      moreQuesionButton: false,
+      addQuestionButton: true
     };
   }
 
@@ -27,7 +29,7 @@ class QuestionsList extends React.Component {
     }
     if (questionsLength - 2 <= this.state.questionsDisplay) {
       this.setState({
-        questionsDisplay: this.state.questionsDisplay + 2,
+        questionsDisplay: questionsLength,
         moreQuesionButton: false
       });
     }
@@ -45,6 +47,26 @@ class QuestionsList extends React.Component {
     }
   }
 
+  addQuestionForm() {
+    if (this.state.addQuestionButton) {
+      return (
+        <AddQuestion />
+      );
+    }
+  }
+
+  addQuestionClick() {
+    if (this.state.addQuestionButton) {
+      this.setState({
+        addQuestionButton: false
+      });
+    } else {
+      this.setState({
+        addQuestionButton: true
+      });
+    }
+  }
+
   renderQuestions() {
     let questionsList = [];
     const questions = this.props.questions;
@@ -55,13 +77,19 @@ class QuestionsList extends React.Component {
       <div>
         <Question questions={questionsList} />
         {this.moreQuestionsButton()}
-        <button id='addQuestion'>ADD A QUESTION +</button>
+        <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
       </div>
     );
   }
 
   render() {
-    return this.renderQuestions();
+    return (
+      <div>
+        {this.renderQuestions()}
+        {this.addQuestionForm()}
+      </div>
+
+    );
   }
 }
 

@@ -21,7 +21,7 @@ const Question = (props) => {
               </td>
               <td width='50px'><AddAnswer /></td>
             </tr>
-            <tr>  
+            <tr>
               <td width='5px' className='character'>A:</td>
               <td width='200px'> <div><Answer answers={answers} /></div></td>
               <td> </td>
@@ -31,6 +31,7 @@ const Question = (props) => {
       </div>
     );
   });
+
 
   return (
     <div>
