@@ -3,7 +3,7 @@ import DefaultView from './DefaultView';
 import ExpandedView from './ExpandedView';
 
 class ImageGallery extends React.Component {
-  construtor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {

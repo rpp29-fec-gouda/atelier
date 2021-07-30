@@ -4,7 +4,7 @@ const QuantitySelector = (props) => {
   return (
     <div>
       QuantitySelector
-      <input type="number" id="quantity" name="quantity" step="1">1</input>
+      {/* <input type="number" id="quantity" name="quantity" step="1">1</input> */}
     </div>
   );
 };
