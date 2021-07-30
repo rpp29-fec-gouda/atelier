@@ -15,7 +15,6 @@ class QA extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.productId)
     axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
       .then(res => {
         this.setState({

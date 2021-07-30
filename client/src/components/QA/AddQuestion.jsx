@@ -3,7 +3,7 @@ import React from 'react';
 
 class AddQuestion extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
       email: '',
@@ -12,10 +12,7 @@ class AddQuestion extends React.Component {
         username: '',
         email: '',
         question: ''
-
       }
-
-
     };
   }
 
@@ -131,6 +128,6 @@ class AddQuestion extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default AddQuestion;
