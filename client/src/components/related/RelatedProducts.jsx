@@ -11,12 +11,11 @@ class RelatedProducts extends React.Component {
 
     this.selectProduct = this.selectProduct.bind(this);
 
-    this.products = this.props.products;
+    this.productList = this.props.products;
 
     this.store = {
       products: new Map(),
       related: new Map()
-      // outfit: undefined
     };
 
     this.state = {
@@ -38,11 +37,13 @@ class RelatedProducts extends React.Component {
     let ids = related.get(product.id);
 
     if (ids) {
+      console.log(`${ids.length} products associated with ${product.name}:`, ids);
       callback(ids);
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
           ids = res.data;
+          console.log(`${ids.length} product ids associated with ${product.name}`, ids);
           related.set(id, ids);
           callback(ids);
           // this.setState({ related: res.data });
@@ -69,7 +70,7 @@ class RelatedProducts extends React.Component {
     });
 
     this.setState({
-      related: loaded
+      related: [...loaded]
     });
 
     if (toLoad.length) {
@@ -78,8 +79,8 @@ class RelatedProducts extends React.Component {
           .then(res => {
             const product = res.data;
             const relatedProducts = this.state.related.slice();
-            console.log(product);
-            this.products.push(product);
+            console.log(`Related product ${product.name} retrieved`);
+            this.productList.push(product);
             products.set(id, product);
             this.setState({
               related: [product, ...relatedProducts]
@@ -111,25 +112,64 @@ class RelatedProducts extends React.Component {
     // }
   }
 
-  mapAllProductsById() {
-    return axios.get('/products?count=1000000')
-      .then(res => {
-        const { products: map } = this.store;
-        const allProducts = res.data;
-        for (let i = 0, end = allProducts.length; i < end; i++) {
-          const product = allProducts[i];
-          map.set(product.id, product);
+  loadOutfit() {
+    const { localStorage } = window;
+    const outfitIds = localStorage.getItem('outfit');
+    console.log('Outfit Ids:', outfitIds);
+
+    if (outfitIds) {
+      const { products } = this.store;
+      let loaded = [];
+      let index = 0;
+
+      JSON.parse(outfitIds).forEach(id => {
+        let product = products.get(id);
+
+        if (product) {
+          loaded[index++] = product;
+          console.log(`${product.name} already loaded`);
+          this.setState({ products: [...loaded] });
+        } else {
+          let asyncIndex = index++;
+          axios.get(`/products/${id}`)
+            .then(res => {
+              const product = res.data;
+              loaded[asyncIndex] = product;
+              console.log(`${product.name} loaded from server/API`);
+              this.setState({ products: [...loaded] });
+            })
+            .catch(err => {
+              console.log('Loading outfit:', err.stack);
+            });
         }
-        this.products = allProducts;
-      })
-      .catch(err => {
-        console.log(err.stack);
       });
+    }
   }
+
+  updateOutfit(newOutfit) {
+    console.log('Related products updating outfit:', newOutfit);
+    this.setState({ outfit: newOutfit });
+  }
+
+  // mapAllProductsById() {
+  //   return axios.get('/products?count=1000000')
+  //     .then(res => {
+  //       const { products: map } = this.store;
+  //       const allProducts = res.data;
+  //       for (let i = 0, end = allProducts.length; i < end; i++) {
+  //         const product = allProducts[i];
+  //         map.set(product.id, product);
+  //       }
+  //       this.products = allProducts;
+  //     })
+  //     .catch(err => {
+  //       console.log(err.stack);
+  //     });
+  // }
 
   selectProduct(product) {
     const { updateProductData, selectProduct } = this.props;
-    updateProductData(this.products, this.store.products);
+    updateProductData(this.productList, this.store.products);
     // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
   }
@@ -144,20 +184,24 @@ class RelatedProducts extends React.Component {
     //   .catch(err => {
     //     console.log(err.stack);
     //   });
+    this.loadOutfit();
     this.collectRelatedProducts(this.props.selectedProduct);
   }
 
   componentDidUpdate() {
-    const { related } = this.store;
-    if (!related.get(this.props.selectedProduct.id)) {
+    const relatedProductIds = this.store.related.get(this.props.selectedProduct.id);
+    if (relatedProductIds) {
+      // this.collectProductsById(relatedProductIds);
+    } else {
       this.collectRelatedProducts(this.props.selectedProduct);
     }
-
   }
 
   render() {
     const { related, outfit } = this.state;
     const { selectedProduct, selectProduct } = this.props;
+
+    console.log('Related products:', related);
 
     console.log('RelatedProducts re-render');
     return (
@@ -167,10 +211,13 @@ class RelatedProducts extends React.Component {
           products={ related }
           selectedProduct={ selectedProduct }
           selectProduct={ this.selectProduct }
-          />
+        />
         <Outfit
+          products={ outfit }
+          updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
-          selectProduct={ this.selectProduct }        />
+          selectProduct={ this.selectProduct }
+        />
         {/* <RelatedProductsOutfit /> */}
       </div>
     );

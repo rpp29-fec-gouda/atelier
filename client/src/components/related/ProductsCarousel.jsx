@@ -17,9 +17,8 @@ const ProductsCarousel = (props) => {
             <ProductCard
               key={ `related${key++}` }
               product={ product }
-              selectProduct={ selectProduct }
               selectedProduct={ selectedProduct }
-              updateOutfit={ (p) => {} }
+              selectProduct={ selectProduct }
             />
           ))
         ) : (
@@ -28,6 +27,6 @@ const ProductsCarousel = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default ProductsCarousel;

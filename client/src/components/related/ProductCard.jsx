@@ -4,6 +4,9 @@ import '../css/RelatedProducts.css';
 const stars = [1, 1, 1, .8, 0];
 
 const ProductCard = (props) => {
+  if (!props.product) {
+    return null;
+  }
   const { product, selectedProduct, selectProduct, type, action } = props;
   let hoverText, actionClass, actionSymbol;
 
@@ -14,10 +17,11 @@ const ProductCard = (props) => {
   } else {
     hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
     actionClass = 'compareProductSymbol';
-    actionSymbol = String.fromCharCode(9734)
+    actionSymbol = String.fromCharCode(9734);
   }
 
   const maxTitleTextLength = 60;
+  // console.log(`Attempting to render card for ${product.name}`);
   let trimmedTitle = `${product.name}: ${product.slogan.toLowerCase()}`;
   if (trimmedTitle.length > maxTitleTextLength) {
     trimmedTitle = trimmedTitle.slice(0, trimmedTitle.indexOf(' ', maxTitleTextLength - 10)) + '...';

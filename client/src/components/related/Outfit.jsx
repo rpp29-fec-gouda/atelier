@@ -21,26 +21,25 @@ class Outfit extends React.Component {
     };
 
     this.state = {
-      outfit: []
+      products: []
     };
   }
 
   updateOutfit(newOutfit) {
     const { localStorage } = window;
-    if (newOutfit.length) {
-      localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
-    } else {
-      localStorage.removeItem('outfit');
-    }
+    localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
 
     this.setState({
-      outfit: newOutfit
+      products: newOutfit
     });
+
+    this.props.updateOutfit(newOutfit);
   }
 
-  addToOutfit() {
+  addToOutfit(e) {
+    e.stopPropagation();
     const { selectedProduct } = this.props;
-    let oldOutfit = this.state.outfit.slice();
+    let oldOutfit = this.state.products.slice();
 
     if (oldOutfit.includes(selectedProduct)) {
       return;
@@ -50,51 +49,20 @@ class Outfit extends React.Component {
   }
 
   removeFromOutfit(product) {
-    let oldOutfit = this.state.outfit.slice();
+    let oldOutfit = this.state.products.slice();
     const newOutfit = oldOutfit.splice(oldOutfit.indexOf(product), 1);
     this.updateOutfit(newOutfit);
   }
-
-  loadOutfit() {
-    const { localStorage } = window;
-    const outfitIds = localStorage.getItem('outfit');
-    console.log(outfitIds);
-
-    if (outfitIds) {
-      const { products } = this.store;
-      let loaded = [], index = 0;
-      JSON.parse(outfitIds).forEach(id => {
-        let product = products.get(id);
-
-        if (product) {
-          loaded[index++] = product;
-          console.log(loaded);
-          this.setState({ outfit: [...loaded] });
-        } else {
-          let asyncIndex = index++;
-          axios.get(`/products/${id}`)
-            .then(res => {
-              const product = res.data;
-              loaded[asyncIndex] = product;
-              console.log(loaded);
-              this.setState({ outfit: [...loaded]});
-            })
-            .catch(err => {
-              console.log('Loading outfit:', err.stack);
-            });
-        }
-      });
-    }
-  }
-
-  componentDidMount() {
-    this.loadOutfit();
-  }
+  // componentDidMount() {
+  //   this.loadOutfit();
+  // }
 
   render() {
     const { selectedProduct, selectProduct } = this.props;
-    const { outfit } = this.state;
+    const { products } = this.state;
+    console.log('Products in current outfit:', products);
 
+    let key = 0;
     return selectedProduct ? (
       <div id='OutfitCarousel'>
         <h1></h1>
@@ -104,9 +72,9 @@ class Outfit extends React.Component {
             <h1>+</h1>
             <h2>Add to Outfit</h2>
           </div>
-          {outfit.length ? (
-            outfit.map(product => (
-              <ProductCard key={product.id} type='outfit' product={product} selectProduct={ selectProduct } action={ this.removeFromOutfit } />
+          {products.length ? (
+            products.map(product => (
+              <ProductCard key={ key++ } type='outfit' product={ product } selectProduct={ selectProduct } action={ this.removeFromOutfit } />
             ))) : null
           }
         </div>
