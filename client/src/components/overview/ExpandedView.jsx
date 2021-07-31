@@ -27,12 +27,14 @@ class ExpandedView extends React.Component {
         ExpandedView
         { this.state.isZoomed
         ? <ExpandedViewZoomed />
-        : <div>
+        : <div class="row">
             <ImageNavigator />
-            <ScrollingArrows />
+            <div class="column">
+              <div class="collapsed-view" onClick={this.props.onClick}>]+[</div>
+              <ScrollingArrows />
+            </div>
           </div>
         }
-        <div class="collapsed-view" onClick={this.props.onClick}>]+[</div>
       </div>
     );
   }

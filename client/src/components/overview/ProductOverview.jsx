@@ -4,6 +4,7 @@ import ProductInformation from './ProductInformation';
 import StyleSelector from './StyleSelector';
 import Cart from './Cart';
 import ProductDescription from './ProductDescription';
+import './productOverview.css';
 
 const ProductOverview = (props) => {
   const { id, name, category, slogan, description } = props.selectedProduct;
@@ -13,7 +14,7 @@ const ProductOverview = (props) => {
         <ImageGallery
           id={ id }
         />
-        <div class="column">
+        <div id="product-col-right" class="column">
           <ProductInformation
             id={ id }
             name={ name }

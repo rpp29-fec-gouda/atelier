@@ -1,4 +1,5 @@
 import React from 'react';
+import './scrollingArrows.css';
 
 const ScrollingArrows = (props) => {
   return (

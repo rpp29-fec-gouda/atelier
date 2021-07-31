@@ -1,4 +1,5 @@
 import React from 'react';
+import './productDescription.css';
 
 const ProductDescription = (props) => {
   return (
