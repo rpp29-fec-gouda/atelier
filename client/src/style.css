@@ -61,6 +61,7 @@ a {
   border: 1px solid black;
 }
 
+.button {
   font-size: 1em;
   padding: 1em;
   margin: 0.7em, 0.7em, 0.7em, 0em;
