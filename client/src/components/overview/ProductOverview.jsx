@@ -105,7 +105,7 @@ class ProductOverview extends React.Component {
           />
           <div id="product-col-right" class="column">
             <ProductInformation
-              productName={ selectedProduct.name }
+              name={ selectedProduct.name }
               category={ selectedProduct.category }
               defaultPrice={ selectedProduct.default_price }
               originalPrice={ selectedStyle.original_price }
