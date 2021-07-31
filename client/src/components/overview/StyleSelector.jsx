@@ -2,10 +2,15 @@ import React from 'react';
 import './styleSelector.css';
 
 const StyleSelector = (props) => {
+  console.log('Rendering style selector');
+
+  // selectedId = { styleId }
+  // items={ selectorItems }
+
   return (
     <div id="style-selector">
       <h2 class="uppercase no-select">
-        <span class="bold">STYLE &gt;</span> SELECTED STYLE
+        <span class="bold">STYLE &gt;</span> {props.name}
       </h2>
       <div class="styles column">
         <div class="row">

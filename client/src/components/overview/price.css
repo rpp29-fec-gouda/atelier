@@ -1,0 +1,11 @@
+#price {
+  user-select: none;
+}
+
+.sale-price {
+  color: red
+}
+
+.original-price {
+  text-decoration: line-through
+}
