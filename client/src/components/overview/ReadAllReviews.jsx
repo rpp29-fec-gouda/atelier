@@ -2,8 +2,8 @@ import React from 'react';
 
 const ReadAllReviews = (props) => {
   return (
-    <div>
-      <a href="">Read all reviews</a>
+    <div id="read-all-reviews">
+      <a href="" class="row">Read all reviews</a>
     </div>
   );
 };

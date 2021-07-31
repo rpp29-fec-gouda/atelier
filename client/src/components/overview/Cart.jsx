@@ -5,7 +5,7 @@ import Checkout from './Checkout';
 
 const Cart = (props) => {
   return (
-    <div id="cart column">
+    <div id="cart" class="column">
       <div class="row">
         <SizeSelector />
         <QuantitySelector />

@@ -13,7 +13,7 @@ const ProductOverview = (props) => {
         <ImageGallery
           id={ id }
         />
-        <div class="column">
+        <div id="product-col-right" class="column">
           <ProductInformation
             id={ id }
             name={ name }

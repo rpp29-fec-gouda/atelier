@@ -6,10 +6,11 @@ const StyleSelector = (props) => {
       <h2 class="uppercase no-select">
         <span class="bold">STYLE &gt;</span> SELECTED STYLE
       </h2>
-      <div class="column">
-        <div class="style-selected">✓</div>
+      <div class="styles column">
         <div class="row">
-          <div class="style"></div>
+          <div class="style">
+            <div class="style-selected">✓</div>
+          </div>
           <div class="style"></div>
           <div class="style"></div>
           <div class="style"></div>
