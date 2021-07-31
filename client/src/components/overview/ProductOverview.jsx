@@ -22,6 +22,8 @@ class ProductOverview extends React.Component {
     this.getStyleSelectorItems = this.getStyleSelectorItems.bind(this);
     this.getStyleDefaultPhotoUrl = this.getStyleDefaultPhotoUrl.bind(this);
     this.handleStyleClick = this.handleStyleClick.bind(this);
+    this.getStyleById = this.getStyleById.bind(this);
+    this.setStyleById = this.setStyleById.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +61,33 @@ class ProductOverview extends React.Component {
     });
   }
 
+  getStyleById(id) {
+    if (typeof id === 'string') {
+      id = parseInt(id);
+    }
+    for (const style of this.styles) {
+      console.log('style checked for id:', JSON.stringify(style));
+      console.log('style.style_id', style.style_id);
+      console.log('id', id);
+      if (style.style_id === id) {
+        console.log('Matching style found');
+        return style;
+      }
+    }
+    return;
+  }
+
+  setStyleById(id) {
+    const style = this.getStyleById(id);
+    console.log('Getting style by ID:', style);
+    if (style) {
+      console.log('Updating style to id', id);
+      this.setState({
+        selectedStyle: style
+      });
+    }
+  }
+
   getStyleSelectorItems() {
     const styleItems = [];
     this.styles.forEach(style => {
@@ -80,6 +109,7 @@ class ProductOverview extends React.Component {
 
   handleStyleClick(id) {
     console.log(`Style id ${id} clicked`);
+    this.setStyleById(id);
   }
 
   render() {
