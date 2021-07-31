@@ -89,6 +89,7 @@ class AddingForm extends React.Component {
       };
     }
     if (this.state.formName === 'Answer') {
+      console.log('>>>>>>id<<<<<<', this.props.questionId)
       url = '/qa/questions/' + this.props.questionId + '/answers';
       data = {
         body: this.state.text,
@@ -100,7 +101,7 @@ class AddingForm extends React.Component {
     if (this.checkingRequire()) {
       axios.post(url, data)
         .then(res => {
-          console.log('post question success', res);
+          console.log('submit success', res);
           this.setState({
             username: '',
             email: '',

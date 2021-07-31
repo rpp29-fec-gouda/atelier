@@ -72,12 +72,4 @@ describe('<QA testing />', () => {
     wrapper.find('button.morequestions').simulate('click');
     expect(wrapper.find('table.question_table')).toHaveLength(4);
   });
-
-  test('renders rating breakdown', () => {
-
-  });
-
-  test('renders product breakdown', () => {
-
-  });
 });

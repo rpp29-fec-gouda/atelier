@@ -40,7 +40,7 @@ class Question extends React.Component {
                 <td width='50px' className='helpfulness'>
                   <Helpfulness question={question} />
                 </td>
-                <td width='50px'> | <a href='#!' onClick={() => this.onClickHandle(questionId)}> Add answer </a></td>
+                <td width='50px'> | <a href='#!' id={questionId} onClick={() => this.onClickHandle(questionId)}> Add answer </a></td>
               </tr>
               <tr>
                 <td width='5px' className='character'>A:</td>
@@ -53,7 +53,7 @@ class Question extends React.Component {
           {this.state.addAnswerClicked ?
             <div className='popup'>
               <span className='close' onClick={() => this.onClickHandle(questionId)} >X</span>
-              <AddingForm questionId={questionId} />
+              <AddingForm questionId={this.state.questionId} />
             </div> : null
           }
         </div>
