@@ -30,8 +30,8 @@ module.exports = {
     }
 
     // More varied data attached to POST/PUT requests:
-    console.log('API query:\n', req.url, req.params[0], req.query);
-
+    console.log('API query:\n', req.url, req.params[0], req.query, req.body);
+    
     if (req.method === 'POST') {
       return axios.post(req.url, req.body)
         .then(response => {

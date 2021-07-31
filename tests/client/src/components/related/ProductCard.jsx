@@ -29,10 +29,10 @@ const ProductCard = (props) => {
 
   let key = 0;
   return (
-    <div className='relatedProductCard' title={`Select ${product.name}`} onClick={() => { selectProduct(product); }}>
+    <div className='relatedProductCard' title={`Select ${product.name}`} onClick={(e) => { selectProduct(product); }}>
       <div className='imageBacker'>
         <img src=''></img>
-        <div className={actionClass} title={hoverText} value={product.id} onClick={ () => { action(product); }}>{actionSymbol}</div>
+        <div className={actionClass} title={hoverText} onClick={product => { action(product); }}>{actionSymbol}</div>
       </div>
       <div className='relatedProductInfo'>
         <span className='relatedProductCategory'>{product.category.toUpperCase()}</span>
