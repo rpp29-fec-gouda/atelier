@@ -20,9 +20,11 @@ const Outfit = (props) => {
     if (outfit.includes(selectedProduct)) {
       return;
     }
-    localStorage.setItem('outfit', JSON.stringify(outfit.map(item => item.id)));
+    const newOutfit = [ selectedProduct, ...outfit ];
+    localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
+    console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
 
-    updateOutfit([ selectedProduct, ...outfit ]);
+    updateOutfit(newOutfit);
   };
 
   const removeFromOutfit = (event, product) => {

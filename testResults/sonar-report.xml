@@ -1,27 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <unitTest version="1">
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/overview/productOverview.test.js">
-        <testCase name="&lt;ProductOverview /&gt; renders product information" duration="3"/>
-        <testCase name="&lt;ProductOverview /&gt; renders style selector" duration="0"/>
-        <testCase name="&lt;ProductOverview /&gt; renders add to card" duration="0"/>
-        <testCase name="&lt;ProductOverview /&gt; renders image gallery" duration="1"/>
+    <file path="/Users/stevenharder/hackreactor/atelier/tests/client/src/components/QA/QA.test.js">
+        <testCase name="&lt;QA testing /&gt; renders QA" duration="74"/>
+        <testCase name="&lt;QA testing /&gt; should add 2 questions when click button" duration="79"/>
     </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/ratingsReviews/ratingsAndReviews.test.js">
+    <file path="/Users/stevenharder/hackreactor/atelier/tests/client/src/index.test.js">
+        <testCase name="Test App Entry point should have a paragraph tag with &quot;Loading...&quot;:" duration="13"/>
+        <testCase name="Test App Entry point renders without crashing given the required props" duration="8"/>
+    </file>
+    <file path="/Users/stevenharder/hackreactor/atelier/tests/client/src/components/related/outfit.test.js">
+        <testCase name="Product is added to outfit when &quot;Add to Outfit&quot; card is clicked" duration="10">
+            <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+Expected: 0
+Received: undefined
+    at Object.<anonymous> (/Users/stevenharder/hackreactor/atelier/tests/client/src/components/related/outfit.test.js:8:41)
+    at Promise.then.completed (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/utils.js:390:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/utils.js:315:10)
+    at _callCircusTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:218:40)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at _runTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:155:3)
+    at _runTestsForDescribeBlock (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:66:9)
+    at run (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:25:3)
+    at runAndTransformResultsToJestFormat (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:166:21)
+    at jestAdapter (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:82:19)
+    at runTestInternal (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/runTest.js:389:16)
+    at runTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/runTest.js:481:34)
+    at Object.worker (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/testWorker.js:133:12)]]></failure>
+        </testCase>
+        <testCase name="Product is removed from outfit when &quot;action&quot; button is clicked" duration="2">
+            <failure message="TypeError: Cannot read property &apos;removeFromOutfit&apos; of null"><![CDATA[TypeError: Cannot read property 'removeFromOutfit' of null
+    at Object.<anonymous> (/Users/stevenharder/hackreactor/atelier/tests/client/src/components/related/outfit.test.js:20:12)
+    at Promise.then.completed (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/utils.js:390:28)
+    at new Promise (<anonymous>)
+    at callAsyncCircusFn (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/utils.js:315:10)
+    at _callCircusTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:218:40)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at _runTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:155:3)
+    at _runTestsForDescribeBlock (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:66:9)
+    at run (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/run.js:25:3)
+    at runAndTransformResultsToJestFormat (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:166:21)
+    at jestAdapter (/Users/stevenharder/hackreactor/atelier/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:82:19)
+    at runTestInternal (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/runTest.js:389:16)
+    at runTest (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/runTest.js:481:34)
+    at Object.worker (/Users/stevenharder/hackreactor/atelier/node_modules/jest-runner/build/testWorker.js:133:12)]]></failure>
+        </testCase>
+    </file>
+    <file path="/Users/stevenharder/hackreactor/atelier/tests/client/src/components/ratingsReviews/ratingsAndReviews.test.js">
         <testCase name="&lt;RatingsAndReviews /&gt; renders product information" duration="0"/>
         <testCase name="&lt;RatingsAndReviews /&gt; renders review list" duration="0"/>
         <testCase name="&lt;RatingsAndReviews /&gt; renders rating breakdown" duration="0"/>
         <testCase name="&lt;RatingsAndReviews /&gt; renders product breakdown" duration="0"/>
     </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/related/outfit.test.js">
-        <testCase name="Product is added to outfit when &quot;Add to Outfit&quot; card is clicked" duration="143"/>
-        <testCase name="Product is removed from outfit when &quot;action&quot; button is clicked" duration="3"/>
-    </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/QA/QA.test.js">
-        <testCase name="&lt;QA testing /&gt; renders QA" duration="104"/>
-        <testCase name="&lt;QA testing /&gt; should add 2 questions when click button" duration="68"/>
-    </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/index.test.js">
-        <testCase name="Test App Entry point should have a paragraph tag with &quot;Loading...&quot;:" duration="10"/>
-        <testCase name="Test App Entry point renders without crashing given the required props" duration="6"/>
+    <file path="/Users/stevenharder/hackreactor/atelier/tests/client/src/components/overview/productOverview.test.js">
+        <testCase name="&lt;ProductOverview /&gt; renders product information" duration="0"/>
+        <testCase name="&lt;ProductOverview /&gt; renders style selector" duration="0"/>
+        <testCase name="&lt;ProductOverview /&gt; renders add to card" duration="0"/>
+        <testCase name="&lt;ProductOverview /&gt; renders image gallery" duration="1"/>
     </file>
 </unitTest>

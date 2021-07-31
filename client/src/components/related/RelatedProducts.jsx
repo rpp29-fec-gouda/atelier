@@ -22,6 +22,7 @@ class RelatedProducts extends React.Component {
 
 
     this.state = {
+      selected: this.props.selectedProduct.id,
       related: [],
       outfit: [],
       ready: true
@@ -92,7 +93,7 @@ class RelatedProducts extends React.Component {
             this.productList.push(product);
             products.set(id, product);
             this.setState({
-              related: [product, ...relatedProducts]
+              related: [ ...relatedProducts, product ]
             });
           })
           .catch(err => {
@@ -127,7 +128,7 @@ class RelatedProducts extends React.Component {
 
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
-      console.log('Outfit from localStorage:', outfit);
+      console.log('Outfit found in localStorage:', outfit);
       const { products } = this.store;
       let cached = [];
       let index = 0;
@@ -201,9 +202,10 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.ready) {
-      this.setState({ ready: true });
-      this.collectRelatedProducts(this.props.selectedProduct);
+    const { selectedProduct } = this.props;
+    if (this.state.selected !== selectedProduct.id) {
+      this.setState({ selected: selectedProduct.id });
+      this.collectRelatedProducts(selectedProduct);
     }
   }
 
