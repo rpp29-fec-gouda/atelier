@@ -4,8 +4,8 @@ const NewReview = (props) => {
   return (
     <div id='newReview'>
       <h3>New Review</h3>
-      <button>More Reviews</button>
-      <button>Add a Review +</button>
+      <button className='moreReviews'>More Reviews</button>
+      <button className='addReview'>Add a Review +</button>
     </div>
   );
 };

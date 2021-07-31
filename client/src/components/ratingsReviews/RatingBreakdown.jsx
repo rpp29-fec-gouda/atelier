@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingProgress from './ratingProgress.jsx';
 
 const RatingBreakdown = (props) => {
   const { reviews, ratings, recommended } = props;
@@ -8,20 +9,20 @@ const RatingBreakdown = (props) => {
   let key = 0;
   console.log('ratings:', ratings);
 
-  const oneStar = parseInt(ratings[1]) * 1 || 0;
-  const twoStar = parseInt(ratings[2]) * 2 || 0;
-  const threeStar = parseInt(ratings[3]) * 3 || 0;
-  const fourStar = parseInt(ratings[4]) * 4 || 0;
-  const fiveStar = parseInt(ratings[5]) * 5 || 0;
+  const oneBar = parseInt(ratings[1]);
+  const oneStar = oneBar * 1 || 0;
+  const twoBar = parseInt(ratings[2]);
+  const twoStar = twoBar * 2 || 0;
+  const threeBar = parseInt(ratings[3]);
+  const threeStar = threeBar * 3 || 0;
+  const fourBar = parseInt(ratings[4]);
+  const fourStar = fourBar * 4 || 0;
+  const fiveBar = parseInt(ratings[5]);
+  const fiveStar = fiveBar * 5 || 0;
 
   const sum = oneStar + twoStar + threeStar + fourStar + fiveStar;
-  // const allRatings = [];
 
-  // for (let i = 1; i < 6; i++) {
-  //   if (!isNaN(parseInt(ratings[i])) ) {
-  //     allRatings.push(parseInt(ratings[i]));
-  //   }
-  // }
+  const test = sum / twoStar;
 
   const averageRating = sum / reviews.length;
 
@@ -35,12 +36,14 @@ const RatingBreakdown = (props) => {
 
   return (
     <div id='ratingBreakdown'>
-      <span className='averageRating'>{averageRating} {stars.map(star => (
+      <span className='averageRating'>{averageRating}</span>
+      <span>{stars.map(star => (
         <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
       ))}</span>
       <br></br><br></br>
       <div>{averageRecommend}% of reviews recommend this product</div>
       <br></br>
+      <RatingProgress color='#00695c' completed='test'/>
       <div>
         <div>5 stars bar</div>
         <div>4 stars bar</div>
