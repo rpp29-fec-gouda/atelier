@@ -1,30 +1,30 @@
 import axios from 'axios';
 import React from 'react';
 
-class AddQuestion extends React.Component {
+class AddingForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formName: '',
       username: '',
       email: '',
-      question: '',
+      text: '',
       requires: {
         username: '',
         email: '',
-        question: ''
+        text: ''
       }
     };
   }
   componentDidMount() {
     if (this.props.productId) {
       this.setState({
-        formName: 'question'
+        formName: 'Question'
       });
     }
     if (this.props.questionId) {
       this.setState({
-        formName: 'answer'
+        formName: 'Answer'
       });
     }
   }
@@ -41,9 +41,9 @@ class AddQuestion extends React.Component {
         email: e.target.value
       });
     }
-    if (id === 'question') {
+    if (id === 'text') {
       this.setState({
-        question: e.target.value
+        text: e.target.value
       });
     }
   }
@@ -54,8 +54,8 @@ class AddQuestion extends React.Component {
     if (this.state.username.length === 0) {
       requires.username = 'username is require';
     }
-    if (this.state.question.length === 0) {
-      requires.question = 'question is require';
+    if (this.state.text.length === 0) {
+      requires.text = 'text is require';
     }
     if (this.state.email.length === 0) {
       requires.email = 'email is require';
@@ -79,19 +79,19 @@ class AddQuestion extends React.Component {
 
   submit() {
     let data, url;
-    if (this.state.formName === 'question') {
+    if (this.state.formName === 'Question') {
       url = '/qa/questions';
       data = {
-        body: this.state.question,
+        body: this.state.text,
         name: this.state.username,
         email: this.state.email,
         'product_id': this.props.productId
       };
     }
-    if (this.state.formName === 'answer') {
+    if (this.state.formName === 'Answer') {
       url = '/qa/questions/' + this.props.questionId + '/answers';
       data = {
-        body: this.state.question,
+        body: this.state.text,
         name: this.state.username,
         email: this.state.email
       };
@@ -104,10 +104,12 @@ class AddQuestion extends React.Component {
           this.setState({
             username: '',
             email: '',
-            question: '',
-            usernameRequire: '',
-            emailRequire: '',
-            questionRequire: ''
+            text: '',
+            requires: {
+              username: '',
+              email: '',
+              text: ''
+            }
           });
         })
         .catch(err => console.log('post qestion err', err));
@@ -127,7 +129,7 @@ class AddQuestion extends React.Component {
               value={this.state.username}
               onChange={this.handleOnChange.bind(this)}>
             </input><p style={{ color: 'red' }}>{this.state.requires.username}</p>
-            <p className='warningText'>For privacy reasons, do not use your full name or email address</p>
+            <p className='warningtext'>For privacy reasons, do not use your full name or email address</p>
           </label>
           <label>
             Email:
@@ -137,16 +139,16 @@ class AddQuestion extends React.Component {
               value={this.state.email}
               onChange={this.handleOnChange.bind(this)}>
             </input><p style={{ color: 'red' }}>{this.state.requires.email}</p>
-            <p className='warningText'>For authentication reasons, you will not be emailed</p>
+            <p className='warningtext'>For authentication reasons, you will not be emailed</p>
           </label>
           <label>
-            Question:
+            {this.state.formName}:
             <input maxlength='1000'
               placeholder='Maximum 1000 characters'
-              id='question'
-              value={this.state.question}
+              id='text'
+              value={this.state.text}
               onChange={this.handleOnChange.bind(this)}>
-            </input><p style={{ color: 'red' }}>{this.state.requires.question}</p>
+            </input><p style={{ color: 'red' }}>{this.state.requires.text}</p>
           </label><br></br>
           <input type="submit" value="Submit" />
         </form>
@@ -155,4 +157,4 @@ class AddQuestion extends React.Component {
   }
 }
 
-export default AddQuestion;
+export default AddingForm;

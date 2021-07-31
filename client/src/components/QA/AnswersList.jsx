@@ -62,7 +62,7 @@ class Answer extends React.Component {
         return (
           <div key={answerId}>
             <div>{answer.body}</div>
-            <div className='answerBy'>
+            <div className='answerby'>
               <div class='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
               <div class='inline'> | </div>

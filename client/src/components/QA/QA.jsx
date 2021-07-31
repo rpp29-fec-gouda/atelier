@@ -9,6 +9,7 @@ class QA extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: '',
       questions: [],
       questionsFiltered: [],
       addQuestionButton: true
@@ -19,12 +20,29 @@ class QA extends React.Component {
     axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
       .then(res => {
         this.setState({
-          questions: res.data.results
+          questions: res.data.results,
+          productId: this.props.productId
         });
       })
       .catch(err => {
         console.log(err.stack);
       });
+  }
+
+  componentDidUpdate() {
+    if (this.state.productId !== this.props.productId) {
+      axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
+        .then(res => {
+          this.setState({
+            questions: res.data.results,
+            productId: this.props.productId
+          });
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+
+    }
   }
 
   addQuestionClick() {
@@ -56,19 +74,19 @@ class QA extends React.Component {
       }
 
       return (
-        <div className='QAComponent'>
+        <div >
           <h3>QUESTIONS & ANSWERS</h3>
           <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
-          <QuestionsList questions={questions} productId={this.props.productId}/>
+          <QuestionsList questions={questions} productId={this.props.productId} />
         </div>
       );
     } else {
       return (
-        <div className='QAComponent'>
+        <div >
           <h3>QUESTIONS & ANSWERS</h3>
           {this.state.addQuestionButton ?
-            <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
-            <AddingForm productId={this.props.productId}/>
+            <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
+            <AddingForm productId={this.props.productId} />
           }
 
         </div>

@@ -15,22 +15,22 @@ td {
 .character {
   font-weight: bold;
 }
-.answerBy {
+.answerby {
   margin: 5px;
   font-size: 14px;
 }
 
-#addQuestion, #moreQuestions {
+#addquestion, #morequestions {
   height: 50px;
   margin: 8px;
   font-weight: 550 ; 
   display: inline-block; 
 }
 
-#addQuestion {
+#addquestion {
   width: 200px
 }
-#moreQuestion {
+#morequestion {
   width: 250px
 }
 
@@ -40,7 +40,7 @@ td {
 .inline {
   display: inline;
 }
-.warningText {
+.warningtext {
   font-size: 10px;
 }
   

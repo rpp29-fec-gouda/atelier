@@ -39,7 +39,7 @@ class QuestionsList extends React.Component {
   moreQuestionsButton() {
     if (this.state.moreQuesionButton) {
       return (
-        < button id='moreQuestions' className='moreQuestions' onClick={this.checkRemainQuestion.bind(this)} >
+        < button id='morequestions' className='morequestions' onClick={this.checkRemainQuestion.bind(this)} >
           MORE ANSWERED QUESTIONS
         </button>
       );
@@ -80,7 +80,7 @@ class QuestionsList extends React.Component {
       <div>
         <Question questions={questionsList} />
         {this.moreQuestionsButton()}
-        <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
+        <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
       </div>
     );
   }
