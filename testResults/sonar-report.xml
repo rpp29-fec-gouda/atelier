@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <unitTest version="1">
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/productOverview/productOverview.test.js">
+    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/ratingsReviews/ratingsAndReviews.test.js">
+        <testCase name="&lt;RatingsAndReviews /&gt; renders product information" duration="0"/>
+        <testCase name="&lt;RatingsAndReviews /&gt; renders review list" duration="0"/>
+        <testCase name="&lt;RatingsAndReviews /&gt; renders rating breakdown" duration="1"/>
+        <testCase name="&lt;RatingsAndReviews /&gt; renders product breakdown" duration="0"/>
+    </file>
+    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/related/outfit.test.js">
+        <testCase name="Product is added to outfit when &quot;Add to Outfit&quot; card is clicked" duration="105"/>
+        <testCase name="Product is removed from outfit when &quot;action&quot; button is clicked" duration="6"/>
+    </file>
+    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/overview/productOverview.test.js">
         <testCase name="&lt;ProductOverview /&gt; renders product information" duration="1"/>
         <testCase name="&lt;ProductOverview /&gt; renders style selector" duration="0"/>
         <testCase name="&lt;ProductOverview /&gt; renders add to card" duration="0"/>
         <testCase name="&lt;ProductOverview /&gt; renders image gallery" duration="0"/>
     </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/ratingsReviews/ratingsAndReviews.test.js">
-        <testCase name="&lt;RatingsAndReviews /&gt; renders product information" duration="1"/>
-        <testCase name="&lt;RatingsAndReviews /&gt; renders review list" duration="0"/>
-        <testCase name="&lt;RatingsAndReviews /&gt; renders rating breakdown" duration="0"/>
-        <testCase name="&lt;RatingsAndReviews /&gt; renders product breakdown" duration="0"/>
-    </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/related/outfit.test.js">
-        <testCase name="Product is added to outfit when &quot;Add to Outfit&quot; card is clicked" duration="103"/>
-        <testCase name="Product is removed from outfit when &quot;action&quot; button is clicked" duration="6"/>
+    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/QA/QA.test.js">
+        <testCase name="&lt;QA testing /&gt; renders QA" duration="40"/>
+        <testCase name="&lt;QA testing /&gt; should add 2 questions when click button" duration="63"/>
+        <testCase name="&lt;QA testing /&gt; renders rating breakdown" duration="0"/>
+        <testCase name="&lt;QA testing /&gt; renders product breakdown" duration="0"/>
     </file>
     <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/index.test.js">
         <testCase name="Test App Entry point should have a paragraph tag with &quot;Loading...&quot;:" duration="10"/>
         <testCase name="Test App Entry point renders without crashing given the required props" duration="6"/>
-    </file>
-    <file path="/Users/vinhhuynh/Desktop/atelier/tests/client/src/components/QA/QA.test.js">
-        <testCase name="&lt;QA testing /&gt; renders QA" duration="100"/>
-        <testCase name="&lt;QA testing /&gt; should add 2 more question when click button" duration="66"/>
-        <testCase name="&lt;QA testing /&gt; renders rating breakdown" duration="0"/>
-        <testCase name="&lt;QA testing /&gt; renders product breakdown" duration="0"/>
     </file>
 </unitTest>
