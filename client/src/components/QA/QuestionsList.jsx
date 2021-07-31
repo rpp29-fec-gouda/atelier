@@ -1,8 +1,8 @@
 import React from 'react';
 import Question from './Question.jsx';
-import AddQuestion from './AddQuestion.jsx';
+import AddForm from './AddingForm.jsx';
 import axios from 'axios';
-import AddAnswer from './AddAnswer.jsx';
+import AddingForm from './AddingForm.jsx';
 
 
 class QuestionsList extends React.Component {
@@ -16,7 +16,6 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('////////', this.state.questionsDisplay);
     this.checkRemainQuestion();
   }
 
@@ -52,7 +51,7 @@ class QuestionsList extends React.Component {
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
-        <AddQuestion productId={this.props.productId} />
+        <AddingForm productId={this.props.productId} />
       );
     }
   }
@@ -87,7 +86,6 @@ class QuestionsList extends React.Component {
   }
 
   render() {
-    console.log('////////', this.state.questionsDisplay);
     return (
       <div>
         {this.renderQuestions()}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import AddQuestion from './AddQuestion';
+import AddingForm from './AddingForm';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestion';
 import '../css/QA.css';
@@ -68,7 +68,7 @@ class QA extends React.Component {
           <h2>QUESTIONS & ANSWERS</h2>
           {this.state.addQuestionButton ?
             <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
-            <AddQuestion productId={this.props.productId}/>
+            <AddingForm productId={this.props.productId}/>
           }
 
         </div>

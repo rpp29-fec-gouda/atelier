@@ -1,5 +1,5 @@
 import React from 'react';
-import AddAnswer from './AddAnswer';
+import AddingForm from './AddingForm';
 import Helpfulness from '../shared/Helpfulness';
 import Answer from './AnswersList';
 
@@ -21,7 +21,7 @@ class Question extends React.Component {
 
   toggleAddAnswer(id) {
     if (this.addAnswerClicked) {
-      return (<AddAnswer />);
+      return (<AddingForm />);
     }
   }
 
@@ -52,7 +52,7 @@ class Question extends React.Component {
 
           {this.state.addAnswerClicked ?
             <div className='popup'>
-              <AddAnswer questionId={questionId} />
+              <AddingForm questionId={questionId} />
             </div> : null
           }
         </div>

@@ -1,21 +1,32 @@
-import React from 'react';
 import axios from 'axios';
+import React from 'react';
 
-
-class AddAnswer extends React.Component {
+class AddQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsId: '',
+      formName: '',
       username: '',
       email: '',
-      answer: '',
+      question: '',
       requires: {
         username: '',
         email: '',
-        answer: ''
+        question: ''
       }
     };
+  }
+  componentDidMount() {
+    if (this.props.productId) {
+      this.setState({
+        formName: 'question'
+      });
+    }
+    if (this.props.questionId) {
+      this.setState({
+        formName: 'answer'
+      });
+    }
   }
 
   handleOnChange(e) {
@@ -30,20 +41,21 @@ class AddAnswer extends React.Component {
         email: e.target.value
       });
     }
-    if (id === 'answer') {
+    if (id === 'question') {
       this.setState({
-        answer: e.target.value
+        question: e.target.value
       });
     }
   }
+
 
   checkingRequire() {
     let requires = {};
     if (this.state.username.length === 0) {
       requires.username = 'username is require';
     }
-    if (this.state.answer.length === 0) {
-      requires.answer = 'answer is require';
+    if (this.state.question.length === 0) {
+      requires.question = 'question is require';
     }
     if (this.state.email.length === 0) {
       requires.email = 'email is require';
@@ -66,31 +78,45 @@ class AddAnswer extends React.Component {
   }
 
   submit() {
-    const data = {
-      body: this.state.answer,
-      name: this.state.username,
-      email: this.state.email
-    };
+    let data, url;
+    if (this.state.formName === 'question') {
+      url = '/qa/questions';
+      data = {
+        body: this.state.question,
+        name: this.state.username,
+        email: this.state.email,
+        'product_id': this.props.productId
+      };
+    }
+    if (this.state.formName === 'answer') {
+      url = '/qa/questions/' + this.props.questionId + '/answers';
+      data = {
+        body: this.state.question,
+        name: this.state.username,
+        email: this.state.email
+      };
+    }
+
     if (this.checkingRequire()) {
-      axios.post('/qa/questions/' + this.props.questionId + '/answers', data)
+      axios.post(url, data)
         .then(res => {
-          console.log('post answer success', res);
+          console.log('post question success', res);
           this.setState({
             username: '',
             email: '',
-            answer: '',
+            question: '',
             usernameRequire: '',
             emailRequire: '',
-            answerRequire: ''
+            questionRequire: ''
           });
         })
-        .catch(err => console.log('post answer err', err));
+        .catch(err => console.log('post qestion err', err));
     }
   }
 
   render() {
     return (
-      <div className='inner-popup'>
+      <div>
         <form onSubmit={this.submit.bind(this)}>
           <label>
             Username:
@@ -114,22 +140,19 @@ class AddAnswer extends React.Component {
             <p className='warningText'>For authentication reasons, you will not be emailed</p>
           </label>
           <label>
-            Answer:
+            Question:
             <input maxlength='1000'
               placeholder='Maximum 1000 characters'
-              id='answer'
-              value={this.state.answer}
+              id='question'
+              value={this.state.question}
               onChange={this.handleOnChange.bind(this)}>
-            </input><p style={{ color: 'red' }}>{this.state.requires.answer}</p>
+            </input><p style={{ color: 'red' }}>{this.state.requires.question}</p>
           </label><br></br>
           <input type="submit" value="Submit" />
         </form>
-      </div >
-
+      </div>
     );
-
   }
 }
 
-
-export default AddAnswer;
+export default AddQuestion;
