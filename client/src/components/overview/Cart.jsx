@@ -8,6 +8,9 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
 
+    this.currentQuantity = 0;
+    this.bag = [];
+
     this.state = {
       currentSku: null
     };
@@ -24,11 +27,17 @@ class Cart extends React.Component {
   }
 
   handleQuantitySelect(quantity) {
-    console.log('Quantity chosen:', quantity);
+    this.currentQuantity = quantity;
+    console.log('Quantity chosen:', this.currentQuantity);
   }
 
   handleCheckout() {
     console.log('Cart checked out!');
+    this.bag.push({
+      sku: this.state.currentSku,
+      quantity: this.currentQuantity
+    });
+    console.log('Current order:', this.bag);
   }
 
   render() {
@@ -51,12 +60,6 @@ class Cart extends React.Component {
     console.log('sizes', sizes);
     console.log('maxQuantity', maxQuantity);
 
-    // styleId = { styleId }
-    //             skus = { skus }
-    //   "37": {
-    //     "quantity": 8,
-    //     "size": "XS"
-    // },
     return (
       <div id="cart" class="column">
         <div class="row">
