@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-/* 
+/*
 pass id through component
 prop name can be answerId or reviewId
 Example: <Report answerId={answerId}/>
@@ -23,7 +23,7 @@ class Report extends React.Component {
         link: link
       });
     } if (this.props.reviewId) {
-      const answerId = this.props.reviewId;
+      const reviewId = this.props.reviewId;
       const link = '/reviews/' + reviewId + '/report';
       this.setState({
         link: link

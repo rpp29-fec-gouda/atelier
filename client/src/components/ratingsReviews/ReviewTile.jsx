@@ -1,4 +1,6 @@
 import React from 'react';
+import Helpfulness from '../shared/Helpfulness.jsx';
+import Report from '../shared/Report.jsx';
 
 const ReviewTile = (props) => {
   const { reviews } = props;
@@ -26,9 +28,9 @@ const ReviewTile = (props) => {
               }
               <div className='ReviewResponse'>{review.response}</div>
               <br></br>
-              <span className='ReviewHelpfulness'>Helpful? Yes({review.helpfulness})</span>
+              <Helpfulness review={review} />
               <span> | </span>
-              <span className='ReviewReport'>Report</span>
+              <Report reviewId={review.review_id} />
               <hr></hr>
             </div>
           </div>
