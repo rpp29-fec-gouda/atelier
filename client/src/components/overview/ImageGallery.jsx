@@ -7,6 +7,14 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
 
+    // photos={ photos }
+    // [
+    //   {
+    //       "thumbnail_url": ,
+    //       "url":
+    //   },
+    // ]
+
     this.state = {
       isExpanded: false
     };
