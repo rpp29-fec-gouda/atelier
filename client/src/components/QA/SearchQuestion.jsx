@@ -21,7 +21,7 @@ const SearchQuestions = (props) => {
         callback(questionsFiltered);
         questionsFiltered = [];
       }
-    } 
+    }
     if (searchText.length < 3) {
       questionsFiltered = [];
       callback(questionsFiltered);
@@ -31,14 +31,14 @@ const SearchQuestions = (props) => {
 
   return (
     <div>
-      <form className="search_bar" action="FILL URL">
-        <input
-          type="text"
-          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
-          name="search"
-          onChange={changeHandle}
-        ></input>
-      </form>
+      <input
+        className="search_bar"
+        type="text"
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
+        name="search"
+        onChange={changeHandle}
+      ></input>
+
     </div>
   );
 };

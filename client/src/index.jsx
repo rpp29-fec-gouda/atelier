@@ -102,20 +102,19 @@ class App extends React.Component {
         <select name='productSelector' value={selectedProduct.id} onChange={this.handleSelectChange}>
           {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
         </select>
-        <ProductOverview
+        {/* <ProductOverview
           selectedProduct={ selectedProduct }
-        />
-        <RelatedProducts
+        /> */}
+        {/* <RelatedProducts
           products={products}
           selectedProduct={selectedProduct}
           updateProductData={this.updateProductData}
           selectProduct={this.selectProduct}
-        />
-        {console.log('re render >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', selectedProduct.id)}
+        /> */}
         <QA productId={selectedProduct.id} />
         <br></br>
-        <RatingsAndReviews
-          selectedProduct={selectedProduct} />
+        {/* <RatingsAndReviews
+          selectedProduct={selectedProduct} /> */}
       </div>
     ) : (
       <p>Loading...</p>

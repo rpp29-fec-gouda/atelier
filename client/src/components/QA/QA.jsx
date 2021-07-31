@@ -57,7 +57,7 @@ class QA extends React.Component {
 
       return (
         <div className='QAComponent'>
-          <h2>QUESTIONS & ANSWERS</h2>
+          <h3>QUESTIONS & ANSWERS</h3>
           <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
           <QuestionsList questions={questions} productId={this.props.productId}/>
         </div>
@@ -65,7 +65,7 @@ class QA extends React.Component {
     } else {
       return (
         <div className='QAComponent'>
-          <h2>QUESTIONS & ANSWERS</h2>
+          <h3>QUESTIONS & ANSWERS</h3>
           {this.state.addQuestionButton ?
             <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
             <AddingForm productId={this.props.productId}/>

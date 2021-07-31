@@ -59,7 +59,7 @@ describe('<QA testing />', () => {
   test('renders QA', () => {
     const wrapper = shallow(<QA productId='28212' />); // mount/render/shallow when applicable
     // // Assert that the given enzyme wrapper has rendered content.
-    const text = wrapper.find('h2').text();
+    const text = wrapper.find('h3').text();
     expect(text).toBe('QUESTIONS & ANSWERS');
     const button = wrapper.find('button').length;
     expect(button).toBe(1);

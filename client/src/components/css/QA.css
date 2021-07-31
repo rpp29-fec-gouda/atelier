@@ -53,3 +53,8 @@ td {
   margin: auto;
   background: rgb(199, 196, 196);
 }
+
+.search_bar {
+  width: 80%;
+  height: 30px;
+}
