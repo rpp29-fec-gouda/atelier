@@ -2,6 +2,7 @@ import React from 'react';
 import StarRating from '../shared/StarRating';
 import ReadAllReviews from './ReadAllReviews';
 import Price from './Price';
+import './productInformation.css';
 
 const ProductInformation = (props) => {
   return (

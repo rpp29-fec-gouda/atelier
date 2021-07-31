@@ -1,4 +1,5 @@
 import React from 'react';
+import './styleSelector.css';
 
 const StyleSelector = (props) => {
   return (

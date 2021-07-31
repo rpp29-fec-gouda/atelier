@@ -1,5 +1,5 @@
+/* General */
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); */
-
 body {
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: .5em;
@@ -12,12 +12,15 @@ body {
   flex-flow: column;
 }
 
-
-
+/* layout */
 .row {
   display: flex;
   flex-flow: row;
   padding: 1em, 0, 1em, 0;
+}
+
+.row-margin {
+  margin: 1em 0;
 }
 
 .column {
@@ -25,8 +28,7 @@ body {
   flex-flow: column;
 }
 
-
-
+/* HTML tags */
 h1 {
   font-size: 2.5em;
   margin-block-start: 0em;
@@ -49,31 +51,8 @@ a {
   margin: 0 1em;
 }
 
-.button {
-  font-size: 1em;
-  padding: 1em;
-  margin: 0.7em, 0.7em, 0.7em, 0em;
-  display: inline;
-  font-weight: bold;
-  user-select: none;
-  flex-flow: row;
-  text-transform: uppercase;
-  border: 1px solid black;
-}
 
-select {
-  font-size: 1em;
-  padding: 1em;
-  margin: 0.7em, 0.7em, 0.7em, 0em;
-  display: inline;
-  font-weight: bold;
-  user-select: none;
-  flex-flow: row;
-  text-transform: uppercase;
-  border: 1px solid black;
-}
-
-
+/* Formatting */
 .bold {
   font-weight: bold;
 }
@@ -87,222 +66,34 @@ select {
 }
 
 
+/* Form Elements */
+select {
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+  display: inline;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
+
+.button {
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
 
 .button:hover {
   cursor: pointer;
   background-color: yellow;
-}
-
-.row-margin {
-  margin: 1em 0;
-}
-
-
-/* Stars  */
-.star-rating {
-  display: flex;
-  flex-flow: row;
-}
-
-.star-0 {
-  content: "\2606";
-}
-
-.star-25 {
-  content: "\2BE8";
-}
-
-.star-50 {
-  content: "\2BE8";
-}
-
-.star-75 {
-  content: "\2BE8";
-}
-
-.star-100 {
-  content: "\2605";
-}
-
-/* Scrolling Arrows */
-.scrolling-arrows{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-}
-
-.scrolling-arrows .right-arrow:hover, .left-arrow:hover {
-  cursor: pointer;
-}
-
-/* Image navigator */
-.image-navigator-item {
-  margin: 0.7em 0.7em 0.7em 0;
-  width: 4em;
-}
-
-.image-navigator-item:hover {
-  cursor: pointer;
-}
-
-.image-navigator-item .icon {
-  border: 1px black solid;
-  height: 4em;
-  background-color: yellow;
-}
-
-.image-navigator-item .thumbnail {
-  border: 1px black solid;
-  height: 4em;
-  background-color: white;
-}
-
-.image-navigator-item > div:nth-child(2) {
-  border: 1px;
-  height: 0.4em;
-  margin: 0.2em 0 0 0;
-}
-
-.image-navigator .selected {
-  border: 1px black solid;
-  background-color: black;
-}
-
-/* Style Module */
-#product-col-right {
-  padding: 2em;
-  width: 33%;
-}
-
-.styles {
-  padding: 0.7em 0;
-}
-
-.style {
-  border: 1px black solid;
-  border-radius: 50%;
-  width: 4em;
-  height: 4em;
-  margin: 0.7em 0.7em 0.7em 0;
-  position: relative;
-  background-color: lightgoldenrodyellow;
-}
-
-.style:hover {
-  cursor: pointer;
-}
-
-.style-selected {
-  border: 1px black solid;
-  border-radius: 50%;
-  content: "\2713";
-  width: 0.75em;
-  height: 0.75em;
-  padding: 0 0.20em 0.3em 0.20em;
-  position: absolute;
-  background-color: white;
-  top: 0;
-  right: 0;
-}
-
-#read-all-reviews {
-  display: inline-block;
-  white-space: nowrap;
-}
-
-#product-information {
-  flex-flow: column;
-}
-
-#product-description {
-  padding: 2em;
-}
-
-/* Cart */
-#size-selector {
-  margin: 0 1em 0 0;
-  width: 67%;
-}
-
-#sizes {
-  width: 100%;
-}
-
-#quantity-selector {
-  width: 33%;
-}
-
-#quantity {
-  width: 100%;
-}
-
-#checkout {
-  margin: 1em 0 0 0;
-}
-
-.button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* image gallery */
-#image-gallery {
-  background-color: gray;
-  width: 67%;
-  padding: 2em;
-}
-
-#default-view, #expanded-view {
-  position: relative;
-  height: 100%;
-}
-
-#default-view .row, #expanded-view .row {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
-#default-view .column, #expanded-view .column {
-  width: 100%;
-  background-color: aqua;
-  position: relative;
-}
-
-#main-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: blanchedalmond;
-  z-index: 1;
-}
-
-.expanded-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 20;
-}
-
-.expanded-view:hover {
-  cursor: pointer;
-}
-
-.collapsed-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 19;
-}
-
-.collapsed-view:hover {
-  cursor: pointer;
 }

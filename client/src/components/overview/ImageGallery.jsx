@@ -1,6 +1,7 @@
 import React from 'react';
 import DefaultView from './DefaultView';
 import ExpandedView from './ExpandedView';
+import './imageGallery.css';
 
 class ImageGallery extends React.Component {
   constructor(props) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import './readAllReviews.css';
 
 const ReadAllReviews = (props) => {
   return (
