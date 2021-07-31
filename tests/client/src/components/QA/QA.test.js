@@ -69,7 +69,7 @@ describe('<QA testing />', () => {
   test('should add 2 questions when click button', () => {
     const wrapper = mount(<QuestionList questions={questionsData} />);
     expect(wrapper.find('table.question_table')).toHaveLength(2);
-    wrapper.find('button.moreQuestions').simulate('click');
+    wrapper.find('button.morequestions').simulate('click');
     expect(wrapper.find('table.question_table')).toHaveLength(4);
   });
 
