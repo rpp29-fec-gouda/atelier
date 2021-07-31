@@ -1,0 +1,55 @@
+.question_table {
+  table-layout: fixed;
+  width: 100%;  
+}
+
+.answer_table{
+  table-layout: fixed;
+  width: 100%;  
+}
+
+td {
+  vertical-align: top;
+}
+
+.character {
+  font-weight: bold;
+}
+.answerBy {
+  margin: 5px;
+  font-size: 14px;
+}
+
+#addQuestion, #moreQuestions {
+  height: 50px;
+  margin: 8px;
+  font-weight: 550 ; 
+  display: inline-block; 
+}
+
+#addQuestion {
+  width: 200px
+}
+#moreQuestion {
+  width: 250px
+}
+
+.helpfulness {
+  text-align: right;
+}
+.inline {
+  display: inline;
+}
+.warningText {
+  font-size: 10px;
+}
+  
+.popup {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  background: rgb(199, 196, 196);
+}
