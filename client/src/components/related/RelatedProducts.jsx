@@ -22,7 +22,7 @@ class RelatedProducts extends React.Component {
     this.state = {
       related: [],
       outfit: [],
-      loading: true
+      asyncLoading: true
     };
   }
 
@@ -93,6 +93,10 @@ class RelatedProducts extends React.Component {
           });
       });
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Something like the following could be used if we decide to limit client HTTP requests //
+    ///////////////////////////////////////////////////////////////////////////////////////////
     //   return axios.get(`/multipleProducts?ids=${load.join('&ids=')}`)
     //     .then(res => {
     //       console.log(res.data);
@@ -121,6 +125,7 @@ class RelatedProducts extends React.Component {
 
     if (outfitIds) {
       const { products } = this.store;
+      let outfit = [];
       let loaded = [];
       let index = 0;
 
@@ -128,17 +133,26 @@ class RelatedProducts extends React.Component {
         let product = products.get(id);
 
         if (product) {
-          loaded[index++] = product;
+          const linearIndex = index++;
+          loaded[linearIndex] = product;
+          outfit[linearIndex] = product.id;
           // console.log(`${product.name} already loaded`);
-          this.setState({ products: [...loaded] });
+          this.setState({
+            products: [...loaded],
+            outfit: [...outfit]
+          });
         } else {
-          let asyncIndex = index++;
+          const asyncIndex = index++;
           axios.get(`/products/${id}`)
             .then(res => {
               const product = res.data;
               loaded[asyncIndex] = product;
+              outfit[asyncIndex] = product.id;
               // console.log(`${product.name} loaded from server/API`);
-              this.setState({ products: [...loaded] });
+              this.setState({
+                products: [...loaded],
+                outfit: [...outfit]
+              });
             })
             .catch(err => {
               console.log('Loading outfit:', err.stack);
@@ -174,7 +188,7 @@ class RelatedProducts extends React.Component {
     updateProductData(this.productList, this.store.products);
     // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
-    this.setState({ loading: true });
+    this.setState({ asyncLoading: true });
   }
 
   componentDidMount() {
@@ -192,8 +206,8 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.loading) {
-      this.setState({ loading: false });
+    if (this.state.asyncLoading) {
+      this.setState({ asyncLoading: false });
       const relatedProductIds = this.store.related.get(this.props.selectedProduct.id);
       if (relatedProductIds) {
         // this.collectProductsById(relatedProductIds);

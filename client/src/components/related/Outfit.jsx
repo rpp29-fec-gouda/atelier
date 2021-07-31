@@ -2,7 +2,7 @@ import React from 'react';
 import ProductCard from './ProductCard.jsx';
 // import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
-import '../css/RelatedProducts.css';
+// import '../css/RelatedProducts.css';
 
 //
 // Try to use product ids instead of products for performance reasons
@@ -21,7 +21,7 @@ class Outfit extends React.Component {
     };
 
     this.state = {
-      products: []
+      products: this.props.products
     };
   }
 

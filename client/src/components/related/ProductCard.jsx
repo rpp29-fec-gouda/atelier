@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/RelatedProducts.css';
+// import '../css/RelatedProducts.css';
 
 const stars = [1, 1, 1, .8, 0];
 

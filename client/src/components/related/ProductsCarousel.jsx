@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
-import '../css/RelatedProducts.css';
+// import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
   const { products, selectProduct, selectedProduct } = props;
