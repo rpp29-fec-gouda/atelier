@@ -46,11 +46,11 @@ const Outfit = (props) => {
 
   let key = 0;
   return selectedProduct ? (
-    <div id='OutfitCarousel'>
+    <div id='Outfit'>
       <h1></h1>
-      <span className='componentTitle'>YOUR OUTFIT</span>
-      <div className='cardContainer'>
-        <div className='relatedProductCard addToOutfit' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
+      <span className='rp-component-title'>YOUR OUTFIT</span>
+      <div className='rp-card-container'>
+        <div className='rp-card rp-card-placeholder' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
           <h1>+</h1>
           <h2>Add to Outfit</h2>
         </div>

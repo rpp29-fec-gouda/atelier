@@ -29,16 +29,16 @@ const ProductCard = (props) => {
 
   let key = 0;
   return (
-    <div className='relatedProductCard' title={`Select ${product.name}`} onClick={() => { selectProduct(product); }}>
-      <div className='imageBacker'>
+    <div className='rp-card' title={`Select ${product.name}`} onClick={() => { selectProduct(product); }}>
+      <div className='rp-image-backer'>
         <img src=''></img>
         <div className={actionClass} title={hoverText} value={product.id} onClick={ (event) => { action(event, product); }}>{actionSymbol}</div>
       </div>
-      <div className='relatedProductInfo'>
-        <span className='relatedProductCategory'>{product.category.toUpperCase()}</span>
-        <span className='relatedProductTitle'>{trimmedTitle}</span>
-        <span className='relatedProductPrice' title={`Default price: ${product.default_price}`}>{'$' + product.default_price}</span>
-        <div className='starRating' title='Average customer review: 3.8 out of 5'>
+      <div className='rp-info'>
+        <span className='rp-category'>{product.category.toUpperCase()}</span>
+        <span className='rp-title'>{trimmedTitle}</span>
+        <span className='rp-price' title={`Default price: ${product.default_price}`}>{'$' + product.default_price}</span>
+        <div className='rp-star-rating' title='Average customer review: 3.8 out of 5'>
           {stars.map(star => (
             <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
           ))}
