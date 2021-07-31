@@ -118,7 +118,6 @@ class ProductOverview extends React.Component {
               onClick={ this.handleStyleClick }
             />
             <Cart
-              styleId={ styleId }
               skus={ selectedStyle.skus }
             />
           </div>
