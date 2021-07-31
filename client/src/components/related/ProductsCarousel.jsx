@@ -19,6 +19,7 @@ const ProductsCarousel = (props) => {
               product={ product }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
+              action={ () => {} }
             />
           ))
         ) : (

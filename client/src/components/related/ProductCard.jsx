@@ -32,7 +32,7 @@ const ProductCard = (props) => {
     <div className='relatedProductCard' title={`Select ${product.name}`} onClick={() => { selectProduct(product); }}>
       <div className='imageBacker'>
         <img src=''></img>
-        <div className={actionClass} title={hoverText} value={product.id} onClick={ () => { action(product); }}>{actionSymbol}</div>
+        <div className={actionClass} title={hoverText} value={product.id} onClick={ (event) => { action(event, product); }}>{actionSymbol}</div>
       </div>
       <div className='relatedProductInfo'>
         <span className='relatedProductCategory'>{product.category.toUpperCase()}</span>
