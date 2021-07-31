@@ -82,8 +82,7 @@ class QuestionsList extends React.Component {
     return (
       <div >
         <div className='questionslist'>
-        <Question questions={questionsList} />
-
+          <Question questions={questionsList} />
         </div>
         {this.moreQuestionsButton()}
         <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
