@@ -64,7 +64,7 @@ class Outfit extends React.Component {
   render() {
     const { selectedProduct, selectProduct } = this.props;
     const { products } = this.state;
-    console.log('Products in current outfit:', products);
+    // console.log('Products in current outfit:', products);
 
     let key = 0;
     return selectedProduct ? (

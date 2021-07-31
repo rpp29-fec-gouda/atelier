@@ -98,10 +98,10 @@ class App extends React.Component {
     let key = 0;
     return ready ? (
       <div id='app'>
-        <h3>{`${selectedProduct.name} selected`}</h3>
+        {/* <h3>{`${selectedProduct.name} selected`}</h3>
         <select name='productSelector' value={selectedProduct.id} onChange={this.handleSelectChange}>
           {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
-        </select>
+        </select> */}
         <ProductOverview
           selectedProduct={ selectedProduct }
         />

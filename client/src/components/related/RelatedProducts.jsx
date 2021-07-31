@@ -39,13 +39,13 @@ class RelatedProducts extends React.Component {
     let ids = related.get(product.id);
 
     if (ids) {
-      // console.log(`${ids.length} products associated with ${product.name}:`, ids);
+      console.log(`${ids.length} products associated with ${product.name}:`, ids);
       callback(ids);
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
           ids = res.data;
-          // console.log(`${ids.length} product ids associated with ${product.name}`, ids);
+          console.log(`${ids.length} product ids associated with ${product.name}`, ids);
           related.set(id, ids);
           callback(ids);
           // this.setState({ related: res.data });
@@ -81,7 +81,7 @@ class RelatedProducts extends React.Component {
           .then(res => {
             const product = res.data;
             const relatedProducts = this.state.related.slice();
-            // console.log(`Related product ${product.name} retrieved`);
+            console.log(`Related product ${product.name} retrieved`);
             this.productList.push(product);
             products.set(id, product);
             this.setState({
@@ -129,7 +129,7 @@ class RelatedProducts extends React.Component {
 
         if (product) {
           loaded[index++] = product;
-          // console.log(`${product.name} already loaded`);
+          console.log(`${product.name} already loaded`);
           this.setState({ products: [...loaded] });
         } else {
           let asyncIndex = index++;
@@ -137,7 +137,7 @@ class RelatedProducts extends React.Component {
             .then(res => {
               const product = res.data;
               loaded[asyncIndex] = product;
-              // console.log(`${product.name} loaded from server/API`);
+              console.log(`${product.name} loaded from server/API`);
               this.setState({ products: [...loaded] });
             })
             .catch(err => {
