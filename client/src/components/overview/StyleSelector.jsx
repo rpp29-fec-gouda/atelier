@@ -49,6 +49,10 @@ const StyleSelector = (props) => {
                 itemsOnRow.map(item => (
                   <div key={itemKey++} class="style" data-style-id={item.id} onClick={handleClick}>
                     {
+                      item.thumbnail && item.thumbnail !== null &&
+                      <img src={item.thumbnail} key={itemKey++} class="style image" data-style-id={item.id} onClick={handleClick}></img>
+                    }
+                    {
                       item.id === props.selectedId &&
                       <div class="style-selected">✓</div>
                     }

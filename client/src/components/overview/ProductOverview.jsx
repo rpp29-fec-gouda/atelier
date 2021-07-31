@@ -66,14 +66,12 @@ class ProductOverview extends React.Component {
       id = parseInt(id);
     }
     for (const style of this.styles) {
-      console.log('style checked for id:', JSON.stringify(style));
-      console.log('style.style_id', style.style_id);
-      console.log('id', id);
       if (style.style_id === id) {
         console.log('Matching style found');
         return style;
       }
     }
+    console.log('NO Matching style found!');
     return;
   }
 
