@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ProductOverview from '../../../../../client/src/components/productOverview/ProductOverview.jsx';
+import ProductOverview from '../../../../../client/src/components/overview/ProductOverview.jsx';
 
 // ==== Test Template ====
 // ====== index.jsx ======
