@@ -109,7 +109,7 @@ class ProductOverview extends React.Component {
               category={ selectedProduct.category }
               defaultPrice={ selectedProduct.default_price }
               originalPrice={ selectedStyle.original_price }
-              salePrice={ selectedStyle.sale_price}
+              salePrice={ selectedStyle.sale_price }
             />
             <StyleSelector
               selectedId = { styleId }
