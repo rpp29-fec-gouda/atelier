@@ -69,12 +69,11 @@ class QA extends React.Component {
       if (this.state.questionsFiltered.length === 0) {
         questions = this.state.questions;
       } else {
-        console.log('else', this.state.questionsFiltered);
         questions = this.state.questionsFiltered;
       }
 
       return (
-        <div >
+        <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
           <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
           <QuestionsList questions={questions} productId={this.props.productId} />
@@ -82,7 +81,7 @@ class QA extends React.Component {
       );
     } else {
       return (
-        <div >
+        <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
           {this.state.addQuestionButton ?
             <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :

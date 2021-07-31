@@ -2,7 +2,7 @@ import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
 
-class Answer extends React.Component {
+class AnswersList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +60,7 @@ class Answer extends React.Component {
       const answer = answers[answerId];
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answerId}>
+          <div key={answerId} className='answerslist'>
             <div>{answer.body}</div>
             <div className='answerby'>
               <div class='inline'> by {answer.answerer_name} | </div>
@@ -84,4 +84,4 @@ class Answer extends React.Component {
 }
 
 
-export default Answer;
+export default AnswersList;

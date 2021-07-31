@@ -45,7 +45,7 @@ td {
 }
   
 .popup {
-  position: absolute;
+  position: fixed;
   left: 25%;
   right: 25%;
   top: 25%;
@@ -57,4 +57,22 @@ td {
 .search_bar {
   width: 80%;
   height: 30px;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  padding: 0.4em;
+  color: black;
+  text-decoration: none;
+}
+
+.answerslist {
+  overflow: scroll;
+  max-height:50%; 
+}
+
+.questionslist {
+  overflow: scroll;
+  max-height: 400px; 
 }
