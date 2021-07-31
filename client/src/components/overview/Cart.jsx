@@ -1,7 +1,6 @@
 import React from 'react';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
-import Checkout from './Checkout';
 import AddButton from '../shared/AddButton';
 import './cart.css';
 
