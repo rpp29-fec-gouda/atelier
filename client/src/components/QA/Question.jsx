@@ -1,7 +1,7 @@
 import React from 'react';
 import AddingForm from './AddingForm';
 import Helpfulness from '../shared/Helpfulness';
-import Answer from './AnswersList';
+import AnswersList from './AnswersList';
 
 class Question extends React.Component {
   constructor(props) {
@@ -40,11 +40,11 @@ class Question extends React.Component {
                 <td width='50px' className='helpfulness'>
                   <Helpfulness question={question} />
                 </td>
-                <td width='50px'> | <a href='#' onClick={() => this.onClickHandle(questionId)}> Add answer </a></td>
+                <td width='50px'> | <a href='#!' id={questionId} onClick={() => this.onClickHandle(questionId)}> Add answer </a></td>
               </tr>
               <tr>
                 <td width='5px' className='character'>A:</td>
-                <td width='200px'> <div> <Answer answers={answers} /></div></td>
+                <td width='200px'><AnswersList answers={answers} /></td>
                 <td> </td>
               </tr>
             </tbody>
@@ -52,7 +52,8 @@ class Question extends React.Component {
 
           {this.state.addAnswerClicked ?
             <div className='popup'>
-              <AddingForm questionId={questionId} />
+              <span className='close' onClick={() => this.onClickHandle(questionId)} >X</span>
+              <AddingForm questionId={this.state.questionId} />
             </div> : null
           }
         </div>
