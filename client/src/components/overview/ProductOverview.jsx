@@ -24,8 +24,8 @@ const ProductOverview = (props) => {
             description={ description }
           />
           <StyleSelector
-              id={ id }
-            />
+            id={ id }
+          />
           <Cart
             id={ id }
           />
