@@ -12,11 +12,11 @@ const ProductCard = (props) => {
 
   if (type === 'outfit') {
     hoverText = `Remove ${product.name} from outfit`;
-    actionClass = 'removeFromOutfitSymbol';
+    actionClass = 'remove-from-outfit-symbol';
     actionSymbol = '+';
   } else {
     hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
-    actionClass = 'compareProductSymbol';
+    actionClass = 'rp-compare-symbol';
     actionSymbol = String.fromCharCode(9734);
   }
 
