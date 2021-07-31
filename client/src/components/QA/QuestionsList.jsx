@@ -16,6 +16,7 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
+    console.log('////////', this.state.questionsDisplay);
     this.checkRemainQuestion();
   }
 
@@ -39,7 +40,7 @@ class QuestionsList extends React.Component {
   moreQuestionsButton() {
     if (this.state.moreQuesionButton) {
       return (
-        < button id='moreQuestions' onClick={this.checkRemainQuestion.bind(this)} >
+        < button id='moreQuestions' className='moreQuestions' onClick={this.checkRemainQuestion.bind(this)} >
           MORE ANSWERED QUESTIONS
         </button>
       );
@@ -51,7 +52,7 @@ class QuestionsList extends React.Component {
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
-        <AddQuestion productId={this.props.productId}/>
+        <AddQuestion productId={this.props.productId} />
       );
     }
   }
@@ -72,7 +73,9 @@ class QuestionsList extends React.Component {
     let questionsList = [];
     const questions = this.props.questions;
     for (let i = 0; i < this.state.questionsDisplay; i++) {
-      questionsList.push(questions[i]);
+      if (questions[i]) {
+        questionsList.push(questions[i]);
+      }
     }
     return (
       <div>
@@ -84,6 +87,7 @@ class QuestionsList extends React.Component {
   }
 
   render() {
+    console.log('////////', this.state.questionsDisplay);
     return (
       <div>
         {this.renderQuestions()}

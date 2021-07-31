@@ -27,12 +27,11 @@ class Question extends React.Component {
 
   render() {
     const questions = this.props.questions;
-    const individualQuestion = questions.map(question => {
+    return questions.map(question => {
       const answers = question.answers;
-      const helpfulCount = question.question_helpfulness;
       const questionId = question.question_id;
       return (
-        <div key={questionId}>
+        <div key={questionId} className='question'>
           <table className='question_table'>
             <tbody>
               <tr>
@@ -50,7 +49,7 @@ class Question extends React.Component {
               </tr>
             </tbody>
           </table>
-          
+
           {this.state.addAnswerClicked ?
             <div className='popup'>
               <AddAnswer questionId={questionId} />
@@ -59,17 +58,6 @@ class Question extends React.Component {
         </div>
       );
     });
-
-
-    return (
-      <div>
-        {individualQuestion}
-
-      </div>
-    );
-
-
-
   }
 
 }

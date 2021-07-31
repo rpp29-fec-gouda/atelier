@@ -89,8 +89,11 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
-    console.log('select product', selectedProduct)
-    console.log('App re-render');
+    if (ready) {
+      console.log('select product', selectedProduct.id);
+
+    }
+    //console.log('App re-render');
     let key = 0;
     return ready ? (
       <div id='App'>
@@ -104,6 +107,7 @@ class App extends React.Component {
           updateProductData={this.updateProductData}
           selectProduct={this.selectProduct}
         />
+        {console.log('re render >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', selectedProduct.id)}
         <QA productId={selectedProduct.id} />
         <br></br>
         <RatingsAndReviews
