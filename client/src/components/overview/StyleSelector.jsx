@@ -3,10 +3,6 @@ import './styleSelector.css';
 
 const StyleSelector = (props) => {
   console.log('Rendering style selector');
-
-  // selectedId = { styleId }
-  // items={ selectorItems }
-  // onClick={ this.handleStyleClick }
   console.log('Style items:', JSON.stringify(props.items));
 
   let rowItemLimit = 4;
@@ -23,12 +19,21 @@ const StyleSelector = (props) => {
       }
       itemsOnRow.push(item);
     });
+    if (itemsOnRow.length > 0) {
+      itemsByRow.push(itemsOnRow);
+    }
 
+    console.log('Style items:', JSON.stringify(itemsByRow));
     return itemsByRow;
   };
 
-  const itemsByRow = getItemsByRow();
+  const handleClick = (e) => {
+    props.onClick(e.target.dataset.styleId);
+  };
 
+  const itemsByRow = getItemsByRow();
+  let rowKey = 0;
+  let itemKey = 0;
   return (
     <div id="style-selector">
       <h2 class="uppercase no-select">
@@ -36,13 +41,13 @@ const StyleSelector = (props) => {
       </h2>
       <div class="styles column">
         {
-          itemsByRow.length &&
+          itemsByRow.length && itemsByRow.length > 0 &&
           itemsByRow.map(itemsOnRow => (
-            <div class="row">
+            <div key={rowKey++} class="row">
               {
-                itemsOnRow.length &&
+                itemsOnRow.length && itemsOnRow.length > 0 &&
                 itemsOnRow.map(item => (
-                  <div class="style" onClick={props.onClick}>
+                  <div key={itemKey++} class="style" data-style-id={item.id} onClick={handleClick}>
                     {
                       item.id === props.selectedId &&
                       <div class="style-selected">✓</div>
