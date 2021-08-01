@@ -5,17 +5,22 @@ import Price from './Price';
 import './productInformation.css';
 
 const ProductInformation = (props) => {
+  console.log('Rendering product information');
   return (
     <div id="product-information">
-      {/* id={ id } */}
       <span id="product-rating" class="row row-margin">
-        <StarRating />
+        <StarRating
+          rating={3.75}
+          callback={(e) => console.log('click!', e.target.dataset.rating)}
+        />
         <ReadAllReviews />
       </span>
       <h2 class="uppercase">{ props.category }</h2>
       <h1>{ props.name }</h1>
       <Price
         defaultPrice = { props.defaultPrice }
+        originalPrice={ props.originalPrice }
+        salePrice={ props.salePrice }
       />
     </div>
   );

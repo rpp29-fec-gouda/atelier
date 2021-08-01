@@ -12,6 +12,12 @@
   background-color: lightgoldenrodyellow;
 }
 
+.image {
+  position: absolute;
+  top: -0.75em;
+  left: -0.1em
+}
+
 .style:hover {
   cursor: pointer;
 }

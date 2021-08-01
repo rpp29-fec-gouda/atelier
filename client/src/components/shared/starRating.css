@@ -3,6 +3,15 @@
   flex-flow: row;
 }
 
+.star {
+  width: 1em;
+  height: 1em;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 .star-0 {
   content: "\2606";
 }

@@ -2,26 +2,66 @@ import React from 'react';
 import './styleSelector.css';
 
 const StyleSelector = (props) => {
+  console.log('Rendering style selector');
+  console.log('Style items:', JSON.stringify(props.items));
+
+  let rowItemLimit = 4;
+  const getItemsByRow = () => {
+    const itemsByRow = [];
+    let itemsOnRow = [];
+    let rowItemCount = 0;
+    props.items.forEach(item => {
+      rowItemCount++;
+      if (rowItemCount > rowItemLimit) {
+        itemsByRow.push(itemsOnRow);
+        itemsOnRow = [];
+        rowItemCount = 1;
+      }
+      itemsOnRow.push(item);
+    });
+    if (itemsOnRow.length > 0) {
+      itemsByRow.push(itemsOnRow);
+    }
+
+    console.log('Style items:', JSON.stringify(itemsByRow));
+    return itemsByRow;
+  };
+
+  const handleClick = (e) => {
+    props.onClick(e.target.dataset.styleId);
+  };
+
+  const itemsByRow = getItemsByRow();
+  let rowKey = 0;
+  let itemKey = 0;
   return (
     <div id="style-selector">
       <h2 class="uppercase no-select">
-        <span class="bold">STYLE &gt;</span> SELECTED STYLE
+        <span class="bold">STYLE &gt;</span> {props.name}
       </h2>
       <div class="styles column">
-        <div class="row">
-          <div class="style">
-            <div class="style-selected">✓</div>
-          </div>
-          <div class="style"></div>
-          <div class="style"></div>
-          <div class="style"></div>
-        </div>
-        <div class="row">
-          <div class="style"></div>
-          <div class="style"></div>
-          <div class="style"></div>
-          <div class="style"></div>
-        </div>
+        {
+          itemsByRow.length && itemsByRow.length > 0 &&
+          itemsByRow.map(itemsOnRow => (
+            <div key={rowKey++} class="row">
+              {
+                itemsOnRow.length && itemsOnRow.length > 0 &&
+                itemsOnRow.map(item => (
+                  <div key={itemKey++} class="style" data-style-id={item.id} onClick={handleClick}>
+                    {
+                      item.thumbnail && item.thumbnail !== null &&
+                      <img src={item.thumbnail} key={itemKey++} class="style image" data-style-id={item.id} onClick={handleClick}></img>
+                    }
+                    {
+                      item.id === props.selectedId &&
+                      <div class="style-selected">✓</div>
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          ))
+        }
       </div>
     </div>
   );
