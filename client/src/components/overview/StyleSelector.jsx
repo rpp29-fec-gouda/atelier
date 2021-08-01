@@ -3,7 +3,6 @@ import './styleSelector.css';
 
 const StyleSelector = (props) => {
   console.log('Rendering style selector');
-  // console.log('Style items:', JSON.stringify(props.items));
 
   let rowItemLimit = 4;
   const getItemsByRow = () => {
@@ -23,7 +22,6 @@ const StyleSelector = (props) => {
       itemsByRow.push(itemsOnRow);
     }
 
-    // console.log('Style items:', JSON.stringify(itemsByRow));
     return itemsByRow;
   };
 

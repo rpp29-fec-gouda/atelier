@@ -74,9 +74,7 @@ class ProductOverview extends React.Component {
   }
 
   getStyleById(id) {
-    if (typeof id === 'string') {
-      id = parseInt(id);
-    }
+    id = parseInt(id);
     for (const style of this.styles) {
       if (style.style_id === id) {
         return style;
@@ -87,11 +85,14 @@ class ProductOverview extends React.Component {
   }
 
   setStyleById(id) {
-    const style = this.getStyleById(id);
-    if (style) {
-      this.setState({
-        selectedStyle: style
-      });
+    id = parseInt(id);
+    if (this.state.selectedStyle.style_id !== id) {
+      const style = this.getStyleById(id);
+      if (style) {
+        this.setState({
+          selectedStyle: style
+        });
+      }
     }
   }
 
