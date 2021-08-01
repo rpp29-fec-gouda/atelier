@@ -9,11 +9,17 @@ const ProductInformation = (props) => {
   return (
     <div id="product-information">
       <span id="product-rating" class="row row-margin">
-        <StarRating
-          rating={3.75}
-          callback={(e) => console.log('click!', e.target.dataset.rating)}
-        />
-        <ReadAllReviews />
+        {
+          props.reviewCount > 0 &&
+          <StarRating
+            rating={props.averageRating}
+            callback={(e) => console.log('click!', e.target.dataset.rating)}
+          />
+        }
+        {
+          props.reviewCount > 0 &&
+          <ReadAllReviews number={props.reviewCount}/>
+        }
       </span>
       <h2 class="uppercase">{ props.category }</h2>
       <h1>{ props.name }</h1>

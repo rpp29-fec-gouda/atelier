@@ -11,6 +11,8 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
 
+    this.numberOfReviews = 0;
+    this.averageRating = 0;
     this.styles = [];
 
     this.state = {
@@ -18,7 +20,7 @@ class ProductOverview extends React.Component {
     };
 
     this.fetchProductStyles = this.fetchProductStyles.bind(this);
-    this.getDefaultStyle = this.getDefaultStyle.bind(this);
+    this.getDefaultStyle = this.updateDefaultStyle.bind(this);
     this.getStyleSelectorItems = this.getStyleSelectorItems.bind(this);
     this.getStyleDefaultPhotoUrl = this.getStyleDefaultPhotoUrl.bind(this);
     this.handleStyleClick = this.handleStyleClick.bind(this);
@@ -27,28 +29,38 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchProductStyles(this.props.selectedProduct.id);
+    this.loadAdditionalProductData(this.props.selectedProduct.id);
   }
 
-  fetchProductStyles(id) {
-    axios.get(`/products/${id}/styles`)
+  loadAdditionalProductData(id) {
+    Promise.all([this.fetchRatings(id), this.fetchProductStyles(id)])
       .then(res => {
-        this.styles = res.data.results;
-        console.log(`Styles: ${JSON.stringify(this.styles)}`);
-        this.getDefaultStyle();
+        console.log('res: ', res);
+        this.ratings = res[0].data.ratings;
+        console.log(`ProductOverview Ratings: ${JSON.stringify(this.ratings)}`);
+        this.numberOfReviews = this.getNumberOfReviews(this.ratings);
+        this.averageRating = this.getAverageRating(this.ratings, this.numberOfReviews);
+
+        this.styles = res[1].data.results;
+        this.updateDefaultStyle();
       })
-      .catch(err => {
-        console.log(err.stack);
+      .catch(error => {
+        console.error(error.stack);
       });
   }
 
-  getDefaultStyle() {
-    console.log('Getting default style');
+  fetchProductStyles(id) {
+    return axios.get(`/products/${id}/styles`);
+  }
+
+  fetchRatings(id) {
+    return axios.get(`reviews/meta?product_id=${id}`);
+  }
+
+  updateDefaultStyle() {
+    console.log('Updating default style');
     for (const style of this.styles) {
-      console.log(`Style ${JSON.stringify(style)}`);
-      console.log('Is default?', style['default?']);
       if (style['default?']) {
-        console.log('Found default');
         this.setState({
           selectedStyle: style
         });
@@ -67,7 +79,6 @@ class ProductOverview extends React.Component {
     }
     for (const style of this.styles) {
       if (style.style_id === id) {
-        console.log('Matching style found');
         return style;
       }
     }
@@ -77,9 +88,7 @@ class ProductOverview extends React.Component {
 
   setStyleById(id) {
     const style = this.getStyleById(id);
-    console.log('Getting style by ID:', style);
     if (style) {
-      console.log('Updating style to id', id);
       this.setState({
         selectedStyle: style
       });
@@ -105,6 +114,29 @@ class ProductOverview extends React.Component {
     }
   }
 
+  getNumberOfReviews(ratings) {
+    let numberOfReviews = 0;
+    for (const count in ratings) {
+      numberOfReviews += parseInt(ratings[count]);
+    }
+    return numberOfReviews;
+  }
+
+  getAverageRating(ratings, reviews) {
+    if (!reviews || reviews === 0) {
+      return 0;
+    }
+
+    let ratingValues = Object.keys(ratings);
+    let score = 0;
+    for (let i = 0; i < ratingValues.length; i++) {
+      const value = ratingValues[i];
+      const ratingCount = ratings[value];
+      score += value * ratingCount;
+    }
+    return score / reviews;
+  }
+
   handleStyleClick(id) {
     console.log(`Style id ${id} clicked`);
     this.setStyleById(id);
@@ -123,7 +155,6 @@ class ProductOverview extends React.Component {
     const selectorItems = this.getStyleSelectorItems();
 
     console.log('Rendering product overview');
-    console.log(`Selected style ${JSON.stringify(this.state.selectedStyle)}`);
     return (
       <div id="product-overview">
         <div class="row">
@@ -134,6 +165,8 @@ class ProductOverview extends React.Component {
           <div id="product-col-right" class="column">
             <ProductInformation
               name={ selectedProduct.name }
+              averageRating={this.averageRating}
+              reviewCount={this.numberOfReviews}
               category={ selectedProduct.category }
               defaultPrice={ selectedProduct.default_price }
               originalPrice={ selectedStyle.original_price }

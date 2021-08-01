@@ -4,7 +4,7 @@ import './readAllReviews.css';
 const ReadAllReviews = (props) => {
   return (
     <div id="read-all-reviews">
-      <a href="" class="row">Read all reviews</a>
+      <a href="" class="row">Read all {props.number} reviews</a>
     </div>
   );
 };
