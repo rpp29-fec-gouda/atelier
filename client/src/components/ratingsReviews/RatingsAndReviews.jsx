@@ -28,6 +28,7 @@ class RatingsAndReviews extends React.Component {
 
 
   componentDidMount () {
+    console.log('teest', this.props.selectedProduct);
     Promise.all([this.getReviews(), this.getRatings()])
       .then(res => {
         this.setState({
@@ -36,7 +37,7 @@ class RatingsAndReviews extends React.Component {
           characteristics: res[1].data.characteristics,
           recommended: res[1].data.recommended,
           // eslint-disable-next-line camelcase
-          product_id: res[0].data.product_id
+          product_id: res[0].data.product
 
         });
 
@@ -50,8 +51,6 @@ class RatingsAndReviews extends React.Component {
     Promise.all([this.getReviews(), this.getRatings()])
       .then(res => {
         if (this.state.product_id !== res[0].data.product) {
-
-          console.log('resss', res);
           this.setState({
             reviews: res[0].data.results,
             ratings: res[1].data.ratings,
