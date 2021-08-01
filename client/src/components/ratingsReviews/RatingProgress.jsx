@@ -2,8 +2,9 @@ import React from 'react';
 
 const RatingProgress = (props) => {
   const { completed, ratings } = props;
-  const ratingProgress = {
+  console.log('completed:', completed);
 
+  const ratingProgress = {
     width: '100%',
     backgroundColor: '#e0e0de',
   };
@@ -17,13 +18,18 @@ const RatingProgress = (props) => {
     marginBottom: '5%'
   };
 
-  const stars = [5, 4, 3, 2, 1];
+  const stars = [{star: 5},
+    {star: 4},
+    {star: 3},
+    {star: 2},
+    {star: 1}
+  ];
 
   return (
     <div style={ratingProgress}>
-      <div>
-        {stars.map((star) => {
-          <span>{star}</span>;
+      <div style={ratingFiller}>
+        {stars.map((star, i) => {
+          return <span key={i}>''</span>;
         })}
         <span style={ratingFiller}></span>
       </div>
