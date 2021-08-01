@@ -6,6 +6,7 @@ import KeywordSearch from './KeywordSearch.jsx';
 
 const ReviewsList = (props) => {
   const { reviews } = props;
+  console.log('reviews:', reviews);
 
   return (
     <div className='ReviewsList'>
