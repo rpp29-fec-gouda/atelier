@@ -14,19 +14,30 @@ const SizeSelector = (props) => {
   };
 
   let key = 0;
-  return (
-    <div id="size-selector">
-      <select id="sizes" name="sizes" defaultValue={'DEFAULT'} onChange={onChange}>
-        <option value="DEFAULT" disabled hidden>Select Size</option>
-        {
-          items.length &&
-          items.map(item => (
-            <option key={key++} value={item.sku}>{item.size}</option>
-          ))
-        }
-      </select>
-    </div>
-  );
+  if (!items || !items.length || items.length === 0) {
+    return (
+      <div id="size-selector">
+        <select id="sizes" name="sizes" defaultValue={-1} onChange={onChange} disabled>
+          {
+            <option class="uppercase" value={-1} disabled hidden>Out of Stock</option>
+          }
+        </select>
+      </div>
+    );
+  } else {
+    return (
+      <div id="size-selector">
+        <select id="sizes" name="sizes" defaultValue={-1} onChange={onChange}>
+          <option class="uppercase" value={-1} disabled hidden>Select Size</option>
+          {
+            items.map(item => (
+              <option key={key++} value={item.sku}>{item.size}</option>
+            ))
+          }
+        </select>
+      </div>
+    );
+  }
 };
 
 export default SizeSelector;

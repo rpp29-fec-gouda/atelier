@@ -16,10 +16,12 @@ class ProductOverview extends React.Component {
     this.styles = [];
 
     this.state = {
-      selectedStyle: null
+      selectedStyle: null,
+      sizesAvailable: []
     };
 
     this.fetchProductStyles = this.fetchProductStyles.bind(this);
+    this.updateState = this.updateState.bind(this);
     this.getDefaultStyle = this.updateDefaultStyle.bind(this);
     this.getStyleSelectorItems = this.getStyleSelectorItems.bind(this);
     this.getStyleDefaultPhotoUrl = this.getStyleDefaultPhotoUrl.bind(this);
@@ -35,9 +37,8 @@ class ProductOverview extends React.Component {
   loadAdditionalProductData(id) {
     Promise.all([this.fetchRatings(id), this.fetchProductStyles(id)])
       .then(res => {
-        console.log('res: ', res);
         this.ratings = res[0].data.ratings;
-        console.log(`ProductOverview Ratings: ${JSON.stringify(this.ratings)}`);
+        console.log(`Product Ratings: ${JSON.stringify(this.ratings)}`);
         this.numberOfReviews = this.getNumberOfReviews(this.ratings);
         this.averageRating = this.getAverageRating(this.ratings, this.numberOfReviews);
 
@@ -57,20 +58,31 @@ class ProductOverview extends React.Component {
     return axios.get(`reviews/meta?product_id=${id}`);
   }
 
+  updateState(style) {
+    console.log('Style Selected: ', style);
+    if (style === null || !style) {
+      this.setState({
+        selectedStyle: null,
+        sizesAvailable: []
+      });
+    } else {
+      this.setState({
+        selectedStyle: style,
+        sizesAvailable: this.getSizesInStock(style.skus)
+      });
+    }
+  }
+
   updateDefaultStyle() {
     console.log('Updating default style');
     for (const style of this.styles) {
       if (style['default?']) {
-        this.setState({
-          selectedStyle: style
-        });
+        this.updateState(style);
         return;
       }
     }
     console.log('No default found!');
-    this.setState({
-      selectedStyle: null
-    });
+    this.updateState(null);
   }
 
   getStyleById(id) {
@@ -89,9 +101,7 @@ class ProductOverview extends React.Component {
     if (this.state.selectedStyle.style_id !== id) {
       const style = this.getStyleById(id);
       if (style) {
-        this.setState({
-          selectedStyle: style
-        });
+        this.updateState(style);
       }
     }
   }
@@ -138,6 +148,23 @@ class ProductOverview extends React.Component {
     return score / reviews;
   }
 
+
+  getSizesInStock(sizes) {
+    const isInStock = sku => {
+      return !(!sku.quantity || sku.quantity === 0 || sku.quantity === null);
+    };
+
+    console.log('Removing out of stock sizes: ', sizes);
+    const sizesInStock = {};
+    for (const sku in sizes) {
+      if (isInStock(sizes[sku])) {
+        sizesInStock[sku] = sizes[sku];
+      }
+    }
+    console.log('In stock skus: ', sizesInStock);
+    return sizesInStock;
+  }
+
   handleStyleClick(id) {
     console.log(`Style id ${id} clicked`);
     this.setStyleById(id);
@@ -146,6 +173,8 @@ class ProductOverview extends React.Component {
   render() {
     const selectedProduct = this.props.selectedProduct;
     const selectedStyle = this.state.selectedStyle;
+    const sizesAvailable = this.state.sizesAvailable;
+
     if (selectedProduct === null || selectedStyle === null) {
       return (<div>Loading...</div>);
     }
@@ -180,7 +209,7 @@ class ProductOverview extends React.Component {
               onClick={ this.handleStyleClick }
             />
             <Cart
-              skus={ selectedStyle.skus }
+              skus={ sizesAvailable }
             />
           </div>
         </div>

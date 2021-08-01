@@ -8,11 +8,13 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
 
+    this.isInStock = Object.keys(props.skus).length > 0;
     this.currentQuantity = 0;
     this.bag = [];
 
     this.state = {
-      currentSku: null
+      currentSku: null,
+      promptSelection: false
     };
 
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
@@ -21,8 +23,10 @@ class Cart extends React.Component {
   }
 
   handleSizeSelect(sku) {
+    console.log('sku for size selected:', sku);
     this.setState({
-      currentSku: sku
+      currentSku: sku,
+      promptSelection: false
     });
   }
 
@@ -31,13 +35,22 @@ class Cart extends React.Component {
     console.log('Quantity chosen:', this.currentQuantity);
   }
 
+  handleSelectSizePrompt() {
+
+  }
+
   handleCheckout() {
-    console.log('Cart checked out!');
-    this.bag.push({
-      sku: this.state.currentSku,
-      quantity: this.currentQuantity
-    });
-    console.log('Current order:', this.bag);
+    if (this.isInStock && this.state.currentSku !== null) {
+      this.bag.push({
+        sku: this.state.currentSku,
+        quantity: this.currentQuantity
+      });
+      console.log('Current order:', this.bag);
+    } else {
+      this.setState({
+        promptSelection: true
+      });
+    }
   }
 
   render() {
@@ -56,12 +69,16 @@ class Cart extends React.Component {
     const maxQuantity = this.state.currentSku === null ? 0 : skus[this.state.currentSku].quantity;
 
     console.log('Cart skus', JSON.stringify(skus));
-    console.log('sku #s', skusList);
-    console.log('sizes', sizes);
-    console.log('maxQuantity', maxQuantity);
+    console.log('Cart sku #s', skusList);
+    console.log('Cart sizes', sizes);
+    console.log('Cart maxQuantity', maxQuantity);
 
     return (
       <div id="cart" class="column">
+        {
+          this.state.promptSelection &&
+          <div class="error-prompt">Please select size</div>
+        }
         <div class="row">
           <SizeSelector
             skus={ skusList }
@@ -73,11 +90,14 @@ class Cart extends React.Component {
             onSelect={this.handleQuantitySelect}
           />
         </div>
-        <AddButton
-          label={'ADD TO BAG'}
-          id={'checkout'}
-          onClick={this.handleCheckout}
-        />
+        {
+          this.isInStock &&
+          <AddButton
+            label={'add to bag'}
+            id={'checkout'}
+            onClick={this.handleCheckout}
+          />
+        }
       </div>
     );
   }

@@ -97,3 +97,9 @@ select {
   cursor: pointer;
   background-color: yellow;
 }
+
+.error-prompt {
+  color: red;
+  background-color: lightgoldenrodyellow;
+  border: 1px red dashed;
+}

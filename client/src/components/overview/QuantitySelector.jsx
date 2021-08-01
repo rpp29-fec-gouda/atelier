@@ -17,6 +17,13 @@ const QuantitySelector = (props) => {
       props.onSelect(e.target.value);
     };
 
+    const options = document.querySelectorAll('#quantity option');
+    if (options) {
+      for (let i = 0; i < options.length; i++) {
+        options[i].selected = options[i].defaultSelected;
+      }
+    }
+
     let key = 0;
     let defaultValue = 1;
     return (
@@ -35,7 +42,7 @@ const QuantitySelector = (props) => {
     return (
       <div id="quantity-selector">
         <select id="quantity" name="quantity" disabled>
-          <option value="0">-</option>
+          <option value={-1}>-</option>
         </select>
       </div>
     );
