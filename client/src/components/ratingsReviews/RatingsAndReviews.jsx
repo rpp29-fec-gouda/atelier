@@ -75,7 +75,7 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div id='ratings-reviews'>
-        <span className='component-title'>RATINGS & REVIEWS</span>
+        <span className='component-title'>RATINGS &amp; REVIEWS</span>
         <div id='ratings'>
           <ReviewsList
             reviews={this.state.reviews}/>
