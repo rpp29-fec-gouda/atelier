@@ -2,10 +2,10 @@ import React from 'react';
 
 const NewReview = (props) => {
   return (
-    <div id='newReview'>
+    <div id='new-review'>
       <h3>New Review</h3>
-      <button className='moreReviews'>More Reviews</button>
-      <button className='addReview'>Add a Review +</button>
+      <button className='more-reviews'>More Reviews</button>
+      <button className='add-review'>Add a Review +</button>
     </div>
   );
 };

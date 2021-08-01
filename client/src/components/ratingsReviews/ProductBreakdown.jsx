@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductBreakdown = (props) => {
   return (
-    <div id='productBreakdown'>
+    <div id='product-breakdown'>
       <div>
         <div>Size bar</div>
         <div>Comfort bar</div>

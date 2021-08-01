@@ -9,7 +9,7 @@ const ReviewsList = (props) => {
   console.log('reviews:', reviews);
 
   return (
-    <div className='ReviewsList'>
+    <div className='reviews-list'>
       <Sort
         reviews={reviews}/>
       <KeywordSearch />
