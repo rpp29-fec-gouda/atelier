@@ -3,7 +3,7 @@
   flex-flow: row;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
-  padding: 2em;
+
 }
 
 #RatingsReviews {
@@ -39,6 +39,7 @@
 #RatingList {
   order: 1;
   flex-basis: 30%;
+  margin-right: 5%;
 
 }
 

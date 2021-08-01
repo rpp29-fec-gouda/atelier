@@ -50,8 +50,6 @@ class RatingsAndReviews extends React.Component {
     Promise.all([this.getReviews(), this.getRatings()])
       .then(res => {
         if (this.state.product_id !== res[0].data.product) {
-
-          console.log('resss', res);
           this.setState({
             reviews: res[0].data.results,
             ratings: res[1].data.ratings,
