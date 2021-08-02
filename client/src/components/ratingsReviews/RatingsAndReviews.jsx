@@ -13,27 +13,35 @@ class RatingsAndReviews extends React.Component {
     this.ratings = [];
     this.characteristics = [];
     this.recommended = [];
-    // eslint-disable-next-line camelcase
     this.product_id = '';
+    this.sort = 'relevant';
 
     this.state = {
       ratings: [],
       reviews: [],
       characteristics: [],
       recommended: {},
-      // eslint-disable-next-line camelcase
-      product_id: ''
+      product_id: '',
+      sort: ''
     };
+
+    this.sortOptions = ['relevance', 'newest', 'helpfulness'];
+
 
     this.getReviews = this.getReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
+    this.handleReviewSort = this.handleReviewSort.bind(this);
   }
 
   componentDidMount() {
-    this.getReviews(this.props.selectedProduct.id);
-    this.getRatings(this.props.selectedProduct.id);
+    if (this.props.selectedProduct) {
+      this.getReviews(this.state.sort, this.props.selectedProduct.id);
+      this.getRatings(this.props.selectedProduct.id);
+    } else {
+      return <div>Loading...</div>;
+    }
   }
 
   getDefaultReviews() {
@@ -45,7 +53,6 @@ class RatingsAndReviews extends React.Component {
 
       this.setState({
         reviews: this.reviews,
-        // eslint-disable-next-line camelcase
         product_id: this.product_id
       });
       return;
@@ -74,13 +81,12 @@ class RatingsAndReviews extends React.Component {
     });
   }
 
-  getReviews(id) {
+  getReviews(sort, id) {
     console.log('Getting Reviews');
-    axios.get(`reviews?product_id=${id}`)
+    axios.get(`reviews?sort=${sort}&product_id=${id}`)
       .then(res => {
         console.log('getReviews:', res);
         this.reviews = res.data.results;
-        // eslint-disable-next-line camelcase
         this.product_id = res.data.product;
         this.getDefaultReviews();
 
@@ -101,21 +107,48 @@ class RatingsAndReviews extends React.Component {
           console.log('ReRatings', this.ratings);
           this.getDefaultRatings();
         }
-
       })
       .catch(err => {
         console.log(err.stack);
       });
   }
 
-
-  componentDidUpdate() {
+  componentDidUpdate(prevState) {
     if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
       if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
-        this.getReviews(this.props.selectedProduct.id);
+        this.getReviews(this.state.sort, this.props.selectedProduct.id);
         this.getRatings(this.props.selectedProduct.id);
       }
     }
+  }
+
+
+
+  handleReviewSort (event) {
+    const sortFilter = event.target.value;
+    if (sortFilter === 'relevance') {
+      this.setState({
+        sort: 'relevant'
+      }, () => {
+        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+
+      });
+    } else if (sortFilter === 'helpfulness') {
+      this.setState({
+        sort: 'helpful'
+      }, () => {
+        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+
+      });
+    } else if (sortFilter === 'newest') {
+      this.setState({
+        sort: 'newest'
+      }, () => {
+        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+
+      });
+    }
+    event.preventDefault();
   }
 
   render() {
@@ -129,12 +162,15 @@ class RatingsAndReviews extends React.Component {
         <span className='componentTitle'>RATINGS & REVIEWS</span>
         <div id='Ratings'>
           <ReviewsList
-            reviews={this.state.reviews} />
+            reviews={this.state.reviews}
+            sortOptions={this.sortOptions}
+            handleReviewSort={this.handleReviewSort} />
           <RatingList
             ratings={this.state.ratings}
             reviews={this.state.reviews}
             characteristics={this.state.characteristics}
-            recommended={this.state.recommended} />
+            recommended={this.state.recommended}
+          />
         </div>
       </div>
     );
