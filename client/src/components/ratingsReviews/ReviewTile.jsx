@@ -9,7 +9,7 @@ const ReviewTile = (props) => {
 
   let key = 0;
 
-  return reviews.length ? (
+  return reviews ? (
     <div id='reviewTile'>
       <div className='Tile'>
         {reviews.map((review) => (
