@@ -8,7 +8,7 @@ const ReviewsList = (props) => {
   const { reviews, sortOptions, handleReviewSort } = props;
 
   return (
-    <div className='ReviewsList'>
+    <div className='reviews-list'>
       <Sort
         reviews={reviews}
         sortOptions={sortOptions}

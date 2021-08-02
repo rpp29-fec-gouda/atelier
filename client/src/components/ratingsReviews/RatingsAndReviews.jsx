@@ -165,9 +165,9 @@ class RatingsAndReviews extends React.Component {
     }
 
     return (
-      <div id='RatingsReviews'>
-        <span className='componentTitle'>RATINGS & REVIEWS</span>
-        <div id='Ratings'>
+      <div id='ratings-reviews'>
+        <span className='component-title'>RATINGS &amp; REVIEWS</span>
+        <div id='ratings'>
           <ReviewsList
             reviews={this.state.reviews}
             sortOptions={this.sortOptions}

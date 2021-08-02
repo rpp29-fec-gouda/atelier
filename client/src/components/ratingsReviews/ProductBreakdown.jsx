@@ -16,7 +16,8 @@ const ProductBreakdown = (props) => {
   console.log('barChars:', barChars);
 
   return (
-    <div id='productBreakdown'>
+
+    <div id='product-breakdown'>
       <div>Size
         <div></div>
         <span>Too small</span>
@@ -59,7 +60,6 @@ const ProductBreakdown = (props) => {
         <span>Too small</span>
         <span>Perfect</span>
         <span>Too large</span>
-
       </div>
     </div>
   );
