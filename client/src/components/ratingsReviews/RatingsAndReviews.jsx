@@ -22,7 +22,7 @@ class RatingsAndReviews extends React.Component {
       characteristics: [],
       recommended: {},
       product_id: '',
-      sort: ''
+      sort: 'relevant'
     };
 
     this.sortOptions = ['relevance', 'newest', 'helpfulness'];
@@ -33,6 +33,7 @@ class RatingsAndReviews extends React.Component {
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
     this.handleReviewSort = this.handleReviewSort.bind(this);
+    this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
   }
 
   componentDidMount() {
@@ -104,6 +105,7 @@ class RatingsAndReviews extends React.Component {
         if (res.data.ratings) {
 
           this.ratings = res.data.ratings;
+          this.characteristics = res.data.characteristics;
           console.log('ReRatings', this.ratings);
           this.getDefaultRatings();
         }
@@ -151,6 +153,11 @@ class RatingsAndReviews extends React.Component {
     event.preventDefault();
   }
 
+  handleRatingProgressFilter(event) {
+    console.log('stars', event.target.id);
+    event.preventDefault();
+  }
+
   render() {
     const selectedProduct = this.props.selectedProduct;
     if (selectedProduct === null) {
@@ -170,6 +177,7 @@ class RatingsAndReviews extends React.Component {
             reviews={this.state.reviews}
             characteristics={this.state.characteristics}
             recommended={this.state.recommended}
+            handleRatingProgressFilter={this.handleRatingProgressFilter}
           />
         </div>
       </div>

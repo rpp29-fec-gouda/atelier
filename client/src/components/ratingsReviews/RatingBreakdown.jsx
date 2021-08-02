@@ -2,11 +2,11 @@ import React from 'react';
 import RatingProgress from './RatingProgress.jsx';
 
 const RatingBreakdown = (props) => {
-  const { reviews, ratings, recommended } = props;
+  const { reviews, ratings, recommended, handleRatingProgressFilter } = props;
   const stars = [1, 1, 1, .8, 0];
   let key = 0;
-  if (ratings) {
 
+  if (ratings.length !== 0) {
     const oneBar = parseInt(ratings[1]) || 0;
     const oneStar = oneBar * 1 || 0;
     const twoBar = parseInt(ratings[2]) || 0;
@@ -23,11 +23,11 @@ const RatingBreakdown = (props) => {
     const averageRating = sum / sumBar;
 
     const barFills = [
-      { percentage: oneBar / sumBar * 100 },
-      { percentage: twoBar / sumBar * 100 },
-      { percentage: threeBar / sumBar * 100 },
-      { percentage: fourBar / sumBar * 100 },
-      { percentage: fiveBar / sumBar * 100 },
+      { star: '5 stars', percentage: fiveBar / sumBar * 100 },
+      { star: '4 stars', percentage: fourBar / sumBar * 100 },
+      { star: '3 stars', percentage: threeBar / sumBar * 100 },
+      { star: '2 stars', percentage: twoBar / sumBar * 100 },
+      { star: '1 stars', percentage: oneBar / sumBar * 100 },
     ];
 
     let averageRecommend = 0;
@@ -48,16 +48,8 @@ const RatingBreakdown = (props) => {
         <div>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
         {barFills.map((item, i) => (
-          <RatingProgress key={i} ratings={ratings} completed={item.percentage} />
+          <RatingProgress key={i} ratings={ratings} completed={item} handleRatingProgressFilter={handleRatingProgressFilter}/>
         ))}
-
-        <div>
-          <div>5 stars bar</div>
-          <div>4 stars bar</div>
-          <div>3 stars bar</div>
-          <div>2 stars bar</div>
-          <div>1 star bar</div>
-        </div>
       </div>
     );
   } else {
