@@ -1,0 +1,20 @@
+#size-selector {
+  margin: 0 1em 0 0;
+  width: 67%;
+}
+
+#sizes {
+  width: 100%;
+}
+
+#quantity-selector {
+  width: 33%;
+}
+
+#quantity {
+  width: 100%;
+}
+
+#checkout {
+  margin: 1em 0 0 0;
+}

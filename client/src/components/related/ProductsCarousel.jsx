@@ -5,13 +5,14 @@ import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
   const { products, selectProduct, selectedProduct } = props;
+
   let key = 0;
 
   return (
     <div id='RelatedProductsCarousel'>
       <h1></h1>
-      <span className='componentTitle'>RELATED PRODUCTS</span>
-      <div className='cardContainer'>{
+      <span className='rp-component-title'>RELATED PRODUCTS</span>
+      <div className='rp-card-container'>{
         products.length ? (
           products.map(product => (
             <ProductCard
@@ -19,10 +20,11 @@ const ProductsCarousel = (props) => {
               product={ product }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
+              action={ () => {} }
             />
           ))
         ) : (
-          <div className='relatedProductCard addToOutfit'>Loading...</div>
+          <div className='rp-card rp-card-placeholder'>Loading...</div>
         )}
       </div>
     </div>

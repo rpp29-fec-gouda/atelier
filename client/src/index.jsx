@@ -2,8 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './style.css';
+
+import QA from './components/QA/QA.jsx';
+
 import RelatedProducts from './components/related/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
+import ProductOverview from './components/overview/ProductOverview';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -14,11 +19,11 @@ class App extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.updateProductData = this.updateProductData.bind(this);
 
+
     this.store = {
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
-      related: new Map()
     };
 
     this.state = {
@@ -85,24 +90,36 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
+    if (ready) {
+      console.log('select product', selectedProduct.id);
 
-    console.log('App re-render');
+    }
+    //console.log('App re-render');
     let key = 0;
     return ready ? (
-      <div id='App'>
+      <div id='app'>
         <h3>{`${selectedProduct.name} selected`}</h3>
-        <select name='productSelector' value={ selectedProduct.id } onChange={ this.handleSelectChange }>
-          { products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>)) }
+        <select name='productSelector' value={selectedProduct.id} onChange={this.handleSelectChange}>
+          {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
         </select>
-        <RelatedProducts
-          products={ products }
+        <ProductOverview
           selectedProduct={ selectedProduct }
-          updateProductData={ this.updateProductData }
-          selectProduct={ this.selectProduct }
         />
+        <RelatedProducts
+          products={products}
+          selectedProduct={selectedProduct}
+          updateProductData={this.updateProductData}
+          selectProduct={this.selectProduct}
+        />
+        {console.log('//////////id/////////////')}
+        <QA productId={selectedProduct.id} />
+        <br></br>
+        <RatingsAndReviews
+          selectedProduct={selectedProduct} />
       </div>
     ) : (
       <p>Loading...</p>
+
     );
   }
 }
