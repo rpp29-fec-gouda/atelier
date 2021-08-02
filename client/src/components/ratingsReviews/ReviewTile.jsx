@@ -10,27 +10,27 @@ const ReviewTile = (props) => {
   let key = 0;
 
   return reviews.length ? (
-    <div id='reviewTile'>
-      <div className='Tile'>
+    <div id='review-tile'>
+      <div className='tile'>
         {reviews.map((review) => (
           <div key={key++}>
-            <div className='userStamp'>
-              <span className='starRating'>{stars.map(star => (
+            <div className='user-stamp'>
+              <span className='star-rating'>{stars.map(star => (
                 <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
               ))}</span>
-              <span className='ReviewDate'>{review.reviewer_name}, {new Date(review.date).toDateString()}</span>
+              <span className='review-date'>{review.reviewer_name}, {new Date(review.date).toDateString()}</span>
             </div>
             <br></br><br></br>
-            <div className='Review'>
-              <div className='ReviewSummary'>{review.summary}</div>
+            <div className='review'>
+              <div className='review-summary'>{review.summary}</div>
               <br></br>
-              <div className='ReviewBody'>{review.body}</div>
+              <div className='review-body'>{review.body}</div>
               <br></br>
               {review.recommend ?
-                <div className='ReviewRecommend'>&#10003; I recommend this product!</div>
+                <div className='review-recommend'>&#10003; I recommend this product!</div>
                 : null
               }
-              <div className='ReviewResponse'>{review.response}</div>
+              <div className='review-response'>{review.response}</div>
               <br></br>
               <Helpfulness review={review} />
               <span> | </span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingProgress from './RatingProgress.jsx';
+import StarRating from '../shared/StarRating.jsx';
 
 const RatingBreakdown = (props) => {
   const { reviews, ratings, recommended } = props;
@@ -39,8 +40,8 @@ const RatingBreakdown = (props) => {
   }
 
   return (
-    <div id='ratingBreakdown'>
-      <span className='averageRating'>{isNaN(averageRating) ? '' : averageRating}</span>
+    <div id='rating-breakdown'>
+      <span className='average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
       <span>{stars.map(star => (
         <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
       ))}</span>
