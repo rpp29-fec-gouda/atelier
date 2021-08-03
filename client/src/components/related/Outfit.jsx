@@ -2,89 +2,71 @@ import React from 'react';
 import ProductCard from './ProductCard.jsx';
 // import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
-import '../css/RelatedProducts.css';
+// import '../css/RelatedProducts.css';
 
 //
 // Try to use product ids instead of products for performance reasons
 //
 
-class Outfit extends React.Component {
-  constructor(props) {
-    super(props);
+const Outfit = (props) => {
+  const { selectedProduct, selectProduct, outfit, updateOutfit } = props;
+  const { localStorage } = window;
 
-    this.updateOutfit = this.updateOutfit.bind(this);
-    this.addToOutfit = this.addToOutfit.bind(this);
-    this.removeFromOutfit = this.removeFromOutfit.bind(this);
+  // const update = (newOutfit) => {
+  //   props.updateOutfit(newOutfit);
+  // };
 
-    this.store = {
-      products: new Map()
-    };
-
-    this.state = {
-      products: []
-    };
-  }
-
-  updateOutfit(newOutfit) {
-    const { localStorage } = window;
-    localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
-
-    this.setState({
-      products: newOutfit
-    });
-
-    this.props.updateOutfit(newOutfit);
-  }
-
-  addToOutfit() {
-    // e.stopPropagation();
-    const { selectedProduct } = this.props;
-    let oldOutfit = this.state.products.slice();
-
-    if (oldOutfit.includes(selectedProduct)) {
+  const addToOutfit = () => {
+    if (outfit && outfit.includes(selectedProduct)) {
       return;
     }
+    const newOutfit = [ selectedProduct, ...outfit ];
+    localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
+    console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
 
-    this.updateOutfit([ selectedProduct, ...oldOutfit ]);
-  }
+    updateOutfit(newOutfit);
+  };
 
-  removeFromOutfit(product) {
+  const removeFromOutfit = (event, product) => {
+    event.stopPropagation();
     const match = product.id;
+    const newOutfit = [ ...outfit ];
     console.log('Remove', match);
-    let outfit = this.state.products.slice();
-    let i = outfit.length;
+    let i = newOutfit.length;
     while (i--) {
-      if (outfit[i].id === match) {
-        outfit.splice(i, 1);
+      if (newOutfit[i].id === match) {
+        newOutfit.splice(i, 1);
       }
     }
-    this.updateOutfit(outfit);
-  }
 
-  render() {
-    const { selectedProduct, selectProduct } = this.props;
-    const { products } = this.state;
-    console.log('Products in current outfit:', products);
+    newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id))) : localStorage.removeItem('outfit');
+    updateOutfit(newOutfit);
+  };
 
-    let key = 0;
-    return selectedProduct ? (
-      <div id='OutfitCarousel'>
-        <h1></h1>
-        <span className='componentTitle'>YOUR OUTFIT</span>
-        <div className='cardContainer'>
-          <div className='relatedProductCard addToOutfit' title={`Add ${selectedProduct.name} to outfit`} onClick={ this.addToOutfit }>
-            <h1>+</h1>
-            <h2>Add to Outfit</h2>
-          </div>
-          {products.length ? (
-            products.map(product => (
-              <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ this.removeFromOutfit } />
-            ))) : null
-          }
+  // const { outfit } = this.state;
+  // console.log('Products in current outfit:', products);
+
+  let key = 0;
+  return selectedProduct ? (
+    <div id='Outfit'>
+      <h1></h1>
+      <span className='rp-component-title'>YOUR OUTFIT</span>
+      <div className='rp-card-container'>
+        <div className='rp-card rp-card-placeholder' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
+          <h1>+</h1>
+          <h2>Add to Outfit</h2>
         </div>
+        {outfit.length ? (
+          outfit.map(product => {
+            if (typeof product === 'number') {
+              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
+            }
+            return <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ removeFromOutfit } />;
+          })) : null
+        }
       </div>
-    ) : null;
-  }
-}
+    </div>
+  ) : null;
+};
 
 export default Outfit;

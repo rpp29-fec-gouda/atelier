@@ -113,6 +113,7 @@ class App extends React.Component {
           updateProductData={this.updateProductData}
           selectProduct={this.selectProduct}
         />
+        {console.log('//////////id/////////////')}
         <QA productId={selectedProduct.id} />
         <br></br>
         <RatingsAndReviews

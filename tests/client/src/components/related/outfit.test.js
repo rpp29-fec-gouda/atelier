@@ -1,23 +1,36 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Outfit from './Outfit.jsx';
+import { mount } from 'enzyme';
+import Outfit from '../../../../../client/src/components/related/Outfit.jsx';
 
-test('Product is added to outfit when "Add to Outfit" card is clicked', () => {
-  const outfit = shallow(<Outfit selectedProduct={{name: 'Product'}} products={[]} />);
+describe('<Outfit />', () => {
+  const updateOutfit = jest.fn();
+  const outfit = mount(<Outfit selectedProduct={{name: 'Product'}} outfit={[]} updateOutfit={updateOutfit} />);
+  it('Renders', () => {
+    expect(outfit.find('div#Outfit')).toHaveLength(1);
+  });
 
-  expect(outfit.state('products').length).toEqual(0);
+  it('Should call updateOutfit when clicked', () => {
+    outfit.find('div.rp-card-placeholder').simulate('click');
+    expect(updateOutfit).toHaveBeenCalled();
+  });
 
-  outfit.find('.addToOutfit').simulate('click');
+  // const element = outfit.find('#Outfit');
+
   // console.log(outfit.state);
 
-  expect(outfit.state('products').length).toEqual(1);
+  // expect(outfit.props('outfit').length).toEqual(1);
 });
+/*
+const wrapper = mount(<MyComponent />);
+expect(wrapper.find('.foo')).to.have.lengthOf(1);
+expect(wrapper.find('.bar')).to.have.lengthOf(3);
 
-test('Product is removed from outfit when "action" button is clicked', () => {
-  const outfit = shallow(<Outfit selectedProduct={{name: 'Product'}} products={[{name: 'Product'}]} />);
-  const instance = outfit.instance();
+// compound selector
+expect(wrapper.find('div.some-class')).to.have.lengthOf(3);
 
-  instance.removeFromOutfit({name: 'Product'});
+// CSS id selector
+expect(wrapper.find('#foo')).to.have.lengthOf(1);
 
-  expect(outfit.state('products').length).toEqual(0);
-});
+// property selector
+expect(wrapper.find('[htmlFor="checkbox"]')).to.have.lengthOf(1);
+*/

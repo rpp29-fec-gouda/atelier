@@ -39,7 +39,7 @@ class QuestionsList extends React.Component {
   moreQuestionsButton() {
     if (this.state.moreQuesionButton) {
       return (
-        < button id='moreQuestions' className='moreQuestions' onClick={this.checkRemainQuestion.bind(this)} >
+        < button id='morequestions' className='morequestions' onClick={this.checkRemainQuestion.bind(this)} >
           MORE ANSWERED QUESTIONS
         </button>
       );
@@ -51,7 +51,10 @@ class QuestionsList extends React.Component {
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
-        <AddingForm productId={this.props.productId} />
+        <div className='popup'>
+          <span className='close' onClick={this.addQuestionClick.bind(this)}>X</span>
+          <AddingForm productId={this.props.productId} />
+        </div>
       );
     }
   }
@@ -77,10 +80,12 @@ class QuestionsList extends React.Component {
       }
     }
     return (
-      <div>
-        <Question questions={questionsList} />
+      <div >
+        <div className='questionslist'>
+          <Question questions={questionsList} />
+        </div>
         {this.moreQuestionsButton()}
-        <button id='addQuestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
+        <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
       </div>
     );
   }
