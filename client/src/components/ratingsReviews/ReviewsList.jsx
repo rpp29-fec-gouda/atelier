@@ -5,13 +5,14 @@ import NewReview from './NewReview.jsx';
 import KeywordSearch from './KeywordSearch.jsx';
 
 const ReviewsList = (props) => {
-  const { reviews } = props;
-  console.log('reviews:', reviews);
+  const { reviews, sortOptions, handleReviewSort } = props;
 
   return (
     <div className='reviews-list'>
       <Sort
-        reviews={reviews}/>
+        reviews={reviews}
+        sortOptions={sortOptions}
+        handleReviewSort={handleReviewSort}/>
       <KeywordSearch />
       <br></br>
       <ReviewTile
