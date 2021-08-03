@@ -1,6 +1,11 @@
 import React from 'react';
 import roundByIncrement from '../../model/Calcs';
 import './starRating.css';
+import starRatings0 from '../../assets/images/starRatings-0.png';
+import starRatings25 from '../../assets/images/starRatings-25.png';
+import starRatings50 from '../../assets/images/starRatings-50.png';
+import starRatings75 from '../../assets/images/starRatings-75.png';
+import starRatings100 from '../../assets/images/starRatings-100.png';
 
 // props: rating, max, callback
 class StarRating extends React.Component {
@@ -21,8 +26,16 @@ class StarRating extends React.Component {
     this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
-  generateUrl(rating) {
-    return `../public/img/starRatings-${rating}.png`;
+  getImage(rating) {
+    if (rating === 25) {
+      return starRatings25;
+    } else if (rating === 50) {
+      return starRatings50;
+    } else if (rating === 75) {
+      return starRatings75;
+    } else {
+      return null;
+    }
   }
 
   getStarsFull(rating) {
@@ -86,7 +99,7 @@ class StarRating extends React.Component {
           starsFull.map(star =>
             <img
               key={key++}
-              src={this.generateUrl(100)}
+              src={starRatings100}
               class={imgClass}
               data-rating={key}
               onClick={callback}
@@ -98,7 +111,7 @@ class StarRating extends React.Component {
           ratingDecimalRounded25 > 0 &&
           <img
             key={key++}
-            src={this.generateUrl(ratingDecimalRounded25)}
+            src={this.getImage(ratingDecimalRounded25)}
             class={imgClass}
           ></img>
         }
@@ -106,7 +119,7 @@ class StarRating extends React.Component {
           starsEmpty.map(star =>
             <img
               key={key++}
-              src={this.generateUrl(0)}
+              src={starRatings0}
               class={imgClass}
               data-rating={key}
               onClick={callback}
