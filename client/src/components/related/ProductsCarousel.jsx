@@ -14,15 +14,18 @@ const ProductsCarousel = (props) => {
       <span className='rp-component-title'>RELATED PRODUCTS</span>
       <div className='rp-card-container'>{
         products.length ? (
-          products.map(product => (
-            <ProductCard
-              key={ `related${key++}` }
+          products.map(product => {
+            if (typeof product === 'number') {
+              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
+            }
+            return <ProductCard
+              key={ key++ }
               product={ product }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
               action={ () => {} }
-            />
-          ))
+            />;
+          })
         ) : (
           <div className='rp-card rp-card-placeholder'>Loading...</div>
         )}

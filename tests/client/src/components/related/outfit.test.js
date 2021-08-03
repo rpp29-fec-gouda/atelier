@@ -12,12 +12,3 @@ test('Product is added to outfit when "Add to Outfit" card is clicked', () => {
 
   expect(outfit.props('outfit').length).toEqual(1);
 });
-
-test('Product is removed from outfit when "action" button is clicked', () => {
-  const outfit = shallow(<Outfit selectedProduct={{id: 11}} outfit={[{name: 'Product', id: 11}, {name: 'AnotherProduct', id: 12}, {name: 'YetAnotherProduct', id: 13}]} />);
-  const instance = outfit.instance();
-
-  instance.removeFromOutfit({id: 11});
-
-  expect(outfit.props('outfit').length).toEqual(2);
-});

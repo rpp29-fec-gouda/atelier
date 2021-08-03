@@ -57,9 +57,12 @@ const Outfit = (props) => {
           <h2>Add to Outfit</h2>
         </div>
         {outfit.length ? (
-          outfit.map(product => (
-            <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ removeFromOutfit } />
-          ))) : null
+          outfit.map(product => {
+            if (typeof product === 'number') {
+              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
+            }
+            return <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ removeFromOutfit } />;
+          })) : null
         }
       </div>
     </div>

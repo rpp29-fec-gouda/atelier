@@ -7,17 +7,19 @@ const ProductCard = (props) => {
   if (!props.product) {
     return null;
   }
-  const { product, selectedProduct, selectProduct, type, action } = props;
+  const { product, selectedProduct, selectProduct, type, action, value } = props;
   let hoverText, actionClass, actionSymbol;
 
-  if (type === 'outfit') {
-    hoverText = `Remove ${product.name} from outfit`;
-    actionClass = 'remove-from-outfit-symbol';
-    actionSymbol = '+';
-  } else {
-    hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
-    actionClass = 'rp-compare-symbol';
-    actionSymbol = String.fromCharCode(9734);
+  if (type !== 'placeholder') {
+    if (type === 'outfit') {
+      hoverText = `Remove ${product.name} from outfit`;
+      actionClass = 'remove-from-outfit-symbol';
+      actionSymbol = '+';
+    } else {
+      hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
+      actionClass = 'rp-compare-symbol';
+      actionSymbol = String.fromCharCode(9734);
+    }
   }
 
   const maxTitleTextLength = 60;
@@ -28,7 +30,9 @@ const ProductCard = (props) => {
   }
 
   let key = 0;
-  return (
+  return type === 'placeholder' ? (
+    <div className='rp-card rp-card-placeholder' >{value}</div>
+  ) : (
     <div className='rp-card' title={`Select ${product.name}`} onClick={() => { selectProduct(product); }}>
       <div className='rp-image-backer'>
         <img src=''></img>

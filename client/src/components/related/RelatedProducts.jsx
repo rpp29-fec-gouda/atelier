@@ -73,6 +73,7 @@ class RelatedProducts extends React.Component {
         console.log(`Related product ${product.id} (${product.name}) loaded from cache`);
         cached.push(product);
       } else {
+        cached.push(id);
         toLoad.push(id);
       }
     });
