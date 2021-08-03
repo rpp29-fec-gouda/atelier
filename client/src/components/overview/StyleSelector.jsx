@@ -3,7 +3,6 @@ import './styleSelector.css';
 
 const StyleSelector = (props) => {
   console.log('Rendering style selector');
-  console.log('Style items:', JSON.stringify(props.items));
 
   let rowItemLimit = 4;
   const getItemsByRow = () => {
@@ -23,12 +22,11 @@ const StyleSelector = (props) => {
       itemsByRow.push(itemsOnRow);
     }
 
-    console.log('Style items:', JSON.stringify(itemsByRow));
     return itemsByRow;
   };
 
   const handleClick = (e) => {
-    props.onClick(e.target.dataset.styleId);
+    props.onClick(e?.target?.dataset?.styleId);
   };
 
   const itemsByRow = getItemsByRow();
@@ -39,7 +37,7 @@ const StyleSelector = (props) => {
       <h2 class="uppercase no-select">
         <span class="bold">STYLE &gt;</span> {props.name}
       </h2>
-      <div class="styles column">
+      <div id="styles-list" class="styles column">
         {
           itemsByRow.length && itemsByRow.length > 0 &&
           itemsByRow.map(itemsOnRow => (

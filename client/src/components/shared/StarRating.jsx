@@ -13,7 +13,6 @@ class StarRating extends React.Component {
     const rating = props.rating ? props.rating : 0;
     console.log('Rendering Star Rating');
     this.state = {
-      // currentRating: this.isClickable ? 0 : Math.min(props.rating, this.maxStars)
       currentRating: Math.min(rating, this.maxStars)
     };
 
@@ -53,7 +52,8 @@ class StarRating extends React.Component {
   }
 
   handleMouseOver(e) {
-    const rating = e.target.dataset.rating;
+    const rating = e?.target?.dataset?.rating;
+    console.log('rating: ', rating);
     if (rating && rating !== this.state.currentRating) {
       console.log('Rating:', rating);
       this.setState({
@@ -77,10 +77,11 @@ class StarRating extends React.Component {
     const imgClass = this.getStarClasses(this.isClickable);
     const callback = this.isClickable ? this.props.callback : () => {};
     const mouseOver = this.isClickable ? this.handleMouseOver : () => {};
+    const mouseOut = this.isClickable ? this.handleMouseOut : () => {};
 
     let key = 0;
     return (
-      <div class="star-rating" onMouseOut={this.handleMouseOut}>
+      <div class="star-rating" onMouseOut={mouseOut}>
         {
           starsFull.map(star =>
             <img

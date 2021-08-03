@@ -6,6 +6,13 @@ const QuantitySelector = (props) => {
   const maxQuantityCapped = Math.min(props.maxQuantity, 15);
   const quantitiesAvailable = props.maxQuantity && maxQuantityCapped > 0;
 
+  const resetToDefaultSelected = () => {
+    const options = document.querySelectorAll('#quantity option');
+    for (let i = 0; i < options.length; i++) {
+      options[i].selected = options[i].defaultSelected;
+    }
+  };
+
   if (quantitiesAvailable) {
     const quantities = [];
     for (let i = 1; i <= maxQuantityCapped; i++) {
@@ -14,8 +21,10 @@ const QuantitySelector = (props) => {
     console.log('quantities available', quantities);
 
     const onChange = (e) => {
-      props.onSelect(e.target.value);
+      props.onSelect(e?.target?.value);
     };
+
+    resetToDefaultSelected();
 
     let key = 0;
     let defaultValue = 1;
@@ -35,7 +44,7 @@ const QuantitySelector = (props) => {
     return (
       <div id="quantity-selector">
         <select id="quantity" name="quantity" disabled>
-          <option value="0">-</option>
+          <option value={-1}>-</option>
         </select>
       </div>
     );
