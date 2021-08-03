@@ -9,7 +9,7 @@ const ProductsCarousel = (props) => {
   let key = 0;
 
   return (
-    <div id='RelatedProductsCarousel'>
+    <div id='ProductsCarousel'>
       <h1></h1>
       <span className='rp-component-title'>RELATED PRODUCTS</span>
       <div className='rp-card-container'>{

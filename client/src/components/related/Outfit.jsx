@@ -17,7 +17,7 @@ const Outfit = (props) => {
   // };
 
   const addToOutfit = () => {
-    if (outfit.includes(selectedProduct)) {
+    if (outfit && outfit.includes(selectedProduct)) {
       return;
     }
     const newOutfit = [ selectedProduct, ...outfit ];
