@@ -8,12 +8,12 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.isInStock = Object.keys(props.skus).length > 0;
-    this.currentQuantity = 0;
-    this.bag = [];
+    this.isInStock = props.skus ? Object.keys(props.skus).length > 0 : false;
 
     this.state = {
       currentSku: null,
+      currentQuantity: 0,
+      bag: [],
       promptSelection: false
     };
 
@@ -23,27 +23,32 @@ class Cart extends React.Component {
   }
 
   handleSizeSelect(sku) {
-    console.log('sku for size selected:', sku);
     this.setState({
       currentSku: sku,
+      currentQuantity: 1,
       promptSelection: false
     });
+    console.log('sku for size selected:', this.state.currentSku);
   }
 
   handleQuantitySelect(quantity) {
-    this.currentQuantity = quantity;
-    console.log('Quantity chosen:', this.currentQuantity);
-  }
-
-  handleSelectSizePrompt() {
-
+    this.setState({
+      currentQuantity: quantity,
+      promptSelection: false
+    });
+    console.log('Quantity chosen:', this.state.currentQuantity);
   }
 
   handleCheckout() {
     if (this.isInStock && this.state.currentSku !== null) {
-      this.bag.push({
+      const newBag = this.state.bag;
+      newBag.push({
         sku: this.state.currentSku,
-        quantity: this.currentQuantity
+        quantity: this.state.currentQuantity
+      });
+
+      this.setState({
+        bag: newBag
       });
       console.log('Current order:', this.bag);
     } else {

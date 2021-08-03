@@ -22,26 +22,36 @@ class ProductOverview extends React.Component {
 
     this.fetchProductStyles = this.fetchProductStyles.bind(this);
     this.updateState = this.updateState.bind(this);
-    this.getDefaultStyle = this.updateDefaultStyle.bind(this);
+    this.getDefaultStyle = this.getDefaultStyle.bind(this);
+    this.updateDefaultStyle = this.updateDefaultStyle.bind(this);
     this.getStyleSelectorItems = this.getStyleSelectorItems.bind(this);
     this.getStyleDefaultPhotoUrl = this.getStyleDefaultPhotoUrl.bind(this);
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.getStyleById = this.getStyleById.bind(this);
     this.setStyleById = this.setStyleById.bind(this);
+    this.updateRatingsProperties = this.updateRatingsProperties.bind(this);
   }
 
   componentDidMount() {
-    this.loadAdditionalProductData(this.props.selectedProduct.id);
+    this.loadAdditionalProductData(this.props.selectedProduct?.id);
   }
 
   loadAdditionalProductData(id) {
+    if (!id || id === null) {
+      console.log('Product ID is null');
+      return;
+    }
+    if (this.props.isTesting) {
+      this.ratings = this.props.ratings;
+      this.updateRatingsProperties(this.ratings);
+      this.styles = this.props.styles;
+      this.updateDefaultStyle();
+      return;
+    }
     Promise.all([this.fetchRatings(id), this.fetchProductStyles(id)])
       .then(res => {
         this.ratings = res[0].data.ratings;
-        console.log(`Product Ratings: ${JSON.stringify(this.ratings)}`);
-        this.numberOfReviews = this.getNumberOfReviews(this.ratings);
-        this.averageRating = this.getAverageRating(this.ratings, this.numberOfReviews);
-
+        this.updateRatingsProperties(this.ratings);
         this.styles = res[1].data.results;
         this.updateDefaultStyle();
       })
@@ -59,13 +69,13 @@ class ProductOverview extends React.Component {
   }
 
   updateState(style) {
-    console.log('Style Selected: ', style);
     if (style === null || !style) {
       this.setState({
         selectedStyle: null,
         sizesAvailable: []
       });
     } else {
+      console.log('Style Selected: '); //, style);
       this.setState({
         selectedStyle: style,
         sizesAvailable: this.getSizesInStock(style.skus)
@@ -75,14 +85,20 @@ class ProductOverview extends React.Component {
 
   updateDefaultStyle() {
     console.log('Updating default style');
+    const defaultStyle = this.getDefaultStyle();
+    this.updateState({
+      selectedStyle: defaultStyle
+    });
+  }
+
+  getDefaultStyle() {
     for (const style of this.styles) {
       if (style['default?']) {
-        this.updateState(style);
-        return;
+        return style;
       }
     }
-    console.log('No default found!');
-    this.updateState(null);
+    console.log('No default found! Using first style...');
+    return this.styles.length > 0 ? this.styles[0] : null;
   }
 
   getStyleById(id) {
@@ -123,6 +139,12 @@ class ProductOverview extends React.Component {
     } else {
       return style.photos[0].thumbnail_url;
     }
+  }
+
+  updateRatingsProperties(ratings) {
+    console.log(`Product Ratings: ${JSON.stringify(ratings)}`);
+    this.numberOfReviews = this.getNumberOfReviews(ratings);
+    this.averageRating = this.getAverageRating(ratings, this.numberOfReviews);
   }
 
   getNumberOfReviews(ratings) {
@@ -183,7 +205,7 @@ class ProductOverview extends React.Component {
 
     const styleId = selectedStyle.style_id;
     const selectorItems = this.getStyleSelectorItems();
-
+    console.log('styles', JSON.stringify(selectorItems));
     console.log('Rendering product overview');
     return (
       <div id="product-overview">

@@ -105,6 +105,7 @@ class App extends React.Component {
         <ProductOverview
           selectedProduct={selectedProduct}
           // ratings={this.store.ratings}
+          isTesting={this.props.isTesting}
         />
         <RelatedProducts
           products={products}

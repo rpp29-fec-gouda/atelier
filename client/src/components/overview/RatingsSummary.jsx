@@ -4,6 +4,7 @@ import './ratingsSummary.css';
 
 const RatingsSummary = (props) => {
   const handleOnClick = () => {
+    props.callback?.call();
     document.getElementById('RatingsReviews')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -11,7 +12,6 @@ const RatingsSummary = (props) => {
     <span id="product-rating" class="row row-margin">
       <StarRating
         rating={props.averageRating}
-        // callback={(e) => console.log('click!', e.target.dataset.rating)}
       />
       <div id="read-all-reviews" onClick={handleOnClick} class="row link">
         Read all {props.reviewCount} reviews

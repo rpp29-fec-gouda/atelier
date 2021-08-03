@@ -5,7 +5,7 @@ const Price = (props) => {
   return (
     <div id="price" class="row-margin">
       {
-        props.salePrice === null
+        props.salePrice === null || !props.salePrice
           ?
           `$ ${ props.defaultPrice }`
           :
@@ -15,7 +15,6 @@ const Price = (props) => {
             <div class="original-price">$ {props.originalPrice}</div>
           </span>
       }
-
     </div>
   );
 };

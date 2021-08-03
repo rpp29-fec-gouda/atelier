@@ -10,7 +10,7 @@ const SizeSelector = (props) => {
   }
 
   const onChange = (e) => {
-    props.onSelect(e.target.value);
+    props.onSelect(e?.target?.value);
   };
 
   let key = 0;
