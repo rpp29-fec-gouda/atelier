@@ -1,33 +1,37 @@
 import React from 'react';
 
 const RatingProgress = (props) => {
-  const { completed, ratings, handleRatingProgressFilter } = props;
+  const { completed, ratings } = props;
   console.log('completed:', completed);
 
   const ratingProgress = {
     width: '100%',
-    height: '50%',
     backgroundColor: '#e0e0de',
   };
 
   const ratingFiller = {
-    height: '50%',
-    width: `${completed.percentage}%`,
+    height: '100%',
+    width: `${completed}%`,
     backgroundColor: '#00695c',
     borderRadius: 'inherit',
     marginTop: '5%',
-    marginBottom: '5%',
-
+    marginBottom: '5%'
   };
 
+  const stars = [{star: 5},
+    {star: 4},
+    {star: 3},
+    {star: 2},
+    {star: 1}
+  ];
+
   return (
-    <div class='rating-progress'>
-      <div onClick={handleRatingProgressFilter} id={completed.star}>{completed.star}</div>
-      <div style={ratingProgress} class='progress'>
-        <div style={ratingFiller}>
-          <span class='progress-bar'>.
-          </span>
-        </div>
+    <div style={ratingProgress}>
+      <div style={ratingFiller}>
+        {stars.map((star, i) => {
+          return <span key={i}>''</span>;
+        })}
+        <span style={ratingFiller}></span>
       </div>
     </div>
   );
