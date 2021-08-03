@@ -2,7 +2,7 @@ import React from 'react';
 
 const KeywordSearch = (props) => {
   return (
-    <div id='keywordSearch'>
+    <div id='keyword-search'>
       <div>KeywordSearch</div>
     </div>
   );

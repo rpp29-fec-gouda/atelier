@@ -9,24 +9,8 @@ import RatingsAndReviews from '../../../../../client/src/components/ratingsRevie
 // For Enzyme usage, see: https://github.com/enzymejs/enzyme-matchers/tree/master/packages/jest-enzyme
 
 describe('<RatingsAndReviews />', () => {
-  test('renders product information', () => {
-    // const wrapper = mount(<RatingsAndReviews />); // mount/render/shallow when applicable
-
-    // // Assert that the given enzyme wrapper has rendered content.
-    // expect(wrapper.find('div')).toBeTruthy();
-    // expect(wrapper.find('h3')).toBeTruthy();
-    // expect(wrapper.find('ul')).toEqual({});
-  });
-
-  test('renders review list', () => {
-
-  });
-
-  test('renders rating breakdown', () => {
-
-  });
-
-  test('renders product breakdown', () => {
-
+  test('should render correctly in debug mode', () => {
+    const wrapper = shallow(<RatingsAndReviews debug/>);
+    expect(wrapper).toMatchSnapshot();
   });
 });

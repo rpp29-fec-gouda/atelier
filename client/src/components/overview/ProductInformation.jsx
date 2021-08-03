@@ -9,7 +9,10 @@ const ProductInformation = (props) => {
   return (
     <div id="product-information">
       <span id="product-rating" class="row row-margin">
-        <StarRating />
+        <StarRating
+          rating={3.75}
+          callback={(e) => console.log('click!', e.target.dataset.rating)}
+        />
         <ReadAllReviews />
       </span>
       <h2 class="uppercase">{ props.category }</h2>

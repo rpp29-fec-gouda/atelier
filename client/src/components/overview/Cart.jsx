@@ -1,7 +1,7 @@
 import React from 'react';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
-import Checkout from './Checkout';
+import AddButton from '../shared/AddButton';
 import './cart.css';
 
 class Cart extends React.Component {
@@ -73,7 +73,9 @@ class Cart extends React.Component {
             onSelect={this.handleQuantitySelect}
           />
         </div>
-        <Checkout
+        <AddButton
+          label={'ADD TO BAG'}
+          id={'checkout'}
           onClick={this.handleCheckout}
         />
       </div>
