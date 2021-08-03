@@ -1,14 +1,8 @@
 config.js
 node_modules
 coverage
-<<<<<<< HEAD
-<<<<<<< HEAD
 *.DS_Store
-=======
-__snapshots__
->>>>>>> 6e93501980714567ba1d6aa6cf9ea191f5c62ab4
-=======
 __snapshots__
 __archive__
 testResults
->>>>>>> 615559bbe49422ac84a32762e0ed73be0ae7d521
+sonar-report.xml
