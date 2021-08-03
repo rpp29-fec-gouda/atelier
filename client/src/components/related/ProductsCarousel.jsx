@@ -5,24 +5,29 @@ import ProductCard from './ProductCard.jsx';
 
 const ProductsCarousel = (props) => {
   const { products, selectProduct, selectedProduct } = props;
+
   let key = 0;
 
   return (
     <div id='RelatedProductsCarousel'>
       <h1></h1>
-      <span className='componentTitle'>RELATED PRODUCTS</span>
-      <div className='cardContainer'>{
+      <span className='rp-component-title'>RELATED PRODUCTS</span>
+      <div className='rp-card-container'>{
         products.length ? (
-          products.map(product => (
-            <ProductCard
-              key={ `related${key++}` }
+          products.map(product => {
+            if (typeof product === 'number') {
+              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
+            }
+            return <ProductCard
+              key={ key++ }
               product={ product }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
-            />
-          ))
+              action={ () => {} }
+            />;
+          })
         ) : (
-          <div className='relatedProductCard addToOutfit'>Loading...</div>
+          <div className='rp-card rp-card-placeholder'>Loading...</div>
         )}
       </div>
     </div>

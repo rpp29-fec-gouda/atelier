@@ -1,0 +1,30 @@
+.styles {
+  padding: 0.7em 0;
+}
+
+.style {
+  border: 1px black solid;
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  margin: 0.7em 0.7em 0.7em 0;
+  position: relative;
+  background-color: lightgoldenrodyellow;
+}
+
+.style:hover {
+  cursor: pointer;
+}
+
+.style-selected {
+  border: 1px black solid;
+  border-radius: 50%;
+  content: "\2713";
+  width: 0.75em;
+  height: 0.75em;
+  padding: 0 0.20em 0.3em 0.20em;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  right: 0;
+}

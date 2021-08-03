@@ -14,6 +14,7 @@
 
 ## Documentation
 - Documentation such as diagrams for the app and UX styling guidelines are stored in the **`./docs`** directory.
+- See the [web style guide](./docs/web-style-guide.md) for the standards we are following for coding and project organization.
 
 ## Team Members
 - [Alex Cakic](https://github.com/aleksandar-cakic) - [Engineering Journal](https://gist.github.com/aleksandar-cakic/1f46fd75b3cefb7857a5bdbae9a6a53b)
@@ -28,13 +29,14 @@
 - ```npm test``` to run the tests
 
 # Continuous Integration
-Basic test of JavaScript continuous integration.
+Basic test of JavaScript continuous integration uses [CircleCI](https://circleci.com/) to run the tests, and [Coveralls](https://coveralls.io/) for reporting test coverage.
 
 Circle CI: [![rpp29-fec-gouda](https://circleci.com/gh/rpp29-fec-gouda/atelier.svg?style=svg)](https://app.circleci.com/pipelines/github/rpp29-fec-gouda/atelier)
 
 Coveralls: [![Coverage Status](https://coveralls.io/repos/github/rpp29-fec-gouda/atelier/badge.svg?branch=main)](https://coveralls.io/github/rpp29-fec-gouda/atelier?branch=main)
 
 # SonarCloud
+Additionally, [SonarCloud](https://sonarcloud.io/projects) is used for an overall check of code quality.
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=alert_status)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
