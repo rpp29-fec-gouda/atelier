@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import RatingList from './RatingList.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -9,176 +8,82 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
 
-    this.reviews = [];
-    this.ratings = [];
-    this.characteristics = [];
-    this.recommended = [];
-    this.product_id = '';
-    this.sort = 'relevant';
-
     this.state = {
       ratings: [],
       reviews: [],
       characteristics: [],
       recommended: {},
-      product_id: '',
-      sort: 'relevant'
+      // eslint-disable-next-line camelcase
+      product_id: ''
     };
-
-    this.sortOptions = ['relevance', 'newest', 'helpfulness'];
-
-
-    this.getReviews = this.getReviews.bind(this);
-    this.getRatings = this.getRatings.bind(this);
-    this.getDefaultRatings = this.getDefaultRatings.bind(this);
-    this.getDefaultReviews = this.getDefaultReviews.bind(this);
-    this.handleReviewSort = this.handleReviewSort.bind(this);
-    this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.selectedProduct) {
-      this.getReviews(this.state.sort, this.props.selectedProduct.id);
-      this.getRatings(this.props.selectedProduct.id);
-    } else {
-      return <div>Loading...</div>;
-    }
+  getReviews() {
+    return axios.get(`reviews?count=1000000&page=1&sort=relevant&product_id=${this.props.selectedProduct.id}`);
   }
 
-  getDefaultReviews() {
-    console.log('1ID', this.product_id);
-    console.log('1reviews:', this.reviews);
-    if (this.reviews.length > 0) {
-      console.log('2reviews:', this.reviews);
-      console.log('2ID', this.product_id);
-
-      this.setState({
-        reviews: this.reviews,
-        product_id: this.product_id
-      });
-      return;
-    }
-    this.setState({
-      product_id: this.product_id,
-      reviews: null
-    });
+  getRatings() {
+    return axios.get(`reviews/meta?product_id=${this.props.selectedProduct.id}`);
   }
 
-  getDefaultRatings() {
-    console.log('1ratings:', this.ratings);
-    if (Object.keys(this.ratings).length !== 0) {
-      console.log('2ratings:', this.ratings);
 
-      this.setState({
-        ratings: this.ratings,
-        characteristics: this.characteristics,
-        recommended: this.recommended
-      });
-      console.log('state', this.state);
-      return;
-    }
-    this.setState({
-      ratings: null
-    });
-  }
-
-  getReviews(sort, id) {
-    console.log('Getting Reviews');
-    axios.get(`reviews?sort=${sort}&product_id=${id}`)
+  componentDidMount () {
+    console.log('teest', this.props.selectedProduct);
+    Promise.all([this.getReviews(), this.getRatings()])
       .then(res => {
-        console.log('getReviews:', res);
-        this.reviews = res.data.results;
-        this.product_id = res.data.product;
-        this.getDefaultReviews();
+        this.setState({
+          reviews: res[0].data.results,
+          ratings: res[1].data.ratings,
+          characteristics: res[1].data.characteristics,
+          recommended: res[1].data.recommended,
+          // eslint-disable-next-line camelcase
+          product_id: res[0].data.product
+
+        });
 
       })
-      .catch(err => {
-        console.log(err.stack);
+      .catch(error => {
+        console.error(error);
       });
   }
 
-  getRatings(id) {
-    console.log('Getting Ratings');
-    axios.get(`reviews/meta?product_id=${id}`)
+  componentDidUpdate() {
+    Promise.all([this.getReviews(), this.getRatings()])
       .then(res => {
-        console.log('getRatings:', res);
-        if (res.data.ratings) {
-
-          this.ratings = res.data.ratings;
-          this.characteristics = res.data.characteristics;
-          console.log('ReRatings', this.ratings);
-          this.getDefaultRatings();
+        if (this.state.product_id !== res[0].data.product) {
+          this.setState({
+            reviews: res[0].data.results,
+            ratings: res[1].data.ratings,
+            characteristics: res[1].data.characteristics,
+            recommended: res[1].data.recommended,
+            // eslint-disable-next-line camelcase
+            product_id: res[0].data.product
+          });
         }
+
       })
-      .catch(err => {
-        console.log(err.stack);
+      .then(res => {
+        console.log('STATE', this.state);
+      })
+      .catch(error => {
+        console.error(error);
       });
   }
 
-  componentDidUpdate(prevState) {
-    if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
-      if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
-        this.getRatings(this.props.selectedProduct.id);
-      }
-    }
-  }
 
-
-
-  handleReviewSort (event) {
-    const sortFilter = event.target.value;
-    if (sortFilter === 'relevance') {
-      this.setState({
-        sort: 'relevant'
-      }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
-
-      });
-    } else if (sortFilter === 'helpfulness') {
-      this.setState({
-        sort: 'helpful'
-      }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
-
-      });
-    } else if (sortFilter === 'newest') {
-      this.setState({
-        sort: 'newest'
-      }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
-
-      });
-    }
-    event.preventDefault();
-  }
-
-  handleRatingProgressFilter(event) {
-    console.log('stars', event.target.id);
-    event.preventDefault();
-  }
 
   render() {
-    const selectedProduct = this.props.selectedProduct;
-    if (selectedProduct === null) {
-      return (<p>Loading...</p>);
-    }
-
     return (
       <div id='ratings-reviews'>
         <span className='component-title'>RATINGS &amp; REVIEWS</span>
         <div id='ratings'>
           <ReviewsList
-            reviews={this.state.reviews}
-            sortOptions={this.sortOptions}
-            handleReviewSort={this.handleReviewSort} />
+            reviews={this.state.reviews}/>
           <RatingList
             ratings={this.state.ratings}
             reviews={this.state.reviews}
             characteristics={this.state.characteristics}
-            recommended={this.state.recommended}
-            handleRatingProgressFilter={this.handleRatingProgressFilter}
-          />
+            recommended={this.state.recommended}/>
         </div>
       </div>
     );
