@@ -1,11 +1,6 @@
 import React from 'react';
 import roundByIncrement from '../../model/Calcs';
 import './starRating.css';
-// import starRatings0 from '../../../assets/images/starRatings-0.png';
-// import starRatings25 from '../../../assets/images/starRatings-25.png';
-// import starRatings50 from '../../../assets/images/starRatings-50.png';
-// import starRatings75 from '../../../assets/images/starRatings-75.png';
-// import starRatings100 from '../../../assets/images/starRatings-100.png';
 
 // props: rating, max, callback
 class StarRating extends React.Component {
@@ -27,20 +22,7 @@ class StarRating extends React.Component {
   }
 
   getImage(rating) {
-    return `assets/images/starRatings-${rating}.png`;
-    // if (rating === 0) {
-    //   return starRatings0;
-    // } else if (rating === 25) {
-    //   return starRatings25;
-    // } else if (rating === 50) {
-    //   return starRatings50;
-    // } else if (rating === 75) {
-    //   return starRatings75;
-    // } else if (rating === 100) {
-    //   return starRatings100;
-    // } else {
-    //   return null;
-    // }
+    return `images/starRatings-${rating}.png`;
   }
 
   getStarsFull(rating) {
