@@ -7,7 +7,7 @@ const SearchQuestions = (props) => {
   let questionsFiltered = [];
 
 
-  const changeHandle = (e) => {
+  const handleOnchange = (e) => {
     const searchText = e.target.value;
     if (searchText.length >= 3) {
       questions.forEach(question => {
@@ -36,8 +36,8 @@ const SearchQuestions = (props) => {
         type="text"
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
         name="search"
-        onChange={changeHandle}
-      ></input>
+        onChange={handleOnchange}>
+      </input>
 
     </div>
   );
