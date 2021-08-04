@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingProgress from './ratingProgress.jsx';
+import RatingProgress from './RatingProgress.jsx';
 
 const RatingBreakdown = (props) => {
   const { reviews, ratings, recommended } = props;
