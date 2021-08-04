@@ -1,5 +1,5 @@
 import React from 'react';
-import roundByIncrement from '../../model/Calcs';
+import { roundByIncrement } from '../../model/Calcs';
 import './starRating.css';
 
 // props: rating, max, callback
