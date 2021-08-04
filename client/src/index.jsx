@@ -20,7 +20,7 @@ class App extends React.Component {
     this.updateProductData = this.updateProductData.bind(this);
 
 
-    this.store = {
+    this.cache = {
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
@@ -60,14 +60,14 @@ class App extends React.Component {
   }
 
   updateProductData(productList, productMap) {
-    this.store.products = productMap;
+    this.cache.products = productMap;
     this.setState({
       products: productList
     });
   }
 
   handleSelectChange(e) {
-    const { products } = this.store;
+    const { products } = this.cache;
     const productId = parseInt(e.currentTarget.value);
     const selectedProduct = products.get(productId);
     this.selectProduct(selectedProduct);
@@ -78,7 +78,7 @@ class App extends React.Component {
       .then(res => {
         const products = res.data;
         products.forEach(product => {
-          this.store.products.set(product.id, product);
+          this.cache.products.set(product.id, product);
         });
         this.setState({
           products: products,
@@ -103,7 +103,9 @@ class App extends React.Component {
           {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
         </select>
         <ProductOverview
-          selectedProduct={ selectedProduct }
+          selectedProduct={selectedProduct}
+          // ratings={this.store.ratings}
+          isTesting={this.props.isTesting}
         />
         <RelatedProducts
           products={products}
@@ -118,7 +120,6 @@ class App extends React.Component {
       </div>
     ) : (
       <p>Loading...</p>
-
     );
   }
 }

@@ -7,6 +7,14 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
 
+    // photos={ photos }
+    // [
+    //   {
+    //       "thumbnail_url": ,
+    //       "url":
+    //   },
+    // ]
+
     this.state = {
       isExpanded: false
     };
@@ -32,8 +40,13 @@ class ImageGallery extends React.Component {
     return (
       <div id="image-gallery">
         { this.state.isExpanded
-          ? <ExpandedView onClick={this.handleCollapsedView} />
-          : <DefaultView onClick={this.handleExpandedView} />
+          ? <ExpandedView
+            onClick={this.handleCollapsedView}
+            photos={this.props.photos}
+          />
+          : <DefaultView
+            onClick={this.handleExpandedView}
+          />
         }
       </div>
     );
