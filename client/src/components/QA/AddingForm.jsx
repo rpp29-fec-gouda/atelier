@@ -41,24 +41,9 @@ class AddingForm extends React.Component {
 
   checkingRequire() {
     let requires = {};
-    // if (this.state.username.length === 0) {
-    //   requires.username = 'username is require';
-    // }
-    // if (this.state.text.length === 0) {
-    //   requires.text = 'text is require';
-    // }
-    // if (this.state.email.length === 0) {
-    //   requires.email = 'email is require';
-    // }
-    // if (this.state.email.length > 0) {
-    //   const email = this.state.email;
-    //   const re = /\S+@\S+\.\S+/;
-    //   if (!re.test(email)) {
-    //     requires.email = 'email invalid';
-    //   }
-    // }
+   
     for (let key in this.state.requires) {
-      if (this.state.[key].length === 0) {
+      if (this.state[key].length === 0) {
         requires[key] = `${key} id required`;
       }
     }
