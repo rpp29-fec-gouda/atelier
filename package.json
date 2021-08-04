@@ -11,7 +11,8 @@
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "nodemon server.js",
     "build": "webpack --mode development --watch",
-    "dev": "npm run build & npm run start & npm run test"
+    "build-images": "cp -R ./client/assets ./client/dist",
+    "dev": "npm run build & npm run build-images & npm run start & npm run test"
   },
   "repository": {
     "type": "git",
