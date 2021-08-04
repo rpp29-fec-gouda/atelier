@@ -15,22 +15,22 @@ td {
 .character {
   font-weight: bold;
 }
-.answerby {
+.answer_by {
   margin: 5px;
   font-size: 14px;
 }
 
-#addquestion, #morequestions {
+.add_question, .more_questions {
   height: 50px;
   margin: 8px;
   font-weight: 550 ; 
   display: inline-block; 
 }
 
-#addquestion {
+.add_question {
   width: 200px
 }
-#morequestion {
+.more_question {
   width: 250px
 }
 
@@ -40,7 +40,7 @@ td {
 .inline {
   display: inline;
 }
-.warningtext {
+.warning_text {
   font-size: 10px;
 }
   
@@ -67,12 +67,12 @@ td {
   text-decoration: none;
 }
 
-.answerslist {
+.answers_list {
   overflow: scroll;
   max-height:50%; 
 }
 
-.questionslist {
+.questions_list {
   overflow: scroll;
   max-height: 400px; 
 }

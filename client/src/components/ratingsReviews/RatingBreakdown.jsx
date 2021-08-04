@@ -2,6 +2,7 @@ import React from 'react';
 import RatingProgress from './RatingProgress.jsx';
 import StarRating from '../shared/StarRating.jsx';
 
+
 const RatingBreakdown = (props) => {
   const { reviews, ratings, recommended } = props;
   const stars = [1, 1, 1, .8, 0];
