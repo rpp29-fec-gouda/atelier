@@ -38,7 +38,6 @@ const SearchQuestions = (props) => {
         name="search"
         onChange={handleOnchange}>
       </input>
-
     </div>
   );
 };

@@ -74,5 +74,15 @@ td {
 
 .questions_list {
   overflow: scroll;
-  max-height: 400px; 
+  max-height: 50%; 
+}
+
+img.thumbnail {
+  width: 5em;
+  height: 5em;
+}
+
+.photos_inline {
+  display: inline-block;
+  padding: 5px;
 }

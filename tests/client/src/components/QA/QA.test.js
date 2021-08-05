@@ -57,7 +57,7 @@ const questionsData = [
 
 describe('<QA testing />', () => {
   test('renders QA', () => {
-    const wrapper = shallow(<QA productId='28212' />); // mount/render/shallow when applicable
+    const wrapper = shallow(<QA productId='28218' />); // mount/render/shallow when applicable
     // // Assert that the given enzyme wrapper has rendered content.
     const text = wrapper.find('h3').text();
     expect(text).toBe('QUESTIONS & ANSWERS');
@@ -69,7 +69,7 @@ describe('<QA testing />', () => {
   test('should add 2 questions when click button', () => {
     const wrapper = mount(<QuestionList questions={questionsData} />);
     expect(wrapper.find('table.question_table')).toHaveLength(2);
-    wrapper.find('button.morequestions').simulate('click');
+    wrapper.find('button.more_questions').simulate('click');
     expect(wrapper.find('table.question_table')).toHaveLength(4);
   });
 });

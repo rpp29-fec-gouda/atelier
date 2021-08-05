@@ -32,7 +32,7 @@ class QA extends React.Component {
 
   componentDidUpdate() {
     if (this.state.productId !== this.props.productId) {
-      axios.get(`/qa/questions?product_id=${this.props.productId}&count=20`)
+      axios.get(`/qa/questions?product_id=${this.props.productId}&count=1000`)
         .then(res => {
           this.setState({
             questions: res.data.results,
