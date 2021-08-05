@@ -57,7 +57,7 @@ const questionsData = [
 
 describe('<QA testing />', () => {
   test('renders QA', () => {
-    const wrapper = shallow(<QA productId='28212' />); // mount/render/shallow when applicable
+    const wrapper = shallow(<QA productId='28218' />); // mount/render/shallow when applicable
     // // Assert that the given enzyme wrapper has rendered content.
     const text = wrapper.find('h3').text();
     expect(text).toBe('QUESTIONS & ANSWERS');

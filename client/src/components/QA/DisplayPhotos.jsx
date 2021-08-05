@@ -2,7 +2,8 @@ import React from 'react';
 
 const DisplayPhotos = (props) => {
   const photos = props.photos;
-  if (photos.length > 0) {
+  console.log('photo', photos);
+  if (photos) {
     return photos.map((photo, index) => {
       return (
         <div key={photo} className='photos_inline'>
