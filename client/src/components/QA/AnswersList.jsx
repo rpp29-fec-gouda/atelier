@@ -1,6 +1,7 @@
 import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
+import DisplayPhotos from './DisplayPhotos';
 
 class AnswersList extends React.Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class AnswersList extends React.Component {
         return (
           <div key={answerId} className='answers_list'>
             <div>{answer.body}</div>
+            <DisplayPhotos photos={answer.photos} />
             <div className='answer_by'>
               <div class='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />

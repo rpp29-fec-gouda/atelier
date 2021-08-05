@@ -39,7 +39,7 @@ class QuestionsList extends React.Component {
     if (this.state.addQuestionButton) {
       return (
         <div className='popup'>
-          <span className='close' onClick={this.addQuestionClicked.bind(this)}>X</span>
+          <span className='close' onClick={this.addQuestionClicked}>X</span>
           <AddingForm
             productId={this.props.productId}
             closePopup={this.addQuestionClicked}
@@ -55,26 +55,13 @@ class QuestionsList extends React.Component {
     });
   }
 
-  renderQuestions() {
-    const questions = this.props.questions;
-    const questionsDisplay = this.state.questionsDisplay;
-    return questions.map((question, index) => {
-      if (index < questionsDisplay) {
-        return (
-          <div key={question.question_id}>
-            <Question
-              question={question}
-            />
-          </div>
-        );
-      }
-    });
-  }
-
   render() {
     return (
       <div>
-        {this.renderQuestions()}
+        <Question 
+          questions={this.props.questions}
+          questionsDisplay={this.state.questionsDisplay}
+        />
         <MoreQuestionButton
           status={this.state.moreQuestionButton}
           moreQuestions={this.moreQuestions}
