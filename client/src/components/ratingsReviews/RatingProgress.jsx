@@ -2,14 +2,12 @@ import React from 'react';
 
 const RatingProgress = (props) => {
   const { completed, ratings, handleRatingProgressFilter } = props;
-  console.log('TETETETETEESSTcompleted:', completed);
 
   const ratingProgress = {
     width: '100%',
     height: '50%',
     backgroundColor: '#e0e0de',
   };
-
 
   const ratingFiller = {
     height: '50%',
