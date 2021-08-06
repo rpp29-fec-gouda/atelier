@@ -3,7 +3,7 @@ import RatingProgress from './RatingProgress.jsx';
 import StarRating from '../shared/StarRating.jsx';
 
 const RatingBreakdown = (props) => {
-  const { reviews, ratings, recommended, handleRatingProgressFilter } = props;
+  const { ratings, recommended, handleRatingProgressFilter } = props;
   const stars = [1, 1, 1, .8, 0];
   let key = 0;
 

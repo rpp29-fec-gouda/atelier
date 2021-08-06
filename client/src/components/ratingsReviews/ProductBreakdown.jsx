@@ -1,18 +1,6 @@
 import React from 'react';
 
 const ProductBreakdown = (props) => {
-  const { characteristics } = props;
-
-  // const barChars = [
-  //   characteristics.Size,
-  //   characteristics.Width,
-  //   characteristics.Comfort,
-  //   characteristics.Quality,
-  //   characteristics.length,
-  //   characteristics.Fit
-  // ];
-
-  // console.log('barChars:', barChars);
 
   return (
     <div id='product-breakdown'>

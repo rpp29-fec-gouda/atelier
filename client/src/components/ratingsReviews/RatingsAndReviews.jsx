@@ -26,7 +26,6 @@ class RatingsAndReviews extends React.Component {
     };
     this.sortOptions = ['relevance', 'newest', 'helpfulness'];
 
-
     this.getReviews = this.getReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
@@ -86,7 +85,6 @@ class RatingsAndReviews extends React.Component {
         reviews: this.reviews,
         product_id: this.product_id
       });
-      // this.props.handleUpdate();
       return;
     }
     this.setState({

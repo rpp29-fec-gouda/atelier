@@ -1,5 +1,4 @@
 import React from 'react';
-import AddButton from '../shared/AddButton.jsx';
 
 const NewReview = (props) => {
 
