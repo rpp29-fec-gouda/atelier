@@ -1,8 +1,16 @@
-import roundByIncrement from '../../../../client/src/model/Calcs.js';
+import {
+  roundByIncrement,
+  incrementIndexDown,
+  incrementIndexUp
+} from '../../../../client/src/model/Calcs.js';
 
 describe('Test roundByIncrement', function () {
   it('should should equal a matching empty increment', function () {
     expect(roundByIncrement(0, 25)).toEqual(0);
+  });
+
+  it('should should equal a matching quarter increment rounding up by default', function () {
+    expect(roundByIncrement(3.9)).toEqual(1);
   });
 
   it('should should equal a matching quarter increment', function () {
@@ -67,5 +75,62 @@ describe('Test roundByIncrement', function () {
 
   it('should should equal a -1 for an invalid number', function () {
     expect(roundByIncrement('A', 25)).toEqual(-1);
+  });
+});
+
+describe('incrementIndexDown', function () {
+  it('should increment index down', function () {
+    const props = {
+      index: -1
+    };
+    expect(incrementIndexDown(props.index)).toEqual(props.index - 1);
+  });
+
+  it('should wrap around decrement to specified max if not capped', function () {
+    const props = {
+      index: 0,
+      min: 0,
+      max: 3
+    };
+    expect(incrementIndexDown(props.index, props.max, props.min)).toEqual(props.max);
+  });
+
+  it('should limit decrement to specified min if capped', function () {
+    const props = {
+      isCapped: true,
+      index: 0,
+      min: 0,
+      max: 2
+    };
+    expect(incrementIndexDown(props.index, props.max, props.min, props.isCapped)).toEqual(props.min);
+  });
+});
+
+// index, max, isCapped
+describe('incrementIndexUp', function () {
+  it('should increment index up', function () {
+    const props = {
+      index: 2
+    };
+    expect(incrementIndexUp(props.index)).toEqual(props.index + 1);
+  });
+
+  it('should wrap around increment to specified min if not capped', function () {
+    const props = {
+      min: 0,
+      max: 2,
+      index: 2
+    };
+    expect(incrementIndexUp(props.index, props.max, props.min)).toEqual(props.min);
+  });
+
+  it('should limit increment to specified max if capped', function () {
+    const props = {
+      isCapped: true,
+      min: 0,
+      max: 2,
+      index: 2
+    };
+    expect(incrementIndexUp(props.index, props.max, props.min, props.isCapped)).toEqual(props.max);
   });
 });
