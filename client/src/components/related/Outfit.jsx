@@ -27,8 +27,7 @@ const Outfit = (props) => {
     updateOutfit(newOutfit);
   };
 
-  const removeFromOutfit = (event, product) => {
-    event.stopPropagation();
+  const removeFromOutfit = (product) => {
     const match = product.id;
     const newOutfit = [ ...outfit ];
     console.log('Remove', match);

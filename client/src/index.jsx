@@ -28,6 +28,7 @@ class App extends React.Component {
       questions: new Map(),
       ratings: new Map(),
       relatedIds: new Map(),
+      styles: new Map(),
     };
 
     this.state = {
