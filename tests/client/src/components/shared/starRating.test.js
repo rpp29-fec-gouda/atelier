@@ -47,9 +47,18 @@ describe('<StarRating />', () => {
     expect(wrapper.instance().maxStars).toEqual(props.max);
   });
 
-  it('should have the same number of star elements as max stars:', function () {
+  it('should have the same number of empty star elements as max stars for no current rating:', function () {
     const props = {
-      max: 4
+      max: 3
+    };
+    const wrapper = shallow(<StarRating {...props} />);
+    expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
+  });
+
+  it('should have the same number of star elements as max stars for current rating with partial star:', function () {
+    const props = {
+      max: 4,
+      rating: 2.81
     };
     const wrapper = shallow(<StarRating {...props} />);
     expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
