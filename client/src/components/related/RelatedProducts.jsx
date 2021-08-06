@@ -12,13 +12,13 @@ class RelatedProducts extends React.Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.updateOutfit = this.updateOutfit.bind(this);
 
-    this.productList = this.props.products;
-    this.toLoad = [];
+    // this.productList = this.props.products;
+    // this.toLoad = [];
 
-    this.store = {
-      products: new Map(),
-      related: new Map()
-    };
+    // this.cache = {
+    //   products: new Map(),
+    //   related: new Map()
+    // };
 
 
     this.state = {
@@ -38,8 +38,10 @@ class RelatedProducts extends React.Component {
 
   fetchRelatedIds(product, callback = () => {}) {
     const id = product.id;
-    const { related } = this.store;
-    let ids = related.get(product.id);
+    // const { related } = this.cache;
+    const { checkCache, updateCache } = this.props;
+    // let ids = related.get(product.id);
+    let ids = checkCache('relatedIds', id);
 
     if (ids) {
       console.log(`${ids.length} products associated with ${product.name}:`, ids);
@@ -49,7 +51,7 @@ class RelatedProducts extends React.Component {
         .then(res => {
           ids = res.data;
           console.log(`${ids.length} product ids associated with ${product.name}`, ids);
-          related.set(id, ids);
+          updateCache('relatedIds', id, ids);
           callback(ids);
           // this.setState({ related: res.data });
         })
@@ -61,14 +63,16 @@ class RelatedProducts extends React.Component {
 
   collectProductsById(ids) {
     // Choose between cached data or API call on a per-product basis
-    const { products } = this.store;
+    // const { products } = this.cache;
+    const { checkCache, updateCache } = this.props;
     const uniqueIds = Array.from(new Set(ids));
 
     let cached = [];
     let toLoad = [];
 
     uniqueIds.forEach(id => {
-      let product = products.get(id);
+      // let product = products.get(id);
+      let product = checkCache('products', id);
       if (product) {
         console.log(`Related product ${product.id} (${product.name}) loaded from cache`);
         cached.push(product);
@@ -91,8 +95,9 @@ class RelatedProducts extends React.Component {
             const product = res.data;
             const relatedProducts = [ ...this.state.related ];
             console.log(`Related product ${product.id} (${product.name}) retrieved from server`);
-            this.productList.push(product);
-            products.set(id, product);
+            // this.productList.push(product);
+            // products.set(id, product);
+            updateCache('products', id, product);
             this.setState({
               related: [ ...relatedProducts, product ]
             });
@@ -134,12 +139,14 @@ class RelatedProducts extends React.Component {
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
       console.log('Outfit found in localStorage:', outfit);
-      const { products } = this.store;
+      // const { products } = this.cache;
+      const { checkCache, updateCache } = this.props;
       let cached = [];
       let index = 0;
 
       outfit.forEach(id => {
-        let product = products.get(id);
+        // let product = products.get(id);
+        let product = checkCache('products', id);
 
         if (product) {
           cached[index++] = product;
@@ -153,7 +160,8 @@ class RelatedProducts extends React.Component {
               cached[asyncIndex] = product;
               console.log(`Outfit product ${product.id} (${product.name}) retrived from server`);
               this.setState({ outfit: [ ...cached ] });
-              products.set(product.id, product);
+              // products.set(product.id, product);
+              updateCache('products', product.id, product);
             })
             .catch(err => {
               console.log('Loading outfit:', err.stack);
@@ -185,8 +193,8 @@ class RelatedProducts extends React.Component {
   // }
 
   selectProduct(product) {
-    const { updateProductData, selectProduct } = this.props;
-    updateProductData(this.productList, this.store.products);
+    const { selectProduct } = this.props;
+    // updateProductData(this.productList, this.cache.products);
     // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
     this.setState({ ready: false });

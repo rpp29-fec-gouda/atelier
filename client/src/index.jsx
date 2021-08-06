@@ -17,19 +17,26 @@ class App extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.selectProduct = this.selectProduct.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.updateProductData = this.updateProductData.bind(this);
+    // this.updateProductData = this.updateProductData.bind(this);
+    this.checkCache = this.checkCache.bind(this);
+    this.updateCache = this.updateCache.bind(this);
 
 
     this.cache = {
+      imageURLs: new Map(),
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
+      relatedIds: new Map(),
     };
 
     this.state = {
       ready: false,
-      products: [],
-      selectedProduct: null
+      selectedProduct: null,
+      // products: [],
+      selectedProductRating: { ratingsCount: undefined, avgRating: undefined, ratings: [] },
+      selectedProductImageURLs: [],
+      selectedProductThumbnailURLs: []
     };
   }
 
@@ -59,12 +66,42 @@ class App extends React.Component {
     });
   }
 
-  updateProductData(productList, productMap) {
-    this.cache.products = productMap;
-    this.setState({
-      products: productList
-    });
+  checkCache(cacheName, productId) {
+    return this.cache[cacheName].get(productId);
   }
+
+  updateCache(cacheName, productId, data) {
+    this.cache[cacheName].set(productId, data);
+  }
+
+  // updateImageURLs(imageURLs, thumbnailURLs) {
+  //   const { id } = this.state.selectedProduct;
+  //   this.cache.imageURLs.set(id, { imageURLs, thumbnailURLs });
+  //   this.setState({
+  //     selectedProductImageURLs: imageURLs,
+  //     selectedProductThumbnailURLs: thumbnailURLs
+  //   });
+  // }
+
+  // updateProductCache(productList, productMap) {
+  //   this.cache.products = productMap;
+  //   this.setState({
+  //     products: productList
+  //   });
+  // }
+
+  // this.props.updateRatings(ratings.length, ratings.reduce((total, rating) => (total + rating)) / ratings.length);
+
+  // updateSelectedProductRatings(ratings) {
+  //   const { id } = this.state.selectedProduct;
+  //   this.cache.ratings.set(id, {
+  //     ratingsCount: ratings.length,
+  //     avgRating: ratings.reduce((total, rating) => (total + rating)) / ratings.length
+  //   });
+  //   this.setState({
+  //     rating:
+  //   })
+  // }
 
   handleSelectChange(e) {
     const { products } = this.cache;
@@ -108,10 +145,12 @@ class App extends React.Component {
           isTesting={this.props.isTesting}
         />
         <RelatedProducts
-          products={products}
           selectedProduct={selectedProduct}
-          updateProductData={this.updateProductData}
           selectProduct={this.selectProduct}
+          checkCache={ this.checkCache }
+          updateCache={ this.updateCache }
+          // products={products}
+          // updateProductData={this.updateProductData}
         />
         <QA productId={selectedProduct.id} />
         <br></br>

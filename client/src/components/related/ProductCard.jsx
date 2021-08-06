@@ -26,7 +26,8 @@ const ProductCard = (props) => {
   // console.log(`Rendering card for ${product.name}`);
   let trimmedTitle = `${product.name}: ${product.slogan.toLowerCase()}`;
   if (trimmedTitle.length > maxTitleTextLength) {
-    trimmedTitle = trimmedTitle.slice(0, trimmedTitle.indexOf(' ', maxTitleTextLength - 10)) + '...';
+    const endIndex = Math.min(trimmedTitle.indexOf('.'), trimmedTitle.indexOf(' ', maxTitleTextLength - 10));
+    trimmedTitle = trimmedTitle.slice(0, endIndex) + '...';
   }
 
   let key = 0;
