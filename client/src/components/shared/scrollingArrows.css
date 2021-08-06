@@ -1,4 +1,4 @@
-.scrolling-arrows{
+.scrolling-arrows {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,6 +7,30 @@
   z-index: 10;
 }
 
-.scrolling-arrows .right-arrow:hover, .left-arrow:hover {
+.decrement:hover, .increment:hover {
   cursor: pointer;
+}
+
+.decrement, .increment {
+  width: 1em;
+  height: 1em;
+  background-size: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.decrement-no-stem {
+  background-image: url(../../../assets/icons/left-arrow.svg);
+}
+
+.increment-no-stem {
+  background-image: url(../../../assets/icons/right-arrow.svg);
+}
+
+.decrement-stem {
+  background-image: url(../../../assets/icons/left-arrow-stem.svg);
+}
+
+.increment-stem {
+  background-image: url(../../../assets/icons/right-arrow-stem.svg);
 }

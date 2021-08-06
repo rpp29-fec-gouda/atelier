@@ -75,7 +75,7 @@ class ProductOverview extends React.Component {
         sizesAvailable: []
       });
     } else {
-      console.log('Style Selected: '); //, style);
+      console.log('Style Selected: ', style);
       this.setState({
         selectedStyle: style,
         sizesAvailable: this.getSizesInStock(style.skus)
@@ -86,9 +86,7 @@ class ProductOverview extends React.Component {
   updateDefaultStyle() {
     console.log('Updating default style');
     const defaultStyle = this.getDefaultStyle();
-    this.updateState({
-      selectedStyle: defaultStyle
-    });
+    this.updateState(defaultStyle);
   }
 
   getDefaultStyle() {

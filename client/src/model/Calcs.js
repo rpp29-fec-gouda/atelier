@@ -19,4 +19,28 @@ const roundByIncrement = (ratingDecimal, increment = 25) => {
   return -1;
 };
 
-export default roundByIncrement;
+const incrementIndexDown = (index, max, min = 0, isCapped) => {
+  index--;
+  if (index < min) {
+    if (isCapped) {
+      index = min;
+    } else if (max) {
+      index = max - 1;
+    }
+  }
+  return index;
+};
+
+const incrementIndexUp = (index, max, isCapped) => {
+  index++;
+  if (max && index >= max) {
+    index = isCapped ? max : 0;
+  }
+  return index;
+};
+
+export {
+  roundByIncrement,
+  incrementIndexDown,
+  incrementIndexUp
+};
