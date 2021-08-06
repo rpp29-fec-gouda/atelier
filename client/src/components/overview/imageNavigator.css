@@ -1,20 +1,32 @@
+.image-navigator {
+  z-index: 9;
+  padding: 2em 2em 2em 2em;
+  pointer-events: none;
+}
+
 .image-navigator-item {
-  margin: 0.7em 0.7em 0.7em 0;
+  margin: 0 0 0.7em 0;
   width: 4em;
+  pointer-events: auto;
 }
 
 .image-navigator-item:hover {
   cursor: pointer;
 }
 
-.image-navigator-item .icon {
+.image-navigator-item img.icon {
   border: 1px black solid;
-  height: 4em;
-  background-color: yellow;
+  width: 4em;
 }
 
-.image-navigator-item .thumbnail {
+.image-navigator-item img.thumbnail {
   border: 1px black solid;
+  width: 4em;
+}
+
+.image-navigator-item div.placeholder {
+  border: 1px black solid;
+  width: 4em;
   height: 4em;
   background-color: white;
 }
@@ -25,7 +37,8 @@
   margin: 0.2em 0 0 0;
 }
 
-.image-navigator .selected {
+.image-selected {
   border: 1px black solid;
   background-color: black;
+  box-shadow: 0 0 0 0.03em white;
 }
