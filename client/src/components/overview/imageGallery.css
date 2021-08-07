@@ -71,12 +71,10 @@
 }
 
 .expanded-view-toggle {
-  background-image: url(../../../assets/icons/full-screen.svg);
   width: 1em;
 }
 
 .collapsed-view-toggle {
-  background-image: url(../../../assets/icons/full-screen-exit.svg);
   width: 1em;
 }
 
