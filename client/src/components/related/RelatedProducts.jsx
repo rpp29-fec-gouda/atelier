@@ -182,7 +182,7 @@ class RelatedProducts extends React.Component {
         <ProductsCarousel
           products={ related }
           selectedProduct={ selectedProduct }
-          selectProduct={ this.selectProduct }
+          selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
         />
@@ -190,7 +190,7 @@ class RelatedProducts extends React.Component {
           outfit={ outfit }
           updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
-          selectProduct={ this.selectProduct }
+          selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
         />
