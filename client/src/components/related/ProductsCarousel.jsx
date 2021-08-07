@@ -4,7 +4,7 @@ import ProductCard from './ProductCard.jsx';
 // import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
-  const { products, selectProduct, selectedProduct } = props;
+  const { products, selectProduct, selectedProduct, checkCache, updateCache } = props;
 
   let key = 0;
 
@@ -19,7 +19,7 @@ const ProductsCarousel = (props) => {
               return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
             }
             return <ProductCard
-              key={ key++ }
+              key={ `rpCard${key++}` }
               product={ product }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }

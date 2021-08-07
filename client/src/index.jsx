@@ -53,8 +53,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const randomInitialId = 28212 + Math.round(Math.random() * 10);
-    axios.get(`/products/${randomInitialId}`)
+    const initialId = 28212 + Math.round(Math.random() * 10);
+    axios.get(`/products/${initialId}`)
       .then(res => {
         const product = res.data;
         this.cache.products.set(product.id, product);
@@ -74,7 +74,7 @@ class App extends React.Component {
     }
     let key = 0;
     return ready ? (
-      <div id='app'>
+      <React.Fragment>
         <ProductOverview
           selectedProduct={selectedProduct}
           isTesting={this.props.isTesting}
@@ -90,7 +90,7 @@ class App extends React.Component {
         <br></br>
         <RatingsAndReviews
           selectedProduct={selectedProduct} />
-      </div>
+      </React.Fragment>
     ) : (
       <p>Loading...</p>
     );
@@ -100,6 +100,6 @@ class App extends React.Component {
 export default App;
 
 const div = document.createElement('div');
-div.setAttribute('id', 'Atelier');
+div.setAttribute('id', 'App');
 document.body.appendChild(div);
 ReactDOM.render(<App />, div);

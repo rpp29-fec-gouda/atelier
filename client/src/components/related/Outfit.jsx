@@ -47,7 +47,13 @@ const Outfit = (props) => {
             if (typeof product === 'number') {
               return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
             }
-            return <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ removeFromOutfit } />;
+            return <ProductCard key={ `outfitCard${key++}` }
+              type='outfit'
+              // value={ product.id }
+              product={ product }
+              selectProduct={ selectProduct }
+              action={ removeFromOutfit }
+            />;
           })) : null
         }
       </div>

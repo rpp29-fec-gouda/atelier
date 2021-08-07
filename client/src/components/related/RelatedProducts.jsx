@@ -13,6 +13,7 @@ class RelatedProducts extends React.Component {
     this.updateOutfit = this.updateOutfit.bind(this);
 
     this.state = {
+      displayPhotos: false,
       selected: this.props.selectedProduct.id,
       related: [],
       outfit: [],
@@ -71,7 +72,7 @@ class RelatedProducts extends React.Component {
       related: [...cached]
     });
 
-    console.log('Products to be retrieved from server:', toLoad);
+    // console.log('Products to be retrieved from server:', toLoad);
 
     if (toLoad.length) {
       toLoad.forEach(id => {
@@ -150,6 +151,8 @@ class RelatedProducts extends React.Component {
       });
     }
   }
+
+  loadImages
 
   updateOutfit(newOutfit) {
     this.setState({ outfit: newOutfit });
