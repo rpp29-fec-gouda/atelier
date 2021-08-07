@@ -1,11 +1,10 @@
 import React from 'react';
 import ScrollingArrows from '../shared/ScrollingArrows';
 import ImageNavigator from './ImageNavigator';
+import MainImage from './MainImage';
 
 const DefaultView = (props) => {
   console.log('Rendering default view');
-  console.log('selectedId', props.selectedId);
-
   return (
     <div id="default-view">
       Default View
@@ -31,9 +30,7 @@ const DefaultView = (props) => {
           />
         </div>
       </div>
-      <div id="main-image">
-        <img src={props.photo} />
-      </div>
+      {/* <MainImage /> */}
     </div>
   );
 };

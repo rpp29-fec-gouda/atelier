@@ -25,20 +25,16 @@ const incrementIndexDown = (index, max, min = 0, isCapped) => {
     if (isCapped) {
       index = min;
     } else if (max) {
-      index = max;
+      index = max - 1;
     }
   }
   return index;
 };
 
-const incrementIndexUp = (index, max, min = 0, isCapped) => {
+const incrementIndexUp = (index, max, isCapped) => {
   index++;
-  if (index > max) {
-    if (isCapped) {
-      index = max;
-    } else {
-      index = min;
-    }
+  if (max && index >= max) {
+    index = isCapped ? max : 0;
   }
   return index;
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
+import DisplayPhotos from './DisplayPhotos';
 
 class AnswersList extends React.Component {
   constructor(props) {
@@ -15,12 +16,6 @@ class AnswersList extends React.Component {
     const questionId = this.props.questionId;
     this.checkRemainAnswers();
   }
-
-  //axios get answers count 
-  //if count = 0 , and count > 0
-  //compare count to show
-  //hide/show button
-
 
   checkRemainAnswers() {
     const answersLength = Object.keys(this.props.answers).length;
@@ -60,9 +55,10 @@ class AnswersList extends React.Component {
       const answer = answers[answerId];
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answerId} className='answerslist'>
+          <div key={answerId} className='answers_list'>
             <div>{answer.body}</div>
-            <div className='answerby'>
+            <DisplayPhotos photos={answer.photos} />
+            <div className='answer_by'>
               <div class='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
               <div class='inline'> | </div>

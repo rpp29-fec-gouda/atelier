@@ -1,101 +1,74 @@
 import React from 'react';
 import Question from './Question.jsx';
-import AddForm from './AddingForm.jsx';
-import axios from 'axios';
 import AddingForm from './AddingForm.jsx';
+import MoreQuestionButton from './MoreQuestionButton.jsx';
 
 
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
+    this.moreQuestions = this.moreQuestions.bind(this);
+    this.addQuestionClicked = this.addQuestionClicked.bind(this);
     this.state = {
-      questionsDisplay: 0,
-      moreQuesionButton: false,
+      questionsLength: this.props.questions.length,
+      questionsDisplay: 2,
+      moreQuestionButton: false,
       addQuestionButton: false
     };
   }
 
   componentDidMount() {
-    this.checkRemainQuestion();
+    const questionsLength = this.state.questionsLength;
+    const moreQuestionButton = questionsLength > this.state.questionsDisplay ? true : false;
+    this.setState({
+      moreQuestionButton: moreQuestionButton
+    });
   }
 
-  checkRemainQuestion() {
-    const questions = this.props.questions;
-    const questionsLength = questions.length;
-    if (questionsLength - 2 > this.state.questionsDisplay) {
-      this.setState({
-        questionsDisplay: this.state.questionsDisplay + 2,
-        moreQuesionButton: true
-      });
-    }
-    if (questionsLength - 2 <= this.state.questionsDisplay) {
-      this.setState({
-        questionsDisplay: questionsLength,
-        moreQuesionButton: false
-      });
-    }
-  }
-
-  moreQuestionsButton() {
-    if (this.state.moreQuesionButton) {
-      return (
-        < button id='morequestions' className='morequestions' onClick={this.checkRemainQuestion.bind(this)} >
-          MORE ANSWERED QUESTIONS
-        </button>
-      );
-    } else {
-      return null;
-    }
+  moreQuestions() {
+    const questionsDisplay = this.state.questionsDisplay + 2;
+    const moreQuestionButton = this.state.questionsLength > questionsDisplay ? true : false;
+    this.setState({
+      questionsDisplay: questionsDisplay,
+      moreQuestionButton: moreQuestionButton,
+      addQuestionButton: false
+    });
   }
 
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
         <div className='popup'>
-          <span className='close' onClick={this.addQuestionClick.bind(this)}>X</span>
-          <AddingForm productId={this.props.productId} />
+          <span className='close' onClick={this.addQuestionClicked}>X</span>
+          <AddingForm
+            productId={this.props.productId}
+            closePopup={this.addQuestionClicked}
+          />
         </div>
       );
     }
   }
 
-  addQuestionClick() {
-    if (this.state.addQuestionButton) {
-      this.setState({
-        addQuestionButton: false
-      });
-    } else {
-      this.setState({
-        addQuestionButton: true
-      });
-    }
-  }
-
-  renderQuestions() {
-    let questionsList = [];
-    const questions = this.props.questions;
-    for (let i = 0; i < this.state.questionsDisplay; i++) {
-      if (questions[i]) {
-        questionsList.push(questions[i]);
-      }
-    }
-    return (
-      <div >
-        <div className='questionslist'>
-          <Question questions={questionsList} />
-        </div>
-        {this.moreQuestionsButton()}
-        <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button>
-      </div>
-    );
+  addQuestionClicked() {
+    this.setState({
+      addQuestionButton: !this.state.addQuestionButton
+    });
   }
 
   render() {
     return (
       <div>
-        {this.renderQuestions()}
+        <Question 
+          questions={this.props.questions}
+          questionsDisplay={this.state.questionsDisplay}
+        />
+        <MoreQuestionButton
+          status={this.state.moreQuestionButton}
+          moreQuestions={this.moreQuestions}
+        />
+        <button className='add_question' onClick={this.addQuestionClicked.bind(this)}>ADD A QUESTION +</button>
         {this.addQuestionForm()}
-      </div>
+      </div >
 
     );
   }

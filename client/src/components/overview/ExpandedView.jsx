@@ -71,10 +71,7 @@ class ExpandedView extends React.Component {
                   />
                 </div>
               </div>
-              <div id="main-image">
-                <img src={props.photo} />
-              </div>
-            </React.Fragment>
+            </div>
         }
       </div>
     );

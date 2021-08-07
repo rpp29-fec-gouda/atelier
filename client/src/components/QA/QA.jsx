@@ -8,16 +8,17 @@ import '../css/QA.css';
 class QA extends React.Component {
   constructor(props) {
     super(props);
+    this.addQuestionClicked = this.addQuestionClicked.bind(this);
     this.state = {
       productId: '',
       questions: [],
       questionsFiltered: [],
-      addQuestionButton: true
+      addingForm: false
     };
   }
 
   componentDidMount() {
-    axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
+    axios.get(`/qa/questions?product_id=${this.props.productId}&count=20`)
       .then(res => {
         this.setState({
           questions: res.data.results,
@@ -25,13 +26,13 @@ class QA extends React.Component {
         });
       })
       .catch(err => {
-        console.log(err.stack);
+        console.log(err);
       });
   }
 
   componentDidUpdate() {
     if (this.state.productId !== this.props.productId) {
-      axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
+      axios.get(`/qa/questions?product_id=${this.props.productId}&count=1000`)
         .then(res => {
           this.setState({
             questions: res.data.results,
@@ -39,22 +40,16 @@ class QA extends React.Component {
           });
         })
         .catch(err => {
-          console.log(err.stack);
+          console.log(err);
         });
 
     }
   }
 
-  addQuestionClick() {
-    if (this.state.addQuestionButton) {
-      this.setState({
-        addQuestionButton: false
-      });
-    } else {
-      this.setState({
-        addQuestionButton: true
-      });
-    }
+  addQuestionClicked() {
+    this.setState({
+      addingForm: !this.state.addingForm
+    });
   }
 
   updateQuestionsList(filtered) {
@@ -65,12 +60,8 @@ class QA extends React.Component {
 
   render() {
     if (this.state.questions.length !== 0) {
-      let questions;
-      if (this.state.questionsFiltered.length === 0) {
-        questions = this.state.questions;
-      } else {
-        questions = this.state.questionsFiltered;
-      }
+      const questions = this.state.questionsFiltered.length === 0 ?
+        this.state.questions : this.state.questionsFiltered;
 
       return (
         <div id='question-answer'>
@@ -79,16 +70,21 @@ class QA extends React.Component {
           <QuestionsList questions={questions} productId={this.props.productId} />
         </div>
       );
+
     } else {
       return (
         <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
-          {this.state.addQuestionButton ?
-            <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
-            <AddingForm productId={this.props.productId} />
+          <button className='add_question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button>
+          {this.state.addingForm ?
+            <div className='popup'>
+              <span className='close' onClick={this.addQuestionClicked} >X</span>
+              <AddingForm productId={this.state.productId} />
+            </div>
+            :
+            null
           }
-
-        </div>
+        </div >
       );
     }
   }
