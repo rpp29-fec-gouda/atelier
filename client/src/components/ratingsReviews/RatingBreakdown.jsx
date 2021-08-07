@@ -8,9 +8,9 @@ const RatingBreakdown = (props) => {
   let key = 0;
 
 
-  if (ratings !== null && ratings) {
+  if (ratings) {
     const oneBar = parseInt(ratings[1]) || 0;
-    const oneStar = oneBar * 1 || 0;
+    const oneStar = oneBar || 0;
     const twoBar = parseInt(ratings[2]) || 0;
     const twoStar = twoBar * 2 || 0;
     const threeBar = parseInt(ratings[3]) || 0;
