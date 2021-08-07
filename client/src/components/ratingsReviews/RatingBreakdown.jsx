@@ -7,33 +7,36 @@ const RatingBreakdown = (props) => {
   const stars = [1, 1, 1, .8, 0];
   let key = 0;
 
+  if (ratings) {
+    const ratingsArr = Object.entries(ratings);
+    let valueRatings = 0;
+    let totalRatings = 0;
 
-  if (ratings !== null && ratings) {
+    ratingsArr.forEach(sum => {
+      let sumBar = parseInt(sum[1]);
+      totalRatings += sumBar;
+      valueRatings += parseInt(sum[0]) * parseInt(sum[1]);
+    });
+    console.log('totalRatings:', totalRatings);
+    console.log('Total Value of Ratings', valueRatings);
+
     const oneBar = parseInt(ratings[1]) || 0;
-    const oneStar = oneBar * 1 || 0;
     const twoBar = parseInt(ratings[2]) || 0;
-    const twoStar = twoBar * 2 || 0;
     const threeBar = parseInt(ratings[3]) || 0;
-    const threeStar = threeBar * 3 || 0;
     const fourBar = parseInt(ratings[4]) || 0;
-    const fourStar = fourBar * 4 || 0;
     const fiveBar = parseInt(ratings[5]) || 0;
-    const fiveStar = fiveBar * 5 || 0;
 
-    const sum = oneStar + twoStar + threeStar + fourStar + fiveStar;
-    const sumBar = oneBar + twoBar + threeBar + fourBar + fiveBar;
-    const averageRating = Math.round(sum / sumBar * 10) / 10;
+    const averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
 
     const barFills = [
-      { star: '5 stars', percentage: fiveBar / sumBar * 100 },
-      { star: '4 stars', percentage: fourBar / sumBar * 100 },
-      { star: '3 stars', percentage: threeBar / sumBar * 100 },
-      { star: '2 stars', percentage: twoBar / sumBar * 100 },
-      { star: '1 stars', percentage: oneBar / sumBar * 100 },
+      { star: '5 stars', percentage: fiveBar / totalRatings * 100 },
+      { star: '4 stars', percentage: fourBar / totalRatings * 100 },
+      { star: '3 stars', percentage: threeBar / totalRatings * 100 },
+      { star: '2 stars', percentage: twoBar / totalRatings * 100 },
+      { star: '1 stars', percentage: oneBar / totalRatings * 100 },
     ];
 
     let averageRecommend = 0;
-
     if (!recommended.false) {
       averageRecommend = 100;
     } else {
