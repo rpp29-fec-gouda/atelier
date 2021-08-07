@@ -30,13 +30,26 @@ class ExpandedView extends React.Component {
             ?
             <ExpandedViewZoomed />
             :
-            <div class="row">
-              <ImageNavigator />
-              <div class="column">
-                <div class="collapsed-view" onClick={this.props.onClick}>]+[</div>
-                <ScrollingArrows />
+            <React.Fragment>
+              <div class="row">
+                <ImageNavigator
+                  onClick={this.props.onClickIndexUpdate}
+                  photos={this.props.thumbnails}
+                  selectedId={this.props.selectedId}
+                />
+                <div class="column">
+                  <div class="collapsed-view-toggle" onClick={this.props.onClick}>xx</div>
+                  <ScrollingArrows
+                    callback={props.onClickIndexUpdate}
+                    max={this.props.thumbnails?.length - 1}
+                    stem={true}
+                  />
+                </div>
               </div>
-            </div>
+              <div id="main-image">
+                <img src={props.photo} />
+              </div>
+            </React.Fragment>
         }
       </div>
     );
