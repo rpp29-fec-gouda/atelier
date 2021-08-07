@@ -7,20 +7,16 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
 
-    // photos={ photos }
-    // [
-    //   {
-    //       "thumbnail_url": ,
-    //       "url":
-    //   },
-    // ]
+    this.thumbnails = this.getPhotoThumbnailUrls(props.photos);
 
     this.state = {
-      isExpanded: false
+      isExpanded: false,
+      selectedPhotoIndex: 0
     };
 
     this.handleExpandedView = this.handleExpandedView.bind(this);
     this.handleCollapsedView = this.handleCollapsedView.bind(this);
+    this.updateIndex = this.updateIndex.bind(this);
   }
 
   handleExpandedView() {
@@ -35,17 +31,53 @@ class ImageGallery extends React.Component {
     });
   }
 
+  updateIndex(index) {
+    console.log('Updating selectedPhotoIndex: ', index);
+    this.setState({
+      selectedPhotoIndex: index
+    });
+  }
+
+  getPhotoThumbnailUrls(photos) {
+    const thumbnails = [];
+    let counter = 0;
+    photos?.forEach(photo => {
+      thumbnails.push({
+        id: counter++,
+        url: photo.thumbnail_url
+      });
+    });
+    return thumbnails;
+  }
+
+  getSelectedPhotoUrl(index) {
+    if (!this.props.photos) {
+      return '';
+    }
+    return this.props.photos[index]?.url;
+  }
+
   render() {
     console.log('Rendering image gallery');
+    console.log('ImageGallery photos', this.props.photos);
+    const currentIndex = this.state.selectedPhotoIndex;
+    console.log('currentIndex', currentIndex);
     return (
       <div id="image-gallery">
         { this.state.isExpanded
           ? <ExpandedView
-            onClick={this.handleCollapsedView}
-            photos={this.props.photos}
+            thumbnails={this.thumbnails}
+            photo={this.getSelectedPhotoUrl(currentIndex)}
+            selectedId={currentIndex}
+            onClickImage={this.handleCollapsedView}
+            onClickIndexUpdate={this.updateIndex}
           />
           : <DefaultView
-            onClick={this.handleExpandedView}
+            thumbnails={this.thumbnails}
+            photo={this.getSelectedPhotoUrl(currentIndex)}
+            selectedId={currentIndex}
+            onClickImage={this.handleExpandedView}
+            onClickIndexUpdate={this.updateIndex}
           />
         }
       </div>

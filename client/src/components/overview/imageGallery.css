@@ -1,7 +1,6 @@
 #image-gallery {
   background-color: gray;
   width: 67%;
-  padding: 2em;
 }
 
 #default-view, #expanded-view {
@@ -23,7 +22,7 @@
   position: relative;
 }
 
-#main-image {
+#main-image img {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,6 +30,10 @@
   height: 100%;
   background-color: blanchedalmond;
   z-index: 1;
+}
+
+#main-image img:hover {
+  cursor: zoom-in;
 }
 
 .expanded-view {
@@ -41,7 +44,7 @@
 }
 
 .expanded-view:hover {
-  cursor: pointer;
+  cursor: zoom-out;
 }
 
 .collapsed-view {
@@ -52,5 +55,40 @@
 }
 
 .collapsed-view:hover {
+  cursor: zoom-in;
+}
+
+.expanded-view-toggle, .collapsed-view-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  margin: 2em;
+}
+
+.expanded-view-toggle:hover, .collapsed-view-toggle:hover {
   cursor: pointer;
+}
+
+.expanded-view-toggle {
+  background-image: url(../../../assets/icons/full-screen.svg);
+  width: 1em;
+}
+
+.collapsed-view-toggle {
+  background-image: url(../../../assets/icons/full-screen-exit.svg);
+  width: 1em;
+}
+
+.default-view .row {
+  padding: 5em;
+}
+
+/* overrides of shared component styles */
+.image-nagivator {
+  margin: 2em;
+}
+
+.scrolling-arrows {
+  margin: 0 2em 0 0;
 }
