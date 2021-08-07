@@ -18,7 +18,7 @@ const selectedProduct = {
 // const selectedProduct = product;
 
 describe('<RelatedProducts />', () => {
-  const component = mount(<RelatedProducts products={products} selectedProduct={selectedProduct} />);
+  const component = mount(<RelatedProducts products={products} selectedProduct={selectedProduct} checkCache={() => {}} updateCache={() => {}} />);
 
   it('renders', () => {
     expect(component.find('div.rp-card')).toBeTruthy();

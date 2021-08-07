@@ -12,15 +12,6 @@ class RelatedProducts extends React.Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.updateOutfit = this.updateOutfit.bind(this);
 
-    this.productList = this.props.products;
-    this.toLoad = [];
-
-    this.store = {
-      products: new Map(),
-      related: new Map()
-    };
-
-
     this.state = {
       selected: this.props.selectedProduct.id,
       related: [],
@@ -30,7 +21,6 @@ class RelatedProducts extends React.Component {
   }
 
   collectRelatedProducts(product) {
-    // console.log('reset related products');
     this.fetchRelatedIds(product, (ids) => {
       this.collectProductsById(ids);
     });
@@ -38,20 +28,19 @@ class RelatedProducts extends React.Component {
 
   fetchRelatedIds(product, callback = () => {}) {
     const id = product.id;
-    const { related } = this.store;
-    let ids = related.get(product.id);
+    const { checkCache, updateCache } = this.props;
+    let ids = checkCache('relatedIds', id);
 
     if (ids) {
-      console.log(`${ids.length} products associated with ${product.name}:`, ids);
+      // console.log(`${ids.length} products associated with ${product.name}:`, ids);
       callback(ids);
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
           ids = res.data;
-          console.log(`${ids.length} product ids associated with ${product.name}`, ids);
-          related.set(id, ids);
+          // console.log(`${ids.length} product ids associated with ${product.name}`, ids);
+          updateCache('relatedIds', id, ids);
           callback(ids);
-          // this.setState({ related: res.data });
         })
         .catch(err => {
           console.log(err.stack);
@@ -61,16 +50,16 @@ class RelatedProducts extends React.Component {
 
   collectProductsById(ids) {
     // Choose between cached data or API call on a per-product basis
-    const { products } = this.store;
+    const { checkCache, updateCache } = this.props;
     const uniqueIds = Array.from(new Set(ids));
 
     let cached = [];
     let toLoad = [];
 
     uniqueIds.forEach(id => {
-      let product = products.get(id);
+      let product = checkCache('products', id);
       if (product) {
-        console.log(`Related product ${product.id} (${product.name}) loaded from cache`);
+        // console.log(`Related product ${product.id} (${product.name}) loaded from cache`);
         cached.push(product);
       } else {
         cached.push(id);
@@ -90,9 +79,8 @@ class RelatedProducts extends React.Component {
           .then(res => {
             const product = res.data;
             const relatedProducts = [ ...this.state.related ];
-            console.log(`Related product ${product.id} (${product.name}) retrieved from server`);
-            this.productList.push(product);
-            products.set(id, product);
+            // console.log(`Related product ${product.id} (${product.name}) retrieved from server`);
+            updateCache('products', id, product);
             this.setState({
               related: [ ...relatedProducts, product ]
             });
@@ -133,17 +121,17 @@ class RelatedProducts extends React.Component {
 
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
-      console.log('Outfit found in localStorage:', outfit);
-      const { products } = this.store;
+      // console.log('Outfit found in localStorage:', outfit);
+      const { checkCache, updateCache } = this.props;
       let cached = [];
       let index = 0;
 
       outfit.forEach(id => {
-        let product = products.get(id);
+        let product = checkCache('products', id);
 
         if (product) {
           cached[index++] = product;
-          console.log(`Outfit product ${product.id} (${product.name}) loaded from cache`);
+          // console.log(`Outfit product ${product.id} (${product.name}) loaded from cache`);
           this.setState({ outfit: [ ...cached ] });
         } else {
           const asyncIndex = index++;
@@ -151,9 +139,9 @@ class RelatedProducts extends React.Component {
             .then(res => {
               const product = res.data;
               cached[asyncIndex] = product;
-              console.log(`Outfit product ${product.id} (${product.name}) retrived from server`);
+              // console.log(`Outfit product ${product.id} (${product.name}) retrived from server`);
               this.setState({ outfit: [ ...cached ] });
-              products.set(product.id, product);
+              updateCache('products', product.id, product);
             })
             .catch(err => {
               console.log('Loading outfit:', err.stack);
@@ -164,44 +152,15 @@ class RelatedProducts extends React.Component {
   }
 
   updateOutfit(newOutfit) {
-    // console.log('Related products updating outfit:', newOutfit);
     this.setState({ outfit: newOutfit });
   }
 
-  // mapAllProductsById() {
-  //   return axios.get('/products?count=1000000')
-  //     .then(res => {
-  //       const { products: map } = this.store;
-  //       const allProducts = res.data;
-  //       for (let i = 0, end = allProducts.length; i < end; i++) {
-  //         const product = allProducts[i];
-  //         map.set(product.id, product);
-  //       }
-  //       this.products = allProducts;
-  //     })
-  //     .catch(err => {
-  //       console.log(err.stack);
-  //     });
-  // }
-
   selectProduct(product) {
-    const { updateProductData, selectProduct } = this.props;
-    updateProductData(this.productList, this.store.products);
-    // this.collectRelatedProducts(product);
     this.props.selectProduct(product);
     this.setState({ ready: false });
   }
 
   componentDidMount() {
-    // In the future this will also need to identify the user and bring up their selected outfit from their past session
-    // this.mapAllProductsById()
-    //   .then(() => {
-    //     this.props.updateProductData(this.products, this.store.products);
-    //     this.collectRelatedProducts(this.props.selectedProduct);
-    //   })
-    //   .catch(err => {
-    //     console.log(err.stack);
-    //   });
     this.loadOutfit();
     this.collectRelatedProducts(this.props.selectedProduct);
   }
@@ -216,26 +175,25 @@ class RelatedProducts extends React.Component {
 
   render() {
     const { related, outfit } = this.state;
-    const { selectedProduct, selectProduct } = this.props;
+    const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
-    // console.log('Related products:', related);
-
-    // console.log('RelatedProducts re-render');
     return (
       <div id='RelatedProdcuts'>
         <ProductsCarousel
-          // key={ selectedProduct }
           products={ related }
           selectedProduct={ selectedProduct }
           selectProduct={ this.selectProduct }
+          checkCache={ checkCache }
+          updateCache={ updateCache }
         />
         <Outfit
           outfit={ outfit }
           updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
           selectProduct={ this.selectProduct }
+          checkCache={ checkCache }
+          updateCache={ updateCache }
         />
-        {/* <RelatedProductsOutfit /> */}
       </div>
     );
   }
