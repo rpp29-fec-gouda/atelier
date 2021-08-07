@@ -27,7 +27,7 @@ const ProductsCarousel = (props) => {
             />;
           })
         ) : (
-          <div className='rp-card rp-card-placeholder'>Loading...</div>
+          <div className='rp-card rp-card-placeholder'>Searching...</div>
         )}
       </div>
     </div>

@@ -104,6 +104,7 @@
 }
 
 .rp-card-placeholder {
+  /* border-color: #0000; */
   display: flex;
   flex-flow: column;
   justify-content: center;

@@ -9,9 +9,9 @@ const ReviewTile = (props) => {
 
   let key = 0;
 
-  return reviews.length ? (
+  return reviews ? (
     <div id='review-tile'>
-      <div className='tile'>
+      <div className='Tile'>
         {reviews.map((review) => (
           <div key={key++}>
             <div className='user-stamp'>
