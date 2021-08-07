@@ -23,7 +23,7 @@ const SearchQuestions = (props) => {
       }
     }
     if (searchText.length < 3) {
-      questionsFiltered = [];
+      questionsFiltered = null;
       callback(questionsFiltered);
     }
   };

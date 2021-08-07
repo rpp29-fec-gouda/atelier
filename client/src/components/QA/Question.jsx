@@ -9,29 +9,15 @@ class Question extends React.Component {
     this.addAnswerClicked = this.addAnswerClicked.bind(this);
     this.state = {
       addAnswerClicked: false,
-      questionId: ''
+      questionId: '',
     };
   }
 
-  addAnswerClicked(e) {
+  addAnswerClicked(id) {
     this.setState({
       addAnswerClicked: !this.state.addAnswerClicked,
-      questionId: e.target.id
+      questionId: id
     });
-  }
-
-
-  addAnswerForm() {
-    return this.state.addAnswerClicked ?
-      <div className='popup'>
-        <span className='close' onClick={this.addAnswerClicked} >X</span>
-        <AddingForm
-          questionId={this.state.questionId}
-          closePopup={this.addAnswerClicked}
-        />
-      </div>
-      :
-      null;
   }
 
   render() {
@@ -50,11 +36,12 @@ class Question extends React.Component {
               <tbody>
                 <tr>
                   <td width='5%' className='character'>Q:</td>
-                  <td width='45%'> {body}</td>
+                  <td width='45%' className='question_body'>{body}</td>
                   <td width='30%' className='helpfulness'>
                     <Helpfulness question={question} />
                   </td>
-                  <td width='20%'> | <a href='#!' id={questionId} onClick={this.addAnswerClicked}> Add answer </a></td>
+                  <td width='20%'> |
+                    <a href='#!' id={questionId} onClick={() => this.addAnswerClicked(questionId)}> Add answer </a></td>
                 </tr>
                 <tr>
                   <td width='5%' className='character'>A:</td>
@@ -71,10 +58,12 @@ class Question extends React.Component {
 
     return (
       <div>
-        {questionsList}
+        <div id='questions_scrolling' className='questions_scrolling'>
+          {questionsList}
+        </div>
         {this.state.addAnswerClicked ?
           <div className='popup'>
-            <span id='close' className='close' onClick={this.addAnswerClicked} >X</span>
+            <div id='close' className='close' onClick={this.addAnswerClicked} >X</div>
             <AddingForm
               questionId={this.state.questionId}
               closePopup={this.addAnswerClicked}

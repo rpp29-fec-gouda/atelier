@@ -6,43 +6,45 @@ import DisplayPhotos from './DisplayPhotos';
 class AnswersList extends React.Component {
   constructor(props) {
     super(props);
+    this.answersLength = Object.keys(this.props.answers).length;
     this.state = {
-      answersDisplay: 0,
-      showButton: true
+      answersDisplay: 2,
+      showButton: false,
+      buttonLabel: 'Collapse answers'
     };
   }
 
   componentDidMount() {
-    const questionId = this.props.questionId;
-    this.checkRemainAnswers();
-  }
-
-  checkRemainAnswers() {
-    const answersLength = Object.keys(this.props.answers).length;
-    if (answersLength - 2 > this.state.answersDisplay) {
+    if (this.answersLength > this.state.answersDisplay) {
       this.setState({
         showButton: true,
-        answersLength: answersLength,
-        answersDisplay: this.state.answersDisplay + 2
+        buttonLabel: 'Load more answers'
       });
     }
-    if (answersLength - 2 <= this.state.answersDisplay) {
+  }
+
+  loadMoreAnswers() {
+    const {answersDisplay} = this.state;
+    if (answersDisplay === 2) {
       this.setState({
-        showButton: false,
-        answersLength: answersLength,
-        answersDisplay: this.state.answersDisplay + 2
+        answersDisplay: this.answersLength,
+        buttonLabel: 'Collapse answers'
+      });
+    } else {
+      this.setState({
+        answersDisplay: 2,
+        buttonLabel: 'Load more answers'
       });
     }
   }
 
   render() {
     const answers = this.props.answers;
-    const answersLength = Object.keys(answers).length;
     const moreAnswersButton = () => {
       if (this.state.showButton) {
         return (
-          <div>
-            < button onClick={this.checkRemainAnswers.bind(this)} > more answers</button >
+          <div className='more_answer_button'>
+            < button onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</button >
           </div>
         );
       } else {
@@ -56,7 +58,7 @@ class AnswersList extends React.Component {
       if (key < this.state.answersDisplay) {
         return (
           <div key={answerId} className='answers_list'>
-            <div>{answer.body}</div>
+            <div className='answer_body'>{answer.body}</div>
             <DisplayPhotos photos={answer.photos} />
             <div className='answer_by'>
               <div class='inline'> by {answer.answerer_name} | </div>
@@ -72,7 +74,9 @@ class AnswersList extends React.Component {
 
     return (
       <div>
-        {renderAnswer}
+        <div className='answers_scrolling'>
+          {renderAnswer}
+        </div>
         {moreAnswersButton()}
       </div >
     );

@@ -38,7 +38,6 @@ class AddingForm extends React.Component {
     }
   }
 
-
   checkingRequire() {
     let requires = {};
 
@@ -80,8 +79,8 @@ class AddingForm extends React.Component {
     if (this.checkingRequire()) {
       axios.post(url, data)
         .then(res => {
-          console.log(res);
-          this.props.closePopup();
+          console.log('submit success', res);
+          this.props.closePopup(0);
         })
         .catch(err => console.log('submit err', err));
     }

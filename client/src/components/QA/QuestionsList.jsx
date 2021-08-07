@@ -25,6 +25,11 @@ class QuestionsList extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    this.state.questionsLength = this.props.questions.length;
+  }
+  
+
   moreQuestions() {
     const questionsDisplay = this.state.questionsDisplay + 2;
     const moreQuestionButton = this.state.questionsLength > questionsDisplay ? true : false;

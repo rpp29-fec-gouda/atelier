@@ -10,19 +10,18 @@ class QA extends React.Component {
     super(props);
     this.addQuestionClicked = this.addQuestionClicked.bind(this);
     this.state = {
-      productId: '',
+      productId: this.props.selectedProduct.id,
       questions: [],
-      questionsFiltered: [],
+      questionsFiltered: null,
       addingForm: false
     };
   }
 
   componentDidMount() {
-    axios.get(`/qa/questions?product_id=${this.props.productId}&count=20`)
+    axios.get(`/qa/questions?product_id=${this.state.productId}&count=1000`)
       .then(res => {
         this.setState({
-          questions: res.data.results,
-          productId: this.props.productId
+          questions: res.data.results
         });
       })
       .catch(err => {
@@ -31,18 +30,17 @@ class QA extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.productId !== this.props.productId) {
-      axios.get(`/qa/questions?product_id=${this.props.productId}&count=1000`)
+    if (this.state.productId !== this.props.selectedProduct.id) {
+      axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
         .then(res => {
           this.setState({
             questions: res.data.results,
-            productId: this.props.productId
+            productId: this.props.selectedProduct.id
           });
         })
         .catch(err => {
           console.log(err);
         });
-
     }
   }
 
@@ -52,22 +50,26 @@ class QA extends React.Component {
     });
   }
 
-  updateQuestionsList(filtered) {
+  updateQuestionsList(filteredList) {
     this.setState({
-      questionsFiltered: filtered
+      questionsFiltered: filteredList
     });
   }
 
   render() {
     if (this.state.questions.length !== 0) {
-      const questions = this.state.questionsFiltered.length === 0 ?
-        this.state.questions : this.state.questionsFiltered;
-
+      const questions = this.state.questionsFiltered || this.state.questions;
       return (
         <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
-          <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
-          <QuestionsList questions={questions} productId={this.props.productId} />
+          <SearchQuestions
+            questions={questions}
+            callback={(filteredList) => this.updateQuestionsList(filteredList)}
+          />
+          <QuestionsList
+            questions={questions}
+            productId={this.state.productId}
+          />
         </div>
       );
 
@@ -79,7 +81,9 @@ class QA extends React.Component {
           {this.state.addingForm ?
             <div className='popup'>
               <span className='close' onClick={this.addQuestionClicked} >X</span>
-              <AddingForm productId={this.state.productId} />
+              <AddingForm
+                productId={this.state.productId}
+              />
             </div>
             :
             null
