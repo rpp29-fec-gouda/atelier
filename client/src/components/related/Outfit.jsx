@@ -1,20 +1,10 @@
 import React from 'react';
 import ProductCard from './ProductCard.jsx';
-// import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
-// import '../css/RelatedProducts.css';
-
-//
-// Try to use product ids instead of products for performance reasons
-//
 
 const Outfit = (props) => {
   const { selectedProduct, selectProduct, outfit, updateOutfit } = props;
   const { localStorage } = window;
-
-  // const update = (newOutfit) => {
-  //   props.updateOutfit(newOutfit);
-  // };
 
   const addToOutfit = () => {
     if (outfit && outfit.includes(selectedProduct)) {
@@ -41,9 +31,6 @@ const Outfit = (props) => {
     newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id))) : localStorage.removeItem('outfit');
     updateOutfit(newOutfit);
   };
-
-  // const { outfit } = this.state;
-  // console.log('Products in current outfit:', products);
 
   let key = 0;
   return selectedProduct ? (
