@@ -54,10 +54,10 @@ class RatingsAndReviews extends React.Component {
       .then(res => {
         console.log('getRatings:', res);
         if (res.data.ratings) {
-
           this.ratings = res.data.ratings;
           this.characteristics = res.data.characteristics;
           console.log('ReRatings', this.ratings);
+          this.recommended = res.data.recommended;
           this.getDefaultRatings();
         }
       })
@@ -76,7 +76,9 @@ class RatingsAndReviews extends React.Component {
   }
 
   getDefaultReviews() {
-    console.log('1ID', this.product_id);
+    const reviews = this.reviews;
+    this.props.updateReviews(reviews);
+    console.log('1ID', this.product_id, this.reviews);
     console.log('1reviews:', this.reviews);
     if (this.reviews.length > 0) {
       console.log('2reviews:', this.reviews);
@@ -94,15 +96,18 @@ class RatingsAndReviews extends React.Component {
   }
 
   getDefaultRatings() {
-    console.log('1ratings:', this.ratings);
+    const ratings = this.ratings;
+    const characteristics = this.characteristics;
+    const recommended = this.recommended;
+
+    this.props.updateRatings(ratings, characteristics, recommended);
     if (Object.keys(this.ratings).length !== 0) {
-      console.log('2ratings:', this.ratings);
       this.setState({
         ratings: this.ratings,
         characteristics: this.characteristics,
         recommended: this.recommended
       });
-      console.log('state', this.state);
+
       return;
     }
     this.setState({
