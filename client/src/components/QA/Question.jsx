@@ -20,6 +20,15 @@ class Question extends React.Component {
     });
   }
 
+  scrollToBottom() {
+    const questionsBox = document.getElementById('questions_scrolling');
+    if (questionsBox) {
+      setTimeout(( ) => {
+        questionsBox.scrollTop = questionsBox.scrollHeight - questionsBox.clientHeight;
+      }, 10);
+    }
+  }
+
   render() {
     let count = 0;
     const questions = this.props.questions;
@@ -60,6 +69,7 @@ class Question extends React.Component {
       <div>
         <div id='questions_scrolling' className='questions_scrolling'>
           {questionsList}
+          {this.scrollToBottom()}
         </div>
         {this.state.addAnswerClicked ?
           <div className='popup'>
@@ -72,6 +82,7 @@ class Question extends React.Component {
           :
           null
         }
+
       </div>
     );
   }

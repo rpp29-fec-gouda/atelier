@@ -73,7 +73,7 @@ td {
 }
 
 .questions_scrolling {
-  overflow: auto;
+  overflow: scroll;
   max-height: 500px;
 }
 

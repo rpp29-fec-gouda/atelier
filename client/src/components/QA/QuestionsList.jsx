@@ -10,33 +10,44 @@ class QuestionsList extends React.Component {
     this.moreQuestions = this.moreQuestions.bind(this);
     this.addQuestionClicked = this.addQuestionClicked.bind(this);
     this.state = {
-      questionsLength: this.props.questions.length,
       questionsDisplay: 2,
       moreQuestionButton: false,
-      addQuestionButton: false
+      addQuestionButton: false,
+      productId: ''
     };
   }
 
   componentDidMount() {
-    const questionsLength = this.state.questionsLength;
-    const moreQuestionButton = questionsLength > this.state.questionsDisplay ? true : false;
+    const moreQuestionButton = this.compareLength();
     this.setState({
-      moreQuestionButton: moreQuestionButton
+      moreQuestionButton: moreQuestionButton,
+      productId: this.props.productId
     });
   }
 
   componentDidUpdate() {
-    this.state.questionsLength = this.props.questions.length;
+    if (this.state.productId !== this.props.productId) {
+      const questionsLength = this.props.questions.length;
+      const moreQuestionButton = questionsLength > 2 ? true : false;
+      this.setState({
+        questionsDisplay: 2,
+        productId: this.props.productId,
+        moreQuestionButton: moreQuestionButton
+      });
+    }
   }
-  
+
+  compareLength() {
+    const questionsLength = this.props.questions.length;
+    return questionsLength > this.state.questionsDisplay ? true : false;
+  }
 
   moreQuestions() {
     const questionsDisplay = this.state.questionsDisplay + 2;
-    const moreQuestionButton = this.state.questionsLength > questionsDisplay ? true : false;
+    const moreQuestionButton = this.compareLength();
     this.setState({
       questionsDisplay: questionsDisplay,
-      moreQuestionButton: moreQuestionButton,
-      addQuestionButton: false
+      moreQuestionButton: moreQuestionButton
     });
   }
 
@@ -63,7 +74,7 @@ class QuestionsList extends React.Component {
   render() {
     return (
       <div>
-        <Question 
+        <Question
           questions={this.props.questions}
           questionsDisplay={this.state.questionsDisplay}
         />
