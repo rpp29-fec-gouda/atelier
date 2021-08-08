@@ -4,7 +4,11 @@ import ProductCard from './ProductCard.jsx';
 // import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
-  const { products, selectProduct, selectedProduct, checkCache, updateCache } = props;
+  const { productIds, selectProduct, selectedProduct, checkCache, updateCache } = props;
+
+  const handleAction = (event) => {
+    event.stopPropagation();
+  };
 
   let key = 0;
 
@@ -13,19 +17,19 @@ const ProductsCarousel = (props) => {
       <h1></h1>
       <span className='rp-component-title'>RELATED PRODUCTS</span>
       <div className='rp-card-container'>{
-        products.length ? (
-          products.map(product => {
-            if (typeof product === 'number') {
-              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
-            }
-            return <ProductCard
+        productIds.length ? (
+          productIds.map(id => (
+            <ProductCard
               key={ `rpCard${key++}` }
-              product={ product }
+              type='Related product'
+              productId={ id }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
-              action={ () => {} }
-            />;
-          })
+              action={ handleAction }
+              checkCache={ checkCache }
+              updateCache={ updateCache }
+            />
+          ))
         ) : (
           <div className='rp-card rp-card-placeholder'>Searching...</div>
         )}

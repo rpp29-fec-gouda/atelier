@@ -3,33 +3,31 @@ import ProductCard from './ProductCard.jsx';
 import axios from 'axios';
 
 const Outfit = (props) => {
-  const { selectedProduct, selectProduct, outfit, updateOutfit } = props;
+  const { selectedProduct, selectProduct, productIds, updateOutfit, checkCache, updateCache } = props;
   const { localStorage } = window;
 
   const addToOutfit = () => {
-    if (outfit && outfit.includes(selectedProduct)) {
-      return;
-    }
-    const newOutfit = [ selectedProduct, ...outfit ];
-    localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id)));
-    console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
+    if (productIds.length && !productIds.includes(selectedProduct.id)) {
+      console.log(`Add ${selectedProduct.id} (${selectedProduct.name}) to outfit`);
+      let newOutfit = [ selectedProduct.id, ...productIds ];
+      localStorage.setItem('outfit', JSON.stringify(newOutfit));
+      console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
 
-    updateOutfit(newOutfit);
+      updateOutfit([ ...newOutfit ]);
+    }
   };
 
-  const removeFromOutfit = (product) => {
-    const match = product.id;
-    const newOutfit = [ ...outfit ];
-    console.log('Remove', match);
-    let i = newOutfit.length;
-    while (i--) {
-      if (newOutfit[i].id === match) {
-        newOutfit.splice(i, 1);
-      }
-    }
+  const removeFromOutfit = (productId) => {
+    let newOutfit = [ ...productIds ];
+    const removalIndex = newOutfit.indexOf(productId);
 
-    newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id))) : localStorage.removeItem('outfit');
-    updateOutfit(newOutfit);
+    if (removalIndex > -1) {
+      console.log(`Remove ${productId} from outfit`);
+      newOutfit.splice(removalIndex, 1);
+
+      newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit)) : localStorage.removeItem('outfit');
+      updateOutfit([ ...newOutfit ]);
+    }
   };
 
   let key = 0;
@@ -42,17 +40,16 @@ const Outfit = (props) => {
           <h1>+</h1>
           <h2>Add to Outfit</h2>
         </div>
-        {outfit.length ? (
-          outfit.map(product => {
-            if (typeof product === 'number') {
-              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
-            }
+        {productIds.length ? (
+          productIds.map(id => {
             return <ProductCard key={ `outfitCard${key++}` }
-              type='outfit'
+              type='Outfit'
               // value={ product.id }
-              product={ product }
+              productId={ id }
               selectProduct={ selectProduct }
               action={ removeFromOutfit }
+              checkCache={ checkCache }
+              updateCache={ updateCache }
             />;
           })) : null
         }

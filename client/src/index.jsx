@@ -40,11 +40,16 @@ class App extends React.Component {
     };
   }
 
-  selectProduct(product) {
-    console.log(`${product.name} selected`);
-    this.setState({
-      selectedProduct: product
-    });
+  selectProduct(productId) {
+    if (this.state.selectedProduct.id !== productId) {
+      const product = this.checkCache('products', productId);
+      if (product) {
+        console.log(`${product.name} selected`);
+        this.setState({
+          selectedProduct: product
+        });
+      }
+    }
   }
 
   checkCache(cacheName, productId) {
@@ -78,7 +83,6 @@ class App extends React.Component {
         const product = res.data;
         this.cache.products.set(product.id, product);
         this.setState({
-          products: [product],
           selectedProduct: product,
           ready: true
         });
