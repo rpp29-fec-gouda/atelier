@@ -37,7 +37,7 @@ class RelatedProducts extends React.Component {
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
-          ids = res.data;
+          ids = Array.from(new Set(res.data));
           console.log(`${ids.length} product ids associated with ${product.name}`, ids);
           updateCache('relatedIds', id, ids);
           callback(ids);
@@ -94,7 +94,7 @@ class RelatedProducts extends React.Component {
     const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
     return (
-      <div id='RelatedProdcuts'>
+      <div id='RelatedProducts'>
         <ProductsCarousel
           productIds={ related }
           selectedProduct={ selectedProduct }

@@ -86,14 +86,14 @@ class ProductCard extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    const { productId } = this.props;
-    const { product, productImageURL } = this.state;
+  // componentDidUpdate() {
+  //   const { productId } = this.props;
+  //   const { product, productImageURL } = this.state;
 
-    if (product && productImageURL === '') {
-      this.loadImages();
-    }
-  }
+  //   if (product && productImageURL === '') {
+  //     this.loadImages();
+  //   }
+  // }
 
   componentDidMount() {
     this.loadProductData();
