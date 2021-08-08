@@ -6,12 +6,12 @@ import ProductCard from './ProductCard.jsx';
 const ProductsCarousel = (props) => {
   const { productIds, selectProduct, selectedProduct, checkCache, updateCache } = props;
 
-  const handleAction = (event) => {
-    event.stopPropagation();
+  const handleAction = (productId) => {
+    const currentProduct = checkCache('products', productId);
+    console.log(`Compare ${selectedProduct.name} with ${currentProduct.name}`);
   };
 
   let key = 0;
-
   return (
     <div id='ProductsCarousel'>
       <h1></h1>
@@ -21,7 +21,7 @@ const ProductsCarousel = (props) => {
           productIds.map(id => (
             <ProductCard
               key={ `rpCard${key++}` }
-              type='Related product'
+              type='Related'
               productId={ id }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
