@@ -54,3 +54,24 @@
 .collapsed-view:hover {
   cursor: pointer;
 }
+
+.expanded-view-toggle {
+  width: 1em;
+}
+
+.collapsed-view-toggle {
+  width: 1em;
+}
+
+.default-view .row {
+  padding: 5em;
+}
+
+/* overrides of shared component styles */
+.image-nagivator {
+  margin: 2em;
+}
+
+.scrolling-arrows {
+  margin: 0 2em 0 0;
+}
