@@ -17,6 +17,8 @@ class App extends React.Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.checkCache = this.checkCache.bind(this);
     this.updateCache = this.updateCache.bind(this);
+    this.updateReviews = this.updateReviews.bind(this);
+    this.updateRatings = this.updateRatings.bind(this);
 
 
     this.cache = {
@@ -32,6 +34,7 @@ class App extends React.Component {
       ready: false,
       selectedProduct: null,
       selectedProductRating: { ratingsCount: undefined, avgRating: undefined, ratings: [] },
+      selectedProductReviews: [],
       selectedProductImageURLs: [],
       selectedProductThumbnailURLs: []
     };
@@ -50,6 +53,22 @@ class App extends React.Component {
 
   updateCache(cacheName, productId, data) {
     this.cache[cacheName].set(productId, data);
+  }
+
+  updateReviews(reviews) {
+    this.setState({
+      selectedProductReviews: reviews,
+    }, () => {
+      console.log('Reviews State: ', this.state.selectedProductReviews);
+    });
+  }
+
+  updateRatings(ratings, characteristics, recommended) {
+    this.setState({
+      selectedProductRating: { ratingsCount: 7, avgRating: 7, ratings: ratings },
+    }, () => (
+      console.log('Ratings State: ', this.state.selectedProductRating)
+    ));
   }
 
   componentDidMount() {
@@ -89,7 +108,11 @@ class App extends React.Component {
         <QA selectedProduct={selectedProduct} />
         <br></br>
         <RatingsAndReviews
-          selectedProduct={selectedProduct} />
+          reviews={this.state.reviews}
+          ratings={this.state.ratings}
+          selectedProduct={selectedProduct}
+          updateReviews={this.updateReviews}
+          updateRatings={this.updateRatings} />
       </div>
     ) : (
       <p>Loading...</p>
