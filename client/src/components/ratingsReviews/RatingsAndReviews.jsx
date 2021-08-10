@@ -115,14 +115,14 @@ class RatingsAndReviews extends React.Component {
     });
   }
 
-  componentDidUpdate(prevState) {
-    if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
-      if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
-        this.getRatings(this.props.selectedProduct.id);
-      }
-    }
-  }
+  // componentDidUpdate(prevState) {
+  //   if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
+  //     if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
+  //       this.getReviews(this.state.sort, this.props.selectedProduct.id);
+  //       this.getRatings(this.props.selectedProduct.id);
+  //     }
+  //   }
+  // }
 
   handleReviewSort(event) {
     const sortFilter = event.target.value;

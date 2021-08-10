@@ -9,13 +9,12 @@ class RelatedProducts extends React.Component {
     super(props);
 
     this.selectProduct = this.selectProduct.bind(this);
-    this.updateOutfit = this.updateOutfit.bind(this);
+    // this.updateOutfit = this.updateOutfit.bind(this);
 
     this.state = {
       displayPhotos: false,
       selectedProductId: this.props.selectedProduct.id,
       related: [],
-      outfit: [],
       ready: true
     };
   }
@@ -48,20 +47,9 @@ class RelatedProducts extends React.Component {
     }
   }
 
-  loadOutfit() {
-    const { localStorage } = window;
-    const outfitData = localStorage.getItem('outfit');
-
-    if (outfitData) {
-      const outfit = JSON.parse(outfitData);
-      console.log('Outfit found in localStorage:', outfit);
-      this.setState({ outfit: outfit });
-    }
-  }
-
-  updateOutfit(newOutfit) {
-    this.setState({ outfit: newOutfit });
-  }
+  // updateOutfit(newOutfit) {
+  //   this.setState({ outfit: newOutfit });
+  // }
 
   selectProduct(productId) {
     this.props.selectProduct(productId);
@@ -69,7 +57,7 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    this.loadOutfit();
+    // this.loadOutfit();
     this.fetchRelatedIds(this.props.selectedProduct, (ids) => {
       this.setState({
         related: ids
@@ -103,8 +91,8 @@ class RelatedProducts extends React.Component {
           updateCache={ updateCache }
         />
         <Outfit
-          productIds={ outfit }
-          updateOutfit={ this.updateOutfit }
+          // productIds={ outfit }
+          // updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
