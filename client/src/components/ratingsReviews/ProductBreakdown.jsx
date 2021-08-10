@@ -1,51 +1,27 @@
 import React from 'react';
 
 const ProductBreakdown = (props) => {
+  const { characteristics } = props;
+  console.log('SelectedProduct Characteristics: ', characteristics);
 
-  return (
+  return characteristics ? (
     <div id='product-breakdown'>
-      <div>Size
-        <div></div>
-        <span>Too small</span>
-        <span>Perfect</span>
-        <span>Too wide</span>
-      </div>
-
-      <div>Width
-        <div></div>
-        <span>Too narrow</span>
-        <span>Perfect</span>
-        <span>Too wide</span>
-      </div>
-
-      <div>Comfort
-        <div></div>
-        <span>Uncomfortable</span>
-        <span>Ok</span>
-        <span>Perfect</span>
-      </div>
-
-      <div>Quality
-        <div></div>
-        <span>Poor</span>
-        <span>What I Expected</span>
-        <span>Perfect</span>
-      </div>
-
-      <div>Length
-        <div></div>
-        <span>Runs Short</span>
-        <span>Perfect</span>
-        <span>Runs Long</span>
-      </div>
-
-      <div>Fit
-        <div></div>
-        <span>Runs Tight</span>
-        <span>Perfect</span>
-        <span>Rung Long</span>
-      </div>
+      {Object.entries(characteristics).map((characteristic, i) => (
+        <div key={i}>{characteristic[0]}
+          <br></br>
+          <div>
+            <input type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value.slice(0, 4)} readonly></input>
+            <datalist id="tickmarks">
+              <option value="1" label='Too Small'>Too Small</option>
+              <option value="3" label='Perfect'>Perfect</option>
+              <option value="5" label='Too Wide'>Too Wide</option>
+            </datalist>
+          </div>
+        </div>
+      ))}
     </div>
+  ) : (
+    <div></div>
   );
 };
 

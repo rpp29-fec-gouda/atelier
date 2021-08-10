@@ -9,7 +9,7 @@ const ReviewTile = (props) => {
 
   let key = 0;
 
-  return reviews ? (
+  return (
     <div id='review-tile'>
       <div className='Tile'>
         {reviews.map((review) => (
@@ -18,7 +18,7 @@ const ReviewTile = (props) => {
               <span className='star-rating'>{stars.map(star => (
                 <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
               ))}</span>
-              <span className='review-date'>{review.reviewer_name}, {new Date(review.date).toDateString()}</span>
+              <span className='review-date'>{review.reviewer_name}, {new Date(review.date).toDateString().slice(3)}</span>
             </div>
             <br></br><br></br>
             <div className='review'>
@@ -26,8 +26,15 @@ const ReviewTile = (props) => {
               <br></br>
               <div className='review-body'>{review.body}</div>
               <br></br>
+              <div className='review-photos'>{review.photos.map((photo) => (
+                <div key={key++}>{photo}</div>
+              ))}</div>
               {review.recommend ?
                 <div className='review-recommend'>&#10003; I recommend this product!</div>
+                : null
+              }
+              {review.response ?
+                <div className='review-response'>Response from seller: {review.response}</div>
                 : null
               }
               <div className='review-response'>{review.response}</div>
@@ -41,7 +48,7 @@ const ReviewTile = (props) => {
         ))}
       </div>
     </div>
-  ) : (<p>Loading...</p>);
+  );
 };
 
 export default ReviewTile;

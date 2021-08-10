@@ -10,6 +10,8 @@ class RatingsAndReviews extends React.Component {
     super(props);
 
     this.reviews = [];
+    this.averageRating = 0;
+    this.totalRating = 0;
     this.ratings = [];
     this.characteristics = [];
     this.recommended = [];
@@ -17,18 +19,20 @@ class RatingsAndReviews extends React.Component {
     this.sort = 'relevant';
 
     this.state = {
-      ratings: [],
+      ratings: {},
       reviews: [],
       characteristics: [],
       recommended: {},
       product_id: '',
       sort: 'relevant'
     };
+
     this.sortOptions = ['relevance', 'newest', 'helpfulness'];
 
     this.getReviews = this.getReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
+    this.ratingDetails = this.ratingDetails.bind(this);
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
@@ -38,7 +42,6 @@ class RatingsAndReviews extends React.Component {
     console.log('Getting Reviews');
     axios.get(`reviews?sort=${sort}&product_id=${id}`)
       .then(res => {
-        console.log('getReviews:', res);
         this.reviews = res.data.results;
         this.product_id = res.data.product;
         this.getDefaultReviews();
@@ -67,6 +70,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   componentDidMount() {
+    console.log('SelectedProductRRMount State: ', this.state);
     if (this.props.selectedProduct) {
       this.getReviews(this.state.sort, this.props.selectedProduct.id);
       this.getRatings(this.props.selectedProduct.id);
@@ -75,37 +79,37 @@ class RatingsAndReviews extends React.Component {
     }
   }
 
+  ratingDetails(averageRating, totalRating) {
+    this.averageRating = averageRating;
+    this.totalRating = totalRating;
+  }
+
   getDefaultReviews() {
-    const reviews = this.reviews;
+    const { reviews, product_id } = this;
     this.props.updateReviews(reviews);
-    console.log('1ID', this.product_id, this.reviews);
-    console.log('1reviews:', this.reviews);
+
     if (this.reviews.length > 0) {
-      console.log('2reviews:', this.reviews);
-      console.log('2ID', this.product_id);
       this.setState({
-        reviews: this.reviews,
-        product_id: this.product_id
+        reviews: reviews,
+        product_id: product_id
       });
       return;
     }
     this.setState({
-      product_id: this.product_id,
+      product_id: product_id,
       reviews: null
     });
   }
 
   getDefaultRatings() {
-    const ratings = this.ratings;
-    const characteristics = this.characteristics;
-    const recommended = this.recommended;
+    const { ratings, characteristics, recommended, averageRating, totalRating } = this;
+    this.props.updateRatings(ratings, characteristics, recommended, averageRating, totalRating);
 
-    this.props.updateRatings(ratings, characteristics, recommended);
-    if (Object.keys(this.ratings).length !== 0) {
+    if (Object.keys(ratings).length !== 0) {
       this.setState({
-        ratings: this.ratings,
-        characteristics: this.characteristics,
-        recommended: this.recommended
+        ratings: ratings,
+        characteristics: characteristics,
+        recommended: recommended
       });
 
       return;
@@ -116,6 +120,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   componentDidUpdate(prevState) {
+    console.log('SelectedProductRRUpdate State: ', this.state);
     if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
       if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
         this.getReviews(this.state.sort, this.props.selectedProduct.id);
@@ -172,6 +177,9 @@ class RatingsAndReviews extends React.Component {
             handleReviewSort={this.handleReviewSort} />
           <RatingList
             ratings={this.state.ratings}
+            ratingDetails={this.ratingDetails}
+            averageRating={this.averageRating}
+            totalRating={this.totalRating}
             reviews={this.state.reviews}
             characteristics={this.state.characteristics}
             recommended={this.state.recommended}
