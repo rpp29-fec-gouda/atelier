@@ -7,11 +7,6 @@ import KeywordSearch from './KeywordSearch.jsx';
 const ReviewsList = (props) => {
   const { reviews, sortOptions, handleReviewSort } = props;
 
-  if (reviews) {
-    var displayedReviews = reviews.splice(0, 2);
-    console.log('displayedReviews:', displayedReviews);
-  }
-
   const handleMoreReviews = () => {
     console.log('More Clicked');
   };
@@ -24,12 +19,12 @@ const ReviewsList = (props) => {
         handleReviewSort={handleReviewSort} />
       <KeywordSearch />
       <br></br>
-      {reviews ?
-        <ReviewTile
-          reviews={reviews} /> : <p>Loading...</p>}
+
+      <ReviewTile
+        reviews={reviews} />
       {reviews && reviews.length > 1 ?
         <div id='more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
-        : null
+        : <div>TEST</div>
       }
       <NewReview />
     </div>

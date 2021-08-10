@@ -42,6 +42,7 @@ class RatingsAndReviews extends React.Component {
     console.log('Getting Reviews');
     axios.get(`reviews?sort=${sort}&product_id=${id}`)
       .then(res => {
+        console.log('AXIOS GET REVIEWS:', res);
         this.reviews = res.data.results;
         this.product_id = res.data.product;
         this.getDefaultReviews();
@@ -69,16 +70,6 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
-  componentDidMount() {
-    console.log('SelectedProductRRMount State: ', this.state);
-    if (this.props.selectedProduct) {
-      this.getReviews(this.state.sort, this.props.selectedProduct.id);
-      this.getRatings(this.props.selectedProduct.id);
-    } else {
-      return <div>Loading...</div>;
-    }
-  }
-
   ratingDetails(averageRating, totalRating) {
     this.averageRating = averageRating;
     this.totalRating = totalRating;
@@ -90,7 +81,7 @@ class RatingsAndReviews extends React.Component {
 
     if (this.reviews.length > 0) {
       this.setState({
-        reviews: reviews,
+        reviews: this.reviews,
         product_id: product_id
       });
       return;
@@ -119,12 +110,22 @@ class RatingsAndReviews extends React.Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.selectedProduct) {
+      console.log('MOUNT selectedProduct:', this.props.selectedProduct);
+      this.getReviews(this.state.sort, this.props.selectedProduct.id);
+      this.getRatings(this.props.selectedProduct.id);
+    } else {
+      return <div>Loading...</div>;
+    }
+  }
+
   componentDidUpdate(prevState) {
-    console.log('SelectedProductRRUpdate State: ', this.state);
     if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
       if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
         this.getReviews(this.state.sort, this.props.selectedProduct.id);
         this.getRatings(this.props.selectedProduct.id);
+        console.log('SelectedProduct Update State: ', this.state);
       }
     }
   }

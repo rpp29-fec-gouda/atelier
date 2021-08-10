@@ -10,6 +10,8 @@ const RatingBreakdown = (props) => {
   if (ratings) {
     console.log('ratings:', ratings);
     const ratingsArr = Object.entries(ratings);
+    console.log('ratingsArr:', ratingsArr);
+
     let valueRatings = 0;
     let totalRatings = 0;
 
@@ -18,6 +20,7 @@ const RatingBreakdown = (props) => {
       totalRatings += ratingNumber;
       valueRatings += parseInt(rating[0]) * parseInt(rating[1]);
     });
+
     console.log('Total Number of Ratings: ', totalRatings);
     console.log('Total Value of Ratings: ', valueRatings);
 

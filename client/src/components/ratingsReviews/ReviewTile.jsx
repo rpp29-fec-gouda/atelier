@@ -6,10 +6,9 @@ import StarRating from '../shared/StarRating.jsx';
 const ReviewTile = (props) => {
   const { reviews } = props;
   const stars = [1, 1, 1, .8, 0];
-
   let key = 0;
 
-  return (
+  return reviews ? (
     <div id='review-tile'>
       <div className='Tile'>
         {reviews.map((review) => (
@@ -26,9 +25,14 @@ const ReviewTile = (props) => {
               <br></br>
               <div className='review-body'>{review.body}</div>
               <br></br>
-              <div className='review-photos'>{review.photos.map((photo) => (
-                <div key={key++}>{photo}</div>
-              ))}</div>
+              <div className='review-photos'>
+                {review.photos.map((photo) => (
+                  <div key={photo.id}>
+                    <input type="file" />
+                    <img src={photo.url} height={'25%'} width={'25%'}/>
+                  </div>
+                ))}
+              </div>
               {review.recommend ?
                 <div className='review-recommend'>&#10003; I recommend this product!</div>
                 : null
@@ -48,7 +52,8 @@ const ReviewTile = (props) => {
         ))}
       </div>
     </div>
-  );
+  )
+    : (<p>Loading...</p>);
 };
 
 export default ReviewTile;
