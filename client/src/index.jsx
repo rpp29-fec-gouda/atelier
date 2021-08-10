@@ -68,9 +68,9 @@ class App extends React.Component {
     });
   }
 
-  updateRatings(ratings, characteristics, recommended) {
+  updateRatings(ratings, characteristics, recommended, averageRating, totalRating) {
     this.setState({
-      selectedProductRating: { ratingsCount: 7, avgRating: 7, ratings: ratings },
+      selectedProductRating: { ratingsCount: totalRating, avgRating: averageRating, ratings: ratings },
     }, () => (
       console.log('Ratings State: ', this.state.selectedProductRating)
     ));

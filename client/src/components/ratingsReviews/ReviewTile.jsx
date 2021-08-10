@@ -6,7 +6,6 @@ import StarRating from '../shared/StarRating.jsx';
 const ReviewTile = (props) => {
   const { reviews } = props;
   const stars = [1, 1, 1, .8, 0];
-
   let key = 0;
 
   return reviews ? (
@@ -18,7 +17,7 @@ const ReviewTile = (props) => {
               <span className='star-rating'>{stars.map(star => (
                 <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
               ))}</span>
-              <span className='review-date'>{review.reviewer_name}, {new Date(review.date).toDateString()}</span>
+              <span className='review-date'>{review.reviewer_name}, {new Date(review.date).toDateString().slice(3)}</span>
             </div>
             <br></br><br></br>
             <div className='review'>
@@ -26,8 +25,20 @@ const ReviewTile = (props) => {
               <br></br>
               <div className='review-body'>{review.body}</div>
               <br></br>
+              <div className='review-photos'>
+                {review.photos.map((photo) => (
+                  <div key={photo.id}>
+                    <input type="file" />
+                    <img src={photo.url} height={'25%'} width={'25%'}/>
+                  </div>
+                ))}
+              </div>
               {review.recommend ?
                 <div className='review-recommend'>&#10003; I recommend this product!</div>
+                : null
+              }
+              {review.response ?
+                <div className='review-response'>Response from seller: {review.response}</div>
                 : null
               }
               <div className='review-response'>{review.response}</div>
@@ -41,7 +52,8 @@ const ReviewTile = (props) => {
         ))}
       </div>
     </div>
-  ) : (<p>Loading...</p>);
+  )
+    : (<p>Loading...</p>);
 };
 
 export default ReviewTile;
