@@ -3,22 +3,26 @@ import RatingProgress from './RatingProgress.jsx';
 import StarRating from '../shared/StarRating.jsx';
 
 const RatingBreakdown = (props) => {
-  const { ratings, recommended, handleRatingProgressFilter } = props;
+  const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
   const stars = [1, 1, 1, .8, 0];
   let key = 0;
 
   if (ratings) {
+    console.log('ratings:', ratings);
     const ratingsArr = Object.entries(ratings);
+    console.log('ratingsArr:', ratingsArr);
+
     let valueRatings = 0;
     let totalRatings = 0;
 
-    ratingsArr.forEach(sum => {
-      let sumBar = parseInt(sum[1]);
-      totalRatings += sumBar;
-      valueRatings += parseInt(sum[0]) * parseInt(sum[1]);
+    ratingsArr.forEach(rating => {
+      let ratingNumber = parseInt(rating[1]);
+      totalRatings += ratingNumber;
+      valueRatings += parseInt(rating[0]) * parseInt(rating[1]);
     });
-    console.log('totalRatings:', totalRatings);
-    console.log('Total Value of Ratings', valueRatings);
+
+    console.log('Total Number of Ratings: ', totalRatings);
+    console.log('Total Value of Ratings: ', valueRatings);
 
     const oneBar = parseInt(ratings[1]) || 0;
     const twoBar = parseInt(ratings[2]) || 0;
@@ -26,7 +30,9 @@ const RatingBreakdown = (props) => {
     const fourBar = parseInt(ratings[4]) || 0;
     const fiveBar = parseInt(ratings[5]) || 0;
 
-    const averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
+    let averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
+
+    ratingDetails(averageRating, totalRatings);
 
     const barFills = [
       { star: '5 stars', percentage: fiveBar / totalRatings * 100 },
@@ -35,6 +41,8 @@ const RatingBreakdown = (props) => {
       { star: '2 stars', percentage: twoBar / totalRatings * 100 },
       { star: '1 stars', percentage: oneBar / totalRatings * 100 },
     ];
+
+    console.log('BarFills', barFills);
 
     let averageRecommend = 0;
     if (!recommended.false) {
