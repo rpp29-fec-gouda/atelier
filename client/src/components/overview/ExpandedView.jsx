@@ -71,7 +71,7 @@ class ExpandedView extends React.Component {
                   />
                 </div>
               </div>
-            </div>
+            </React.Fragment>
         }
       </div>
     );
