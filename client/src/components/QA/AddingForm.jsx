@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import UploadImage from './UploadImage.jsx';
 
 class AddingForm extends React.Component {
   constructor(props) {
@@ -152,8 +153,10 @@ class AddingForm extends React.Component {
                 <td></td>
                 <td style={{ color: 'red' }}>{this.state.requires.text}</td>
               </tr>
+
             </tbody>
           </table>
+          <UploadImage />
           <input type="submit" value="Submit" />
         </form>
       </div>
