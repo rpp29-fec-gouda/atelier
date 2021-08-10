@@ -24,7 +24,7 @@ class AnswersList extends React.Component {
   }
 
   loadMoreAnswers() {
-    const {answersDisplay} = this.state;
+    const { answersDisplay } = this.state;
     if (answersDisplay === 2) {
       this.setState({
         answersDisplay: this.answersLength,
@@ -38,8 +38,31 @@ class AnswersList extends React.Component {
     }
   }
 
-  render() {
+  sortAnswers() {
     const answers = this.props.answers;
+    let sellerAnswers = [];
+    let otherAnswers = [];
+    Object.keys(answers).forEach(answerId => {
+      if (answers[answerId].answerer_name === 'Seller') {
+        sellerAnswers.push(answers[answerId]);
+      } else {
+        otherAnswers.push(answers[answerId]);
+      }
+    });
+
+    sellerAnswers.sort(function (a, b) {
+      return b.helpfulness - a.helpfulness;
+    });
+    otherAnswers.sort(function (a, b) {
+      return b.helpfulness - a.helpfulness;
+    });
+
+    const result = sellerAnswers.concat(otherAnswers);
+    return result;
+  }
+
+  render() {
+    const answers = this.sortAnswers();
     const moreAnswersButton = () => {
       if (this.state.showButton) {
         return (

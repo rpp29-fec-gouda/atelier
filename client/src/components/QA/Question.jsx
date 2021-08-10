@@ -29,9 +29,15 @@ class Question extends React.Component {
     }
   }
 
+  sortQuestions () {
+    const questions = this.props.questions;
+    questions.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+    return questions;
+  }
+
   render() {
     let count = 0;
-    const questions = this.props.questions;
+    const questions = this.sortQuestions();
     const questionsDisplay = this.props.questionsDisplay;
     const questionsList = questions.map((question) => {
       if (count + 1 <= questionsDisplay) {
@@ -77,6 +83,7 @@ class Question extends React.Component {
             <AddingForm
               questionId={this.state.questionId}
               closePopup={this.addAnswerClicked}
+              updateData={this.props.updateData}
             />
           </div>
           :

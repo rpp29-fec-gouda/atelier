@@ -9,6 +9,7 @@ class QA extends React.Component {
   constructor(props) {
     super(props);
     this.addQuestionClicked = this.addQuestionClicked.bind(this);
+    this.updateData = this.updateData.bind(this);
     this.state = {
       productId: this.props.selectedProduct.id,
       questions: [],
@@ -43,6 +44,17 @@ class QA extends React.Component {
         });
     }
   }
+  updateData() {
+    axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
+      .then(res => {
+        this.setState({
+          questions: res.data.results
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   addQuestionClicked() {
     this.setState({
@@ -69,6 +81,7 @@ class QA extends React.Component {
           <QuestionsList
             questions={questions}
             productId={this.state.productId}
+            updateData={this.updateData}
           />
         </div>
       );
@@ -83,6 +96,8 @@ class QA extends React.Component {
               <span className='close' onClick={this.addQuestionClicked} >X</span>
               <AddingForm
                 productId={this.state.productId}
+                updateData={this.updateData}
+                closePopup={this.addQuestionClicked}
               />
             </div>
             :

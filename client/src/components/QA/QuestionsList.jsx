@@ -18,7 +18,9 @@ class QuestionsList extends React.Component {
   }
 
   componentDidMount() {
-    const moreQuestionButton = this.compareLength();
+    const questionsLength = this.props.questions.length;
+    const questionsDisplay = this.state.questionsDisplay;
+    const moreQuestionButton = questionsLength > questionsDisplay ? true : false;
     this.setState({
       moreQuestionButton: moreQuestionButton,
       productId: this.props.productId
@@ -37,14 +39,10 @@ class QuestionsList extends React.Component {
     }
   }
 
-  compareLength() {
-    const questionsLength = this.props.questions.length;
-    return questionsLength > this.state.questionsDisplay ? true : false;
-  }
-
   moreQuestions() {
+    const questionsLength = this.props.questions.length;
     const questionsDisplay = this.state.questionsDisplay + 2;
-    const moreQuestionButton = this.compareLength();
+    const moreQuestionButton = questionsLength > questionsDisplay ? true : false;
     this.setState({
       questionsDisplay: questionsDisplay,
       moreQuestionButton: moreQuestionButton
@@ -59,6 +57,7 @@ class QuestionsList extends React.Component {
           <AddingForm
             productId={this.props.productId}
             closePopup={this.addQuestionClicked}
+            updateData={this.props.updateData}
           />
         </div>
       );
@@ -77,6 +76,7 @@ class QuestionsList extends React.Component {
         <Question
           questions={this.props.questions}
           questionsDisplay={this.state.questionsDisplay}
+          updateData={this.props.updateData}
         />
         <MoreQuestionButton
           status={this.state.moreQuestionButton}

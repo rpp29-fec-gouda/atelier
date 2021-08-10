@@ -5,7 +5,7 @@ import RatingBreakdown from '../../../../../client/src/components/ratingsReviews
 
 describe('<RatingBreakdown />', () => {
   test('should render correctly in debug mode', () => {
-    // const wrapper = shallow(<RatingBreakdown debug/>);
-    // expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<RatingBreakdown debug/>);
+    expect(wrapper).toMatchSnapshot();
   });
 });

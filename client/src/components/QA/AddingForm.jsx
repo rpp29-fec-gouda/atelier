@@ -81,6 +81,7 @@ class AddingForm extends React.Component {
         .then(res => {
           console.log('submit success', res);
           this.props.closePopup(0);
+          this.props.updateData();
         })
         .catch(err => console.log('submit err', err));
     }
