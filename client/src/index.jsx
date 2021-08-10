@@ -105,7 +105,7 @@ class App extends React.Component {
           updateCache={ this.updateCache }
 
         />
-        <QA productId={selectedProduct.id} />
+        <QA selectedProduct={selectedProduct} />
         <br></br>
         <RatingsAndReviews
           reviews={this.state.reviews}
