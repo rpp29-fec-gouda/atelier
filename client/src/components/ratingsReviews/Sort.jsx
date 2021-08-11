@@ -1,4 +1,5 @@
 import React from 'react';
+import './Sort.css';
 
 const Sort = (props) => {
   const { reviews, sortOptions, handleReviewSort } = props;
@@ -12,7 +13,7 @@ const Sort = (props) => {
       </select>
     </div>
   ) : (
-    <div id='sort'></div>
+    <div id='sort'>Loading...</div>
   );
 };
 

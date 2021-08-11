@@ -1,4 +1,5 @@
 import React from 'react';
+import './ratingProgress.css';
 
 const RatingProgress = (props) => {
   const { completed, ratings, handleRatingProgressFilter } = props;
@@ -12,7 +13,7 @@ const RatingProgress = (props) => {
       </div>
     </div>
   ) : (
-    <div class='rating-progress'></div>
+    <div class='rating-progress'>Loading...</div>
   );
 };
 

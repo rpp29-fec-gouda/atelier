@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import KeywordSearch from '../../../../../client/src/components/ratingsReviews/KeywordSearch.jsx';
 

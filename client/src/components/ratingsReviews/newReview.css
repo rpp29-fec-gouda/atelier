@@ -1,0 +1,14 @@
+#add-review {
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
+
+

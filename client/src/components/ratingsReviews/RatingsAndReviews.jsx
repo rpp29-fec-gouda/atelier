@@ -3,7 +3,7 @@ import React from 'react';
 import RatingList from './RatingList.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import axios from 'axios';
-import '../css/RatingsReviews.css';
+import './ratingsAndReviews.css';
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -12,16 +12,16 @@ class RatingsAndReviews extends React.Component {
     this.reviews = [];
     this.averageRating = 0;
     this.totalRating = 0;
-    this.ratings = [];
-    this.characteristics = [];
-    this.recommended = [];
+    this.ratings = {};
+    this.characteristics = {};
+    this.recommended = {};
     this.product_id = '';
     this.sort = 'relevant';
 
     this.state = {
       ratings: {},
       reviews: [],
-      characteristics: [],
+      characteristics: {},
       recommended: {},
       product_id: '',
       sort: 'relevant'
@@ -56,14 +56,11 @@ class RatingsAndReviews extends React.Component {
     console.log('Getting Ratings');
     axios.get(`reviews/meta?product_id=${id}`)
       .then(res => {
-        console.log('getRatings:', res);
-        if (res.data.ratings) {
-          this.ratings = res.data.ratings;
-          this.characteristics = res.data.characteristics;
-          console.log('ReRatings', this.ratings);
-          this.recommended = res.data.recommended;
-          this.getDefaultRatings();
-        }
+        console.log('AXIOS GET RATINGS:', res);
+        this.ratings = res.data.ratings;
+        this.characteristics = res.data.characteristics;
+        this.recommended = res.data.recommended;
+        this.getDefaultRatings();
       })
       .catch(err => {
         console.log(err.stack);
@@ -96,23 +93,34 @@ class RatingsAndReviews extends React.Component {
     const { ratings, characteristics, recommended, averageRating, totalRating } = this;
     this.props.updateRatings(ratings, characteristics, recommended, averageRating, totalRating);
 
-    if (Object.keys(ratings).length !== 0) {
+    if (Object.keys(ratings).length) {
       this.setState({
         ratings: ratings,
-        characteristics: characteristics,
-        recommended: recommended
       });
+    }
 
+    if (Object.keys(recommended).length) {
+      this.setState({
+        recommended: recommended,
+      });
+    }
+
+    if (Object.values(characteristics)[0].value !== null) {
+      this.setState({
+        characteristics: characteristics,
+      });
       return;
     }
+
     this.setState({
-      ratings: null
+      ratings: null,
+      recommended: {},
+      characteristics: {}
     });
   }
 
   componentDidMount() {
     if (this.props.selectedProduct) {
-      console.log('MOUNT selectedProduct:', this.props.selectedProduct);
       this.getReviews(this.state.sort, this.props.selectedProduct.id);
       this.getRatings(this.props.selectedProduct.id);
     } else {
@@ -125,7 +133,6 @@ class RatingsAndReviews extends React.Component {
       if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
         this.getReviews(this.state.sort, this.props.selectedProduct.id);
         this.getRatings(this.props.selectedProduct.id);
-        console.log('SelectedProduct Update State: ', this.state);
       }
     }
   }
@@ -165,13 +172,13 @@ class RatingsAndReviews extends React.Component {
   render() {
     const selectedProduct = this.props.selectedProduct;
     if (selectedProduct === null) {
-      return (<p>Loading...</p>);
+      return (<div>Loading...</div>);
     }
 
     return (
-      <div id='ratings-reviews'>
-        <span className='component-title'>RATINGS &amp; REVIEWS</span>
-        <div id='ratings'>
+      <div id='ratings-reviews-widget'>
+        <h3 className='component-title'>RATINGS &amp; REVIEWS</h3>
+        <div id='ratings-reviews'>
           <ReviewsList
             reviews={this.state.reviews}
             sortOptions={this.sortOptions}
