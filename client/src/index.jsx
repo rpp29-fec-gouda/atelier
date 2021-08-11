@@ -40,9 +40,9 @@ class App extends React.Component {
     };
   }
 
-  selectProduct(productId) {
-    if (this.state.selectedProduct.id !== productId) {
-      const product = this.checkCache('products', productId);
+  selectProduct(product) {
+    if (this.state.selectedProduct.id !== product.id) {
+      // const product = this.checkCache('products', productId);
       if (product) {
         console.log(`${product.name} selected`);
         this.setState({

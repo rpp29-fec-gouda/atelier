@@ -4,14 +4,36 @@ import Outfit from '../../../../../client/src/components/related/Outfit.jsx';
 
 describe('<Outfit />', () => {
   const updateOutfit = jest.fn();
-  const outfit = mount(<Outfit selectedProduct={{name: 'Product'}} outfit={[]} updateOutfit={updateOutfit} />);
+  const removeFromOutfit = jest.fn();
+  jest.mock('axios', () => ({
+    __esModule: true,
+    default: jest.fn()
+  }));
+
+  const outfit = mount(<Outfit selectedProduct={{name: 'Product', id: 11}} productIds={[]} checkCache={ () => {}} />);
   it('Renders', () => {
     expect(outfit.find('div#Outfit')).toHaveLength(1);
   });
 
-  it('Should call updateOutfit when clicked', () => {
-    outfit.find('div.rp-card-placeholder').simulate('click');
-    expect(updateOutfit).toHaveBeenCalled();
+  test('Outfit should be empty before Add to Outfit is clicked', () => {
+    expect(outfit.state('outfit')).toHaveLength(0);
+  });
+
+  test('Should add a product to Outfit when Add to Outfit card is clicked', () => {
+    outfit.find('div.add-to-outfit').simulate('click');
+    expect(outfit.state('outfit')).toHaveLength(1);
+  });
+
+  test('Should not remove a product from Outfit when removeFromOutfit is called without a matching id', () => {
+    const instance = outfit.instance();
+    instance.removeFromOutfit(12);
+    expect(outfit.state('outfit')).toHaveLength(1);
+  });
+
+  test('Should remove a product from Outfit when removeFromOutfit is called with a matching id', () => {
+    const instance = outfit.instance();
+    instance.removeFromOutfit(11);
+    expect(outfit.state('outfit')).toHaveLength(0);
   });
 
   // const element = outfit.find('#Outfit');

@@ -24,8 +24,7 @@ class ProductCard extends React.Component {
   }
 
   handleProductClick(event) {
-    const { productId, selectProduct } = this.props;
-    selectProduct(productId);
+    this.props.selectProduct(this.state.product);
   }
 
   loadProductData() {

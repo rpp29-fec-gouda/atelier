@@ -70,7 +70,7 @@ class Outfit extends React.Component {
         <h1></h1>
         <span className='rp-component-title'>YOUR OUTFIT</span>
         <div className='rp-card-container'>
-          <div className='rp-card rp-card-placeholder' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
+          <div className='rp-card rp-card-placeholder add-to-outfit' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
             <h1>+</h1>
             <h2>Add to Outfit</h2>
           </div>

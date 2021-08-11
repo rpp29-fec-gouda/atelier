@@ -8,14 +8,14 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
 
+    this.update = false;
+
     this.selectProduct = this.selectProduct.bind(this);
     // this.updateOutfit = this.updateOutfit.bind(this);
 
     this.state = {
-      displayPhotos: false,
       selectedProductId: this.props.selectedProduct.id,
       related: [],
-      ready: true
     };
   }
 
@@ -51,9 +51,9 @@ class RelatedProducts extends React.Component {
   //   this.setState({ outfit: newOutfit });
   // }
 
-  selectProduct(productId) {
-    this.props.selectProduct(productId);
-    this.setState({ ready: false });
+  selectProduct(product) {
+    this.props.selectProduct(product);
+    this.update = true;
   }
 
   componentDidMount() {
@@ -66,10 +66,9 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidUpdate() {
-    const { selectedProduct } = this.props;
-    if (this.state.selectedProductId !== selectedProduct.id) {
-      this.setState({ selectedProductId: selectedProduct.id });
-      this.fetchRelatedIds(selectedProduct, (ids) => {
+    if (this.update) {
+      this.update = false;
+      this.fetchRelatedIds(this.props.selectedProduct, (ids) => {
         this.setState({
           related: ids
         });
