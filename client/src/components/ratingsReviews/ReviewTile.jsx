@@ -6,7 +6,6 @@ import './reviewTile.css';
 
 const ReviewTile = (props) => {
   const { reviews } = props;
-
   const stars = [1, 1, 1, .8, 0];
   let key = 0;
 
@@ -55,7 +54,7 @@ const ReviewTile = (props) => {
       ))}
     </div>
   )
-    : (<div>Loading...</div>);
+    : (null);
 };
 
 export default ReviewTile;

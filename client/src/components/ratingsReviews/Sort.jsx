@@ -12,8 +12,7 @@ const Sort = (props) => {
         ))}
       </select>
     </div>
-  ) : (
-    <div id='sort'>Loading...</div>
+  ) : (null
   );
 };
 

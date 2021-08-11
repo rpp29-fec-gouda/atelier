@@ -3,6 +3,11 @@
   flex-basis: 70%;
 }
 
+.displayedReviews {
+  max-height: 75vh;
+  overflow-y: scroll;
+}
+
 .review-buttons {
   display: inline-flex;
   flex-direction: row;

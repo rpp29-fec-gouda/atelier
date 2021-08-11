@@ -1,8 +1,13 @@
+#new-review {
+  order: 2;
+  flex-basis: 30%;
+}
+
 #add-review {
+
   font-size: 1em;
   padding: 1em;
   margin: 0.7em, 0.7em, 0.7em, 0em;
-
   align-items: center;
   font-weight: bold;
   user-select: none;

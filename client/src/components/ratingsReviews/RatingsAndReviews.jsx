@@ -2,6 +2,7 @@
 import React from 'react';
 import RatingList from './RatingList.jsx';
 import ReviewsList from './ReviewsList.jsx';
+import NewReview from './NewReview.jsx';
 import axios from 'axios';
 import './ratingsAndReviews.css';
 
@@ -10,6 +11,7 @@ class RatingsAndReviews extends React.Component {
     super(props);
 
     this.reviews = [];
+    this.displayedReviews = [];
     this.averageRating = 0;
     this.totalRating = 0;
     this.ratings = {};
@@ -21,9 +23,12 @@ class RatingsAndReviews extends React.Component {
     this.state = {
       ratings: {},
       reviews: [],
+      reviewsLength: 0,
+      displayedReviews: [],
       characteristics: {},
       recommended: {},
       product_id: '',
+      count: 2,
       sort: 'relevant'
     };
 
@@ -36,14 +41,16 @@ class RatingsAndReviews extends React.Component {
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
+    this.loadMoreReviews = this.loadMoreReviews.bind(this);
   }
 
-  getReviews(sort, id) {
+  getReviews(sort, count, id) {
     console.log('Getting Reviews');
-    axios.get(`reviews?sort=${sort}&product_id=${id}`)
+    axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
       .then(res => {
         console.log('AXIOS GET REVIEWS:', res);
         this.reviews = res.data.results;
+        this.displayedReviews = res.data.results.slice();
         this.product_id = res.data.product;
         this.getDefaultReviews();
       })
@@ -73,13 +80,16 @@ class RatingsAndReviews extends React.Component {
   }
 
   getDefaultReviews() {
-    const { reviews, product_id } = this;
+    const { displayedReviews, reviews, product_id } = this;
     this.props.updateReviews(reviews);
 
     if (this.reviews.length > 0) {
       this.setState({
         reviews: this.reviews,
-        product_id: product_id
+        reviewsLength: this.reviews.length,
+        displayedReviews: displayedReviews.splice(0, 2),
+        product_id: product_id,
+        count: 2,
       });
       return;
     }
@@ -121,7 +131,7 @@ class RatingsAndReviews extends React.Component {
 
   componentDidMount() {
     if (this.props.selectedProduct) {
-      this.getReviews(this.state.sort, this.props.selectedProduct.id);
+      this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
       this.getRatings(this.props.selectedProduct.id);
     } else {
       return <div>Loading...</div>;
@@ -131,7 +141,7 @@ class RatingsAndReviews extends React.Component {
   componentDidUpdate(prevState) {
     if (this.props.selectedProduct.id && parseInt(this.state.product_id)) {
       if (parseInt(this.state.product_id) !== this.props.selectedProduct.id) {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
         this.getRatings(this.props.selectedProduct.id);
       }
     }
@@ -169,6 +179,13 @@ class RatingsAndReviews extends React.Component {
     event.preventDefault();
   }
 
+  loadMoreReviews() {
+    this.setState((prevState) => ({
+      count: prevState.count + 2,
+      displayedReviews: prevState.displayedReviews.concat(this.displayedReviews.splice(0, 2))
+    }));
+  }
+
   render() {
     const selectedProduct = this.props.selectedProduct;
     if (selectedProduct === null) {
@@ -179,10 +196,6 @@ class RatingsAndReviews extends React.Component {
       <div id='ratings-reviews-widget'>
         <h3 className='component-title'>RATINGS &amp; REVIEWS</h3>
         <div id='ratings-reviews'>
-          <ReviewsList
-            reviews={this.state.reviews}
-            sortOptions={this.sortOptions}
-            handleReviewSort={this.handleReviewSort} />
           <RatingList
             ratings={this.state.ratings}
             ratingDetails={this.ratingDetails}
@@ -193,6 +206,19 @@ class RatingsAndReviews extends React.Component {
             recommended={this.state.recommended}
             handleRatingProgressFilter={this.handleRatingProgressFilter}
           />
+          {this.state.reviews ?
+            <ReviewsList
+              loadMoreReviews={this.loadMoreReviews}
+              reviews={this.state.reviews}
+              displayedReviews={this.state.displayedReviews}
+              sortOptions={this.sortOptions}
+              handleReviewSort={this.handleReviewSort}
+              getReviews={this.getReviews}
+              currentSort={this.state.sort}
+              product_id={this.state.product_id}
+              count={this.state.count}
+              reviewsLength={this.state.reviewsLength} />
+            : <NewReview />}
         </div>
       </div>
     );

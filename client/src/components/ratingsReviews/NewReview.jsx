@@ -2,6 +2,7 @@ import React from 'react';
 import './newReview.css';
 
 const NewReview = (props) => {
+  const { reviews } = props;
 
   const handleAddReview = () => {
     console.log('Add Clicked');
