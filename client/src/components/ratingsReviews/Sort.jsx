@@ -1,4 +1,5 @@
 import React from 'react';
+import './sort.css';
 
 const Sort = (props) => {
   const { reviews, sortOptions, handleReviewSort } = props;
