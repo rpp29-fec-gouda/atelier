@@ -4,16 +4,21 @@ import './ratingProgress.css';
 const RatingProgress = (props) => {
   const { completed, ratings, handleRatingProgressFilter } = props;
 
+  const handleClick = () => {
+    console.log('RatingBreakdown Clicked');
+  };
+
   return completed ? (
-    <div class='rating-progress'>
+    <div id='rating-progress'>
       <div onClick={handleRatingProgressFilter} id={completed.star}></div>
       <div class='progress'>
-        <label for="progress-bar">{completed.star}</label>
-        <meter class='progress-bar' value={isNaN(completed.percentage) ? '' : completed.percentage} min='0' max='100'>{isNaN(completed.percentage) ? '' : completed.percentage}</meter>
+        <label for='progress-bar label' onClick={handleClick}>{completed.star}</label>
+        <meter class='progress-bar meter' onClick={handleClick} value={isNaN(completed.percentage) ? '' : completed.percentage} min='0' max='100'>{isNaN(completed.percentage) ? '' : completed.percentage}</meter>
+        <label for='progress-bar label' onClick={handleClick}>{completed.count}</label>
       </div>
     </div>
   ) : (
-    <div class='rating-progress'>Loading...</div>
+    <div id='rating-progress'></div>
   );
 };
 

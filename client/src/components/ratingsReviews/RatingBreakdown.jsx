@@ -34,11 +34,11 @@ const RatingBreakdown = (props) => {
     ratingDetails(averageRating, totalRatings);
 
     const barFills = [
-      { star: '5 stars', percentage: fiveBar / totalRatings * 100 },
-      { star: '4 stars', percentage: fourBar / totalRatings * 100 },
-      { star: '3 stars', percentage: threeBar / totalRatings * 100 },
-      { star: '2 stars', percentage: twoBar / totalRatings * 100 },
-      { star: '1 stars', percentage: oneBar / totalRatings * 100 },
+      { star: '5 stars', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
+      { star: '4 stars', count: fourBar, percentage: fourBar / totalRatings * 100 },
+      { star: '3 stars', count: threeBar, percentage: threeBar / totalRatings * 100 },
+      { star: '2 stars', count: twoBar, percentage: twoBar / totalRatings * 100 },
+      { star: '1 stars', count: oneBar, percentage: oneBar / totalRatings * 100 },
     ];
 
     console.log('BarFills', barFills);
@@ -51,14 +51,15 @@ const RatingBreakdown = (props) => {
     }
 
     return (
-      <div id='ratingBreakdown'>
-        <span className='averageRating'>{isNaN(averageRating) ? '' : averageRating}</span>
+      <div id='rating-breakdown'>
+        <span className='rating-breakdown average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
         <span>{stars.map(star => (
           <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
         ))}</span>
         <br></br><br></br>
         <div>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
+        <h5>RATING BREAKDOWN</h5>
         {barFills.map((item, i) => (
           <RatingProgress key={i} ratings={ratings} completed={item} handleRatingProgressFilter={handleRatingProgressFilter} />
         ))}
@@ -66,7 +67,7 @@ const RatingBreakdown = (props) => {
     );
   } else {
     return (
-      <div id='ratingBreakdown'>Loading...</div>
+      <div id='rating-breakdown'></div>
     );
   }
 };

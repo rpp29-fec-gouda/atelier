@@ -9,10 +9,6 @@ import SizeSelector from '../../../../../client/src/components/overview/SizeSele
 // For Jest usage, see: https://jestjs.io/docs/getting-started
 // For Enzyme usage, see: https://github.com/enzymejs/enzyme-matchers/tree/master/packages/jest-enzyme
 
-// skus={ skusList }
-// sizes={ sizes }
-// onSelect={this.handleSizeSelect}
-
 describe('<SizeSelector />', () => {
   it('renders without crashing given the required props', () => {
     const props = {

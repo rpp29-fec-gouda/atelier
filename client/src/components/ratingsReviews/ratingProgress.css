@@ -1,17 +1,19 @@
-.rating-progress {
-  height: 10%;
-  width: 100%;
-  border-radius: 50;
-  margin: 50;
+.rating-progress-bar:hover {
+  cursor: pointer;
+  background-color: yellow;
 }
 
-meter {
+.progress-bar.meter {
+  display: block;
   width: 75%;
   height: 20px;
 }
 
-.progress {
-  display: flex;
-  padding-bottom: 10px;
+.progress-bar.meter::-webkit-meter-bar {
+  background: #CCCCCC;
 }
 
+.progress-bar.label:hover {
+  cursor: pointer;
+  color: #2a73fa;
+}
