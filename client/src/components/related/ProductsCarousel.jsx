@@ -4,28 +4,32 @@ import ProductCard from './ProductCard.jsx';
 // import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
-  const { products, selectProduct, selectedProduct } = props;
+  const { productIds, selectProduct, selectedProduct, checkCache, updateCache } = props;
+
+  const handleAction = (productId) => {
+    const currentProduct = checkCache('products', productId);
+    console.log(`Compare ${selectedProduct.name} with ${currentProduct.name}`);
+  };
 
   let key = 0;
-
   return (
     <div id='ProductsCarousel'>
       <h1></h1>
       <span className='rp-component-title'>RELATED PRODUCTS</span>
       <div className='rp-card-container'>{
-        products.length ? (
-          products.map(product => {
-            if (typeof product === 'number') {
-              return <ProductCard key={ key++ } type='placeholder' value='Loading...' />;
-            }
-            return <ProductCard
-              key={ key++ }
-              product={ product }
+        productIds.length ? (
+          productIds.map(id => (
+            <ProductCard
+              key={ `rpCard${id}` }
+              type='Related'
+              productId={ id }
               selectedProduct={ selectedProduct }
               selectProduct={ selectProduct }
-              action={ () => {} }
-            />;
-          })
+              action={ handleAction }
+              checkCache={ checkCache }
+              updateCache={ updateCache }
+            />
+          ))
         ) : (
           <div className='rp-card rp-card-placeholder'>Searching...</div>
         )}
