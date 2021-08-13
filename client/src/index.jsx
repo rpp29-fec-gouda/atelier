@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const randomInitialId = 28212 + Math.round(Math.random() * 10);
+    const randomInitialId = 36300 + Math.round(Math.random() * 10);
     axios.get(`/products/${randomInitialId}`)
       .then(res => {
         const product = res.data;

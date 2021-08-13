@@ -10,7 +10,8 @@ class AnswersList extends React.Component {
     this.state = {
       answersDisplay: 2,
       showButton: false,
-      buttonLabel: 'Collapse answers'
+      buttonLabel: 'Collapse answers',
+      answersLength: this.answersLength
     };
   }
 
@@ -24,10 +25,11 @@ class AnswersList extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.answersLength !== Object.keys(this.props.answers).length) {
+    const newAnswersLength = Object.keys(this.props.answers).length;
+    if (this.answersLength !== newAnswersLength) {
       if (this.state.answersDisplay === this.answersLength) {
         this.setState({
-          answersDisplay: Object.keys(this.props.answers).length
+          answersDisplay: newAnswersLength
         });
       }
     }

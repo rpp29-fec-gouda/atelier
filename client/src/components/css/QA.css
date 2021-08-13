@@ -64,7 +64,7 @@ td {
   top: 10%;
   bottom: 10%;
   margin: auto;
-  background: rgba(232, 229, 229, 0.105);
+  background: rgba(193, 189, 189, 0.139);
 }
 
 .full_size_photo {
@@ -87,6 +87,7 @@ td {
 
 .close {
   float: right;
+  font-weight: bold;
   font-size: 20px;
   padding: 0.4em;
   color: black;
@@ -114,4 +115,10 @@ img.thumbnail {
 } 
  a {
    font-size: 15px;
+ }
+
+ .QA_upload_imgthumnail{
+   width: 5em;
+   height: 5em;
+   padding: 5px;
  }
