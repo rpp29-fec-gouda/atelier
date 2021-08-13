@@ -1,0 +1,27 @@
+.reviews-list {
+  order: 2;
+  flex-basis: 70%;
+}
+
+.displayedReviews {
+  max-height: 75vh;
+  overflow-y: scroll;
+}
+
+.review-buttons {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;}
+
+#more-reviews {
+  font-size: 1em;
+  padding: 1em;
+  margin: 0.7em, 0.7em, 0.7em, 0em;
+
+  align-items: center;
+  font-weight: bold;
+  user-select: none;
+  flex-flow: row;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
