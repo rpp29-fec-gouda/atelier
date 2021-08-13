@@ -156,6 +156,7 @@ class AddingForm extends React.Component {
 
             </tbody>
           </table>
+          <div id='input_image'></div>
           <UploadImage />
           <input type="submit" value="Submit" />
         </form>

@@ -6,7 +6,7 @@ const DisplayPhotos = (props) => {
   if (photos) {
     return photos.map((photo, index) => {
       return (
-        <div key={photo} className='photos_inline'>
+        <div key={photo + index} className='photos_inline'>
           <img className='thumbnail' src={photo}></img>
         </div>
       );
