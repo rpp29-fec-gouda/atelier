@@ -1,27 +1,38 @@
 import React from 'react';
+import './productBreakdown.css';
 
 const ProductBreakdown = (props) => {
   const { characteristics } = props;
-  console.log('SelectedProduct Characteristics: ', characteristics);
+  console.log('characteristics:', characteristics);
+
+  const chart = {
+    Characteristics: characteristics,
+    Size: {first: 'Too Small', third: 'Perfect', fifth: 'Too Wide'},
+    Width: {first: 'Too Narrow', third: 'Perfect', fifth: 'Too Wide'},
+    Comfort: {first: 'Uncomfortable', third: 'Ok', fifth: 'Perfect'},
+    Quality: {first: 'Poor', third: 'What I Expected', fifth: 'Perfect'},
+    Length: {first: 'Runs Short', third: 'Perfect', fifth: 'Runs Long'},
+    Fit: {first: 'Runs Tight', third: 'Perfect', fifth: 'Runs Long'}
+  };
 
   return characteristics ? (
     <div id='product-breakdown'>
-      {Object.entries(characteristics).map((characteristic, i) => (
+      {Object.entries(chart.Characteristics).map((characteristic, i) => (
         <div key={i}>{characteristic[0]}
           <br></br>
           <div>
             <input type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value.slice(0, 4)} readonly></input>
             <datalist id="tickmarks">
-              <option value="1" label='Too Small'>Too Small</option>
-              <option value="3" label='Perfect'>Perfect</option>
-              <option value="5" label='Too Wide'>Too Wide</option>
+              <option value="1" id={characteristic[0]}>{chart[characteristic[0]].first}</option>
+              <option value="3" id={characteristic[0]}>{chart[characteristic[0]].third}</option>
+              <option value="5" id={characteristic[0]}>{chart[characteristic[0]].fifth}</option>
             </datalist>
           </div>
         </div>
       ))}
     </div>
   ) : (
-    <div></div>
+    <div>Loading...</div>
   );
 };
 

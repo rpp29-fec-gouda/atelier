@@ -2,35 +2,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 2em);
   height: 100%;
+  margin: 0 2em 0 2em;
   z-index: 10;
+  pointer-events: none;
 }
 
-.decrement:hover, .increment:hover {
+.arrow:hover {
   cursor: pointer;
 }
 
-.decrement, .increment {
+.arrow {
   width: 1em;
   height: 1em;
   background-size: 1em;
   background-repeat: no-repeat;
   background-position: center;
+  pointer-events: auto;
 }
 
-.decrement-no-stem {
-  background-image: url(../../../assets/icons/left-arrow.svg);
+.arrow svg {
+  stroke: white;
+  stroke-width: 0.5em;
 }
 
-.increment-no-stem {
-  background-image: url(../../../assets/icons/right-arrow.svg);
-}
 
-.decrement-stem {
-  background-image: url(../../../assets/icons/left-arrow-stem.svg);
-}
-
-.increment-stem {
-  background-image: url(../../../assets/icons/right-arrow-stem.svg);
+.arrow svg:hover {
+  stroke: black;
+  stroke-width: 0.8em;
+  fill: white;
 }

@@ -1,0 +1,54 @@
+#review-tile {
+  padding-top: 5%;
+}
+
+.review {
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-stamp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.review-rating {
+  justify-content: flex-start;
+}
+
+.review-date {
+  justify-content: flex-end;
+}
+
+.reviewer-name {
+  justify-content: flex-end;
+}
+
+.review-summary{
+  font-weight:bold;
+}
+
+.review-response {
+  background-color: lightslategrey;
+}
+
+.tile {
+  padding-top: 2%;
+}
+
+.review-photos {
+  display: flex;
+  justify-content: left;
+}
+
+.photos {
+  padding-right: .5em;
+}
+
+.review-photos img {
+  width: 5em;
+  height: 5em;
+ }

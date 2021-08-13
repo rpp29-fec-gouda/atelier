@@ -9,9 +9,7 @@ const RatingBreakdown = (props) => {
   let key = 0;
 
   if (ratings) {
-    console.log('ratings:', ratings);
     const ratingsArr = Object.entries(ratings);
-    console.log('ratingsArr:', ratingsArr);
 
     let valueRatings = 0;
     let totalRatings = 0;
@@ -72,7 +70,6 @@ const RatingBreakdown = (props) => {
       <div id='rating-breakdown'></div>
     );
   }
-
 };
 
 export default RatingBreakdown;
