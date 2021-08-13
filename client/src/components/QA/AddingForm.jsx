@@ -5,11 +5,13 @@ import UploadImage from './UploadImage.jsx';
 class AddingForm extends React.Component {
   constructor(props) {
     super(props);
+    this.updatePhotoUrl = this.updatePhotoUrl.bind(this);
     this.state = {
       formName: '',
       username: '',
       email: '',
       text: '',
+      photos: [],
       requires: {
         username: '',
         email: '',
@@ -37,6 +39,12 @@ class AddingForm extends React.Component {
         [id]: e.target.value
       });
     }
+  }
+
+  updatePhotoUrl (photos) {
+    this.setState ({
+      photos: photos
+    });
   }
 
 
@@ -74,7 +82,8 @@ class AddingForm extends React.Component {
       data = {
         body: this.state.text,
         name: this.state.username,
-        email: this.state.email
+        email: this.state.email,
+        photos: this.state.photos
       };
     }
 
@@ -156,8 +165,10 @@ class AddingForm extends React.Component {
 
             </tbody>
           </table>
-          <div id='input_image'></div>
-          <UploadImage />
+          {this.state.formName === 'Answer' ?
+            <UploadImage updatePhotoUrl={this.updatePhotoUrl}/>
+            : null
+          }
           <input type="submit" value="Submit" />
         </form>
       </div>

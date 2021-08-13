@@ -86,3 +86,9 @@ img.thumbnail {
   display: inline-block;
   padding: 5px;
 }
+
+.QA_upload_imgthumnail {
+  width: 80px; 
+  height: 80px;
+  padding: 5px;
+}

@@ -6,7 +6,7 @@ class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      imgUrls: []
     };
   }
   //API 87f2937eac78a7ff7c565d4a71f4f265
@@ -14,43 +14,47 @@ class UploadImage extends React.Component {
   upload(e) {
     //console.log('>>>>>>>>>>>>>>>>>>>>>>>>', e.target.files[0]);
     const image = e.target.files[0];
-    const input = document.getElementById('input_image');
+    //const input = document.getElementById('input_image');
     //console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', input)
     const form = new FormData();
-    console.log('::::::::::::::::::::::::::', form);
     form.append('image', image);
     axios.post('https://api.imgbb.com/1/upload?key=87f2937eac78a7ff7c565d4a71f4f265', form)
       .then(res => {
-        console.log(res);
+        console.log(res.data.data.image.url);
+        const url = res.data.data.image.url;
+        const imgUrls = this.state.imgUrls;
+        imgUrls.push(url);
+        this.setState ({
+          imgUrls: imgUrls
+        });
       })
       .catch(err => console.log(err));
 
-    // imgbbUploader("your-imgbb-api-key-string", "path/to/your/image.png")
-    //   .then((response) => console.log(response))
-    //   .catch((error) => console.error(error));
-    // const file = document.getElementById('img').files[0];
-    // let imageEncode;
-    // console.log(file);
-    // const reader = new FileReader();
-    // reader.onloadend = function () {
-    //   imageEncode = reader.result;
-    //   console.log('???????????????????????????', imageEncode)
-    //   const data = {
-    //     key: '581edac58db3aadce8b776406730b677',
-    //     image: imageEncode
-    //   };
-    //   axios.post('https://api.imgbb.com/1/upload', cors(), data)
-    //     .then(res => console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>', res))
-    //     .catch (err => console.log(err));
-    // };
-    // reader.readAsDataURL(file);
   }
 
   render() {
+    const imgUrls = this.state.imgUrls;
     return (
       <div>
-        <label for="img">Select image:</label>
-        <input type="file" id="img" name="img" accept="image/*" onChange={this.upload.bind(this)} />
+        {imgUrls.length < 5 ?
+          (<div>
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="img" accept="image/*" onChange={this.upload.bind(this)} />
+          </div>)
+          : 
+          null
+        }
+
+        <div>
+          {imgUrls.length > 0 ?
+            imgUrls.map((url, key) => {
+              return <img className='QA_upload_imgthumnail' key={key} src={url} />;
+            })
+            : 
+            null
+          }
+        </div>
+
       </div>
     );
   }
