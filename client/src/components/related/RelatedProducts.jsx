@@ -14,7 +14,7 @@ class RelatedProducts extends React.Component {
     // this.updateOutfit = this.updateOutfit.bind(this);
 
     this.state = {
-      selectedProductId: this.props.selectedProduct.id,
+      selectedId: null,
       related: [],
     };
   }
@@ -60,18 +60,22 @@ class RelatedProducts extends React.Component {
     // this.loadOutfit();
     this.fetchRelatedIds(this.props.selectedProduct, (ids) => {
       this.setState({
+        selectedId: this.props.selectedProduct.id,
         related: ids
       });
     });
   }
 
   componentDidUpdate() {
-    if (this.update) {
-      this.update = false;
-      this.fetchRelatedIds(this.props.selectedProduct, (ids) => {
-        this.setState({
-          related: ids
-        });
+    const { selectedProduct } = this.props;
+    const matchId = selectedProduct.id;
+    if (this.state.selectedId !== matchId) {
+      this.setState({ selectedId: matchId });
+      // console.log(matchId, this.state.selectedId);
+      // this.update = false;
+      console.log(this.state.selectedId, matchId);
+      this.fetchRelatedIds(selectedProduct, (ids) => {
+        this.setState({ related: ids });
       });
     }
   }

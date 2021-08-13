@@ -20,7 +20,7 @@ const ProductsCarousel = (props) => {
         productIds.length ? (
           productIds.map(id => (
             <ProductCard
-              key={ `rpCard${key++}` }
+              key={ `rpCard${id}` }
               type='Related'
               productId={ id }
               selectedProduct={ selectedProduct }

@@ -131,16 +131,16 @@ class ProductCard extends React.Component {
 
     let key = 0;
     return (
-      <div className='rp-card' title={`Select ${product.name}`} onClick={ this.handleProductClick }>
+      <div className='rp-card' title={`More details on ${product.name}`} onClick={ this.handleProductClick }>
         <div className='rp-image-backer'>
           <img src={this.state.productImageURL}></img>
           <div className={actionClass} title={hoverText} value={productId} onClick={ this.handleActionButtonClick } >{actionSymbol}</div>
         </div>
         <div className='rp-info'>
-          <span className='rp-category'>{product.category.toUpperCase()}</span>
+          <span className='rp-category' title={`${product.name} product category`}>{product.category.toUpperCase()}</span>
           <span className='rp-title'>{trimmedTitle}</span>
-          <span className='rp-price' title={`Default price: ${product.default_price}`}>{'$' + product.default_price}</span>
-          <div className='rp-star-rating' title='Average customer review: 3.8 out of 5'>
+          <span className='rp-price' title={`Default price for ${product.name}`}>{'$' + product.default_price}</span>
+          <div className='rp-star-rating' title={`Average customer review for ${product.name}: 3.8 out of 5`}>
             {stars.map(star => (
               <a key={`starRating${key++}`}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
             ))}
