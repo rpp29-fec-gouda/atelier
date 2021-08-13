@@ -1,6 +1,7 @@
 import React from 'react';
 import RatingProgress from './RatingProgress.jsx';
 import StarRating from '../shared/StarRating.jsx';
+import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
   const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
@@ -8,9 +9,7 @@ const RatingBreakdown = (props) => {
   let key = 0;
 
   if (ratings) {
-    console.log('ratings:', ratings);
     const ratingsArr = Object.entries(ratings);
-    console.log('ratingsArr:', ratingsArr);
 
     let valueRatings = 0;
     let totalRatings = 0;
@@ -67,10 +66,9 @@ const RatingBreakdown = (props) => {
     );
   } else {
     return (
-      <div id='ratingBreakdown'></div>
+      <div id='ratingBreakdown'>Loading...</div>
     );
   }
-
 };
 
 export default RatingBreakdown;

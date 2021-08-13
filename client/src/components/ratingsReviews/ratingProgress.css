@@ -1,0 +1,17 @@
+.rating-progress {
+  height: 10%;
+  width: 100%;
+  border-radius: 50;
+  margin: 50;
+}
+
+meter {
+  width: 75%;
+  height: 20px;
+}
+
+.progress {
+  display: flex;
+  padding-bottom: 10px;
+}
+

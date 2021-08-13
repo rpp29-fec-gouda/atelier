@@ -1,32 +1,36 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import Sort from './Sort.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import NewReview from './NewReview.jsx';
 import KeywordSearch from './KeywordSearch.jsx';
+import './reviewsList.css';
 
 const ReviewsList = (props) => {
-  const { reviews, sortOptions, handleReviewSort } = props;
+  const { loadMoreReviews, displayedReviews, reviewsLength, count, currentSort, product_id, getReviews, reviews, sortOptions, handleReviewSort } = props;
 
   const handleMoreReviews = () => {
-    console.log('More Clicked');
+    loadMoreReviews();
   };
 
   return (
     <div className='reviews-list'>
       <Sort
-        reviews={reviews}
+        reviews={displayedReviews}
         sortOptions={sortOptions}
         handleReviewSort={handleReviewSort} />
       <KeywordSearch />
-      <br></br>
-
-      <ReviewTile
-        reviews={reviews} />
-      {reviews && reviews.length > 1 ?
-        <div id='more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
-        : <div>TEST</div>
-      }
-      <NewReview />
+      <div className='displayedReviews'>
+        <ReviewTile
+          reviews={displayedReviews} />
+      </div>
+      <div className='review-buttons'>
+        {count < reviewsLength ?
+          <div id='more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
+          : null
+        }
+        <NewReview reviews={reviews} />
+      </div>
     </div>
   );
 };
