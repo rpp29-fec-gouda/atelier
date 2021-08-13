@@ -1,19 +1,19 @@
-meter {
-  display: block;
-  --background: #CCCCCC;
-  --optimum: rgb(36, 155, 36);
-}
-
-meter::-webkit-meter-bar {
-  background: var(--background);
-}
-
-.progress:hover {
+.rating-progress-bar:hover {
   cursor: pointer;
   background-color: yellow;
 }
 
-label:hover {
+.progress-bar.meter {
+  display: block;
+  width: 75%;
+  height: 20px;
+}
+
+.progress-bar.meter::-webkit-meter-bar {
+  background: #CCCCCC;
+}
+
+.progress-bar.label:hover {
   cursor: pointer;
   color: #2a73fa;
 }
