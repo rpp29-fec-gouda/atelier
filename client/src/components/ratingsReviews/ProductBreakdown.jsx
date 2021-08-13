@@ -1,51 +1,38 @@
 import React from 'react';
+import './productBreakdown.css';
 
 const ProductBreakdown = (props) => {
+  const { characteristics } = props;
+  console.log('characteristics:', characteristics);
 
-  return (
+  const chart = {
+    Characteristics: characteristics,
+    Size: {first: 'Too Small', third: 'Perfect', fifth: 'Too Wide'},
+    Width: {first: 'Too Narrow', third: 'Perfect', fifth: 'Too Wide'},
+    Comfort: {first: 'Uncomfortable', third: 'Ok', fifth: 'Perfect'},
+    Quality: {first: 'Poor', third: 'What I Expected', fifth: 'Perfect'},
+    Length: {first: 'Runs Short', third: 'Perfect', fifth: 'Runs Long'},
+    Fit: {first: 'Runs Tight', third: 'Perfect', fifth: 'Runs Long'}
+  };
+
+  return characteristics ? (
     <div id='product-breakdown'>
-      <div>Size
-        <div></div>
-        <span>Too small</span>
-        <span>Perfect</span>
-        <span>Too wide</span>
-      </div>
-
-      <div>Width
-        <div></div>
-        <span>Too narrow</span>
-        <span>Perfect</span>
-        <span>Too wide</span>
-      </div>
-
-      <div>Comfort
-        <div></div>
-        <span>Uncomfortable</span>
-        <span>Ok</span>
-        <span>Perfect</span>
-      </div>
-
-      <div>Quality
-        <div></div>
-        <span>Poor</span>
-        <span>What I Expected</span>
-        <span>Perfect</span>
-      </div>
-
-      <div>Length
-        <div></div>
-        <span>Runs Short</span>
-        <span>Perfect</span>
-        <span>Runs Long</span>
-      </div>
-
-      <div>Fit
-        <div></div>
-        <span>Runs Tight</span>
-        <span>Perfect</span>
-        <span>Rung Long</span>
-      </div>
+      {Object.entries(chart.Characteristics).map((characteristic, i) => (
+        <div key={i}>{characteristic[0]}
+          <br></br>
+          <div>
+            <input type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value.slice(0, 4)} readonly></input>
+            <datalist id="tickmarks">
+              <option value="1" id={characteristic[0]}>{chart[characteristic[0]].first}</option>
+              <option value="3" id={characteristic[0]}>{chart[characteristic[0]].third}</option>
+              <option value="5" id={characteristic[0]}>{chart[characteristic[0]].fifth}</option>
+            </datalist>
+          </div>
+        </div>
+      ))}
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 

@@ -1,38 +1,20 @@
 import React from 'react';
+import './ratingProgress.css';
 
 const RatingProgress = (props) => {
   const { completed, ratings, handleRatingProgressFilter } = props;
 
-  const ratingProgress = {
-    width: '100%',
-    height: '50%',
-    backgroundColor: '#e0e0de',
-  };
-
-  const ratingFiller = {
-    height: '50%',
-    width: `${(completed) ? completed.percentage : 0 }%`,
-    backgroundColor: '#00695c',
-    borderRadius: 'inherit',
-    marginTop: '5%',
-    marginBottom: '5%'
-  };
-
   return completed ? (
     <div class='rating-progress'>
-      <div onClick={handleRatingProgressFilter} id={completed.star}>{completed.star}</div>
-
-      <div style={ratingProgress} class='progress'>
-        <div style={ratingFiller}>
-          <span class='progress-bar'>.</span>
-        </div>
-
+      <div onClick={handleRatingProgressFilter} id={completed.star}></div>
+      <div class='progress'>
+        <label for="progress-bar">{completed.star}</label>
+        <meter class='progress-bar' value={isNaN(completed.percentage) ? '' : completed.percentage} min='0' max='100'>{isNaN(completed.percentage) ? '' : completed.percentage}</meter>
       </div>
     </div>
   ) : (
-    <div class='rating-progress'></div>
+    <div class='rating-progress'>Loading...</div>
   );
-
 };
 
 export default RatingProgress;

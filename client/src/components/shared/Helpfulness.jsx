@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-/* 
+/*
 pass module object through component
-prop name can be question, answer or review 
+prop name can be question, answer or review
 Example: <Helpfulness question={questionObj} />
 */
 
