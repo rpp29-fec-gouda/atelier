@@ -1,31 +1,84 @@
+.image-navigator {
+  z-index: 9;
+  padding: 1.5em 1.5em 1.5em 1.5em;
+  pointer-events: none;
+}
+
 .image-navigator-item {
-  margin: 0.7em 0.7em 0.7em 0;
-  width: 4em;
+  margin: 0 0 0.7em 0;
+  width: 3em;
+  pointer-events: auto;
 }
 
 .image-navigator-item:hover {
   cursor: pointer;
 }
 
-.image-navigator-item .icon {
-  border: 1px black solid;
-  height: 4em;
+/* Arrows */
+.navigator-align {
+  display: flex;
+  justify-content: center;
+}
+
+.navigator {
+  height: 1em;
+  width: 1em;
+  stroke: white;
+  stroke-width: 1em;
+}
+
+.navigator:hover {
+  cursor: pointer;
+  pointer-events: auto;
+  fill: white;
+  stroke: black;
+}
+
+/* Icon */
+.image-navigator-item.icon-item {
+  width: 1em;
+}
+
+.image-navigator-item svg.icon {
+  background-color: seashell;
+}
+
+.image-navigator-item svg.icon:hover {
+  width: 1.1em;
   background-color: yellow;
 }
 
-.image-navigator-item .thumbnail {
+.image-navigator-item svg.selected {
+  width: 1.1em;
+  fill: white;
+  background-color: black;
+  border: 1px solid yellow;
+}
+
+.image-navigator-item svg.selected:hover {
+  width: 1.1em;
+  background-color: black;
+}
+
+/* Thumbnails & Placeholders */
+.image-navigator-item img.thumbnail {
   border: 1px black solid;
-  height: 4em;
+  width: 3em;
+}
+
+img.thumbnail:hover,  div.placeholder:hover  {
+  border: 1px white solid;
+}
+
+.image-navigator-item div.placeholder {
+  height: 3em;
   background-color: white;
 }
 
-.image-navigator-item > div:nth-child(2) {
-  border: 1px;
-  height: 0.4em;
-  margin: 0.2em 0 0 0;
-}
-
-.image-navigator .selected {
+.thumbnail-selected {
   border: 1px black solid;
-  background-color: black;
+  height: 0.1em;
+  margin: 0.2em 0 0 0;
+  background-color:  black;;
+  box-shadow: 0 0 0 0.03em white;
 }
