@@ -47,6 +47,23 @@ class Helpfulness extends React.Component {
     }
   }
 
+  componentDidUpdate(prevState) {
+    const target = Object.keys(this.props)[0];
+    const targetObj = this.props[target];
+
+    if (target === 'review') {
+      const targetId = targetObj['review_id'];
+      if (this.state.targetId !== targetId) {
+
+        this.setState({
+          helpfulCount: targetObj['helpfulness'],
+          targetId: targetId,
+          link: '/reviews/' + targetId + '/helpful'
+        });
+      }
+    }
+  }
+
   addHelpfulness() {
     axios.put(this.state.link)
       .then(res => {
@@ -60,7 +77,7 @@ class Helpfulness extends React.Component {
   toggleYesText() {
     if (!this.state.clicked) {
       return (
-        <a href='#' onClick={() => this.addHelpfulness()}>
+        <a href='#!' onClick={() => this.addHelpfulness()}>
           Yes
         </a>
       );

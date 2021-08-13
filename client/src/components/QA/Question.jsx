@@ -2,6 +2,7 @@ import React from 'react';
 import AddingForm from './AddingForm';
 import Helpfulness from '../shared/Helpfulness';
 import AnswersList from './AnswersList';
+import ClickedTracker from './ClickedTracker';
 
 class Question extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class Question extends React.Component {
     };
   }
 
-  addAnswerClicked(id) {
+  addAnswerClicked(e) {
+    ClickedTracker('add Answer');
+    const id = e.target ? e.target.id : '';
     this.setState({
       addAnswerClicked: !this.state.addAnswerClicked,
       questionId: id
@@ -56,7 +59,7 @@ class Question extends React.Component {
                     <Helpfulness question={question} />
                   </td>
                   <td width='20%'> |
-                    <a href='#!' id={questionId} onClick={() => this.addAnswerClicked(questionId)}> Add answer </a></td>
+                    <a href='#!' id={questionId} className='add_answer' onClick={this.addAnswerClicked}> Add answer </a></td>
                 </tr>
                 <tr>
                   <td width='5%' className='character'>A:</td>

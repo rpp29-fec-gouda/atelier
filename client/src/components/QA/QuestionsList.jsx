@@ -2,6 +2,7 @@ import React from 'react';
 import Question from './Question.jsx';
 import AddingForm from './AddingForm.jsx';
 import MoreQuestionButton from './MoreQuestionButton.jsx';
+import ClickedTracker from './ClickedTracker.jsx';
 
 
 class QuestionsList extends React.Component {
@@ -65,6 +66,7 @@ class QuestionsList extends React.Component {
   }
 
   addQuestionClicked() {
+    ClickedTracker('add Question');
     this.setState({
       addQuestionButton: !this.state.addQuestionButton
     });
@@ -82,7 +84,7 @@ class QuestionsList extends React.Component {
           status={this.state.moreQuestionButton}
           moreQuestions={this.moreQuestions}
         />
-        <button className='add_question' onClick={this.addQuestionClicked.bind(this)}>ADD A QUESTION +</button>
+        <button className='add_question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button>
         {this.addQuestionForm()}
       </div >
 

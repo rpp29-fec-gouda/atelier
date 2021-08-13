@@ -41,7 +41,7 @@ td {
   text-align: right;
 }
 .inline {
-  display: inline;
+  display: inline;  
 }
 .warning_text {
   font-size: 10px;
@@ -89,3 +89,6 @@ img.thumbnail {
   display: inline-block;
   padding: 5px;
 } 
+ a {
+   font-size: 15px;
+ }

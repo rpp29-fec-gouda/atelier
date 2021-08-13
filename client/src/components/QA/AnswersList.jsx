@@ -23,6 +23,16 @@ class AnswersList extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.answersLength !== Object.keys(this.props.answers).length) {
+      if (this.state.answersDisplay === this.answersLength) {
+        this.setState({
+          answersDisplay: Object.keys(this.props.answers).length
+        });
+      }
+    }
+  }
+
   loadMoreAnswers() {
     const { answersDisplay } = this.state;
     if (answersDisplay === 2) {
@@ -76,18 +86,17 @@ class AnswersList extends React.Component {
     };
 
 
-    const renderAnswer = Object.keys(answers).map((answerId, key) => {
-      const answer = answers[answerId];
+    const renderAnswer = answers.map((answer, key) => {
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answerId} className='answers_list'>
+          <div key={answer.id} className='answers_list'>
             <div className='answer_body'>{answer.body}</div>
             <DisplayPhotos photos={answer.photos} />
             <div className='answer_by'>
               <div class='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
               <div class='inline'> | </div>
-              <Report answerId={answerId} />
+              <Report answerId={answer.id} />
             </div>
           </div>
         );
@@ -96,12 +105,12 @@ class AnswersList extends React.Component {
 
 
     return (
-      <div>
+      <React.Fragment >
         <div className='answers_scrolling'>
           {renderAnswer}
         </div>
         {moreAnswersButton()}
-      </div >
+      </React.Fragment >
     );
   }
 }
