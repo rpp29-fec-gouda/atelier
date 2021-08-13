@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import UploadImage from './UploadImage';
+import UploadImage from '../shared/UploadImage';
 
 class AddingForm extends React.Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-
+/* props getImgUrl */
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,6 @@ class UploadImage extends React.Component {
     form.append('image', image);
     axios.post('https://api.imgbb.com/1/upload?key=87f2937eac78a7ff7c565d4a71f4f265', form)
       .then(res => {
-        console.log(res.data.data.image.url);
         const url = res.data.data.image.url;
         const imgUrls = this.state.imgUrls;
         imgUrls.push(url);
