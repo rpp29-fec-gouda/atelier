@@ -78,7 +78,7 @@ class AnswersList extends React.Component {
     const moreAnswersButton = () => {
       if (this.state.showButton) {
         return (
-          <div className='more_answer_button'>
+          <div className='QA_more_answer_button'>
             < button onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</button >
           </div>
         );
@@ -91,13 +91,13 @@ class AnswersList extends React.Component {
     const renderAnswer = answers.map((answer, key) => {
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answer.id} className='answers_list'>
-            <div className='answer_body'>{answer.body}</div>
+          <div key={answer.id} className='QA_answers_list'>
+            <div className='QA_answer_body'>{answer.body}</div>
             <DisplayPhotos photos={answer.photos} />
-            <div className='answer_by'>
-              <div class='inline'> by {answer.answerer_name} | </div>
+            <div className='QA_answer_by'>
+              <div className='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
-              <div class='inline'> | </div>
+              <div className='inline'> | </div>
               <Report answerId={answer.id} />
             </div>
           </div>
@@ -108,7 +108,7 @@ class AnswersList extends React.Component {
 
     return (
       <React.Fragment >
-        <div className='answers_scrolling'>
+        <div className='QA_answers_scrolling'>
           {renderAnswer}
         </div>
         {moreAnswersButton()}

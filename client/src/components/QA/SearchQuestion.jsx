@@ -32,7 +32,7 @@ const SearchQuestions = (props) => {
   return (
     <div>
       <input
-        className="search_bar"
+        className="QA_search_bar"
         type="text"
         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
         name="search"

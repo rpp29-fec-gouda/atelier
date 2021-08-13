@@ -53,8 +53,8 @@ class QuestionsList extends React.Component {
   addQuestionForm() {
     if (this.state.addQuestionButton) {
       return (
-        <div className='popup'>
-          <span className='close' onClick={this.addQuestionClicked}>X</span>
+        <div className='QA_popup'>
+          <span className='QA_close' onClick={this.addQuestionClicked}>X</span>
           <AddingForm
             productId={this.props.productId}
             closePopup={this.addQuestionClicked}
@@ -84,7 +84,7 @@ class QuestionsList extends React.Component {
           status={this.state.moreQuestionButton}
           moreQuestions={this.moreQuestions}
         />
-        <button className='add_question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button>
+        <button className='QA_add_question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button>
         {this.addQuestionForm()}
       </div >
 

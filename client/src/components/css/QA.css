@@ -1,9 +1,9 @@
-.question_table {
+.QA_question_table {
   table-layout: fixed;
   width: 100%;  
 }
 
-.answer_table{
+.QA_answer_table{
   table-layout: fixed;
   width: 100%;  
 }
@@ -12,42 +12,49 @@ td {
   vertical-align: top;
 }
 
-.character {
+.QA_character {
   font-weight: bold;
 }
-.answer_by {
+.QA_answer_by {
   margin: 5px;
   font-size: 14px;
 }
 
-.add_question, .more_questions {
+.QA_add_question, .QA_more_questions {
   height: 50px;
   margin: 8px;
   font-weight: 550 ; 
   display: inline-block; 
 }
 
-.add_question {
+.QA_add_question {
   width: 200px
 }
-.more_question {
+.QA_more_question {
   width: 250px
 }
 
-.question_body{
+.QA_question_body{
   font-weight: bold;
+  font-size: 20px;
 }
-.helpfulness {
+
+
+.QA_helpfulness {
   text-align: right;
 }
+
+
+
 .inline {
   display: inline;  
 }
-.warning_text {
+
+.QA_warning_text {
   font-size: 10px;
 }
   
-.popup {
+.QA_popup {
   position: fixed;
   left: 25%;
   right: 25%;
@@ -57,7 +64,7 @@ td {
   background: rgb(199, 196, 196);
 }
 
-.popup_photo {
+.QA_popup_photo {
   position: fixed;
   left: 20%;
   right: 20%;
@@ -67,7 +74,7 @@ td {
   background: rgba(193, 189, 189, 0.139);
 }
 
-.full_size_photo {
+.QA_full_size_photo {
   width: auto;
   height: auto;
   position: absolute;
@@ -80,12 +87,13 @@ td {
   max-height: 100%;
 }
 
-.search_bar {
-  width: 80%;
-  height: 30px;
+.QA_search_bar {
+  width: 90%;
+  height: 40px;
+  font-size: 25px;
 }
 
-.close {
+.QA_close {
   float: right;
   font-weight: bold;
   font-size: 20px;
@@ -94,25 +102,26 @@ td {
   text-decoration: none;
 }
 
-.answers_scrolling {
+.QA_answers_scrolling {
   overflow: scroll;
   max-height: 200px; 
 }
 
-.questions_scrolling {
+.QA_questions_scrolling {
   overflow: scroll;
   max-height: 500px;
 }
 
-img.thumbnail {
+.QA_thumbnail {
   width: 5em;
   height: 5em;
 }
 
-.photos_inline {
+.QA_photos_inline {
   display: inline-block;
   padding: 5px;
 } 
+
  a {
    font-size: 15px;
  }

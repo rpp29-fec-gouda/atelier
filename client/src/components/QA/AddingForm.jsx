@@ -117,7 +117,7 @@ class AddingForm extends React.Component {
               </tr>
               <tr>
                 <td></td>
-                <td className='warning_text'>For privacy reasons, do not use your full name or email address</td>
+                <td className='QA_warning_text'>For privacy reasons, do not use your full name or email address</td>
               </tr>
               <tr>
                 <td></td>
@@ -140,7 +140,7 @@ class AddingForm extends React.Component {
       
               <tr>
                 <td></td>
-                <td className='warning_text'>For authentication reasons, you will not be emailed</td>
+                <td className='QA_warning_text'>For authentication reasons, you will not be emailed</td>
               </tr>
               <tr>
                 <td></td>
@@ -152,7 +152,7 @@ class AddingForm extends React.Component {
                 <td>
                   <textarea maxlength='1000'
                     placeholder='Maximum 1000 characters'
-                    className='text_box'
+                    className='QA_text_box'
                     id='text'
                     value={this.state.text}
                     onChange={this.handleOnChange.bind(this)}>

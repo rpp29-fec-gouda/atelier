@@ -89,7 +89,7 @@ class Helpfulness extends React.Component {
 
   render() {
     return (
-      <div class='inline'>
+      <div className='inline'>
         Helpful?
         {this.toggleYesText()}
         ({this.state.helpfulCount})

@@ -49,20 +49,20 @@ class Question extends React.Component {
         const body = question.question_body;
         const answers = question.answers;
         return (
-          <div key={questionId} className='question'>
-            <table className='question_table'>
+          <div key={questionId} className='QA_question'>
+            <table className='QA_question_table'>
               <tbody>
                 <tr>
-                  <td width='5%' className='character'>Q:</td>
-                  <td width='45%' className='question_body'>{body}</td>
-                  <td width='30%' className='helpfulness'>
+                  <td width='5%' className='QA_character'>Q:</td>
+                  <td width='45%' className='QA_question_body'>{body}</td>
+                  <td width='30%' className='QA_helpfulness'>
                     <Helpfulness question={question} />
                   </td>
                   <td width='20%'> |
-                    <a href='#!' id={questionId} className='add_answer' onClick={this.addAnswerClicked}> Add answer </a></td>
+                    <a href='#!' id={questionId} className='QA_add_answer' onClick={this.addAnswerClicked}> Add answer </a></td>
                 </tr>
                 <tr>
-                  <td width='5%' className='character'>A:</td>
+                  <td width='5%' className='QA_character'>A:</td>
                   <td width='45%'><AnswersList answers={answers} /></td>
                   <td> </td>
                 </tr>
@@ -76,13 +76,13 @@ class Question extends React.Component {
 
     return (
       <div>
-        <div id='questions_scrolling' className='questions_scrolling'>
+        <div className='QA_questions_scrolling'>
           {questionsList}
           {this.scrollToBottom()}
         </div>
         {this.state.addAnswerClicked ?
-          <div className='popup'>
-            <div id='close' className='close' onClick={this.addAnswerClicked} >X</div>
+          <div className='QA_popup'>
+            <div className='QA_close' onClick={this.addAnswerClicked} >X</div>
             <AddingForm
               questionId={this.state.questionId}
               closePopup={this.addAnswerClicked}

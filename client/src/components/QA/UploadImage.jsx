@@ -36,7 +36,7 @@ class UploadImage extends React.Component {
         {imgUrls.length < 5 ?
           (<React.Fragment>
             <label for="img">Select image:</label>
-            <input type="file" id="img" name="img" accept="image/*" onChange={this.upload.bind(this)} />
+            <input type="file" accept="image/*" onChange={this.upload.bind(this)} />
           </React.Fragment>)
           :
           null
