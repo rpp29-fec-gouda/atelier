@@ -9,9 +9,6 @@ import QuantitySelector from '../../../../../client/src/components/overview/Quan
 // For Jest usage, see: https://jestjs.io/docs/getting-started
 // For Enzyme usage, see: https://github.com/enzymejs/enzyme-matchers/tree/master/packages/jest-enzyme
 
-// maxQuantity={ maxQuantity }
-// onSelect={this.handleQuantitySelect}
-
 describe('<QuantitySelector />', () => {
   it('renders without crashing given the required props', () => {
     const props = {
