@@ -33,7 +33,6 @@ module.exports = {
     console.log('API query:\n', req.url, req.params[0], req.query, req.body);
     
     if (req.method === 'POST') {
-      console.log('?????????????????????????', req.url)
       return axios.post(req.url, req.body)
         .then(response => {
           callback(null, response.data);

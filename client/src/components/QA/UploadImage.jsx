@@ -13,16 +13,17 @@ class UploadImage extends React.Component {
 
   upload(e) {
     //console.log('>>>>>>>>>>>>>>>>>>>>>>>>', e.target.files[0]);
+    const image = e.target.files[0];
     const input = document.getElementById('input_image');
     //console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', input)
     const form = new FormData();
-    console.log('::::::::::::::::::::::::::', form)
-    input.append('image');
-    // axios.post('https://api.imgbb.com/1/upload', form)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
+    console.log('::::::::::::::::::::::::::', form);
+    form.append('image', image);
+    axios.post('https://api.imgbb.com/1/upload?key=87f2937eac78a7ff7c565d4a71f4f265', form)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
 
     // imgbbUploader("your-imgbb-api-key-string", "path/to/your/image.png")
     //   .then((response) => console.log(response))
