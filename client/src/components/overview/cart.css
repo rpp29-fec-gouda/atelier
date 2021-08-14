@@ -1,17 +1,17 @@
-#size-selector {
+#po-size-selector {
   margin: 0 1em 0 0;
   width: 67%;
 }
 
-#sizes {
+#po-sizes {
   width: 100%;
 }
 
-#quantity-selector {
+#po-quantity-selector {
   width: 33%;
 }
 
-#quantity {
+#po-quantity {
   width: 100%;
 }
 

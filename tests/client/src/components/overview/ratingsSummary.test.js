@@ -26,7 +26,7 @@ describe('<RatingsSummary />', () => {
       averageRating: 2.2
     };
     const wrapper = shallow(<RatingsSummary {...props} />);
-    expect(wrapper.find('#read-all-reviews').text()).toEqual('Read all 5 reviews');
+    expect(wrapper.find('#po-read-all-reviews').text()).toEqual('Read all 5 reviews');
   });
 
   it('should have a star rating component with the average rating supplied:', function () {
@@ -39,7 +39,7 @@ describe('<RatingsSummary />', () => {
     expect(wrapper.find(StarRating).state().currentRating).toEqual(props.averageRating);
   });
 
-  it('should execute an onclick event on read-all-reviews:', function () {
+  it('should execute an onclick event on po-read-all-reviews:', function () {
     const mockCallBack = jest.fn();
 
     const props = {
@@ -48,7 +48,7 @@ describe('<RatingsSummary />', () => {
       callback: mockCallBack
     };
     const wrapper = shallow(<RatingsSummary {...props} />);
-    wrapper.find('#read-all-reviews').simulate('click');
+    wrapper.find('#po-read-all-reviews').simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });

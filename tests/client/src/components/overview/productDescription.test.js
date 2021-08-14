@@ -25,8 +25,8 @@ describe('<ProductDescription />', () => {
       description: 'This product is too good to be true! Never breaks down'
     };
     const wrapper = shallow(<ProductDescription {...props} />);
-    expect(wrapper.find('#product-description')).toHaveLength(1);
+    expect(wrapper.find('#po-product-description')).toHaveLength(1);
     expect(wrapper.find('h2').text()).toEqual(props.slogan);
-    expect(wrapper.find('#product-description div').text()).toEqual(props.description);
+    expect(wrapper.find('#po-product-description div').text()).toEqual(props.description);
   });
 });

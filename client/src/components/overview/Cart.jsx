@@ -59,7 +59,7 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log('Rendering cart');
+    console.log('Rendering po-cart');
     const skus = this.props.skus;
     if (!skus) {
       return (<div>Loading...</div>);
@@ -79,7 +79,7 @@ class Cart extends React.Component {
     console.log('Cart maxQuantity', maxQuantity);
 
     return (
-      <div id="cart" class="column">
+      <div id="po-cart" class="column">
         {
           this.state.promptSelection &&
           <div class="error-prompt">Please select size</div>

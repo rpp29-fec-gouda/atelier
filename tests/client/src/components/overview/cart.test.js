@@ -46,7 +46,7 @@ describe('<Cart />', function () {
       }
     };
     const wrapper = mount(<Cart {...props} />);
-    expect(wrapper.find('#cart')).toHaveLength(1);
+    expect(wrapper.find('#po-cart')).toHaveLength(1);
     expect(wrapper.find(SizeSelector)).toHaveLength(1);
     expect(wrapper.find(QuantitySelector)).toHaveLength(1);
     expect(wrapper.find(AddButton)).toHaveLength(1);
@@ -80,7 +80,7 @@ describe('<Cart />', function () {
     expect(wrapper.state().promptSelection).toEqual(true);
   });
 
-  it('should generate cart orders:', function () {
+  it('should generate po-cart orders:', function () {
     const props = {
       skus: {
         941278: {quantity: 8, size: 'XS'},
@@ -93,7 +93,7 @@ describe('<Cart />', function () {
     };
     const wrapper = mount(<Cart {...props} />);
 
-    expect(wrapper.find('#cart')).toHaveLength(1);
+    expect(wrapper.find('#po-cart')).toHaveLength(1);
     expect(wrapper.find(SizeSelector)).toHaveLength(1);
     expect(wrapper.find(QuantitySelector)).toHaveLength(1);
     expect(wrapper.find(AddButton)).toHaveLength(1);
@@ -104,9 +104,9 @@ describe('<Cart />', function () {
     expect(wrapper.state().currentQuantity).toEqual(0);
     expect(wrapper.state().bag).toEqual([]);
 
-    wrapper.find('#sizes').simulate('change', { target: { value: 941279 } });
+    wrapper.find('#po-sizes').simulate('change', { target: { value: 941279 } });
     expect(wrapper.state().currentSku).toEqual(941279);
-    wrapper.find('#quantity').simulate('change', { target: { value: 2 } });
+    wrapper.find('#po-quantity').simulate('change', { target: { value: 2 } });
     expect(wrapper.state().currentQuantity).toEqual(2);
     wrapper.find('#checkout').first().simulate('click');
     expect(wrapper.state().bag).toEqual([{sku: 941279, quantity: 2}]);
@@ -125,10 +125,10 @@ describe('<Cart />', function () {
     };
     const wrapper = mount(<Cart {...props} />);
 
-    wrapper.find('#sizes').simulate('change', { target: { value: 941279 } });
-    wrapper.find('#quantity').simulate('change', { target: { value: 2 } });
+    wrapper.find('#po-sizes').simulate('change', { target: { value: 941279 } });
+    wrapper.find('#po-quantity').simulate('change', { target: { value: 2 } });
     expect(wrapper.state().currentQuantity).toEqual(2);
-    wrapper.find('#sizes').simulate('change', { target: { value: 941282 } });
+    wrapper.find('#po-sizes').simulate('change', { target: { value: 941282 } });
     expect(wrapper.state().currentQuantity).toEqual(1);
   });
 });

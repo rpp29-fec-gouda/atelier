@@ -33,11 +33,11 @@ const StyleSelector = (props) => {
   let rowKey = 0;
   let itemKey = 0;
   return (
-    <div id="style-selector">
+    <div id="po-style-selector">
       <h2 class="uppercase no-select">
         <span class="bold">STYLE &gt;</span> {props.name}
       </h2>
-      <div id="styles-list" class="styles column">
+      <div id="po-styles-list" class="styles column">
         {
           itemsByRow.length && itemsByRow.length > 0 &&
           itemsByRow.map(itemsOnRow => (
@@ -45,14 +45,14 @@ const StyleSelector = (props) => {
               {
                 itemsOnRow.length && itemsOnRow.length > 0 &&
                 itemsOnRow.map(item => (
-                  <div key={itemKey++} class="style" data-style-id={item.id} onClick={handleClick}>
+                  <div key={itemKey++} class="po-style" data-style-id={item.id} onClick={handleClick}>
                     {
                       item.thumbnail && item.thumbnail !== null &&
-                      <img src={item.thumbnail} key={itemKey++} class="style image" data-style-id={item.id} onClick={handleClick}></img>
+                      <img src={item.thumbnail} key={itemKey++} class="po-style po-style-selector-image" data-style-id={item.id} onClick={handleClick}></img>
                     }
                     {
                       item.id === props.selectedId &&
-                      <div class="style-selected">✓</div>
+                      <div class="po-style-selected">✓</div>
                     }
                   </div>
                 ))

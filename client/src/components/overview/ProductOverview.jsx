@@ -17,11 +17,16 @@ class ProductOverview extends React.Component {
 
     this.state = {
       selectedStyle: null,
-      sizesAvailable: []
+      sizesAvailable: [],
+      isExpanded: false,
+      isZoomed: false
     };
 
     this.fetchProductStyles = this.fetchProductStyles.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.handleExpandedView = this.handleExpandedView.bind(this);
+    this.handleCollapsedView = this.handleCollapsedView.bind(this);
+    this.handleImageZoom = this.handleImageZoom.bind(this);
     this.getDefaultStyle = this.getDefaultStyle.bind(this);
     this.updateDefaultStyle = this.updateDefaultStyle.bind(this);
     this.getStyleSelectorItems = this.getStyleSelectorItems.bind(this);
@@ -185,6 +190,30 @@ class ProductOverview extends React.Component {
     return sizesInStock;
   }
 
+  handleExpandedView(e) {
+    e.stopPropagation();
+    this.setState({
+      isExpanded: true
+    });
+  }
+
+  handleCollapsedView(e) {
+    if (e.currentTarget.classList.contains('image-gallery-collapsed-view-toggle')) {
+      e.stopPropagation();
+      this.setState({
+        isExpanded: false
+      });
+    }
+  }
+
+  handleImageZoom(e) {
+    e.stopPropagation();
+    console.log('isZoomed', !this.state.isZoomed);
+    this.setState({
+      isZoomed: !this.state.isZoomed
+    });
+  }
+
   handleStyleClick(id) {
     console.log(`Style id ${id} clicked`);
     this.setStyleById(id);
@@ -209,29 +238,36 @@ class ProductOverview extends React.Component {
       <div id="product-overview">
         <div class="row">
           <ImageGallery
-            styleId={ styleId }
-            photos={ selectedStyle.photos }
+            photos={selectedStyle.photos}
+            isExpanded={this.state.isExpanded}
+            isZoomed={this.state.isZoomed}
+            onClickExpand={this.handleExpandedView}
+            onClickCollapse={this.handleCollapsedView}
+            onClickZoom={this.handleImageZoom}
           />
-          <div id="product-col-right" class="column">
-            <ProductInformation
-              name={ selectedProduct.name }
-              averageRating={this.averageRating}
-              reviewCount={this.numberOfReviews}
-              category={ selectedProduct.category }
-              defaultPrice={ selectedProduct.default_price }
-              originalPrice={ selectedStyle.original_price }
-              salePrice={ selectedStyle.sale_price }
-            />
-            <StyleSelector
-              selectedId = { styleId }
-              name={ selectedStyle.name }
-              items={ selectorItems }
-              onClick={ this.handleStyleClick }
-            />
-            <Cart
-              skus={ sizesAvailable }
-            />
-          </div>
+          {
+            !this.state.isExpanded &&
+            <div id="po-col-right" class="column">
+              <ProductInformation
+                name={ selectedProduct.name }
+                averageRating={this.averageRating}
+                reviewCount={this.numberOfReviews}
+                category={ selectedProduct.category }
+                defaultPrice={ selectedProduct.default_price }
+                originalPrice={ selectedStyle.original_price }
+                salePrice={ selectedStyle.sale_price }
+              />
+              <StyleSelector
+                selectedId = { styleId }
+                name={ selectedStyle.name }
+                items={ selectorItems }
+                onClick={ this.handleStyleClick }
+              />
+              <Cart
+                skus={ sizesAvailable }
+              />
+            </div>
+          }
         </div>
         {
           slogan && description &&

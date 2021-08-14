@@ -79,12 +79,12 @@ class ImageNavigator extends React.Component {
     let itemKey = startIndex;
 
     return (
-      <div class="image-navigator">
+      <div class="image-navigator-component">
         {
           model.firstIndexNotVisible(startIndex) &&
           <div class={itemClass} onClick={this.handleDecrement}>
             <div class="navigator-align">
-              <div class="navigator decrement">
+              <div class="image-navigator-control image-navigator-decrement">
                 <svg viewBox="0,0,1000,837">
                   <path
                     d="M71.9816+837.371L500.008+309.729L928.018+837.371L1000+778.965L500.008+162.629L0+778.965L71.9816+837.371Z"
@@ -133,7 +133,7 @@ class ImageNavigator extends React.Component {
               }
               {
                 item.id === this.props.selectedId && !useCase.icons &&
-                <div class="thumbnail-selected"></div>
+                <div class="image-navigator-thumbnail-selected"></div>
               }
             </div>
           ))
@@ -145,7 +145,7 @@ class ImageNavigator extends React.Component {
           model.lastIndexNotVisible(endIndex) &&
           <div class={itemClass} onClick={this.handleIncrement}>
             <div class="navigator-align">
-              <div class="navigator increment">
+              <div class="image-navigator-control image-navigator-increment">
                 <svg viewBox="0,0,1000,837">
                   <path
                     d="M71.9816-0.371452L500.008+527.271L928.018-0.371452L1000+58.0347L500.008+674.371L0+58.0347L71.9816-0.371452Z"
