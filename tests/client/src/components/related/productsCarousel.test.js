@@ -8,7 +8,7 @@ const products = [
 ];
 
 describe('<ProductsCarousel />', () => {
-  const carousel = shallow(<ProductsCarousel products={products} />);
+  const carousel = shallow(<ProductsCarousel productIds={[11, 12]} />);
   it('renders', () => {
     expect(carousel.find('div#ProductsCarousel')).toHaveLength(1);
   });

@@ -1,6 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); */
 
 #RelatedProducts {
+  /* box-sizing: content-box; */
   display: flex;
   flex-flow: column;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -13,12 +14,14 @@
 }
 
 .rp-card-container {
+  /* box-sizing: content-box; */
   display: flex;
   flex-flow: row nowrap;
   overflow: auto;
   justify-content: stretch;
   flex: 1;
   margin: 8px 0;
+  min-height: 25em;
 }
 
 .rp-title {
@@ -37,7 +40,7 @@
   align-items: flex-start;
   justify-content: stretch;
   width: 15em;
-  height: 20em;
+  height: 22em;
   border: 1px solid #333;
   margin-right: 8px;
   user-select: none;
@@ -49,7 +52,7 @@
   flex: none;
   justify-content: space-between;
   padding: 6px;
-  height: 34%;
+  height: 6em;
 }
 
 .rp-price {
@@ -61,17 +64,32 @@
 }
 
 .rp-image-backer {
+  flex-shrink: 0;
+  display: inline-flex;
+  vertical-align: middle;
   background-color: #ddd;
-  display: flex;
-  flex-flow: row-reverse;
   width: 15em;
   height: 15em;
+  overflow: hidden;
   position: relative;
   top: 0;
   left: 0;
 }
 
+.rp-card img {
+  margin: auto;
+  min-width: 15em;
+  min-height: 15em;
+  justify-self: center;
+}
+
 .rp-compare-symbol, .remove-from-outfit-symbol {
+  color: #ffff;
+  /* mix-blend-mode: difference; */
+  text-shadow: 0 0 2px black;
+  position: relative;
+  top: -.1em;
+  right: 2em;
   height: 1.3em;
   width: 1.3em;
   font-size: 1.3em;
@@ -86,10 +104,11 @@
 
 .remove-from-outfit-symbol {
   font-size: 2.5em;
+  right: .8em;
   transform: rotate(45deg);
   border-radius: 1.25em;
   /* border: 2px solid; */
-  font-weight: 100;
+  font-weight: 400;
   padding: 0;
   margin: 0;
   /* background-color: #fff5; */
