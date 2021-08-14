@@ -77,7 +77,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // const initialId = 28212 + Math.round(Math.random() * 10);
     axios.get('/products?page=1&count=1')
       .then(res => {
         console.log(res.data);
