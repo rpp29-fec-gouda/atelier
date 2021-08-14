@@ -34,6 +34,9 @@ td {
   width: 250px
 }
 
+.question_body{
+  font-weight: bold;
+}
 .helpfulness {
   text-align: right;
 }
@@ -67,14 +70,14 @@ td {
   text-decoration: none;
 }
 
-.answers_list {
+.answers_scrolling {
   overflow: scroll;
-  max-height:50%; 
+  max-height: 200px; 
 }
 
-.questions_list {
+.questions_scrolling {
   overflow: scroll;
-  max-height: 50%; 
+  max-height: 500px;
 }
 
 img.thumbnail {

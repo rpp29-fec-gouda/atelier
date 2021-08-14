@@ -1,0 +1,12 @@
+#sort {
+  font-weight: bold;
+}
+select {
+  border: 0px;
+  outline: 0px;
+  font-weight: bold;
+  text-transform: lowercase;
+  text-decoration-line: underline;
+  margin: 0em, 0em, 0em, 0em;
+  padding: 0em;
+}

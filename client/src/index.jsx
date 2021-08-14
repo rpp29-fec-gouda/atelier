@@ -41,10 +41,15 @@ class App extends React.Component {
   }
 
   selectProduct(product) {
-    console.log(`${product.name} selected`);
-    this.setState({
-      selectedProduct: product
-    });
+    if (this.state.selectedProduct.id !== product.id) {
+      // const product = this.checkCache('products', productId);
+      if (product) {
+        console.log(`${product.name} selected`);
+        this.setState({
+          selectedProduct: product
+        });
+      }
+    }
   }
 
   checkCache(cacheName, productId) {
@@ -63,22 +68,23 @@ class App extends React.Component {
     });
   }
 
-  updateRatings(ratings, characteristics, recommended) {
+  updateRatings(ratings, characteristics, recommended, averageRating, totalRating) {
     this.setState({
-      selectedProductRating: { ratingsCount: 7, avgRating: 7, ratings: ratings },
+      selectedProductRating: { ratingsCount: totalRating, avgRating: averageRating, ratings: ratings },
     }, () => (
       console.log('Ratings State: ', this.state.selectedProductRating)
     ));
   }
 
   componentDidMount() {
-    const randomInitialId = 36300 + Math.round(Math.random() * 10);
-    axios.get(`/products/${randomInitialId}`)
+
+    // const initialId = 28212 + Math.round(Math.random() * 10);
+    axios.get('/products?page=1&count=1')
       .then(res => {
-        const product = res.data;
+        console.log(res.data);
+        const product = res.data[0];
         this.cache.products.set(product.id, product);
         this.setState({
-          products: [product],
           selectedProduct: product,
           ready: true
         });
@@ -93,7 +99,7 @@ class App extends React.Component {
     }
     let key = 0;
     return ready ? (
-      <div id='app'>
+      <React.Fragment>
         <ProductOverview
           selectedProduct={selectedProduct}
           isTesting={this.props.isTesting}
@@ -105,7 +111,7 @@ class App extends React.Component {
           updateCache={ this.updateCache }
 
         />
-        <QA productId={selectedProduct.id} />
+        <QA selectedProduct={selectedProduct} />
         <br></br>
         <RatingsAndReviews
           reviews={this.state.reviews}
@@ -113,7 +119,7 @@ class App extends React.Component {
           selectedProduct={selectedProduct}
           updateReviews={this.updateReviews}
           updateRatings={this.updateRatings} />
-      </div>
+      </React.Fragment>
     ) : (
       <p>Loading...</p>
     );
@@ -123,6 +129,6 @@ class App extends React.Component {
 export default App;
 
 const div = document.createElement('div');
-div.setAttribute('id', 'Atelier');
+div.setAttribute('id', 'App');
 document.body.appendChild(div);
 ReactDOM.render(<App />, div);

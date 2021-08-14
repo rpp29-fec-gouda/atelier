@@ -41,12 +41,12 @@ class AddingForm extends React.Component {
     }
   }
 
+
   updatePhotoUrl (photos) {
     this.setState ({
       photos: photos
     });
   }
-
 
   checkingRequire() {
     let requires = {};
@@ -90,8 +90,9 @@ class AddingForm extends React.Component {
     if (this.checkingRequire()) {
       axios.post(url, data)
         .then(res => {
-          console.log(res);
-          this.props.closePopup();
+          console.log('submit success', res);
+          this.props.closePopup(0);
+          this.props.updateData();
         })
         .catch(err => console.log('submit err', err));
     }
