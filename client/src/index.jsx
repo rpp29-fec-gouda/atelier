@@ -77,10 +77,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const initialId = 28212 + Math.round(Math.random() * 10);
-    axios.get(`/products/${initialId}`)
+    // const initialId = 28212 + Math.round(Math.random() * 10);
+    axios.get('/products?page=1&count=1')
       .then(res => {
-        const product = res.data;
+        console.log(res.data);
+        const product = res.data[0];
         this.cache.products.set(product.id, product);
         this.setState({
           selectedProduct: product,
