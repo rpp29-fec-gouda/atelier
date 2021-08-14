@@ -1,19 +1,19 @@
-.reviews-list {
+.rr-reviews-list {
   order: 2;
   flex-basis: 70%;
 }
 
-.displayedReviews {
+.rr-displayed-reviews {
   max-height: 75vh;
   overflow-y: scroll;
 }
 
-.review-buttons {
+.rr-review-buttons {
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;}
 
-#more-reviews {
+#rr-more-reviews {
   font-size: 1em;
   padding: 1em;
   margin: 0.7em, 0.7em, 0.7em, 0em;

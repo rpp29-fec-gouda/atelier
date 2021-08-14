@@ -23,17 +23,17 @@ describe('<QA testing />', () => {
 
   test('should add 2 questions when click more answered question button', () => {
     const wrapper = mount(<QuestionList questions={questionsData}/>);
-    expect(wrapper.find('table.question_table')).toHaveLength(2);
-    wrapper.find('button.more_questions').simulate('click');
-    expect(wrapper.find('table.question_table')).toHaveLength(4);
+    expect(wrapper.find('table.QA_question_table')).toHaveLength(2);
+    wrapper.find('button.QA_more_questions').simulate('click');
+    expect(wrapper.find('table.QA_question_table')).toHaveLength(4);
   });
 });
 
 describe ('Render questions and answer', () => {
   test('should render question body', () => {
     const wrapper = mount(<QuestionList questions={questionsData} />);
-    expect(wrapper.find('.question')).toHaveLength(2);
-    expect(wrapper.find('.question_body').at(0).text()).toBe('question 1');
+    expect(wrapper.find('.QA_question')).toHaveLength(2);
+    expect(wrapper.find('.QA_question_body').at(0).text()).toBe('question 1');
   });
 
   

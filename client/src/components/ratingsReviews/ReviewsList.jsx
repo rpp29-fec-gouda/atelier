@@ -14,19 +14,19 @@ const ReviewsList = (props) => {
   };
 
   return (
-    <div className='reviews-list'>
+    <div className='rr-reviews-list'>
       <Sort
         reviews={displayedReviews}
         sortOptions={sortOptions}
         handleReviewSort={handleReviewSort} />
       <KeywordSearch />
-      <div className='displayedReviews'>
+      <div className='rr-displayed-reviews'>
         <ReviewTile
           reviews={displayedReviews} />
       </div>
-      <div className='review-buttons'>
+      <div className='rr-review-buttons'>
         {count < reviewsLength ?
-          <div id='more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
+          <div id='rr-more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
           : null
         }
         <NewReview reviews={reviews} />
