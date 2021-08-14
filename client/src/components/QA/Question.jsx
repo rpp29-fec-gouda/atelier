@@ -24,7 +24,7 @@ class Question extends React.Component {
   }
 
   scrollToBottom() {
-    const questionsBox = document.getElementById('questions_scrolling');
+    const questionsBox = document.getElementById('qa-questions-scrolling');
     if (questionsBox) {
       setTimeout(( ) => {
         questionsBox.scrollTop = questionsBox.scrollHeight - questionsBox.clientHeight;
@@ -49,20 +49,20 @@ class Question extends React.Component {
         const body = question.question_body;
         const answers = question.answers;
         return (
-          <div key={questionId} className='QA_question'>
-            <table className='QA_question_table'>
+          <div key={questionId} className='qa-question'>
+            <table className='qa-question-table'>
               <tbody>
                 <tr>
-                  <td width='5%' className='QA_character'>Q:</td>
-                  <td width='45%' className='QA_question_body'>{body}</td>
-                  <td width='30%' className='QA_helpfulness'>
+                  <td width='5%' className='qa-character'>Q:</td>
+                  <td width='45%' className='qa-question-body'>{body}</td>
+                  <td width='30%' className='qa-helpfulness'>
                     <Helpfulness question={question} />
                   </td>
                   <td width='20%'> |
-                    <a href='#!' id={questionId} className='QA_add_answer' onClick={this.addAnswerClicked}> Add answer </a></td>
+                    <a href='#!' id={questionId} className='qa-add-answer' onClick={this.addAnswerClicked}> Add answer </a></td>
                 </tr>
                 <tr>
-                  <td width='5%' className='QA_character'>A:</td>
+                  <td width='5%' className='qa-character'>A:</td>
                   <td width='45%'><AnswersList answers={answers} /></td>
                   <td> </td>
                 </tr>
@@ -76,13 +76,13 @@ class Question extends React.Component {
 
     return (
       <div>
-        <div className='QA_questions_scrolling'>
+        <div id='qa-questions-scrolling' className='qa-questions-scrolling'>
           {questionsList}
           {this.scrollToBottom()}
         </div>
         {this.state.addAnswerClicked ?
-          <div className='QA_popup'>
-            <div className='QA_close' onClick={this.addAnswerClicked} >X</div>
+          <div className='qa-popup'>
+            <div className='qa-close' onClick={this.addAnswerClicked} >X</div>
             <AddingForm
               questionId={this.state.questionId}
               closePopup={this.addAnswerClicked}

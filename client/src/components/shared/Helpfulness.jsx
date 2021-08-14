@@ -77,7 +77,7 @@ class Helpfulness extends React.Component {
   toggleYesText() {
     if (!this.state.clicked) {
       return (
-        <a href='#!' onClick={() => this.addHelpfulness()}>
+        <a href='#!' className='yes-link' onClick={() => this.addHelpfulness()}>
           Yes
         </a>
       );

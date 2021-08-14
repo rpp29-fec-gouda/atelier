@@ -7,10 +7,11 @@ class AnswersList extends React.Component {
   constructor(props) {
     super(props);
     this.answersLength = Object.keys(this.props.answers).length;
+    this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.state = {
       answersDisplay: 2,
       showButton: false,
-      buttonLabel: 'Collapse answers',
+      buttonLabel: 'COLLAPSE ANSWERS',
       answersLength: this.answersLength
     };
   }
@@ -19,7 +20,7 @@ class AnswersList extends React.Component {
     if (this.answersLength > this.state.answersDisplay) {
       this.setState({
         showButton: true,
-        buttonLabel: 'Load more answers'
+        buttonLabel: 'LOAD MORE ANSWERS'
       });
     }
   }
@@ -40,12 +41,12 @@ class AnswersList extends React.Component {
     if (answersDisplay === 2) {
       this.setState({
         answersDisplay: this.answersLength,
-        buttonLabel: 'Collapse answers'
+        buttonLabel: 'COLLAPSE ANSWERS'
       });
     } else {
       this.setState({
         answersDisplay: 2,
-        buttonLabel: 'Load more answers'
+        buttonLabel: 'LOAD MORE ANSWERS'
       });
     }
   }
@@ -78,8 +79,8 @@ class AnswersList extends React.Component {
     const moreAnswersButton = () => {
       if (this.state.showButton) {
         return (
-          <div className='QA_more_answer_button'>
-            < button onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</button >
+          <div className='qa-more-answer'>
+            <span href='#!' onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</span>
           </div>
         );
       } else {
@@ -91,10 +92,10 @@ class AnswersList extends React.Component {
     const renderAnswer = answers.map((answer, key) => {
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answer.id} className='QA_answers_list'>
-            <div className='QA_answer_body'>{answer.body}</div>
+          <div key={answer.id} className='qa-answers-list'>
+            <div className='qa-answer-body'>{answer.body}</div>
             <DisplayPhotos photos={answer.photos} />
-            <div className='QA_answer_by'>
+            <div className='qa-answer-by'>
               <div className='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
               <div className='inline'> | </div>
@@ -108,7 +109,7 @@ class AnswersList extends React.Component {
 
     return (
       <React.Fragment >
-        <div className='QA_answers_scrolling'>
+        <div className='qa-answers-scrolling'>
           {renderAnswer}
         </div>
         {moreAnswersButton()}
