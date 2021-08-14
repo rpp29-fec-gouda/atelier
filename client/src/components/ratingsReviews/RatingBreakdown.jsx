@@ -51,8 +51,8 @@ const RatingBreakdown = (props) => {
     }
 
     return (
-      <div id='rating-breakdown'>
-        <span className='rating-breakdown average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
+      <div id='rr-rating-breakdown'>
+        <span className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
         <span>{stars.map(star => (
           <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
         ))}</span>
@@ -67,7 +67,7 @@ const RatingBreakdown = (props) => {
     );
   } else {
     return (
-      <div id='rating-breakdown'></div>
+      <div id='rr-rating-breakdown'></div>
     );
   }
 };
