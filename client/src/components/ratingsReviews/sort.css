@@ -1,7 +1,7 @@
-#sort {
+#rr-sort {
   font-weight: bold;
 }
-select {
+.rr-dropdown {
   border: 0px;
   outline: 0px;
   font-weight: bold;

@@ -7,7 +7,7 @@ const RatingList = (props) => {
   const { reviews, ratings, characteristics, recommended, handleRatingProgressFilter, ratingDetails } = props;
 
   return (
-    <div id='rating-list'>
+    <div id='rr-rating-list'>
       <RatingBreakdown
         ratings={ratings}
         ratingDetails={ratingDetails}

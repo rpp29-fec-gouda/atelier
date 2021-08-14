@@ -9,16 +9,16 @@ const RatingProgress = (props) => {
   };
 
   return completed ? (
-    <div id='rating-progress'>
+    <div id='rr-rating-progress'>
       <div onClick={handleRatingProgressFilter} id={completed.star}></div>
-      <div class='progress'>
-        <label for='progress-bar label' onClick={handleClick}>{completed.star}</label>
-        <meter class='progress-bar meter' onClick={handleClick} value={isNaN(completed.percentage) ? '' : completed.percentage} min='0' max='100'>{isNaN(completed.percentage) ? '' : completed.percentage}</meter>
-        <label for='progress-bar label' onClick={handleClick}>{completed.count}</label>
+      <div class='rr-rating-progress-bar'>
+        <label for='rr-progress-bar rr-label' onClick={handleClick}>{completed.star}</label>
+        <meter class='rr-progress-bar rr-meter' onClick={handleClick} value={isNaN(completed.percentage) ? '' : completed.percentage} min='0' max='100'>{isNaN(completed.percentage) ? '' : completed.percentage}</meter>
+        <label for='rr-progress-bar rr-label' onClick={handleClick}>{completed.count}</label>
       </div>
     </div>
   ) : (
-    <div id='rating-progress'></div>
+    <div id='rr-rating-progress'></div>
   );
 };
 

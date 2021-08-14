@@ -1,54 +1,55 @@
-#review-tile {
+#rr-review-tile {
   padding-top: 5%;
 }
 
-.review {
+.rr-review {
   max-height: 100%;
   max-width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.user-stamp {
+.rr-user-stamp {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.review-rating {
+.rr-review-rating {
   justify-content: flex-start;
 }
 
-.review-date {
+.rr-review-date {
   justify-content: flex-end;
 }
 
-.reviewer-name {
+.rr-reviewer-name {
   justify-content: flex-end;
 }
 
-.review-summary{
+.rr-review-summary{
   font-weight:bold;
 }
 
-.review-response {
+.rr-review-response {
   background-color: lightslategrey;
 }
 
-.tile {
+.rr-tile {
   padding-top: 2%;
 }
 
-.review-photos {
+.rr-review-photos {
   display: flex;
   justify-content: left;
 }
 
-.photos {
+.rr-photos {
   padding-right: .5em;
 }
 
-.review-photos img {
+.rr-photo {
   width: 5em;
   height: 5em;
+
  }

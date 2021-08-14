@@ -16,16 +16,16 @@ const ProductBreakdown = (props) => {
   };
 
   return characteristics ? (
-    <div id='product-breakdown'>
+    <div id='rr-product-breakdown'>
       {Object.entries(chart.Characteristics).map((characteristic, i) => (
         <div key={i}>{characteristic[0]}
           <br></br>
           <div>
-            <input type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value.slice(0, 4)} readonly></input>
-            <datalist id="tickmarks">
-              <option value="1" id={characteristic[0]}>{chart[characteristic[0]].first}</option>
-              <option value="3" id={characteristic[0]}>{chart[characteristic[0]].third}</option>
-              <option value="5" id={characteristic[0]}>{chart[characteristic[0]].fifth}</option>
+            <input className='rr-bar-chart' type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value.slice(0, 4)} readonly></input>
+            <datalist className="rr-breakdown-tickmarks">
+              <option className='rr-breakdown-option' value="1" id={characteristic[0]}>{chart[characteristic[0]].first}</option>
+              <option className='rr-breakdown-option'value="3" id={characteristic[0]}>{chart[characteristic[0]].third}</option>
+              <option className='rr-breakdown-option'value="5" id={characteristic[0]}>{chart[characteristic[0]].fifth}</option>
             </datalist>
           </div>
         </div>
