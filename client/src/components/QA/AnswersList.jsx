@@ -80,7 +80,9 @@ class AnswersList extends React.Component {
       if (this.state.showButton) {
         return (
           <div className='qa-more-answer'>
-            <span href='#!' onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</span>
+            <span href='#!' id='qa-more-answer' onClick={this.loadMoreAnswers.bind(this)} >
+              {this.state.buttonLabel}
+            </span>
           </div>
         );
       } else {

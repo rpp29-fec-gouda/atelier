@@ -95,7 +95,6 @@ class QuestionsList extends React.Component {
           onClick={this.addQuestionClicked}
           label={'ADD A QUESTION'}
         />
-        {/* <button className='qa-add-question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button> */}
         {this.addQuestionForm()}
       </div >
 
