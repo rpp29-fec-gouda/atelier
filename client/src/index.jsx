@@ -76,9 +76,8 @@ class App extends React.Component {
     ));
   }
 
-  componentDidMount() {
-    const initialId = 28212 + Math.round(Math.random() * 10);
-    axios.get(`/products/${initialId}`)
+  getSelectedData(selectedId) {
+    axios.get(`/products/${selectedId}`)
       .then(res => {
         const product = res.data;
         this.cache.products.set(product.id, product);
@@ -86,6 +85,16 @@ class App extends React.Component {
           selectedProduct: product,
           ready: true
         });
+      });
+  }
+
+  componentDidMount() {
+    axios.get('/products')
+      .then(res => {
+        const products = res.data;
+        const randomSelect = Math.round(Math.random() * products.length);
+        const selectedId = products[randomSelect].id;
+        this.getSelectedData(selectedId);
       });
   }
 
@@ -105,8 +114,8 @@ class App extends React.Component {
         <RelatedProducts
           selectedProduct={selectedProduct}
           selectProduct={this.selectProduct}
-          checkCache={ this.checkCache }
-          updateCache={ this.updateCache }
+          checkCache={this.checkCache}
+          updateCache={this.updateCache}
 
         />
         <QA selectedProduct={selectedProduct} />
