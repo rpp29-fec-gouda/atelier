@@ -198,7 +198,7 @@ class ProductOverview extends React.Component {
   }
 
   handleCollapsedView(e) {
-    if (e.currentTarget.classList.contains('collapsed-view-toggle')) {
+    if (e.currentTarget.classList.contains('image-gallery-collapsed-view-toggle')) {
       e.stopPropagation();
       this.setState({
         isExpanded: false
@@ -247,7 +247,7 @@ class ProductOverview extends React.Component {
           />
           {
             !this.state.isExpanded &&
-            <div id="product-col-right" class="column">
+            <div id="po-col-right" class="column">
               <ProductInformation
                 name={ selectedProduct.name }
                 averageRating={this.averageRating}

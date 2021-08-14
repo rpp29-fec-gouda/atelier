@@ -82,7 +82,7 @@ describe('<ImageGalleryModel />', () => {
     const selectedPhotoIndex = 2;
 
     let model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('collapsed-view');
+    expect(model.getViewId()).toEqual('image-gallery-collapsed-view');
 
     props = {
       photos: photos,
@@ -90,7 +90,7 @@ describe('<ImageGalleryModel />', () => {
       isZoomed: false
     };
     model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('collapsed-view');
+    expect(model.getViewId()).toEqual('image-gallery-collapsed-view');
   });
 
   it('getViewId should return expanded if not collapsed or zoomed:', function () {
@@ -100,7 +100,7 @@ describe('<ImageGalleryModel />', () => {
     const selectedPhotoIndex = 2;
 
     let model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('expanded-view');
+    expect(model.getViewId()).toEqual('image-gallery-expanded-view');
 
     props = {
       photos: photos,
@@ -108,7 +108,7 @@ describe('<ImageGalleryModel />', () => {
       isZoomed: false
     };
     model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('collapsed-view');
+    expect(model.getViewId()).toEqual('image-gallery-collapsed-view');
   });
 
   it('getViewId should return zoomed only if expanded and zoomed:', function () {
@@ -119,14 +119,14 @@ describe('<ImageGalleryModel />', () => {
     const selectedPhotoIndex = 2;
 
     let model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('zoomed-view');
+    expect(model.getViewId()).toEqual('image-gallery-zoomed-view');
 
     props = {
       isExpanded: false,
       isZoomed: true
     };
     model = new ImageGalleryModel(props, selectedPhotoIndex);
-    expect(model.getViewId()).toEqual('collapsed-view');
+    expect(model.getViewId()).toEqual('image-gallery-collapsed-view');
   });
 
   it('getAttributes should return empty if not expanded:', function () {

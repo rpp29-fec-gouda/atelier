@@ -25,9 +25,9 @@ describe('<Price />', () => {
       defaultPrice: 99.99
     };
     const wrapper = shallow(<Price {...props} />);
-    expect(wrapper.find('#price')).toHaveLength(1);
-    expect(wrapper.find('div.sale-price')).toHaveLength(0);
-    expect(wrapper.find('div.original-price')).toHaveLength(0);
+    expect(wrapper.find('#po-price')).toHaveLength(1);
+    expect(wrapper.find('div.po-sale-price')).toHaveLength(0);
+    expect(wrapper.find('div.po-original-price')).toHaveLength(0);
   });
 
   it('should have expected sale price classes:', function () {
@@ -37,8 +37,8 @@ describe('<Price />', () => {
       originalPrice: 80.00
     };
     const wrapper = shallow(<Price {...props} />);
-    expect(wrapper.find('#price')).toHaveLength(1);
-    expect(wrapper.find('div.sale-price')).toHaveLength(1);
-    expect(wrapper.find('div.original-price')).toHaveLength(1);
+    expect(wrapper.find('#po-price')).toHaveLength(1);
+    expect(wrapper.find('div.po-sale-price')).toHaveLength(1);
+    expect(wrapper.find('div.po-original-price')).toHaveLength(1);
   });
 });

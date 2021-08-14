@@ -72,12 +72,12 @@ describe('<ImageGallery />', () => {
     };
     const wrapper = shallow(<ImageGallery {...props} />);
 
-    wrapper.find('.expanded-view-toggle').first().simulate('click');
+    wrapper.find('.image-gallery-expanded-view-toggle').first().simulate('click');
     expect(mockCallBackZoom.mock.calls.length).toEqual(0);
     expect(mockCallBackExpand.mock.calls.length).toEqual(1);
     expect(mockCallBackCollapse.mock.calls.length).toEqual(0);
 
-    wrapper.find('#main-image').first().simulate('click');
+    wrapper.find('#po-main-image').first().simulate('click');
     expect(mockCallBackZoom.mock.calls.length).toEqual(0);
     expect(mockCallBackExpand.mock.calls.length).toEqual(2);
     expect(mockCallBackCollapse.mock.calls.length).toEqual(0);
@@ -96,7 +96,7 @@ describe('<ImageGallery />', () => {
     };
     const wrapper = shallow(<ImageGallery {...props} />);
 
-    wrapper.find('.collapsed-view-toggle').first().simulate('click');
+    wrapper.find('.image-gallery-collapsed-view-toggle').first().simulate('click');
     expect(mockCallBackZoom.mock.calls.length).toEqual(0);
     expect(mockCallBackExpand.mock.calls.length).toEqual(0);
     expect(mockCallBackCollapse.mock.calls.length).toEqual(1);
@@ -116,7 +116,7 @@ describe('<ImageGallery />', () => {
     };
     const wrapper = mount(<ImageGallery {...props} />);
 
-    wrapper.find('#main-image').first().simulate('click');
+    wrapper.find('#po-main-image').first().simulate('click');
     expect(mockCallBackZoom.mock.calls.length).toEqual(1);
     expect(mockCallBackExpand.mock.calls.length).toEqual(0);
     expect(mockCallBackCollapse.mock.calls.length).toEqual(0);

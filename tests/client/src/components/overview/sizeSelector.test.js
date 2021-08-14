@@ -25,9 +25,9 @@ describe('<SizeSelector />', () => {
       sizes: ['XS', 'S', 'M', 'L', 'XL', 'XL']
     };
     const wrapper = shallow(<SizeSelector {...props} />);
-    expect(wrapper.find('#size-selector')).toHaveLength(1);
-    expect(wrapper.find('#sizes')).toHaveLength(1);
-    expect(wrapper.find('#sizes').children()).toHaveLength(props.sizes.length + 1);
+    expect(wrapper.find('#po-size-selector')).toHaveLength(1);
+    expect(wrapper.find('#po-sizes')).toHaveLength(1);
+    expect(wrapper.find('#po-sizes').children()).toHaveLength(props.sizes.length + 1);
   });
 
   it('should execute a callback:', function () {
@@ -39,7 +39,7 @@ describe('<SizeSelector />', () => {
       onSelect: mockCallBack
     };
     const wrapper = shallow(<SizeSelector {...props} />);
-    wrapper.find('#sizes').simulate('change');
+    wrapper.find('#po-sizes').simulate('change');
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 
@@ -49,7 +49,7 @@ describe('<SizeSelector />', () => {
       sizes: []
     };
     const wrapper = shallow(<SizeSelector {...props} />);
-    expect(wrapper.find('#sizes').props().disabled).toEqual(true);
-    expect(wrapper.find('#sizes').children().first().text()).toEqual('Out of Stock');
+    expect(wrapper.find('#po-sizes').props().disabled).toEqual(true);
+    expect(wrapper.find('#po-sizes').children().first().text()).toEqual('Out of Stock');
   });
 });

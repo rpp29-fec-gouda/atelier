@@ -19,8 +19,8 @@ describe('<ScrollingArrows />', () => {
     const wrapper = shallow(<ScrollingArrows />);
     expect(wrapper.state().index).toEqual(0);
     expect(wrapper.instance().min).toEqual(0);
-    expect(wrapper.find('.decrement-no-stem')).toHaveLength(1);
-    expect(wrapper.find('.increment-no-stem')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-decrement-no-stem')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-increment-no-stem')).toHaveLength(1);
   });
 
   it('should execute callback event', () => {
@@ -31,24 +31,24 @@ describe('<ScrollingArrows />', () => {
     };
 
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(1);
-    wrapper.find('.increment').simulate('click');
+    wrapper.find('.scrolling-arrows-increment').simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(2);
   });
 
   it('should decrement & decrement index', () => {
     const wrapper = shallow(<ScrollingArrows />);
     expect(wrapper.state().index).toEqual(0);
-    wrapper.find('.increment').simulate('click');
+    wrapper.find('.scrolling-arrows-increment').simulate('click');
     expect(wrapper.state().index).toEqual(1);
-    wrapper.find('.increment').simulate('click');
+    wrapper.find('.scrolling-arrows-increment').simulate('click');
     expect(wrapper.state().index).toEqual(2);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(1);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(0);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(-1);
   });
 
@@ -57,8 +57,8 @@ describe('<ScrollingArrows />', () => {
       stem: true
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.find('.decrement-stem')).toHaveLength(1);
-    expect(wrapper.find('.increment-stem')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-decrement-stem')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-increment-stem')).toHaveLength(1);
   });
 
   it('should set default index to min', function () {
@@ -76,11 +76,11 @@ describe('<ScrollingArrows />', () => {
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
     expect(wrapper.state().index).toEqual(1);
-    wrapper.find('.increment').simulate('click');
+    wrapper.find('.scrolling-arrows-increment').simulate('click');
     expect(wrapper.state().index).toEqual(2);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(1);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(0);
   });
 
@@ -91,7 +91,7 @@ describe('<ScrollingArrows />', () => {
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
     expect(wrapper.state().index).toEqual(props.min);
-    wrapper.find('.decrement').simulate('click');
+    wrapper.find('.scrolling-arrows-decrement').simulate('click');
     expect(wrapper.state().index).toEqual(props.max);
   });
 
@@ -103,7 +103,7 @@ describe('<ScrollingArrows />', () => {
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
     expect(wrapper.state().index).toEqual(props.max);
-    wrapper.find('.increment').simulate('click');
+    wrapper.find('.scrolling-arrows-increment').simulate('click');
     expect(wrapper.state().index).toEqual(props.min);
   });
 
@@ -115,8 +115,8 @@ describe('<ScrollingArrows />', () => {
       max: 2,
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.find('.decrement')).toHaveLength(0);
-    expect(wrapper.find('.increment')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-decrement')).toHaveLength(0);
+    expect(wrapper.find('.scrolling-arrows-increment')).toHaveLength(1);
   });
 
   it('should hide increment icon if at max & is capped', function () {
@@ -127,7 +127,7 @@ describe('<ScrollingArrows />', () => {
       index: 2
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.find('.decrement')).toHaveLength(1);
-    expect(wrapper.find('.increment')).toHaveLength(0);
+    expect(wrapper.find('.scrolling-arrows-decrement')).toHaveLength(1);
+    expect(wrapper.find('.scrolling-arrows-increment')).toHaveLength(0);
   });
 });

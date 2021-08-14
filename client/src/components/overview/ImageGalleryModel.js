@@ -36,9 +36,9 @@ class ImageGalleryModel {
 
   getViewId() {
     if (this.isExpanded) {
-      return this.isZoomed ? 'zoomed-view' : 'expanded-view';
+      return this.isZoomed ? 'image-gallery-zoomed-view' : 'image-gallery-expanded-view';
     } else {
-      return 'collapsed-view';
+      return 'image-gallery-collapsed-view';
     }
   }
 

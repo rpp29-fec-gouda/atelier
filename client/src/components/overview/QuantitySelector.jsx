@@ -7,7 +7,7 @@ const QuantitySelector = (props) => {
   const quantitiesAvailable = props.maxQuantity && maxQuantityCapped > 0;
 
   const resetToDefaultSelected = () => {
-    const options = document.querySelectorAll('#quantity option');
+    const options = document.querySelectorAll('#po-quantity option');
     for (let i = 0; i < options.length; i++) {
       options[i].selected = options[i].defaultSelected;
     }
@@ -29,8 +29,8 @@ const QuantitySelector = (props) => {
     let key = 0;
     let defaultValue = 1;
     return (
-      <div id="quantity-selector">
-        <select id="quantity" name="quantity" defaultValue={ defaultValue } onChange={onChange}>
+      <div id="po-quantity-selector">
+        <select id="po-quantity" name="quantity" defaultValue={ defaultValue } onChange={onChange}>
           {
             quantities.length &&
             quantities.map(quantity => (
@@ -42,8 +42,8 @@ const QuantitySelector = (props) => {
     );
   } else {
     return (
-      <div id="quantity-selector">
-        <select id="quantity" name="quantity" disabled>
+      <div id="po-quantity-selector">
+        <select id="po-quantity" name="quantity" disabled>
           <option value={-1}>-</option>
         </select>
       </div>

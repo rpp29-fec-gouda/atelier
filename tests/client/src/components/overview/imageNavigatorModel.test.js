@@ -125,7 +125,7 @@ describe('<ImageNavigatorModel />', () => {
   });
 });
 
-describe('<ImageNavigatorModel /> thumbnail', () => {
+describe('<ImageNavigatorModel /> image-navigator-thumbnail', () => {
   const thumbnails = [
     {
       id: 0,
@@ -211,12 +211,12 @@ describe('<ImageNavigatorModel /> thumbnail', () => {
     expect(model.getUseCase().placeholders).toEqual(false);
   });
 
-  it('getItemChildClass should return \'thumbnail\':', function () {
+  it('getItemChildClass should return \'image-navigator-thumbnail\':', function () {
     const props = {
       thumbnails: thumbnails
     };
     const model = new ImageNavigatorModel(props);
-    expect(model.getItemChildClass()).toEqual('thumbnail');
+    expect(model.getItemChildClass()).toEqual('image-navigator-thumbnail');
   });
 
   it('getItemParentClass should return base class case:', function () {
@@ -293,7 +293,7 @@ describe('<ImageNavigatorModel /> thumbnail', () => {
   });
 });
 
-describe('<ImageNavigatorModel /> icon', () => {
+describe('<ImageNavigatorModel /> image-navigator-icon', () => {
   it('should initialize expected properties:', function () {
     let props = {
       useIcons: true,
@@ -341,14 +341,14 @@ describe('<ImageNavigatorModel /> icon', () => {
     expect(model.getUseCase().placeholders).toEqual(false);
   });
 
-  it('getItemChildClass should return \'icon\':', function () {
+  it('getItemChildClass should return \'image-navigator-icon\':', function () {
     const props = {
       thumbnails: undefined,
       useIcons: true,
       length: 8
     };
     const model = new ImageNavigatorModel(props);
-    expect(model.getItemChildClass()).toEqual('icon');
+    expect(model.getItemChildClass()).toEqual('image-navigator-icon');
   });
 
   it('getItemParentClass should return icon class case:', function () {
@@ -358,7 +358,7 @@ describe('<ImageNavigatorModel /> icon', () => {
       length: 8
     };
     const model = new ImageNavigatorModel(props);
-    expect(model.getItemParentClass()).toEqual('image-navigator-item icon-item');
+    expect(model.getItemParentClass()).toEqual('image-navigator-item image-navigator-icon-item');
   });
 
   it('getItemUrls should return icons subset:', function () {
@@ -402,7 +402,7 @@ describe('<ImageNavigatorModel /> icon', () => {
   });
 });
 
-describe('<ImageNavigatorModel /> placeholder', () => {
+describe('<ImageNavigatorModel /> image-navigator-placeholder', () => {
   it('should initialize expected properties:', function () {
     let props = {
       useIcons: false,
@@ -447,12 +447,12 @@ describe('<ImageNavigatorModel /> placeholder', () => {
     expect(model.getUseCase().placeholders).toEqual(true);
   });
 
-  it('getItemChildClass should return \'placeholder\':', function () {
+  it('getItemChildClass should return \'image-navigator-placeholder\':', function () {
     const props = {
       useIcons: false
     };
     const model = new ImageNavigatorModel(props);
-    expect(model.getItemChildClass()).toEqual('placeholder');
+    expect(model.getItemChildClass()).toEqual('image-navigator-placeholder');
   });
 
   it('getItemParentClass should return base class case:', function () {
