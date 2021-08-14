@@ -193,9 +193,9 @@ class RatingsAndReviews extends React.Component {
     }
 
     return (
-      <div id='ratings-reviews-widget'>
-        <h3 className='component-title'>RATINGS &amp; REVIEWS</h3>
-        <div id='ratings-reviews'>
+      <div id='rr-ratings-reviews-widget'>
+        <h3 className='rr-component-title'>RATINGS &amp; REVIEWS</h3>
+        <div id='rr-ratings-reviews'>
           <RatingList
             ratings={this.state.ratings}
             ratingDetails={this.ratingDetails}

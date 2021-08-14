@@ -9,8 +9,8 @@ const NewReview = (props) => {
   };
 
   return (
-    <div id='new-review'>
-      <div id='add-review' class='button uppercase' onClick={handleAddReview}>ADD A REVIEW<div class='plus'>+</div></div>
+    <div id='rr-new-review'>
+      <div id='rr-add-review' class='button uppercase' onClick={handleAddReview}>ADD A REVIEW<div class='plus'>+</div></div>
     </div>
   );
 };
