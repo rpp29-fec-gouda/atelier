@@ -173,15 +173,15 @@ describe('<ProductOverview />', () => {
     // another style img src = given - model test?
 
     // === model? tests there? ===
-    // getStyleSelectorItems(this.styles)
-    // getDefaultStyle(this.styles)
+    // getStyleSelectorItems(this.po-styles)
+    // getDefaultStyle(this.po-styles)
     // getStyleDefaultPhotoUrl
     //    one style img src = '' - model test?
     //    another style img src = given - model test?
     // getNumberOfReviews
     // getAverageRating
     // getSizesInStock
-    // getStyleById(id, this.styles)
+    // getStyleById(id, this.po-styles)
   });
 
   it('should not have a product description if no slogan exists:', function () {

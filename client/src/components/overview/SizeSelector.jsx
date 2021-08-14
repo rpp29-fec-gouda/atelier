@@ -16,8 +16,8 @@ const SizeSelector = (props) => {
   let key = 0;
   if (!items || !items.length || items.length === 0) {
     return (
-      <div id="size-selector">
-        <select id="sizes" name="sizes" defaultValue={-1} onChange={onChange} disabled>
+      <div id="po-size-selector">
+        <select id="po-sizes" name="sizes" defaultValue={-1} onChange={onChange} disabled>
           {
             <option class="uppercase" value={-1} disabled hidden>Out of Stock</option>
           }
@@ -26,8 +26,8 @@ const SizeSelector = (props) => {
     );
   } else {
     return (
-      <div id="size-selector">
-        <select id="sizes" name="sizes" defaultValue={-1} onChange={onChange}>
+      <div id="po-size-selector">
+        <select id="po-sizes" name="sizes" defaultValue={-1} onChange={onChange}>
           <option class="uppercase" value={-1} disabled hidden>Select Size</option>
           {
             items.map(item => (

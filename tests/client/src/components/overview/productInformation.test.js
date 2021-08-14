@@ -37,7 +37,7 @@ describe('<ProductOverview />', () => {
       originalPrice: 80.00
     };
     const wrapper = mount(<ProductInformation {...props} />);
-    expect(wrapper.find('#product-information')).toHaveLength(1);
+    expect(wrapper.find('#po-product-information')).toHaveLength(1);
     expect(wrapper.find('h2.uppercase')).toHaveLength(1);
     expect(wrapper.find('h2.uppercase').text()).toEqual(props.category);
     expect(wrapper.find('h1')).toHaveLength(1);
@@ -57,7 +57,7 @@ describe('<ProductOverview />', () => {
       originalPrice: 80.00
     };
     const wrapper = mount(<ProductInformation {...props} />);
-    expect(wrapper.find('#product-information')).toHaveLength(1);
+    expect(wrapper.find('#po-product-information')).toHaveLength(1);
     expect(wrapper.find('h2.uppercase')).toHaveLength(1);
     expect(wrapper.find('h2.uppercase').text()).toEqual(props.category);
     expect(wrapper.find('h1')).toHaveLength(1);

@@ -9,11 +9,11 @@
   pointer-events: none;
 }
 
-.arrow:hover {
+.scrolling-arrows-arrow:hover {
   cursor: pointer;
 }
 
-.arrow {
+.scrolling-arrows-arrow {
   width: 1em;
   height: 1em;
   background-size: 1em;
@@ -22,13 +22,13 @@
   pointer-events: auto;
 }
 
-.arrow svg {
+.scrolling-arrows-arrow svg {
   stroke: white;
   stroke-width: 0.5em;
 }
 
 
-.arrow svg:hover {
+.scrolling-arrows-arrow svg:hover {
   stroke: black;
   stroke-width: 0.8em;
   fill: white;

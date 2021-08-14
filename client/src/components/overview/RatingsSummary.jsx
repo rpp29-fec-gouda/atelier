@@ -9,11 +9,11 @@ const RatingsSummary = (props) => {
   };
 
   return (
-    <span id="product-rating" class="row row-margin">
+    <span id="po-product-rating" class="row row-margin">
       <StarRating
         rating={props.averageRating}
       />
-      <div id="read-all-reviews" onClick={handleOnClick} class="row link">
+      <div id="po-read-all-reviews" onClick={handleOnClick} class="row link">
         Read all {props.reviewCount} reviews
       </div>
     </span>

@@ -1,11 +1,11 @@
-#price {
+#po-price {
   user-select: none;
 }
 
-.sale-price {
+.po-sale-po-price {
   color: red
 }
 
-.original-price {
+.po-original-po-price {
   text-decoration: line-through
 }

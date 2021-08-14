@@ -50,11 +50,11 @@ describe('<StyleSelector />', () => {
     };
 
     const wrapper = shallow(<StyleSelector {...props} />);
-    expect(wrapper.find('#style-selector')).toHaveLength(1);
+    expect(wrapper.find('#po-style-selector')).toHaveLength(1);
     expect(wrapper.find('h2').text()).toEqual('STYLE > ' + props.name);
-    expect(wrapper.find('.style-selected').children()).toHaveLength(1);
-    expect(wrapper.find('#styles-list div.row')).toHaveLength(3);
-    expect(wrapper.find('div.style')).toHaveLength(9);
+    expect(wrapper.find('.po-style-selected').children()).toHaveLength(1);
+    expect(wrapper.find('#po-styles-list div.row')).toHaveLength(3);
+    expect(wrapper.find('div.po-style')).toHaveLength(9);
     expect(wrapper.find('img')).toHaveLength(8);
   });
 
@@ -76,11 +76,11 @@ describe('<StyleSelector />', () => {
     };
 
     const wrapper = shallow(<StyleSelector {...props} />);
-    expect(wrapper.find('#style-selector')).toHaveLength(1);
+    expect(wrapper.find('#po-style-selector')).toHaveLength(1);
     expect(wrapper.find('h2').text()).toEqual('STYLE > ' + props.name);
-    expect(wrapper.find('.style-selected').children()).toHaveLength(0);
-    expect(wrapper.find('#styles-list div.row')).toHaveLength(2);
-    expect(wrapper.find('div.style')).toHaveLength(8);
+    expect(wrapper.find('.po-style-selected').children()).toHaveLength(0);
+    expect(wrapper.find('#po-styles-list div.row')).toHaveLength(2);
+    expect(wrapper.find('div.po-style')).toHaveLength(8);
     expect(wrapper.find('img')).toHaveLength(7);
   });
 
@@ -104,7 +104,7 @@ describe('<StyleSelector />', () => {
       onClick: mockCallBack
     };
     const wrapper = shallow(<StyleSelector {...props} />);
-    wrapper.find('div.style').at(0).simulate('click');
+    wrapper.find('div.po-style').at(0).simulate('click');
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });

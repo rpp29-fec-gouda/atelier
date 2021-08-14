@@ -53,11 +53,11 @@ class ImageNavigatorModel {
   getItemChildClass() {
     const useCase = this.getUseCase();
     if (useCase.icons) {
-      return 'icon';
+      return 'image-navigator-icon';
     } else if (useCase.thumbnails) {
-      return 'thumbnail';
+      return 'image-navigator-thumbnail';
     } else {
-      return 'placeholder';
+      return 'image-navigator-placeholder';
     }
   }
 
@@ -65,7 +65,7 @@ class ImageNavigatorModel {
     const useCase = this.getUseCase();
     let itemClass = 'image-navigator-item';
     if (useCase.icons) {
-      itemClass += ' icon-item';
+      itemClass += ' image-navigator-icon-item';
     }
     return itemClass;
   }

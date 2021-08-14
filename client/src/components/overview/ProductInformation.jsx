@@ -6,7 +6,7 @@ import './productInformation.css';
 const ProductInformation = (props) => {
   console.log('Rendering product information');
   return (
-    <div id="product-information">
+    <div id="po-product-information">
       {
         props.reviewCount > 0 &&
         <RatingsSummary
