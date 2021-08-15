@@ -74,7 +74,7 @@ class Outfit extends React.Component {
             <h1>+</h1>
             <h2>Add to Outfit</h2>
           </div>
-          {outfit.length && (
+          {outfit.length ? (
             outfit.map(id => (
               <ProductCard
                 key={ `outfitCard${id}` }
@@ -87,7 +87,7 @@ class Outfit extends React.Component {
                 updateCache={ updateCache }
               />
             ))
-          )}
+          ) : null}
         </div>
       </div>
     ) : null;
