@@ -136,3 +136,8 @@
   flex: 0 0 row nowrap;
   justify-content: space-between;
 }
+
+.rp-compare-checkmark {
+  color: #296;
+  text-shadow: 0 0 2px black;
+}

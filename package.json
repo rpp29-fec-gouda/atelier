@@ -12,7 +12,10 @@
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "start": "nodemon server.js",
     "build": "webpack --mode development --watch",
-    "dev": "npm run build & npm run start & npm run test"
+    "dev": "npm run build & npm run start & npm run test",
+    "production-build": "webpack --mode production",
+    "production-server": "node server.js",
+    "production-app": "npm run production-build & npm run production-server"
   },
   "repository": {
     "type": "git",
