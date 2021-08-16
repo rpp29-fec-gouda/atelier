@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import './UploadImage.css';
 
 /* props getImgUrl */
 class UploadImage extends React.Component {
@@ -44,7 +45,7 @@ class UploadImage extends React.Component {
         <div>
           {imgUrls.length > 0 ?
             imgUrls.map((url, key) => {
-              return <img className='QA_upload_imgthumbnail' key={key} src={url} />;
+              return <img className='shared-upload-imgthumbnail' key={key} src={url} />;
             })
             :
             null

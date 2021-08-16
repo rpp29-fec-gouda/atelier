@@ -6,6 +6,7 @@
   "scripts": {
     "test:related": "jest --coverage --testPathPattern=tests/client/src/components/related --testResultsProcessor=jest-sonar-reporter --watch",
     "test:QA": "jest --coverage --testPathPattern=tests/client/src/components/QA --testResultsProcessor=jest-sonar-reporter",
+    "test:RR": "jest --coverage --testPathPattern=tests/client/src/components/ratingsReviews --testResultsProcessor=jest-sonar-reporter",
     "test": "jest --coverage --testResultsProcessor=jest-sonar-reporter",
     "test-updateSnapshot": "jest --updateSnapshot --coverage --testResultsProcessor=jest-sonar-reporter",
     "test-init": "jest --init",
