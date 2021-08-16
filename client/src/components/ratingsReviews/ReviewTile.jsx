@@ -2,6 +2,8 @@ import React from 'react';
 import Helpfulness from '../shared/Helpfulness.jsx';
 import Report from '../shared/Report.jsx';
 import StarRating from '../shared/StarRating.jsx';
+import DisplayPhotos from '../shared/DisplayPhotos.jsx';
+import PopupPhoto from '../shared/PopupPhoto.jsx';
 import './reviewTile.css';
 
 const ReviewTile = (props) => {
@@ -27,11 +29,7 @@ const ReviewTile = (props) => {
             <br></br>
             {review.photos.length > 0 ?
               <div className='rr-review-photos'>
-                {review.photos.map((photo) => (
-                  <div class='rr-photos' key={photo.id}>
-                    <img className='rr-photo' src={photo.url} />
-                  </div>
-                ))}
+                <DisplayPhotos photos={review.photos} />
               </div> : null}
             {review.recommend ?
               <div className='rr-review-recommend'>&#10003; I recommend this product!</div>
