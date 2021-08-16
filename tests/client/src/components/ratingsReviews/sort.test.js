@@ -11,7 +11,6 @@ describe('<Sort />', () => {
 
   it('should contain loading element if data not provided:', function () {
     const wrapper = mount(<Sort />);
-    expect(wrapper.find('div')).toHaveLength(1);
-    expect(wrapper.find('div').text()).toEqual('Loading...');
+    expect(wrapper.find('div')).toHaveLength(0);
   });
 });

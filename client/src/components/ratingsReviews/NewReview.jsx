@@ -192,7 +192,7 @@ class NewReview extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.selectedProduct ? (
       <div id='rr-new-review'>
         <Modal show={this.state.show} handleClose={this.hideModal}>
           <h1 className='modal-title'>{this.state.modalTitle}</h1>
@@ -370,6 +370,8 @@ class NewReview extends React.Component {
         </Modal >
         <div id='add-review' class='button uppercase' onClick={this.showModal}>ADD A REVIEW<div class='plus'>+</div></div>
       </div >
+    ) : (
+      null
     );
   }
 }

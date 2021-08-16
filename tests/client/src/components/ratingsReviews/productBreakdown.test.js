@@ -11,7 +11,7 @@ describe('<ProductBreakdown />', () => {
 
   it('should contain loading element if data not provided:', function () {
     const wrapper = mount(<ProductBreakdown />);
-    expect(wrapper.find('div')).toHaveLength(4);
+    expect(wrapper.find('div')).toHaveLength(1);
     expect(wrapper.find('div').text()).toEqual('Loading...');
   });
 });
