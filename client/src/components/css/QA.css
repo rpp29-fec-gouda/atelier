@@ -50,7 +50,6 @@ td {
 .qa-more-answer :hover{
   font-size: 1.2em;
   color: rgba(18, 17, 17, 0.728);
-  
 }
 
 .qa-helpfulness {
@@ -67,35 +66,13 @@ td {
   
 .qa-popup {
   position: fixed;
+  z-index: 5;
   left: 25%;
   right: 25%;
   top: 25%;
   bottom: 25%;
   margin: auto;
   background: rgb(199, 196, 196);
-}
-
-.qa-popup-photo {
-  position: fixed;
-  left: 20%;
-  right: 20%;
-  top: 10%;
-  bottom: 10%;
-  margin: auto;
-  background: rgba(193, 189, 189, 0.139);
-}
-
-.qa-full-size-photo {
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
 }
 
 .qa-search-bar {
@@ -105,12 +82,17 @@ td {
 }
 
 .qa-close {
+  position: sticky;
   float: right;
   font-weight: bold;
   font-size: 2em;
   padding: 0.4em;
   color: black;
   user-select: none;
+}
+
+.qa-close:hover {
+  color: gray;
 }
 
 .qa-answers-scrolling {
