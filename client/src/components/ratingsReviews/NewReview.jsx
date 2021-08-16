@@ -237,7 +237,9 @@ class NewReview extends React.Component {
                 this.props.characteristics.hasOwnProperty(item[0]) ?
                   <div key={item[0] + index}>
                     <h4 key={index}>*{item[0]}</h4>
-                    <div key={item[0]}>{this.state[item[0]] ? this.state[item[0]] + ' selected' : 'none selected'}</div>
+                    {this.state[item[0]] ? <div key={item[0]}>{this.state[item[0]] + ' selected'}</div>
+                      : <div key={item[0]}>{'none selected'}</div>
+                    }
                     <div>
                       <input
                         type="radio"

@@ -15,9 +15,6 @@ const ReviewsList = (props) => {
     displayedReviews,
     reviewsLength,
     count,
-    currentSort,
-    product_id,
-    getReviews,
     reviews,
     sortOptions,
     handleReviewSort

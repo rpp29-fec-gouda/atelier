@@ -5,7 +5,6 @@ import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
   const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
-  const stars = [1, 1, 1, .8, 0];
   let key = 0;
 
   if (ratings) {

@@ -3,12 +3,10 @@ import Helpfulness from '../shared/Helpfulness.jsx';
 import Report from '../shared/Report.jsx';
 import StarRating from '../shared/StarRating.jsx';
 import DisplayPhotos from '../shared/DisplayPhotos.jsx';
-import PopupPhoto from '../shared/PopupPhoto.jsx';
 import './reviewTile.css';
 
 const ReviewTile = (props) => {
   const { reviews, averageRating } = props;
-  const stars = [1, 1, 1, .8, 0];
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   let key = 0;
 
