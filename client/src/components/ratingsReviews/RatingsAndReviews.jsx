@@ -208,6 +208,8 @@ class RatingsAndReviews extends React.Component {
           />
           {this.state.reviews ?
             <ReviewsList
+              selectedProduct={this.props.selectedProduct}
+              characteristics={this.state.characteristics}
               loadMoreReviews={this.loadMoreReviews}
               reviews={this.state.reviews}
               displayedReviews={this.state.displayedReviews}

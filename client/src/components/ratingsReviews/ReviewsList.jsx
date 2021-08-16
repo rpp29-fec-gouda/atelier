@@ -7,7 +7,20 @@ import KeywordSearch from './KeywordSearch.jsx';
 import './reviewsList.css';
 
 const ReviewsList = (props) => {
-  const { loadMoreReviews, displayedReviews, reviewsLength, count, currentSort, product_id, getReviews, reviews, sortOptions, handleReviewSort } = props;
+  const {
+    characteristics,
+    selectedProduct,
+    loadMoreReviews,
+    displayedReviews,
+    reviewsLength,
+    count,
+    currentSort,
+    product_id,
+    getReviews,
+    reviews,
+    sortOptions,
+    handleReviewSort
+  } = props;
 
   const handleMoreReviews = () => {
     loadMoreReviews();
@@ -29,7 +42,11 @@ const ReviewsList = (props) => {
           <div id='rr-more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
           : null
         }
-        <NewReview reviews={reviews} />
+        <NewReview
+          reviews={reviews}
+          selectedProduct={selectedProduct}
+          characteristics={characteristics}
+        />
       </div>
     </div>
   );
