@@ -20,6 +20,7 @@
 }
 
 .rr-review-date {
+  padding-right: 0.5em;
   justify-content: flex-end;
 }
 
@@ -29,10 +30,17 @@
 
 .rr-review-summary{
   font-weight:bold;
+  font-size: large;
 }
 
 .rr-review-response {
-  background-color: lightslategrey;
+  padding: 0.5em;
+  width: fit-content;
+  background-color: #dad6d6;
+}
+
+.rr-review-response.title {
+  font-weight: bold;
 }
 
 .rr-tile {

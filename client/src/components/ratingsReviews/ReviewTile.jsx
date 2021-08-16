@@ -9,6 +9,7 @@ import './reviewTile.css';
 const ReviewTile = (props) => {
   const { reviews } = props;
   const stars = [1, 1, 1, .8, 0];
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
   let key = 0;
 
   return reviews ? (
@@ -19,7 +20,7 @@ const ReviewTile = (props) => {
             <span className='rr-star-rating'>{stars.map(star => (
               <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
             ))}</span>
-            <span className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toDateString().slice(3)}</span>
+            <span className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toLocaleDateString('en-EN', options)}</span>
           </div>
           <br></br>
           <div className='rr-review'>
@@ -36,10 +37,15 @@ const ReviewTile = (props) => {
               : null
             }
             {review.response ?
-              <div className='rr-review-response'>Response from seller: {review.response}</div>
+              <div>
+                <br></br>
+                <div className='rr-review-response'>
+                  <div className='rr-review-response title'>Response from seller</div>
+                  <div className='rr-review-response text'>{review.response}</div>
+                </div>
+              </div>
               : null
             }
-            <div className='rr-review-response'>{review.response}</div>
             <br></br>
             <div className='rr-review-feedback'>
               <Helpfulness review={review} />
