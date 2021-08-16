@@ -9,6 +9,7 @@ import './reviewsList.css';
 const ReviewsList = (props) => {
   const {
     characteristics,
+    averageRating,
     selectedProduct,
     loadMoreReviews,
     displayedReviews,
@@ -35,7 +36,8 @@ const ReviewsList = (props) => {
       <KeywordSearch />
       <div className='rr-displayed-reviews'>
         <ReviewTile
-          reviews={displayedReviews} />
+          reviews={displayedReviews}
+          averageRating={averageRating} />
       </div>
       <div className='rr-review-buttons'>
         {count < reviewsLength ?

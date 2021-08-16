@@ -29,7 +29,12 @@ class RatingsAndReviews extends React.Component {
       recommended: {},
       product_id: '',
       count: 2,
-      sort: 'relevant'
+      sort: 'relevant',
+      5: false,
+      4: false,
+      3: false,
+      2: false,
+      1: false
     };
 
     this.sortOptions = ['relevance', 'newest', 'helpfulness'];
@@ -66,6 +71,7 @@ class RatingsAndReviews extends React.Component {
         console.log('AXIOS GET RATINGS:', res);
         this.ratings = res.data.ratings;
         this.characteristics = res.data.characteristics;
+        console.log('this.characteristics:', this.characteristics);
         this.recommended = res.data.recommended;
         this.getDefaultRatings();
       })
@@ -153,21 +159,21 @@ class RatingsAndReviews extends React.Component {
       this.setState({
         sort: 'relevant'
       }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
 
       });
     } else if (sortFilter === 'helpfulness') {
       this.setState({
         sort: 'helpful'
       }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
 
       });
     } else if (sortFilter === 'newest') {
       this.setState({
         sort: 'newest'
       }, () => {
-        this.getReviews(this.state.sort, this.props.selectedProduct.id);
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
 
       });
     }
@@ -175,8 +181,20 @@ class RatingsAndReviews extends React.Component {
   }
 
   handleRatingProgressFilter(event) {
-    console.log('stars', event.target.id);
     event.preventDefault();
+    let starFilter = parseInt(event.target.id);
+    console.log('TEST3', this.state[starFilter]);
+    this.state[starFilter] ?
+      this.setState({
+        starFilter: false
+      }, () => {
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
+      })
+      : this.setState({
+        starFilter: true
+      }, () => {
+        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
+      });
   }
 
   loadMoreReviews() {
@@ -209,6 +227,7 @@ class RatingsAndReviews extends React.Component {
           {this.state.reviews ?
             <ReviewsList
               selectedProduct={this.props.selectedProduct}
+              averageRating={this.averageRating}
               characteristics={this.state.characteristics}
               loadMoreReviews={this.loadMoreReviews}
               reviews={this.state.reviews}

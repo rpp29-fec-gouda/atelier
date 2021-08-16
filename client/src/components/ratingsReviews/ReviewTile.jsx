@@ -7,7 +7,7 @@ import PopupPhoto from '../shared/PopupPhoto.jsx';
 import './reviewTile.css';
 
 const ReviewTile = (props) => {
-  const { reviews } = props;
+  const { reviews, averageRating } = props;
   const stars = [1, 1, 1, .8, 0];
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   let key = 0;
@@ -17,9 +17,9 @@ const ReviewTile = (props) => {
       {reviews.map((review) => (
         <div className='rr-tile' key={key++}>
           <div className='rr-user-stamp'>
-            <span className='rr-star-rating'>{stars.map(star => (
-              <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
-            ))}</span>
+            <span className='rr-star-rating'>
+              <StarRating rating={averageRating} max={5} />
+            </span>
             <span className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toLocaleDateString('en-EN', options)}</span>
           </div>
           <br></br>
