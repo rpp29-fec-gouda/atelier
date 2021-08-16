@@ -1,0 +1,9 @@
+.shared-thumbnail {
+  width: 5em;
+  height: 5em;
+}
+
+.shared-photos-inline {
+  display: inline-block;
+  padding: 0.2em;
+}

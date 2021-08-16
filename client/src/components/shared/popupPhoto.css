@@ -1,0 +1,41 @@
+.shared-popup {
+  position: fixed;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  background: rgb(199, 196, 196);
+}
+
+.shared-popup-photo {
+  position: fixed;
+  left: 20%;
+  right: 20%;
+  top: 10%;
+  bottom: 10%;
+  margin: auto;
+  background: rgba(193, 189, 189, 0.139);
+}
+
+.shared-full-size-photo {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.shared-popup-photo-close {
+  float: right;
+  font-weight: bold;
+  font-size: 2em;
+  padding: 0.4em;
+  color: black;
+  user-select: none;
+}
