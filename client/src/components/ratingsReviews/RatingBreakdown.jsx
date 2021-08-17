@@ -51,7 +51,7 @@ const RatingBreakdown = (props) => {
 
     return (
       <div id='rr-rating-breakdown'>
-        <span className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
+        <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
         <StarRating rating={averageRating} max={5} />
         <br></br><br></br>
         <div>{averageRecommend}% of reviews recommend this product</div>
