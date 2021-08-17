@@ -239,7 +239,10 @@ class RatingsAndReviews extends React.Component {
               product_id={this.state.product_id}
               count={this.state.count}
               reviewsLength={this.state.reviewsLength} />
-            : <NewReview />}
+            : <NewReview
+              selectedProduct={selectedProduct}
+              characteristics={this.characteristics}
+            />}
         </div>
       </div>
     );
