@@ -12,6 +12,6 @@ describe('<ReviewsList />', () => {
 
   it('should contain loading element if data not provided:', function () {
     const wrapper = mount(<ReviewsList />);
-    expect(wrapper.find('div')).toHaveLength(5);
+    expect(wrapper.find('div')).toHaveLength(4);
   });
 });
