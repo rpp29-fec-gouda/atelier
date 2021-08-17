@@ -25,6 +25,7 @@ class RatingsAndReviews extends React.Component {
       reviews: [],
       reviewsLength: 0,
       displayedReviews: [],
+      filteredReviews: null,
       characteristics: {},
       recommended: {},
       product_id: '',
@@ -47,6 +48,7 @@ class RatingsAndReviews extends React.Component {
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
+    this.updateReviewsList = this.updateReviewsList.bind(this);
   }
 
   getReviews(sort, count, id) {
@@ -180,6 +182,12 @@ class RatingsAndReviews extends React.Component {
     event.preventDefault();
   }
 
+  updateReviewsList(filteredList) {
+    this.setState({
+      filteredReviews: filteredList
+    });
+  }
+
   handleRatingProgressFilter(event) {
     event.preventDefault();
     let starFilter = parseInt(event.target.id);
@@ -210,6 +218,8 @@ class RatingsAndReviews extends React.Component {
       return (<div>Loading...</div>);
     }
 
+    const displayedReviews = this.state.filteredReviews || this.state.displayedReviews;
+
     return (
       <div id='rr-ratings-reviews-widget'>
         <h3 className='rr-component-title'>RATINGS &amp; REVIEWS</h3>
@@ -231,15 +241,20 @@ class RatingsAndReviews extends React.Component {
               characteristics={this.state.characteristics}
               loadMoreReviews={this.loadMoreReviews}
               reviews={this.state.reviews}
-              displayedReviews={this.state.displayedReviews}
+              displayedReviews={displayedReviews}
               sortOptions={this.sortOptions}
               handleReviewSort={this.handleReviewSort}
               getReviews={this.getReviews}
               currentSort={this.state.sort}
               product_id={this.state.product_id}
               count={this.state.count}
-              reviewsLength={this.state.reviewsLength} />
-            : <NewReview />}
+              reviewsLength={this.state.reviewsLength}
+              callback={(filteredList) => this.updateReviewsList(filteredList)}
+            />
+            : <NewReview
+              selectedProduct={selectedProduct}
+              characteristics={this.characteristics}
+            />}
         </div>
       </div>
     );
