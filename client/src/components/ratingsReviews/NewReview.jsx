@@ -14,28 +14,33 @@ class NewReview extends React.Component {
       modalSubtitle: 'About the ',
       selectedProduct: this.props.selectedProduct,
       formName: 'Review',
-      overallRating: '',
-      recommend: '',
-      characteristics: '',
+      'Overall Rating': '',
+      'Recommendation': '',
+      'Characteristic': '',
       reviewSummary: '',
-      reviewBody: '',
+      'Review Body': '',
       photos: [],
-      nickname: '',
-      email: '',
+      'Nickname': '',
+      'Email': '',
       charCount: 50,
-      Size: undefined,
-      Width: undefined,
-      Comfort: undefined,
-      Quality: undefined,
-      Length: undefined,
-      Fit: undefined,
+      Size: '',
+      Width: '',
+      Comfort: '',
+      Quality: '',
+      Length: '',
+      Fit: '',
       requires: {
-        overallRating: '',
-        recommend: '',
-        characteristics: '',
-        reviewBody: '',
-        nickname: '',
-        email: '',
+        'Overall Rating': '',
+        'Recommendation': '',
+        'Review Body': '',
+        'Nickname': '',
+        'Email': '',
+        'Size': '',
+        'Width': '',
+        'Comfort': '',
+        'Quality': '',
+        'Length': '',
+        'Fit': ''
       }
     };
 
@@ -87,7 +92,6 @@ class NewReview extends React.Component {
     };
 
     this.radioArr = Object.entries(this.radio);
-    console.log('radioArr:', this.radioArr);
     this.recommendArr = ['Yes', 'No'];
 
     this.getImgUrl = this.getImgUrl.bind(this);
@@ -112,11 +116,11 @@ class NewReview extends React.Component {
   handleOnChange(e) {
     let id = e.target.id;
     let currentCharacteristic = this.props.characteristics[e.target.name];
-    if (id === 'reviewSummary' || id === 'email' || id === 'nickname' || id === 'overallRating' || id === 'recommend') {
+    if (id === 'reviewSummary' || id === 'Email' || id === 'Nickname' || id === 'Overall Rating' || id === 'Recommendation') {
       this.setState({
         [id]: e.target.value
       });
-    } else if (id === 'reviewBody') {
+    } else if (id === 'Review Body') {
       let bodyLength = e.target.value.length;
       if (bodyLength <= 50) {
         this.setState({
@@ -128,18 +132,18 @@ class NewReview extends React.Component {
           [id]: e.target.value
         });
       }
-    } else if (id === 'characteristics') {
+    } else if (id === 'Characteristic') {
       this.characteristics[currentCharacteristic.id] = parseInt(e.target.value);
       this.setState({
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.title
       });
     } else if (id === 'Yes') {
       this.setState({
-        recommend: true
+        Recommendation: true
       });
     } else {
       this.setState({
-        recommend: false
+        Recommendation: false
       });
     }
   }
@@ -150,17 +154,15 @@ class NewReview extends React.Component {
     for (let key in this.state.requires) {
       if (this.state[key] === '') {
         requires[key] = `${key} is required`;
-      } else if (this.state.characteristics === '') {
-        requires.characteristics = 'characteristics are required';
       }
-    }
 
-    if (Object.keys(requires).length === 0) {
-      return true;
-    } else {
-      this.setState({
-        requires: requires
-      });
+      if (Object.keys(requires).length === 0) {
+        return true;
+      } else {
+        this.setState({
+          requires: requires
+        });
+      }
     }
   }
 
@@ -170,12 +172,12 @@ class NewReview extends React.Component {
     if (this.state.formName === 'Review') {
       url = '/reviews';
       data = {
-        rating: this.state.overallRating,
+        rating: this.state.['Overall Rating'],
         summary: this.state.reviewSummary,
-        body: this.state.reviewBody,
-        recommend: this.state.recommend,
-        name: this.state.nickname,
-        email: this.state.email,
+        body: this.state.['Review Body'],
+        recommend: this.state.['Recommendation'],
+        name: this.state.['Nickname'],
+        email: this.state.['Email'],
         photos: this.state.photos,
         characteristics: this.characteristics,
         'product_id': this.state.selectedProduct.id
@@ -202,7 +204,7 @@ class NewReview extends React.Component {
             <div className='rr-new-review-form'>
               <h3>*Overal Rating</h3>
               <StarRating />
-              <div style={{ color: 'red' }}>{this.state.requires.overallRating}</div>
+              <div style={{ color: 'red' }}>{this.state.requires['Overall Rating']}</div>
               <hr></hr>
             </div>
 
@@ -213,7 +215,7 @@ class NewReview extends React.Component {
                   type="radio"
                   key={this.recommendArr[0]}
                   id={this.recommendArr[0]}
-                  name='recommend'
+                  name='Recommendation'
                   value={this.recommendArr[0]}
                   onChange={this.handleOnChange.bind(this)}
                 />{this.recommendArr[0]}
@@ -222,12 +224,12 @@ class NewReview extends React.Component {
                   type="radio"
                   key={this.recommendArr[1]}
                   id={this.recommendArr[1]}
-                  name='recommend'
+                  name='Recommendation'
                   value={this.recommendArr[1]}
                   onChange={this.handleOnChange.bind(this)}
                 />{this.recommendArr[1]}
               </div>
-              <div style={{ color: 'red' }}>{this.state.requires.recommend}</div>
+              <div style={{ color: 'red' }}>{this.state.requires['Recommendation']}</div>
               <hr></hr>
             </div>
 
@@ -245,35 +247,39 @@ class NewReview extends React.Component {
                         type="radio"
                         className='rr-new-review-char1'
                         key={item[0] + item[1].one}
-                        id={'characteristics'}
+                        id={'Characteristic'}
                         name={item[0]}
+                        title={item[1].one}
                         value={1}
                         onChange={this.handleOnChange.bind(this)}
                       />
-                      <label for='characteristics'>
+                      <label for='Characteristic'>
                         {item[1].one}
                       </label>
                       <input
                         type="radio"
                         key={item[0] + item[1].two}
-                        id={'characteristics'}
+                        id={'Characteristic'}
                         name={item[0]}
+                        title={item[1].two}
                         value={2}
                         onChange={this.handleOnChange.bind(this)}
                       />
                       <input
                         type="radio"
                         key={item[0] + item[1].three}
-                        id={'characteristics'}
+                        id={'Characteristic'}
                         name={item[0]}
+                        title={item[1].three}
                         value={3}
                         onChange={this.handleOnChange.bind(this)}
                       />
                       <input
                         type="radio"
                         key={item[0] + item[1].four}
-                        id={'characteristics'}
+                        id={'Characteristic'}
                         name={item[0]}
+                        title={item[1].four}
                         value={4}
                         onChange={this.handleOnChange.bind(this)}
                       />
@@ -281,14 +287,15 @@ class NewReview extends React.Component {
                         type="radio"
                         className='rr-new-review-char5'
                         key={item[0] + item[1].five}
-                        id={'characteristics'}
+                        id={'Characteristic'}
                         name={item[0]}
+                        title={item[1].five}
                         value={5}
                         onChange={this.handleOnChange.bind(this)}
                       />
                       <div>{item[1].five}</div>
                     </div>
-                    <div style={{ color: 'red' }}>{this.state.requires.characteristics}</div>
+                    <div style={{ color: 'red' }}>{this.state.requires.[item[0]]}</div>
                   </div>
                   : null))}
               <hr></hr>
@@ -314,7 +321,7 @@ class NewReview extends React.Component {
                 <textarea minlength='50' maxlength='1000'
                   placeholder='Why did you like the product or not?'
                   className='text_box'
-                  id='reviewBody'
+                  id='Review Body'
                   value={this.state.reviewBody}
                   onChange={this.handleOnChange.bind(this)}>
                 </textarea>
@@ -323,7 +330,7 @@ class NewReview extends React.Component {
                 <div className='rr-new-review-char-count'>Minimum required characters left: [{this.state.charCount}]</div>
                 : <div className='rr-new-review-char-count'>Minimum reached</div>
               }
-              <div style={{ color: 'red' }}>{this.state.requires.reviewBody}</div>
+              <div style={{ color: 'red' }}>{this.state.requires.['Review Body']}</div>
               <hr></hr>
             </div>
 
@@ -339,13 +346,13 @@ class NewReview extends React.Component {
                 <input
                   maxlength='60'
                   placeholder='Example: Jackson11!'
-                  id='nickname'
+                  id='Nickname'
                   value={this.state.nickname}
                   onChange={this.handleOnChange.bind(this)}>
                 </input>
               </div>
               <div className='warning_text'>For privacy reasons, do not use your full name or email address</div>
-              <div style={{ color: 'red' }}>{this.state.requires.nickname}</div>
+              <div style={{ color: 'red' }}>{this.state.requires.['Nickname']}</div>
               <hr></hr>
             </div>
 
@@ -355,13 +362,13 @@ class NewReview extends React.Component {
                 <input maxlength='60'
                   type='email'
                   placeholder='Example: jackson11@email.com'
-                  id='email'
+                  id='Email'
                   value={this.state.email}
                   onChange={this.handleOnChange.bind(this)}>
                 </input>
               </div>
               <div className='warning_text'>For privacy reasons, you will not be emailed</div>
-              <div style={{ color: 'red' }}>{this.state.requires.email}</div>
+              <div style={{ color: 'red' }}>{this.state.requires.['Email']}</div>
               <hr></hr>
             </div>
             <div>

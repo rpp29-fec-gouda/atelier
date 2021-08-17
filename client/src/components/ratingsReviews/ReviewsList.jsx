@@ -9,6 +9,7 @@ import './reviewsList.css';
 const ReviewsList = (props) => {
   const {
     characteristics,
+    callback,
     averageRating,
     selectedProduct,
     loadMoreReviews,
@@ -30,7 +31,9 @@ const ReviewsList = (props) => {
         reviews={displayedReviews}
         sortOptions={sortOptions}
         handleReviewSort={handleReviewSort} />
-      <KeywordSearch />
+      <KeywordSearch
+        reviews={reviews}
+        callback={callback} />
       <div className='rr-displayed-reviews'>
         <ReviewTile
           reviews={displayedReviews}
