@@ -48,6 +48,7 @@ class RatingsAndReviews extends React.Component {
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
+    this.handleInteractions = this.handleInteractions.bind(this);
     this.updateReviewsList = this.updateReviewsList.bind(this);
   }
 
@@ -212,6 +213,25 @@ class RatingsAndReviews extends React.Component {
     }));
   }
 
+  handleInteractions(e) {
+    e.persist();
+    console.log('HANDLE INTERACTIONS ELEMENT:', e.target.id);
+    let data, url;
+
+    url = '/interactions';
+    data = {
+      'element': e.target.id,
+      widget: 'Ratings & Reviews',
+      time: new Date()
+    };
+
+    axios.post(url, data)
+      .then(res => {
+        console.log('Interactions posted', res);
+      })
+      .catch(err => console.log('Submit error', err));
+  }
+
   render() {
     const selectedProduct = this.props.selectedProduct;
     if (selectedProduct === null) {
@@ -221,8 +241,10 @@ class RatingsAndReviews extends React.Component {
     const displayedReviews = this.state.filteredReviews || this.state.displayedReviews;
 
     return (
-      <div id='rr-ratings-reviews-widget'>
-        <h3 className='rr-component-title'>RATINGS &amp; REVIEWS</h3>
+      <div name='rr-ratings-reviews-widget' id='rr-ratings-reviews-widget'
+        onClick={this.handleInteractions}
+      >
+        <h3 name='rr-component-title' id='rr-component-title' className='rr-component-title'>RATINGS &amp; REVIEWS</h3>
         <div id='rr-ratings-reviews'>
           <RatingList
             ratings={this.state.ratings}
