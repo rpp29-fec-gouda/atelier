@@ -14,9 +14,7 @@ const RatingProgress = (props) => {
         </div>
       }
     </div>
-  ) : (
-    <div className='rr-rating-progress'></div>
-  );
+  ) : null;
 };
 
 export default RatingProgress;
