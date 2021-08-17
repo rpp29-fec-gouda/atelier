@@ -1,7 +1,7 @@
 import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
-import DisplayPhotos from './DisplayPhotos';
+import DisplayPhotos from '../shared/DisplayPhotos';
 
 class AnswersList extends React.Component {
   constructor(props) {

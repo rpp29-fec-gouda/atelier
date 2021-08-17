@@ -32,6 +32,7 @@
 }
 
 .shared-popup-photo-close {
+  position: sticky;
   float: right;
   font-weight: bold;
   font-size: 2em;
