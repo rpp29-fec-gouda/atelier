@@ -208,9 +208,11 @@ class ProductOverview extends React.Component {
 
   handleImageZoom(e) {
     e.stopPropagation();
-    console.log('isZoomed', !this.state.isZoomed);
+    const isZoomed = !this.state.isZoomed;
+    console.log('isZoomed', isZoomed);
+
     this.setState({
-      isZoomed: !this.state.isZoomed
+      isZoomed: isZoomed
     });
   }
 
