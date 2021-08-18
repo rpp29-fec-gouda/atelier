@@ -5,7 +5,7 @@
 
 .rr-displayed-reviews {
   max-height: 75vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .rr-review-buttons {
