@@ -28,15 +28,14 @@ class ZoomedImageController {
       return;
     }
 
-    const container = this._getContainer();
     const lens = this._initializeLens(img);
     if (!lens) {
-      console.log('Lens element not initialized', container);
+      console.log('Lens element not initialized', this._getContainer());
       return;
     }
     const result = this._initializeResult(img);
     if (!result) {
-      console.log('Result elements not initialized', container);
+      console.log('Result elements not initialized', this._getContainer());
       return;
     }
 
@@ -53,7 +52,7 @@ class ZoomedImageController {
   teardown() {
     const img = this._getImage();
     const container = this._getContainer();
-    if (container === null) {
+    if (!container) {
       console.log('No container element found');
       return;
     }
@@ -131,11 +130,15 @@ class ZoomedImageController {
   }
 
   _uninitializeElements(lens, result) {
+    console.log('_uninitializeElements');
+    console.log('removing lens', lens);
     lens?.remove();
 
     if (this._generateResult) {
+      console.log('removing result', result);
       result?.remove();
     } else {
+      console.log('modifying result', result);
       result?.classList.remove(this.resultClassName);
     }
 
@@ -179,6 +182,7 @@ class ZoomedImageController {
   }
 
   _removeEventListeners(img, lens) {
+    console.log('removing event listeners');
     const moveLens = this.moveLens;
     lens?.removeEventListener('mousemove', moveLens);
     img?.removeEventListener('mousemove', moveLens);

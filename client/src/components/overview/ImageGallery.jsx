@@ -26,11 +26,9 @@ class ImageGallery extends React.Component {
     };
 
     this.updateIndex = this.updateIndex.bind(this);
-    this.handleImageZoom = this.handleImageZoom.bind(this);
   }
 
   componentDidUpdate() {
-    // console.log('⭐⭐⭐⭐ ImageGallery: componentDidMount');
     if (this.model.isZoomed) {
       console.log('⭐⭐⭐⭐ ImageGallery: setup');
       this.controller.setup();
@@ -45,11 +43,6 @@ class ImageGallery extends React.Component {
     this.setState({
       selectedPhotoIndex: index
     });
-  }
-
-  handleImageZoom(e) {
-    e.stopPropagation();
-    this.props.onClickZoom();
   }
 
   render() {
@@ -69,7 +62,7 @@ class ImageGallery extends React.Component {
     const viewId = model.getViewId();
     const attributes = model.getAttributes();
     const photoUrl = model.getSelectedPhoto();
-    const handleImageClick = model.isExpanded ? this.handleImageZoom : this.props.onClickExpand;
+    const handleImageClick = model.isExpanded ? this.props.onClickZoom : this.props.onClickExpand;
 
     return (
       <div id="po-image-gallery" {...attributes}>

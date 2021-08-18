@@ -38,8 +38,6 @@ class ProductOverview extends React.Component {
     this.getStyleById = this.getStyleById.bind(this);
     this.setStyleById = this.setStyleById.bind(this);
     this.updateRatingsProperties = this.updateRatingsProperties.bind(this);
-
-    // this.imageZoom = this.imageZoom.bind(this);
   }
 
   componentDidMount() {
@@ -211,87 +209,10 @@ class ProductOverview extends React.Component {
     }
   }
 
-  // imageZoom(imgID, resultID, zoom = 2.5) {
-  //   const img = document.getElementById(imgID);
-
-  //   // create & insert lens
-  //   const lens = document.createElement('div');
-  //   lens.setAttribute('class', 'img-zoom-lens');
-  //   img.parentElement.insertBefore(lens, img);
-
-  //   if (zoom) {
-  //     const scale = 1 / zoom;
-  //     lens.style.width = `${scale * img.width}px`;
-  //     lens.style.height = `${scale * img.height}px`;
-  //   }
-
-  //   // Set up result div to display image
-  //   let result = document.getElementById(resultID);
-  //   console.log('result', result);
-  //   if (result === null) {
-  //     result = document.createElement('img');
-  //     result.setAttribute('class', 'img-zoom-result');
-  //     img.parentElement.insertBefore(result, img);
-  //   }
-
-  //   result.style.top = 0;
-  //   result.style.position = 'absolute';
-  //   result.style.zIndex = img.style.zIndex + 1;
-  //   result.style.width = `${img.width}px`;
-  //   result.style.height = `${img.height}px`;
-  //   result.style.backgroundImage = `url('${img.src}')`;
-
-  //   lens.style.zIndex = result.style.zIndex + 1;
-
-  //   const zoomedImage = new ZoomedImageModel(img, result, lens);
-
-  //   const ratioResultLens = zoomedImage.getRatioBetweenResultAndLens(result, lens);
-  //   result.style.backgroundSize = `${(img.width * ratioResultLens.x)}px ${(img.height * ratioResultLens.y)}px`;
-
-  //   // execute a function when someone moves the cursor over the image, or the lens
-  //   const moveLens = this.moveLens.bind(null, zoomedImage);
-  //   lens.addEventListener('mousemove', moveLens);
-  //   img.addEventListener('mousemove', moveLens);
-
-  //   // touch screen events
-  //   lens.addEventListener('touchmove', moveLens);
-  //   img.addEventListener('touchmove', moveLens);
-  // }
-
-  // moveLens(zoomedImage, e) {
-  //   // prevent any other actions that may occur when moving over the image:
-  //   e.preventDefault();
-
-  //   const cursorPosition = zoomedImage.getCursorPosition(e, window);
-  //   const lensPosition = zoomedImage.getLensPosition(cursorPosition);
-
-  //   // set the position of the lens:
-  //   const lens = zoomedImage.lens;
-  //   lens.style.left = `${lensPosition.x}px`;
-  //   lens.style.top = `${lensPosition.y}px`;
-
-  //   // display what the lens "sees"
-  //   const result = zoomedImage.result;
-  //   const ratio = zoomedImage.getRatioBetweenResultAndLens();
-  //   result.style.backgroundPosition = `-${lensPosition.x * ratio.x}px -${lensPosition.y * ratio.y}px`;
-  // }
-
   handleImageZoom(e) {
-    // e.stopPropagation();
+    e.stopPropagation();
     const isZoomed = !this.state.isZoomed;
     console.log('isZoomed', isZoomed);
-
-    // const imgId = 'po-image'; // TODO: Abstract this or move most of this back to ImageGallery
-    // if (isZoomed) {
-    //   const containerDiv = e.currentTarget;
-    //   console.log('containerDiv', containerDiv);
-    //   console.log('containerDiv.id', containerDiv.id);
-
-    //   const controller = new ZoomedImageController(containerDiv.id, imgId);
-    //   controller.setup();
-    // } else {
-    //   controller.teardown();
-    // }
 
     this.setState({
       isZoomed: isZoomed
