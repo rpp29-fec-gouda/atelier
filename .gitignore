@@ -8,3 +8,6 @@ testResults
 sonar-report.xml
 atelierKeyPair.pem
 login.sh
+
+*.cer
+*.pem

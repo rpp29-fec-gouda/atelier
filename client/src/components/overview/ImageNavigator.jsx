@@ -139,9 +139,6 @@ class ImageNavigator extends React.Component {
           ))
         }
         {
-          console.log('items', items),
-          console.log('endIndex', endIndex),
-          console.log('model.lastIndexNotVisible(endIndex)', model.lastIndexNotVisible(endIndex)),
           model.lastIndexNotVisible(endIndex) &&
           <div class={itemClass} onClick={this.handleIncrement}>
             <div class="navigator-align">
