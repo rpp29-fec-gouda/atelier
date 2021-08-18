@@ -3,6 +3,7 @@ import ScrollingArrows from '../shared/ScrollingArrows';
 import ImageNavigator from './ImageNavigator';
 import ImageGalleryModel from './ImageGalleryModel';
 import './imageGallery.css';
+import ZoomedImageController from './ZoomedImageController.js';
 
 class ImageGallery extends React.Component {
   constructor(props) { // = {
@@ -15,11 +16,28 @@ class ImageGallery extends React.Component {
   // }) {
     super(props);
 
+    this.imgId = 'po-image';
+    this.containerId = 'po-main-image';
+    this.model = null;
+    this.controller = new ZoomedImageController(this.containerId, this.imgId);
+
     this.state = {
       selectedPhotoIndex: 0
     };
 
     this.updateIndex = this.updateIndex.bind(this);
+    this.handleImageZoom = this.handleImageZoom.bind(this);
+  }
+
+  componentDidUpdate() {
+    // console.log('⭐⭐⭐⭐ ImageGallery: componentDidMount');
+    if (this.model.isZoomed) {
+      console.log('⭐⭐⭐⭐ ImageGallery: setup');
+      this.controller.setup();
+    } else if (this.model.isExpanded) {
+      console.log('⭐⭐⭐⭐ ImageGallery: teardown');
+      this.controller.teardown();
+    }
   }
 
   updateIndex(index) {
@@ -29,49 +47,10 @@ class ImageGallery extends React.Component {
     });
   }
 
-  // TODO: Finish dev
-  // imageZoom(imgID, resultID) {
-  //   // create & insert lens
-  //   // TODO: Style lense to be 1/zoom * the width & height of the img, where zoom = 2.5
-  //   const lens = document.createElement('DIV');
-  //   lens.setAttribute('class', 'img-zoom-lens');
-
-  //   const img = document.getElementById(imgID);
-  //   img.parentElement.insertBefore(lens, img);
-
-  //   // Set up result div to display image
-  //   // TODO: Style result to be same dims as the img, same location as img, but higher z index
-  //   const result = document.getElementById(resultID);
-  //   const ratioResultLens = this.getRatioBetweenResultAndLens(result, lens);
-
-  //   result.style.backgroundImage = `url('${img.src}')`;
-  //   result.style.backgroundSize = `${(img.width * ratioResultLens.x)}px ${(img.height * ratioResultLens.y)}px`;
-
-  //   // execute a function when someone moves the cursor over the image, or the lens
-  //   const moveLens = this.moveLens.bind(null, img, lens);
-  //   lens.addEventListener('mousemove', moveLens);
-  //   img.addEventListener('mousemove', moveLens);
-
-  //   // touch screen events
-  //   lens.addEventListener('touchmove', moveLens);
-  //   img.addEventListener('touchmove', moveLens);
-  // }
-
-  // moveLens(img, lens, e) {
-  //   // prevent any other actions that may occur when moving over the image:
-  //   e.preventDefault();
-
-  //   // TODO: Finish dev. These methods are in ZoomedImageModel.
-  //   // const cursorPosition = this.getCursorPosition(e, img, window);
-  //   // const lensPosition = this.getLensPosition(cursorPosition, img, lens);
-
-  //   // // set the position of the lens:
-  //   // lens.style.left = `${lensPosition.x}px`;
-  //   // lens.style.top = `${lensPosition.y}px`;
-
-  //   // // display what the lens "sees"
-  //   // result.style.backgroundPosition = `-${lensPosition.x * xResultLenseRatio}px -${lensPosition.y * yResultLensRatio}px`;
-  // }
+  handleImageZoom(e) {
+    e.stopPropagation();
+    this.props.onClickZoom();
+  }
 
   render() {
     console.log('Rendering image gallery');
@@ -79,16 +58,18 @@ class ImageGallery extends React.Component {
     const currentIndex = this.state.selectedPhotoIndex;
     console.log('currentIndex', currentIndex);
 
-    const model = new ImageGalleryModel({
+    this.model = new ImageGalleryModel({
       photos: this.props?.photos,
       isExpanded: this.props?.isExpanded,
       isZoomed: this.props?.isZoomed
     }, currentIndex);
+
+    const model = this.model;
     const thumbnails = model.getPhotoThumbnailUrls();
     const viewId = model.getViewId();
     const attributes = model.getAttributes();
     const photoUrl = model.getSelectedPhoto();
-    const handleImageClick = model.isExpanded ? this.props.onClickZoom : this.props.onClickExpand;
+    const handleImageClick = model.isExpanded ? this.handleImageZoom : this.props.onClickExpand;
 
     return (
       <div id="po-image-gallery" {...attributes}>
@@ -145,8 +126,8 @@ class ImageGallery extends React.Component {
               }
             </div>
           </div>
-          <div id="po-main-image" onClick={handleImageClick}>
-            <img src={photoUrl} />
+          <div id={this.containerId} onClick={handleImageClick}>
+            <img id={this.imgId} src={photoUrl} />
           </div>
         </div>
       </div>
