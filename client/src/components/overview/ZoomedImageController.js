@@ -17,13 +17,13 @@ class ZoomedImageController {
   }
 
   setup() {
-    if (this._initializeContainer() === null) {
+    if (!this._initializeContainer()) {
       console.log(`No container element found with the id ${this.containerId}`);
       return;
     }
 
     const img = this._getImage();
-    if (img === null || !img) {
+    if (!img) {
       console.log(`No img element found with the id ${this.imageId}`);
       return;
     }
@@ -47,6 +47,8 @@ class ZoomedImageController {
     result.style.backgroundSize = `${(img.width * ratioResultLens.x)}px ${(img.height * ratioResultLens.y)}px`;
 
     this._addEventListeners(img, lens, zoomedImageModel);
+
+    this.moveLens(zoomedImageModel);
   }
 
   teardown() {
@@ -74,7 +76,7 @@ class ZoomedImageController {
 
   moveLens(zoomedImage, e) {
     // prevent any other actions that may occur when moving over the image:
-    e.preventDefault();
+    e?.preventDefault();
 
     const cursorPosition = zoomedImage.getCursorPosition(e, window);
     const lensPosition = zoomedImage.getLensPosition(cursorPosition);
@@ -182,7 +184,6 @@ class ZoomedImageController {
   }
 
   _removeEventListeners(img, lens) {
-    console.log('removing event listeners');
     const moveLens = this.moveLens;
     lens?.removeEventListener('mousemove', moveLens);
     img?.removeEventListener('mousemove', moveLens);

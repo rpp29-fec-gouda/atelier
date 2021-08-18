@@ -30,10 +30,10 @@ class ImageGallery extends React.Component {
 
   componentDidUpdate() {
     if (this.model.isZoomed) {
-      console.log('⭐⭐⭐⭐ ImageGallery: setup');
+      console.log('ImageGallery zoom: setup');
       this.controller.setup();
     } else if (this.model.isExpanded) {
-      console.log('⭐⭐⭐⭐ ImageGallery: teardown');
+      console.log('ImageGallery zoom: teardown');
       this.controller.teardown();
     }
   }
