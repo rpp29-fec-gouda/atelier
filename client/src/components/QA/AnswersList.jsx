@@ -1,7 +1,7 @@
 import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
-import DisplayPhotos from './DisplayPhotos';
+import DisplayPhotos from '../shared/DisplayPhotos';
 
 class AnswersList extends React.Component {
   constructor(props) {
@@ -80,7 +80,9 @@ class AnswersList extends React.Component {
       if (this.state.showButton) {
         return (
           <div className='qa-more-answer'>
-            <span href='#!' onClick={this.loadMoreAnswers.bind(this)} >{this.state.buttonLabel}</span>
+            <span href='#!' id='qa-more-answer' onClick={this.loadMoreAnswers.bind(this)} >
+              {this.state.buttonLabel}
+            </span>
           </div>
         );
       } else {

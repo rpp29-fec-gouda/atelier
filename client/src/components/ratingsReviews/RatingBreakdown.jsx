@@ -5,7 +5,6 @@ import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
   const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
-  const stars = [1, 1, 1, .8, 0];
   let key = 0;
 
   if (ratings) {
@@ -34,11 +33,11 @@ const RatingBreakdown = (props) => {
     ratingDetails(averageRating, totalRatings);
 
     const barFills = [
-      { star: '5 stars', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
-      { star: '4 stars', count: fourBar, percentage: fourBar / totalRatings * 100 },
-      { star: '3 stars', count: threeBar, percentage: threeBar / totalRatings * 100 },
-      { star: '2 stars', count: twoBar, percentage: twoBar / totalRatings * 100 },
-      { star: '1 stars', count: oneBar, percentage: oneBar / totalRatings * 100 },
+      { star: '5', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
+      { star: '4', count: fourBar, percentage: fourBar / totalRatings * 100 },
+      { star: '3', count: threeBar, percentage: threeBar / totalRatings * 100 },
+      { star: '2', count: twoBar, percentage: twoBar / totalRatings * 100 },
+      { star: '1', count: oneBar, percentage: oneBar / totalRatings * 100 },
     ];
 
     console.log('BarFills', barFills);
@@ -52,10 +51,8 @@ const RatingBreakdown = (props) => {
 
     return (
       <div id='rr-rating-breakdown'>
-        <span className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
-        <span>{stars.map(star => (
-          <a key={key++}>{String.fromCharCode((star > 0) ? 9733 : 9734)}</a>
-        ))}</span>
+        <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
+        <StarRating rating={averageRating} max={5} />
         <br></br><br></br>
         <div>{averageRecommend}% of reviews recommend this product</div>
         <br></br>

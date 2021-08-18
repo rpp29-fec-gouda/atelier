@@ -56,7 +56,6 @@ class ImageGallery extends React.Component {
       isExpanded: this.props?.isExpanded,
       isZoomed: this.props?.isZoomed
     }, currentIndex);
-
     const model = this.model;
     const thumbnails = model.getPhotoThumbnailUrls();
     const viewId = model.getViewId();
