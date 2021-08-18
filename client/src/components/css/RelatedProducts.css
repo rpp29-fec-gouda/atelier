@@ -29,7 +29,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   margin: 4px 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   flex: 2 2;
 }
 
@@ -118,7 +118,7 @@
 .rp-star-rating {
   /* margin: 4px 0; */
   /* align-self: auto; */
-  cursor: pointer;
+  cursor: default;
   /* flex-grow: 2; */
 }
 
@@ -129,4 +129,15 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.rp-compare-row {
+  display: flex;
+  flex: 0 0 row nowrap;
+  justify-content: space-between;
+}
+
+.rp-compare-checkmark {
+  color: #296;
+  text-shadow: 0 0 2px black;
 }

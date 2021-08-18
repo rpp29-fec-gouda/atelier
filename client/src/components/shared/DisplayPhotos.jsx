@@ -1,5 +1,6 @@
 import React from 'react';
 import PopupPhoto from './PopupPhoto';
+import './displayPhotos.css';
 
 class DisplayPhotos extends React.Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class DisplayPhotos extends React.Component {
     if (photos) {
       return photos.map((photo, index) => {
         return (
-          <div key={photo + index} className='qa-photos-inline'>
-            <img className='qa-thumbnail' src={photo} onClick={this.popupPhoto}></img>
+          <div key={photo + index} className='shared-photos-inline'>
+            <img className='shared-thumbnail' src={photo.url ? photo.url : photo} onClick={this.popupPhoto}></img>
             {this.state.popupPhoto ? <PopupPhoto src={this.state.src} close={this.popupPhoto}/> : null}
           </div>
         );
@@ -33,7 +34,6 @@ class DisplayPhotos extends React.Component {
     } else {
       return null;
     }
-
   }
 }
 

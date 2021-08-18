@@ -91,15 +91,6 @@ class ProductCard extends React.Component {
     }
   }
 
-  // componentDidUpdate() {
-  //   const { productId } = this.props;
-  //   const { product, productImageURL } = this.state;
-
-  //   if (product && productImageURL === '') {
-  //     this.loadImages();
-  //   }
-  // }
-
   componentDidMount() {
     this.loadProductData();
     this.loadImages();
@@ -109,12 +100,14 @@ class ProductCard extends React.Component {
     const { product } = this.state;
 
     if (!product) {
-      return <div className='rp-card rp-card-placeholder' >Loading...</div>;
-    } else if (product === 'productNotFoundError') {
+      return <div className='rp-card rp-card-placeholder' >Searching...</div>;
+    }
+
+    if (product === 'productNotFoundError') {
       return (
         <div className='rp-card rp-card-placeholder' onClick={this.handleActionButtonClick} >
           <span>{`Product ${this.props.productId} not found`}</span>
-          <span>(Click to remove)</span>
+          <span>{'(Click to remove)'}</span>
         </div>
       );
     }

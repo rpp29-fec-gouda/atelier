@@ -1,6 +1,7 @@
 .rr-breakdown-tickmarks {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .rr-breakdown-option {
