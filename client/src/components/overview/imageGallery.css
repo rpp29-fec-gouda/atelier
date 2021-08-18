@@ -42,15 +42,14 @@
 
 #image-gallery-collapsed-view #po-main-image img:hover {
   cursor: zoom-in;
-  /* cursor: url('data:image/svg+xml;utf8,<svg viewBox="0 0 304.887 304.887"><path style="fill:#010002;" d="M298.903,269.979l-111.37-111.37c11.014-16.584,16.937-36.028,16.937-56.381 c0-27.299-10.639-52.971-29.953-72.285C155.214,10.633,129.547,0,102.243,0C74.928,0,49.25,10.633,29.942,29.942 C10.638,49.256,0.005,74.929,0.005,102.227c0,27.31,10.633,52.976,29.937,72.291c19.314,19.303,44.986,29.942,72.296,29.942 c20.353,0,39.803-5.923,56.381-16.926l111.349,111.349c3.856,3.867,8.996,6.005,14.468,6.005c5.455,0,10.601-2.121,14.484-5.988 C306.872,290.908,306.872,277.947,298.903,269.979z M102.243,35.805c17.737,0,34.413,6.908,46.961,19.461 c12.553,12.537,19.456,29.213,19.456,46.966c0,17.742-6.908,34.424-19.456,46.972c-12.548,12.542-29.224,19.456-46.966,19.456 s-34.424-6.913-46.972-19.456c-12.548-12.553-19.461-29.23-19.461-46.972s6.913-34.424,19.456-46.966 C67.814,42.713,84.501,35.805,102.243,35.805z"/></svg>'), auto; */
 }
 
 #image-gallery-expanded-view #po-main-image img:hover {
-  cursor: zoom-in;
+  cursor: crosshair;
 }
 
-#image-gallery-zoomed-view #po-main-image img:hover {
-  cursor: zoom-out;
+#image-gallery-zoomed-view #po-main-image .img-zoom-lens:hover  {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px; font-weight: bold;"><text y="15">-</text></svg>'), auto;
 }
 
 .image-gallery-expanded-view-toggle, .image-gallery-collapsed-view-toggle {
