@@ -6,9 +6,6 @@ import StyleSelector from './StyleSelector';
 import Cart from './Cart';
 import ProductDescription from './ProductDescription';
 import './productOverview.css';
-// import ZoomedImageModel from './ZoomedImageModel.js';
-// import './zoomedImage.css';
-// import ZoomedImageController from './ZoomedImageController.js';
 
 class ProductOverview extends React.Component {
   constructor(props) {
