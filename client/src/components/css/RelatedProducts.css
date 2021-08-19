@@ -10,7 +10,9 @@
 }
 
 .rp-component-title {
+  display: flex;
   user-select: none;
+  justify-self: left;
 }
 
 .rp-card-container {
@@ -131,11 +133,67 @@
   cursor: pointer;
 }
 
+#ProductCompare {
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  align-self: center;
+  /* justify-self: stretch; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  overflow-y: scroll;
+  overflow-x: auto;
+  min-width: 20%;
+  min-height: 20%;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #fffd;
+  backdrop-filter: blur(8px);
+  /* padding: 2em; */
+  border: 4px solid #0006;
+  overflow: scroll;
+}
+
+.rp-compare-title-bar {
+  background-color: #fff;
+  padding: 1em;
+}
+
+/* .rp-compare-placeholder {
+  flex-grow: 4;
+  flex-shrink: 0;
+} */
+
 .rp-compare-row {
   display: flex;
-  flex: 0 0 row nowrap;
-  justify-content: space-between;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  /* white-space: nowrap; */
 }
+
+
+.rp-compare-row * {
+  justify-content: center;
+  display: flex;
+  white-space: nowrap;
+  min-width: 15em;
+  max-width: 33%;
+  overflow: scroll;
+  padding: .2em;
+  /* margin: auto; */
+}
+
+.rp-compare-row:nth-of-type(odd) {
+  background-color: #0001;
+}
+
+.rp-compare-feature {
+  min-width: 10em;
+}
+/* .rp-compare-row * {
+  display: flex;
+  flex-flow: row nowrap;
+} */
 
 .rp-compare-checkmark {
   color: #296;

@@ -4,11 +4,10 @@ import ProductCard from './ProductCard.jsx';
 // import '../css/RelatedProducts.css';
 
 const ProductsCarousel = (props) => {
-  const { productIds, selectProduct, selectedProduct, checkCache, updateCache } = props;
+  const { productIds, selectProduct, selectedProduct, compare, checkCache, updateCache } = props;
 
   const handleAction = (productId) => {
-    const currentProduct = checkCache('products', productId);
-    console.log(`Compare ${selectedProduct.name} with ${currentProduct.name}`);
+    compare(productId);
   };
 
   let key = 0;

@@ -11,12 +11,13 @@ import App from '../../../client/src/index.jsx';
 
 describe('Test App Entry point', function () {
   it('should have a paragraph tag with "Loading...":', function () {
-    const wrapper = shallow(<App isTesting={true} />);
+    const wrapper = shallow(<App init={{id: 11}} isTesting={true} />);
     expect(wrapper.find('p').text()).toEqual('Loading...');
   });
 
   it('renders without crashing given the required props', () => {
     const props = {
+      init: { id: 11 },
       isTesting: true
     };
     const wrapper = shallow(<App {...props} />);
