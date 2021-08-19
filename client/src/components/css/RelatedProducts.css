@@ -163,6 +163,7 @@
   backdrop-filter: blur(8px);
   border: 4px solid #0006;
   overflow: hidden;
+  z-index: 3;
 }
 
 .rp-compare-title-bar {
@@ -214,6 +215,7 @@
 
 .rp-compare-feature {
   min-width: 10em;
+  font-weight: 500;
 }
 
 .rp-compare-checkmark {
@@ -223,6 +225,12 @@
 
 @media all and (max-width: 40em) {
   #ProductCompare {
+    position: absolute;
     left: 0;
+    bottom: 0;
+  }
+
+  .rp-card-sticky {
+    position: static;
   }
 }
