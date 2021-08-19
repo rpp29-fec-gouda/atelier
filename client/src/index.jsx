@@ -96,6 +96,8 @@ class App extends React.Component {
       <React.Fragment>
         <ProductOverview
           selectedProduct={selectedProduct}
+          checkCache={ this.checkCache }
+          updateCache={ this.updateCache }
           isTesting={this.props.isTesting}
         />
         <RelatedProducts
