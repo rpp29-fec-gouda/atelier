@@ -30,8 +30,6 @@ const RatingBreakdown = (props) => {
 
     let averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
 
-    ratingDetails(averageRating, totalRatings);
-
     const barFills = [
       { star: '5', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
       { star: '4', count: fourBar, percentage: fourBar / totalRatings * 100 },

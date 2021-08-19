@@ -33,8 +33,8 @@ class App extends React.Component {
     this.state = {
       ready: false,
       selectedProduct: null,
-      selectedProductRating: { ratingsCount: undefined, avgRating: undefined, ratings: [] },
-      selectedProductReviews: [],
+      selectedProductRating: { ratingsData: {}, ratings: [], characteristics: {}, recommended: {} },
+      selectedProductReviews: { reviewsData: {}, reviews: [] },
       selectedProductImageURLs: [],
       selectedProductThumbnailURLs: []
     };
@@ -60,17 +60,17 @@ class App extends React.Component {
     this.cache[cacheName].set(productId, data);
   }
 
-  updateReviews(reviews) {
+  updateReviews(reviewsData) {
     this.setState({
-      selectedProductReviews: reviews,
+      selectedProductReviews: { reviewsData: reviewsData, reviews: reviewsData.results }
     }, () => {
       console.log('Reviews State: ', this.state.selectedProductReviews);
     });
   }
 
-  updateRatings(ratings, characteristics, recommended, averageRating, totalRating) {
+  updateRatings(ratingsData, ratings, characteristics, recommended) {
     this.setState({
-      selectedProductRating: { ratingsCount: totalRating, avgRating: averageRating, ratings: ratings },
+      selectedProductRating: { ratingsData: ratingsData, ratings: ratings, characteristics: characteristics, recommended: recommended },
     }, () => (
       console.log('Ratings State: ', this.state.selectedProductRating)
     ));

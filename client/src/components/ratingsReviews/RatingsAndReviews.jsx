@@ -11,6 +11,8 @@ class RatingsAndReviews extends React.Component {
     super(props);
 
     this.reviews = [];
+    this.reviewsData;
+    this.ratingsData;
     this.displayedReviews = [];
     this.averageRating = 0;
     this.totalRating = 0;
@@ -43,7 +45,6 @@ class RatingsAndReviews extends React.Component {
     this.getReviews = this.getReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
-    this.ratingDetails = this.ratingDetails.bind(this);
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
@@ -57,6 +58,7 @@ class RatingsAndReviews extends React.Component {
     axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
       .then(res => {
         console.log('AXIOS GET REVIEWS:', res);
+        this.reviewsData = res.data;
         this.reviews = res.data.results;
         this.displayedReviews = res.data.results.slice();
         this.product_id = res.data.product;
@@ -72,6 +74,7 @@ class RatingsAndReviews extends React.Component {
     axios.get(`reviews/meta?product_id=${id}`)
       .then(res => {
         console.log('AXIOS GET RATINGS:', res);
+        this.ratingsData = res.data;
         this.ratings = res.data.ratings;
         this.characteristics = res.data.characteristics;
         console.log('this.characteristics:', this.characteristics);
@@ -83,14 +86,9 @@ class RatingsAndReviews extends React.Component {
       });
   }
 
-  ratingDetails(averageRating, totalRating) {
-    this.averageRating = averageRating;
-    this.totalRating = totalRating;
-  }
-
   getDefaultReviews() {
-    const { displayedReviews, reviews, product_id } = this;
-    this.props.updateReviews(reviews);
+    const { reviewsData, displayedReviews, reviews, product_id } = this;
+    this.props.updateReviews(reviewsData);
 
     if (this.reviews.length > 0) {
       this.setState({
@@ -109,8 +107,8 @@ class RatingsAndReviews extends React.Component {
   }
 
   getDefaultRatings() {
-    const { ratings, characteristics, recommended, averageRating, totalRating } = this;
-    this.props.updateRatings(ratings, characteristics, recommended, averageRating, totalRating);
+    const { ratingsData, ratings, characteristics, recommended} = this;
+    this.props.updateRatings(ratingsData, ratings, characteristics, recommended);
 
     if (Object.keys(ratings).length) {
       this.setState({
@@ -248,7 +246,6 @@ class RatingsAndReviews extends React.Component {
         <div id='rr-ratings-reviews'>
           <RatingList
             ratings={this.state.ratings}
-            ratingDetails={this.ratingDetails}
             averageRating={this.averageRating}
             totalRating={this.totalRating}
             reviews={this.state.reviews}
