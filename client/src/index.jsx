@@ -105,12 +105,12 @@ class App extends React.Component {
           updateCache={ this.updateCache }
         />
         <QA selectedProduct={selectedProduct} />
-        <RatingsAndReviews
+        {/* <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
           selectedProduct={selectedProduct}
           updateReviews={this.updateReviews}
-          updateRatings={this.updateRatings} />
+          updateRatings={this.updateRatings} /> */}
       </React.Fragment>
     ) : (
       <p>Loading...</p>
@@ -120,7 +120,7 @@ class App extends React.Component {
 
 export default App;
 
-axios.get('/products?page=1&count=1')
+axios.get('/products?page=300&count=1')
   .then(res => {
     const product = res.data[0];
     // this.cache.products.set(product.id, product);

@@ -4,6 +4,7 @@ class ProductCompare extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleHide = this.handleHide.bind(this);
     // this.handleMouseMove = this.handleMouseMove.bind(this);
     // this.handleBlur = this.handleBlur.bind(this);
     // this.handleDragStart = this.handleDragStart.bind(this);
@@ -16,6 +17,11 @@ class ProductCompare extends React.Component {
       x: 0,
       y: 0
     };
+  }
+
+  handleHide(event) {
+    event.preventDefault();
+    this.props.resetCompare(null);
   }
 
   // handleMouseMove(event) {
@@ -96,17 +102,20 @@ class ProductCompare extends React.Component {
       <form id='ProductCompare' draggable='true'>
         <div className='rp-compare-title-bar'>
           <span className='rp-component-title'>COMPARING</span>
+          <div className='rp-compare-exit' onClick={ this.handleHide }>+</div>
         </div>
-        <div className='rp-compare-row'>
+        <div className='rp-compare-header'>
           <span className='rp-title'>{selectedProduct.name}</span><span className='rp-title rp-compare-feature'></span><span className='rp-title'>{compareTo.name}</span>
         </div>
-        {Array.from(featureNames).map(featureName => (
-          <div key={key++} className='rp-compare-row'>
-            <span>{selectedFeatures[featureName] || ''}</span>
-            <span className='rp-compare-feature'>{featureName}</span>
-            <span>{alternateFeatures[featureName] || ''}</span>
-          </div>
-        ))}
+        <div className='rp-invisible-container'>
+          {Array.from(featureNames).map(featureName => (
+            <div key={key++} className='rp-compare-row'>
+              <span>{selectedFeatures[featureName] || ''}</span>
+              <span className='rp-compare-feature'>{featureName}</span>
+              <span>{alternateFeatures[featureName] || ''}</span>
+            </div>
+          ))}
+        </div>
       </form>
     );
   }
