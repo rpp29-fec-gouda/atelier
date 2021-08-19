@@ -17,15 +17,13 @@ class App extends React.Component {
     this.selectProduct = this.selectProduct.bind(this);
     this.checkCache = this.checkCache.bind(this);
     this.updateCache = this.updateCache.bind(this);
-    this.updateReviews = this.updateReviews.bind(this);
-    this.updateRatings = this.updateRatings.bind(this);
-
 
     this.cache = {
       imageURLs: new Map(),
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
+      reviews: new Map(),
       relatedIds: new Map(),
       styles: new Map(),
     };
@@ -33,8 +31,6 @@ class App extends React.Component {
     this.state = {
       ready: false,
       selectedProduct: null,
-      selectedProductRating: { ratingsData: {}, ratings: [], characteristics: {}, recommended: {} },
-      selectedProductReviews: { reviewsData: {}, reviews: [] },
       selectedProductImageURLs: [],
       selectedProductThumbnailURLs: []
     };
@@ -58,22 +54,6 @@ class App extends React.Component {
 
   updateCache(cacheName, productId, data) {
     this.cache[cacheName].set(productId, data);
-  }
-
-  updateReviews(reviewsData) {
-    this.setState({
-      selectedProductReviews: { reviewsData: reviewsData, reviews: reviewsData.results }
-    }, () => {
-      console.log('Reviews State: ', this.state.selectedProductReviews);
-    });
-  }
-
-  updateRatings(ratingsData, ratings, characteristics, recommended) {
-    this.setState({
-      selectedProductRating: { ratingsData: ratingsData, ratings: ratings, characteristics: characteristics, recommended: recommended },
-    }, () => (
-      console.log('Ratings State: ', this.state.selectedProductRating)
-    ));
   }
 
   componentDidMount() {
@@ -101,16 +81,17 @@ class App extends React.Component {
         <RelatedProducts
           selectedProduct={selectedProduct}
           selectProduct={this.selectProduct}
-          checkCache={ this.checkCache }
-          updateCache={ this.updateCache }
+          checkCache={this.checkCache}
+          updateCache={this.updateCache}
         />
         <QA selectedProduct={selectedProduct} />
+        <br></br>
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
           selectedProduct={selectedProduct}
-          updateReviews={this.updateReviews}
-          updateRatings={this.updateRatings} />
+          checkCache={this.checkCache}
+          updateCache={this.updateCache} />
       </React.Fragment>
     ) : (
       <p>Loading...</p>
