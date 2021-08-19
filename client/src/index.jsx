@@ -22,12 +22,12 @@ class App extends React.Component {
 
 
     this.cache = {
-      imageURLs: new Map(),
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
+      reviews: new Map(),
       relatedIds: new Map(),
-      styles: new Map(),
+      styles: new Map()
     };
 
     this.state = {
