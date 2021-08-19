@@ -4,6 +4,12 @@ class ProductCompare extends React.Component {
   constructor(props) {
     super(props);
 
+    // this.handleMouseMove = this.handleMouseMove.bind(this);
+    // this.handleBlur = this.handleBlur.bind(this);
+    // this.handleDragStart = this.handleDragStart.bind(this);
+    // this.handleDragOver = this.handleDragOver.bind(this);
+    // this.handleDrop = this.handleDrop.bind(this);
+
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -11,9 +17,55 @@ class ProductCompare extends React.Component {
       y: 0
     };
   }
-  // const { selectedProduct, compareTo } = props;
+
+  // handleMouseMove(event) {
+  //   this.setState({
+  //     x: event.clientX,
+  //     y: event.clientY
+  //   });
+  // }
+
+  // handleBlur(event) {
+  //   // event.stopPropagation();
+  //   console.log(event.currentTarget, event.relatedTarget);
+  //   if (!event.currentTarget.contains(event.relatedTarget)) {
+  //     this.props.resetCompare(null);
+  //   }
+  // }
+
+  // handleDragStart(event) {
+  //   // event.stopPropagation();
+  //   let x = event.nativeEvent.offsetX;
+  //   let y = event.nativeEvent.offsetY;
+
+  //   console.log(`Grabbed at: ${x}, ${y}`);
+  //   this.offsetX = event.nativeEvent.offsetX;
+  //   this.offsetY = event.nativeEvent.offsetY;
+  // }
+
+  // handleDragOver(event) {
+  //   event.stopPropagation();
+  //   event.preventDefault();
+  // }
+
+  // handleDrop(event) {
+  //   // event.stopPropagation();
+  //   let x = event.clientX - this.offsetX;
+  //   let y = event.clientY - this.offsetY;
+
+  //   console.log(`New position: ${x}, ${y}`);
+
+  //   this.setState({
+  //     x: x,
+  //     y: y
+  //   });
+  // }
 
   render() {
+    if (this.props.compareTo === null) {
+      return null;
+    }
+
     const { selectedProduct, compareTo } = this.props;
     console.log(`Comparing ${selectedProduct.name} and ${compareTo.name}`);
     const rows = [];
@@ -39,13 +91,9 @@ class ProductCompare extends React.Component {
       y: this.state.height * .3
     };
 
-    // const modalPositionStyle = {
-
-    // };
-
     let key = 0;
     return (
-      <React.Fragment>
+      <form id='ProductCompare' draggable='true'>
         <div className='rp-compare-title-bar'>
           <span className='rp-component-title'>COMPARING</span>
         </div>
@@ -59,7 +107,7 @@ class ProductCompare extends React.Component {
             <span>{alternateFeatures[featureName] || ''}</span>
           </div>
         ))}
-      </React.Fragment>
+      </form>
     );
   }
 }

@@ -11,67 +11,17 @@ class RelatedProducts extends React.Component {
 
     this.selectProduct = this.selectProduct.bind(this);
     this.compareProduct = this.compareProduct.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleDragStart = this.handleDragStart.bind(this);
-    this.handleDragOver = this.handleDragOver.bind(this);
-    this.handleDrop = this.handleDrop.bind(this);
 
     this.offsetX = 0;
     this.offsetY = 0;
 
+
+
     this.state = {
       selectedId: null,
       related: [],
-      compareTo: null,
-      x: 0,
-      y: 0,
-      width: window.innerWidth,
-      height: window.innerHeight
+      compareTo: null
     };
-  }
-
-  handleMouseMove(event) {
-    this.setState({
-      x: event.clientX,
-      y: event.clientY
-    });
-  }
-
-  handleBlur(event) {
-    // event.stopPropagation();
-    console.log(event.currentTarget, event.relatedTarget);
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      this.props.resetCompare(null);
-    }
-  }
-
-  handleDragStart(event) {
-    // event.stopPropagation();
-    let x = event.nativeEvent.offsetX;
-    let y = event.nativeEvent.offsetY;
-
-    console.log(`Grabbed at: ${x}, ${y}`);
-    this.offsetX = event.nativeEvent.offsetX;
-    this.offsetY = event.nativeEvent.offsetY;
-  }
-
-  handleDragOver(event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  handleDrop(event) {
-    // event.stopPropagation();
-    let x = event.clientX - this.offsetX;
-    let y = event.clientY - this.offsetY;
-
-    console.log(`New position: ${x}, ${y}`);
-
-    this.setState({
-      x: x,
-      y: y
-    });
   }
 
   collectRelatedProducts(product) {
@@ -107,7 +57,9 @@ class RelatedProducts extends React.Component {
   // }
 
   selectProduct(product) {
-    this.props.selectProduct(product);
+    this.setState({compareTo: null}, () => {
+      this.props.selectProduct(product);
+    });
   }
 
   compareProduct(productId) {
@@ -154,24 +106,18 @@ class RelatedProducts extends React.Component {
           compare={compareProduct}
         />
         <Outfit
-          // productIds={ outfit }
-          // updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
         />
-        { this.state.compareTo ? (
-          <form id='ProductCompare' draggable='true' onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDrop={this.handleDrop} onBlur={this.handleBlur}>
-            <ProductCompare
-              selectedProduct={selectedProduct}
-              compareTo={compareTo}
-              resetCompare={compareProduct}
-              checkCache={checkCache}
-              updateCache={updateCache}
-            />
-          </form>
-        ) : null}
+        <ProductCompare
+          selectedProduct={selectedProduct}
+          compareTo={compareTo}
+          resetCompare={compareProduct}
+          checkCache={checkCache}
+          updateCache={updateCache}
+        />
       </div>
     );
   }
