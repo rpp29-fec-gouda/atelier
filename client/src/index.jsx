@@ -104,13 +104,16 @@ class App extends React.Component {
           checkCache={ this.checkCache }
           updateCache={ this.updateCache }
         />
-        <QA selectedProduct={selectedProduct} />
-        {/* <RatingsAndReviews
+        <QA
+          selectedProduct={selectedProduct}
+        />
+        <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
           selectedProduct={selectedProduct}
           updateReviews={this.updateReviews}
-          updateRatings={this.updateRatings} /> */}
+          updateRatings={this.updateRatings}
+        />
       </React.Fragment>
     ) : (
       <p>Loading...</p>
@@ -120,7 +123,9 @@ class App extends React.Component {
 
 export default App;
 
-axios.get('/products?page=300&count=1')
+const randomPage = Math.round(Math.random() * 900);
+
+axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {
     const product = res.data[0];
     // this.cache.products.set(product.id, product);
