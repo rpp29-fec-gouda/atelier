@@ -11,8 +11,8 @@ class RatingsAndReviews extends React.Component {
     super(props);
 
     this.reviews = [];
-    this.reviewsData;
-    this.ratingsData;
+    this.reviewsData = {};
+    this.ratingsData = {};
     this.displayedReviews = [];
     this.averageRating = 0;
     this.totalRating = 0;
