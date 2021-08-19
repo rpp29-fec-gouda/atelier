@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React from 'react';
+import UploadImage from '../shared/UploadImage';
 
 class AddingForm extends React.Component {
   constructor(props) {
     super(props);
+    this.getImgUrl = this.getImgUrl.bind(this);
     this.state = {
       formName: '',
       username: '',
       email: '',
       text: '',
+      imageUrls: [],
       requires: {
         username: '',
         email: '',
@@ -29,42 +32,27 @@ class AddingForm extends React.Component {
     }
   }
 
+  getImgUrl(urls) {
+    this.setState({
+      imageUrls: urls
+    });
+  }
+
   handleOnChange(e) {
     let id = e.target.id;
-    if (id === 'username') {
+    if (id === 'username' || id === 'email' || id === 'text') {
       this.setState({
-        username: e.target.value
-      });
-    }
-    if (id === 'email') {
-      this.setState({
-        email: e.target.value
-      });
-    }
-    if (id === 'text') {
-      this.setState({
-        text: e.target.value
+        [id]: e.target.value
       });
     }
   }
 
-
   checkingRequire() {
     let requires = {};
-    if (this.state.username.length === 0) {
-      requires.username = 'username is require';
-    }
-    if (this.state.text.length === 0) {
-      requires.text = 'text is require';
-    }
-    if (this.state.email.length === 0) {
-      requires.email = 'email is require';
-    }
-    if (this.state.email.length > 0) {
-      const email = this.state.email;
-      const re = /\S+@\S+\.\S+/;
-      if (!re.test(email)) {
-        requires.email = 'email invalid';
+
+    for (let key in this.state.requires) {
+      if (this.state[key] === '') {
+        requires[key] = `${key} is required`;
       }
     }
 
@@ -89,12 +77,12 @@ class AddingForm extends React.Component {
       };
     }
     if (this.state.formName === 'Answer') {
-      console.log('>>>>>>id<<<<<<', this.props.questionId)
-      url = '/qa/questions/' + this.props.questionId + '/answers';
+      url = `/qa/questions/${this.props.questionId}/answers`;
       data = {
         body: this.state.text,
         name: this.state.username,
-        email: this.state.email
+        email: this.state.email,
+        photos: this.state.imageUrls
       };
     }
 
@@ -102,18 +90,10 @@ class AddingForm extends React.Component {
       axios.post(url, data)
         .then(res => {
           console.log('submit success', res);
-          this.setState({
-            username: '',
-            email: '',
-            text: '',
-            requires: {
-              username: '',
-              email: '',
-              text: ''
-            }
-          });
+          this.props.closePopup(0);
+          this.props.updateData();
         })
-        .catch(err => console.log('post qestion err', err));
+        .catch(err => console.log('submit err', err));
     }
   }
 
@@ -121,36 +101,79 @@ class AddingForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.submit.bind(this)}>
-          <label>
-            Username:
-            <input
-              maxlength='60'
-              placeholder='Example: Jackson11!'
-              id='username'
-              value={this.state.username}
-              onChange={this.handleOnChange.bind(this)}>
-            </input><p style={{ color: 'red' }}>{this.state.requires.username}</p>
-            <p className='warningtext'>For privacy reasons, do not use your full name or email address</p>
-          </label>
-          <label>
-            Email:
-            <input maxlength='60'
-              placeholder='Why did you like the product or not?'
-              id='email'
-              value={this.state.email}
-              onChange={this.handleOnChange.bind(this)}>
-            </input><p style={{ color: 'red' }}>{this.state.requires.email}</p>
-            <p className='warningtext'>For authentication reasons, you will not be emailed</p>
-          </label>
-          <label>
-            {this.state.formName}:
-            <input maxlength='1000'
-              placeholder='Maximum 1000 characters'
-              id='text'
-              value={this.state.text}
-              onChange={this.handleOnChange.bind(this)}>
-            </input><p style={{ color: 'red' }}>{this.state.requires.text}</p>
-          </label><br></br>
+          <table>
+            <tbody>
+              <tr>
+                <td > Username:</td>
+                <td>
+                  <input
+                    className='qa-input-username'
+                    maxlength='60'
+                    placeholder='Example: Jackson11!'
+                    id='username'
+                    value={this.state.username}
+                    onChange={this.handleOnChange.bind(this)}>
+                  </input>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td className='qa-warning-text'>For privacy reasons, do not use your full name or email address</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style={{ color: 'red' }}>{this.state.requires.username}</td>
+              </tr>
+
+
+              <tr>
+                <td >Email:</td>
+                <td>
+                  <input
+                    className='qa-input-email'
+                    maxlength='60'
+                    type='email'
+                    placeholder='Example: jack@email.com'
+                    id='email'
+                    value={this.state.email}
+                    onChange={this.handleOnChange.bind(this)}>
+                  </input>
+                </td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td className='qa-warning-text'>For authentication reasons, you will not be emailed</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style={{ color: 'red' }}>{this.state.requires.email}</td>
+              </tr>
+
+              <tr>
+                <td>{this.state.formName}:</td>
+                <td >
+                  <textarea maxlength='1000'
+                    className='qa-text-box'
+                    placeholder='Maximum 1000 characters'
+                    className='qa-text-box'
+                    id='text'
+                    value={this.state.text}
+                    onChange={this.handleOnChange.bind(this)}>
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td style={{ color: 'red' }}>{this.state.requires.text}</td>
+              </tr>
+            </tbody>
+          </table>
+          {this.state.formName === 'Answer' ?
+            <UploadImage getImgUrl={this.getImgUrl} />
+            :
+            null
+          }
           <input type="submit" value="Submit" />
         </form>
       </div>

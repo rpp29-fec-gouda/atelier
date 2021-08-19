@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-/* 
+/*
 pass module object through component
-prop name can be question, answer or review 
+prop name can be question, answer or review
 Example: <Helpfulness question={questionObj} />
 */
 
@@ -47,6 +47,23 @@ class Helpfulness extends React.Component {
     }
   }
 
+  componentDidUpdate(prevState) {
+    const target = Object.keys(this.props)[0];
+    const targetObj = this.props[target];
+
+    if (target === 'review') {
+      const targetId = targetObj['review_id'];
+      if (this.state.targetId !== targetId) {
+
+        this.setState({
+          helpfulCount: targetObj['helpfulness'],
+          targetId: targetId,
+          link: '/reviews/' + targetId + '/helpful'
+        });
+      }
+    }
+  }
+
   addHelpfulness() {
     axios.put(this.state.link)
       .then(res => {
@@ -60,7 +77,7 @@ class Helpfulness extends React.Component {
   toggleYesText() {
     if (!this.state.clicked) {
       return (
-        <a href='#' onClick={() => this.addHelpfulness()}>
+        <a href='#!' className='yes-link' onClick={() => this.addHelpfulness()}>
           Yes
         </a>
       );
@@ -72,7 +89,7 @@ class Helpfulness extends React.Component {
 
   render() {
     return (
-      <div class='inline'>
+      <div className='inline'>
         Helpful?
         {this.toggleYesText()}
         ({this.state.helpfulCount})

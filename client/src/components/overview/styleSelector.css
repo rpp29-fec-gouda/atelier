@@ -1,8 +1,8 @@
-.styles {
+.po-styles {
   padding: 0.7em 0;
 }
 
-.style {
+.po-style {
   border: 1px black solid;
   border-radius: 50%;
   width: 4em;
@@ -12,23 +12,23 @@
   background-color: lightgoldenrodyellow;
 }
 
-.image {
+.po-style-selector-image {
   position: absolute;
   top: -0.75em;
   left: -0.1em
 }
 
-.style:hover {
+.po-style:hover {
   cursor: pointer;
 }
 
-.style-selected {
+.po-style-selected {
   border: 1px black solid;
   border-radius: 50%;
   content: "\2713";
   width: 0.75em;
   height: 0.75em;
-  padding: 0 0.20em 0.3em 0.20em;
+  padding: 0 0.77em 1.1em 0;
   position: absolute;
   background-color: white;
   top: 0;

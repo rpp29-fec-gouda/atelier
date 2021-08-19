@@ -1,53 +1,88 @@
 import React from 'react';
 import Helpfulness from '../shared/Helpfulness';
 import Report from '../shared/Report';
+import DisplayPhotos from '../shared/DisplayPhotos';
 
 class AnswersList extends React.Component {
   constructor(props) {
     super(props);
+    this.answersLength = Object.keys(this.props.answers).length;
+    this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.state = {
-      answersDisplay: 0,
-      showButton: true
+      answersDisplay: 2,
+      showButton: false,
+      buttonLabel: 'COLLAPSE ANSWERS',
+      answersLength: this.answersLength
     };
   }
 
   componentDidMount() {
-    const questionId = this.props.questionId;
-    this.checkRemainAnswers();
-  }
-
-  //axios get answers count 
-  //if count = 0 , and count > 0
-  //compare count to show
-  //hide/show button
-
-
-  checkRemainAnswers() {
-    const answersLength = Object.keys(this.props.answers).length;
-    if (answersLength - 2 > this.state.answersDisplay) {
+    if (this.answersLength > this.state.answersDisplay) {
       this.setState({
         showButton: true,
-        answersLength: answersLength,
-        answersDisplay: this.state.answersDisplay + 2
+        buttonLabel: 'LOAD MORE ANSWERS'
       });
     }
-    if (answersLength - 2 <= this.state.answersDisplay) {
+  }
+
+  componentDidUpdate() {
+    const newAnswersLength = Object.keys(this.props.answers).length;
+    if (this.answersLength !== newAnswersLength) {
+      if (this.state.answersDisplay === this.answersLength) {
+        this.setState({
+          answersDisplay: newAnswersLength
+        });
+      }
+    }
+  }
+
+  loadMoreAnswers() {
+    const { answersDisplay } = this.state;
+    if (answersDisplay === 2) {
       this.setState({
-        showButton: false,
-        answersLength: answersLength,
-        answersDisplay: this.state.answersDisplay + 2
+        answersDisplay: this.answersLength,
+        buttonLabel: 'COLLAPSE ANSWERS'
+      });
+    } else {
+      this.setState({
+        answersDisplay: 2,
+        buttonLabel: 'LOAD MORE ANSWERS'
       });
     }
+  }
+
+  sortAnswers() {
+    const answers = this.props.answers;
+    let sellerAnswers = [];
+    let otherAnswers = [];
+    Object.keys(answers).forEach(answerId => {
+      if (answers[answerId].answerer_name === 'Seller') {
+        sellerAnswers.push(answers[answerId]);
+      } else {
+        otherAnswers.push(answers[answerId]);
+      }
+    });
+
+    sellerAnswers.sort(function (a, b) {
+      return b.helpfulness - a.helpfulness;
+    });
+    otherAnswers.sort(function (a, b) {
+      return b.helpfulness - a.helpfulness;
+    });
+
+    const result = sellerAnswers.concat(otherAnswers);
+    return result;
   }
 
   render() {
-    const answers = this.props.answers;
-    const answersLength = Object.keys(answers).length;
+    const answers = this.sortAnswers();
     const moreAnswersButton = () => {
       if (this.state.showButton) {
         return (
-          <div>
-            < button onClick={this.checkRemainAnswers.bind(this)} > more answers</button >
+          <div className='qa-more-answer'>
+            <span href='#!' id='qa-more-answer' onClick={this.loadMoreAnswers.bind(this)} >
+              {this.state.buttonLabel}
+            </span>
           </div>
         );
       } else {
@@ -56,17 +91,17 @@ class AnswersList extends React.Component {
     };
 
 
-    const renderAnswer = Object.keys(answers).map((answerId, key) => {
-      const answer = answers[answerId];
+    const renderAnswer = answers.map((answer, key) => {
       if (key < this.state.answersDisplay) {
         return (
-          <div key={answerId} className='answerslist'>
-            <div>{answer.body}</div>
-            <div className='answerby'>
-              <div class='inline'> by {answer.answerer_name} | </div>
+          <div key={answer.id} className='qa-answers-list'>
+            <div className='qa-answer-body'>{answer.body}</div>
+            <DisplayPhotos photos={answer.photos} />
+            <div className='qa-answer-by'>
+              <div className='inline'> by {answer.answerer_name} | </div>
               <Helpfulness answer={answer} />
-              <div class='inline'> | </div>
-              <Report answerId={answerId} />
+              <div className='inline'> | </div>
+              <Report answerId={answer.id} />
             </div>
           </div>
         );
@@ -75,10 +110,12 @@ class AnswersList extends React.Component {
 
 
     return (
-      <div>
-        {renderAnswer}
+      <React.Fragment >
+        <div className='qa-answers-scrolling'>
+          {renderAnswer}
+        </div>
         {moreAnswersButton()}
-      </div >
+      </React.Fragment >
     );
   }
 }

@@ -1,0 +1,20 @@
+.rr-progress-bar.rr-meter {
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  height: 1em;
+  width: 70%;
+}
+
+.rr-rating-progress-bar:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+.rr-progress-bar.rr-meter::-webkit-meter-bar {
+  background: #CCCCCC;
+}
+
+.rr-progress-bar.rr-label:hover {
+  cursor: pointer;
+  color: #2a73fa;
+}

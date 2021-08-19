@@ -4,91 +4,112 @@ import AddingForm from './AddingForm';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestion';
 import '../css/QA.css';
+import ClickedTracker from './ClickedTracker';
+import AddButton from '../shared/AddButton';
 
 class QA extends React.Component {
   constructor(props) {
     super(props);
+    this.addQuestionClicked = this.addQuestionClicked.bind(this);
+    this.updateData = this.updateData.bind(this);
     this.state = {
-      productId: '',
+      productId: this.props.selectedProduct.id,
       questions: [],
-      questionsFiltered: [],
-      addQuestionButton: true
+      questionsFiltered: null,
+      addingForm: false
     };
   }
 
   componentDidMount() {
-    axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
+    axios.get(`/qa/questions?product_id=${this.state.productId}&count=1000`)
       .then(res => {
         this.setState({
-          questions: res.data.results,
-          productId: this.props.productId
+          questions: res.data.results
         });
       })
       .catch(err => {
-        console.log(err.stack);
+        console.log(err);
       });
   }
 
   componentDidUpdate() {
-    if (this.state.productId !== this.props.productId) {
-      axios.get('/qa/questions?product_id=' + this.props.productId + '&count=20')
+    if (this.state.productId !== this.props.selectedProduct.id) {
+      axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
         .then(res => {
           this.setState({
             questions: res.data.results,
-            productId: this.props.productId
+            productId: this.props.selectedProduct.id
           });
         })
         .catch(err => {
-          console.log(err.stack);
+          console.log(err);
         });
-
     }
   }
-
-  addQuestionClick() {
-    if (this.state.addQuestionButton) {
-      this.setState({
-        addQuestionButton: false
+  updateData() {
+    axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
+      .then(res => {
+        this.setState({
+          questions: res.data.results
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    } else {
-      this.setState({
-        addQuestionButton: true
-      });
-    }
   }
 
-  updateQuestionsList(filtered) {
+  addQuestionClicked() {
     this.setState({
-      questionsFiltered: filtered
+      addingForm: !this.state.addingForm
+    });
+  }
+
+  updateQuestionsList(filteredList) {
+    this.setState({
+      questionsFiltered: filteredList
     });
   }
 
   render() {
     if (this.state.questions.length !== 0) {
-      let questions;
-      if (this.state.questionsFiltered.length === 0) {
-        questions = this.state.questions;
-      } else {
-        questions = this.state.questionsFiltered;
-      }
-
+      const questions = this.state.questionsFiltered || this.state.questions;
       return (
-        <div id='question-answer'>
+        <div id='question-answer' onClick={ClickedTracker}>
           <h3>QUESTIONS & ANSWERS</h3>
-          <SearchQuestions questions={questions} callback={(filtered) => this.updateQuestionsList(filtered)} />
-          <QuestionsList questions={questions} productId={this.props.productId} />
+          <SearchQuestions
+            questions={questions}
+            callback={(filteredList) => this.updateQuestionsList(filteredList)}
+          /><br></br>
+          <QuestionsList
+            questions={questions}
+            productId={this.state.productId}
+            updateData={this.updateData}
+          />
         </div>
       );
+
     } else {
       return (
         <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
-          {this.state.addQuestionButton ?
-            <button id='addquestion' onClick={this.addQuestionClick.bind(this)}>ADD A QUESTION +</button> :
-            <AddingForm productId={this.props.productId} />
+          <AddButton
+            id={'qa-add-question'}
+            onClick={this.addQuestionClicked}
+            label={'ADD A QUESTION'}
+          />
+          {this.state.addingForm ?
+            <div className='qa-popup'>
+              <span className='qa-close' onClick={this.addQuestionClicked} >X</span>
+              <AddingForm
+                productId={this.state.productId}
+                updateData={this.updateData}
+                closePopup={this.addQuestionClicked}
+              />
+            </div>
+            :
+            null
           }
-
-        </div>
+        </div >
       );
     }
   }

@@ -1,15 +1,21 @@
-#image-gallery {
-  background-color: gray;
+#po-image-gallery {
   width: 67%;
-  padding: 2em;
+  height: 36em;
+  overflow: hidden;
 }
 
-#default-view, #expanded-view {
+#po-image-gallery.expanded {
+  width: 100%;
+}
+
+#image-gallery-collapsed-view, #image-gallery-expanded-view, #image-gallery-zoomed-view {
   position: relative;
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-#default-view .row, #expanded-view .row {
+#image-gallery-collapsed-view .row, #image-gallery-expanded-view .row, #image-gallery-zoomed-view .row {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -17,40 +23,96 @@
   left: 0;
 }
 
-#default-view .column, #expanded-view .column {
+#image-gallery-collapsed-view .column, #image-gallery-expanded-view .column, #image-gallery-zoomed-view .column {
   width: 100%;
-  background-color: aqua;
   position: relative;
 }
 
-#main-image {
+#po-main-image {
   position: absolute;
+  text-align: center;
+}
+
+#po-main-image img {
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  height: 36em;
   background-color: blanchedalmond;
   z-index: 1;
 }
 
-.expanded-view {
+#image-gallery-collapsed-view #po-main-image img:hover {
+  cursor: zoom-in;
+}
+
+#image-gallery-expanded-view #po-main-image img:hover {
+  cursor: crosshair;
+}
+
+#image-gallery-zoomed-view #po-main-image .img-zoom-lens:hover  {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="30" style="font-size: 20px; font-weight: bold;"><text y="15">-</text></svg>'), auto;
+}
+
+.image-gallery-expanded-view-toggle, .image-gallery-collapsed-view-toggle {
+  width: 1em;
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 20;
+  z-index: 10;
+  margin: 1.5em;
 }
 
-.expanded-view:hover {
+.image-gallery-expanded-view-toggle:hover, .image-gallery-collapsed-view-toggle:hover {
   cursor: pointer;
 }
 
-.collapsed-view {
+.image-gallery-expanded-view-toggle svg {
+  stroke: white;
+  stroke-width: 0.03em;
+}
+
+.image-gallery-collapsed-view-toggle svg {
+  stroke: white;
+  stroke-width: 1em;
+}
+
+/* collapsed view */
+.default-view .row {
+  padding: 5em;
+}
+
+.image-gallery-collapsed-view {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 19;
 }
 
-.collapsed-view:hover {
-  cursor: pointer;
+.image-gallery-collapsed-view:hover {
+  cursor: zoom-in;
+}
+
+/* expanded view */
+.image-gallery-expanded-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.image-gallery-expanded-view:hover {
+  cursor: zoom-in;
+}
+
+/* zoomed view */
+.image-gallery-zoomed-view:hover {
+  cursor: zoom-out;
+}
+
+/* overrides of shared component styles */
+.image-nagivator {
+  margin: 1.5em;
+}
+
+.scrolling-arrows {
+  margin: 0 1.5em 0 0;
 }

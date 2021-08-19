@@ -14,75 +14,76 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleUpdate = this.handleUpdate.bind(this);
     this.selectProduct = this.selectProduct.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.updateProductData = this.updateProductData.bind(this);
+    this.checkCache = this.checkCache.bind(this);
+    this.updateCache = this.updateCache.bind(this);
+    this.updateReviews = this.updateReviews.bind(this);
+    this.updateRatings = this.updateRatings.bind(this);
 
 
-    this.store = {
+    this.cache = {
+      imageURLs: new Map(),
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
+      relatedIds: new Map(),
+      styles: new Map(),
     };
 
     this.state = {
       ready: false,
-      products: [],
-      selectedProduct: null
+      selectedProduct: null,
+      selectedProductRating: { ratingsCount: undefined, avgRating: undefined, ratings: [] },
+      selectedProductReviews: [],
+      selectedProductImageURLs: [],
+      selectedProductThumbnailURLs: []
     };
   }
 
-  handleUpdate(urlToReload, stateKeyToUpdate) {
-    if (this.props.isTesting) {
-      return new Promise((resolve, reject) => {
-        resolve();
-        reject();
-      });
-    }
-
-    return axios.get(urlToReload)
-      .then(res => {
-        this.setState({
-          [stateKeyToUpdate]: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err.stack);
-      });
-  }
-
   selectProduct(product) {
-    console.log(`${product.name} selected`);
+    if (this.state.selectedProduct.id !== product.id) {
+      // const product = this.checkCache('products', productId);
+      if (product) {
+        console.log(`${product.name} selected`);
+        this.setState({
+          selectedProduct: product
+        });
+      }
+    }
+  }
+
+  checkCache(cacheName, productId) {
+    return this.cache[cacheName].get(productId);
+  }
+
+  updateCache(cacheName, productId, data) {
+    this.cache[cacheName].set(productId, data);
+  }
+
+  updateReviews(reviews) {
     this.setState({
-      selectedProduct: product
+      selectedProductReviews: reviews,
+    }, () => {
+      console.log('Reviews State: ', this.state.selectedProductReviews);
     });
   }
 
-  updateProductData(productList, productMap) {
-    this.store.products = productMap;
+  updateRatings(ratings, characteristics, recommended, averageRating, totalRating) {
     this.setState({
-      products: productList
-    });
-  }
-
-  handleSelectChange(e) {
-    const { products } = this.store;
-    const productId = parseInt(e.currentTarget.value);
-    const selectedProduct = products.get(productId);
-    this.selectProduct(selectedProduct);
+      selectedProductRating: { ratingsCount: totalRating, avgRating: averageRating, ratings: ratings },
+    }, () => (
+      console.log('Ratings State: ', this.state.selectedProductRating)
+    ));
   }
 
   componentDidMount() {
-    axios.get('/products')
+    axios.get(`/products/${this.props.init.id}`)
       .then(res => {
-        const products = res.data;
-        products.forEach(product => {
-          this.store.products.set(product.id, product);
-        });
+        const product = res.data;
+        console.log(product);
+        this.cache.products.set(product.id, product);
         this.setState({
-          products: products,
-          selectedProduct: products[Math.floor(Math.random() * products.length)],
+          selectedProduct: product,
           ready: true
         });
       });
@@ -90,43 +91,49 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
-    if (ready) {
-      console.log('select product', selectedProduct.id);
 
-    }
-    //console.log('App re-render');
-    let key = 0;
     return ready ? (
-      <div id='app'>
-        <h3>{`${selectedProduct.name} selected`}</h3>
-        <select name='productSelector' value={selectedProduct.id} onChange={this.handleSelectChange}>
-          {products.map(product => (<option key={`product${key++}`} value={product.id}>{product.name}</option>))}
-        </select>
+      <React.Fragment>
         <ProductOverview
-          selectedProduct={ selectedProduct }
+          selectedProduct={selectedProduct}
+          isTesting={this.props.isTesting}
         />
         <RelatedProducts
-          products={products}
           selectedProduct={selectedProduct}
-          updateProductData={this.updateProductData}
           selectProduct={this.selectProduct}
+          checkCache={ this.checkCache }
+          updateCache={ this.updateCache }
         />
-        {console.log('//////////id/////////////')}
-        <QA productId={selectedProduct.id} />
-        <br></br>
+        <QA
+          selectedProduct={selectedProduct}
+        />
         <RatingsAndReviews
-          selectedProduct={selectedProduct} />
-      </div>
+          reviews={this.state.reviews}
+          ratings={this.state.ratings}
+          selectedProduct={selectedProduct}
+          updateReviews={this.updateReviews}
+          updateRatings={this.updateRatings}
+        />
+      </React.Fragment>
     ) : (
       <p>Loading...</p>
-
     );
   }
 }
 
 export default App;
 
-const div = document.createElement('div');
-div.setAttribute('id', 'Atelier');
-document.body.appendChild(div);
-ReactDOM.render(<App />, div);
+const randomPage = Math.round(Math.random() * 900);
+
+axios.get(`/products?page=${randomPage}&count=1`)
+  .then(res => {
+    const product = res.data[0];
+    // this.cache.products.set(product.id, product);
+    const div = document.createElement('div');
+    div.setAttribute('id', 'App');
+    document.body.appendChild(div);
+    ReactDOM.render(<App init={product} />, div);
+  })
+  .catch(err => {
+    console.log(err.stack);
+  });

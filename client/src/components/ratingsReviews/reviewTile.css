@@ -1,0 +1,54 @@
+#rr-review-tile {
+  padding-top: 5%;
+}
+
+.rr-review {
+  max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-user-stamp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rr-review-rating {
+  justify-content: flex-start;
+}
+
+.rr-review-date {
+  padding-right: 0.5em;
+  justify-content: flex-end;
+}
+
+.rr-reviewer-name {
+  justify-content: flex-end;
+}
+
+.rr-review-summary{
+  font-weight:bold;
+  font-size: large;
+}
+
+.rr-review-response {
+  padding: 0.5em;
+  width: fit-content;
+  background-color: #dad6d6;
+}
+
+.rr-review-response.title {
+  font-weight: bold;
+}
+
+.rr-tile {
+  padding-top: 2%;
+}
+
+.rr-review-photos {
+  display: flex;
+  justify-content: left;
+}
+

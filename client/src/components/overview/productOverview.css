@@ -1,4 +1,8 @@
-#product-col-right {
+#product-overview {
+  min-height: 36em;
+}
+
+#po-col-right {
   padding: 2em;
   width: 33%;
 }

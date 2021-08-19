@@ -1,67 +1,97 @@
 import React from 'react';
 import ProductCard from './ProductCard.jsx';
-// import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
-import '../css/RelatedProducts.css';
 
-//
-// Try to use product ids instead of products for performance reasons
-//
+class Outfit extends React.Component {
+  constructor(props) {
+    super(props);
 
-const Outfit = (props) => {
-  const { selectedProduct, selectProduct, outfit, updateOutfit } = props;
-  const { localStorage } = window;
+    this.addToOutfit = this.addToOutfit.bind(this);
+    this.removeFromOutfit = this.removeFromOutfit.bind(this);
 
-  // const update = (newOutfit) => {
-  //   props.updateOutfit(newOutfit);
-  // };
+    this.state = {
+      outfit: []
+    };
+  }
 
-  const addToOutfit = () => {
-    if (outfit.includes(selectedProduct)) {
-      return;
+  loadOutfit() {
+    const { localStorage } = window;
+    const outfitData = localStorage.getItem('outfit');
+
+    if (outfitData) {
+      const outfit = JSON.parse(outfitData);
+      console.log('Outfit found in localStorage:', outfit);
+      this.setState({ outfit: outfit });
     }
-    localStorage.setItem('outfit', JSON.stringify(outfit.map(item => item.id)));
+  }
 
-    updateOutfit([ selectedProduct, ...outfit ]);
-  };
+  addToOutfit() {
+    const { localStorage } = window;
+    const { selectedProduct } = this.props;
+    const { outfit } = this.state;
 
-  const removeFromOutfit = (event, product) => {
-    event.stopPropagation();
-    const match = product.id;
-    const newOutfit = [ ...outfit ];
-    console.log('Remove', match);
-    let i = newOutfit.length;
-    while (i--) {
-      if (newOutfit[i].id === match) {
-        newOutfit.splice(i, 1);
-      }
+    if (!outfit.includes(selectedProduct.id)) {
+      console.log(`Add ${selectedProduct.id} (${selectedProduct.name}) to outfit`);
+      let newOutfit = [ selectedProduct.id, ...outfit ];
+      localStorage.setItem('outfit', JSON.stringify(newOutfit));
+      console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
+
+      this.setState({ outfit: newOutfit });
     }
+  }
 
-    newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit.map(item => item.id))) : localStorage.removeItem('outfit');
-    updateOutfit(newOutfit);
-  };
+  removeFromOutfit(productId) {
+    const { localStorage } = window;
+    const { outfit } = this.state;
+    let newOutfit = [ ...outfit ];
+    const removalIndex = newOutfit.indexOf(productId);
 
-  // const { outfit } = this.state;
-  // console.log('Products in current outfit:', products);
+    if (removalIndex > -1) {
+      console.log(`Remove ${productId} from outfit`);
+      newOutfit.splice(removalIndex, 1);
 
-  let key = 0;
-  return selectedProduct ? (
-    <div id='Outfit'>
-      <h1></h1>
-      <span className='rp-component-title'>YOUR OUTFIT</span>
-      <div className='rp-card-container'>
-        <div className='rp-card rp-card-placeholder' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
-          <h1>+</h1>
-          <h2>Add to Outfit</h2>
+      newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit)) : localStorage.removeItem('outfit');
+      this.setState({ outfit: newOutfit });
+    }
+  }
+
+  componentDidMount() {
+    this.loadOutfit();
+  }
+
+  render() {
+    const { addToOutfit, removeFromOutfit } = this;
+    const { outfit } = this.state;
+    const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
+
+    let key = 0;
+    return selectedProduct ? (
+      <div id='Outfit'>
+        <h1></h1>
+        <span className='rp-component-title'>YOUR OUTFIT</span>
+        <div className='rp-card-container'>
+          <div className='rp-card-sticky rp-card-placeholder add-to-outfit' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
+            <h1>+</h1>
+            <h2>Add to Outfit</h2>
+          </div>
+          {outfit.length ? (
+            outfit.map(id => (
+              <ProductCard
+                key={ `outfitCard${id}` }
+                type='Outfit'
+                // value={ product.id }
+                productId={ id }
+                selectProduct={ selectProduct }
+                action={ removeFromOutfit }
+                checkCache={ checkCache }
+                updateCache={ updateCache }
+              />
+            ))
+          ) : null}
         </div>
-        {outfit.length ? (
-          outfit.map(product => (
-            <ProductCard key={ key++ } type='outfit' value={ product.id } product={ product } selectProduct={ selectProduct } action={ removeFromOutfit } />
-          ))) : null
-        }
       </div>
-    </div>
-  ) : null;
-};
+    ) : null;
+  }
+}
 
 export default Outfit;

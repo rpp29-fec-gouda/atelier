@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import ReviewsList from '../../../../../client/src/components/ratingsReviews/ReviewsList.jsx';
 
@@ -8,6 +8,10 @@ describe('<ReviewsList />', () => {
     const wrapper = shallow(<ReviewsList debug/>); // mount/render/shallow when applicable
     expect(wrapper).toMatchSnapshot();
     // // // Assert that the given enzyme wrapper has rendered content.
+  });
 
+  it('should contain loading element if data not provided:', function () {
+    const wrapper = mount(<ReviewsList />);
+    expect(wrapper.find('div')).toHaveLength(4);
   });
 });

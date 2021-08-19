@@ -3,19 +3,18 @@ import './price.css';
 
 const Price = (props) => {
   return (
-    <div id="price" class="row-margin">
+    <div id="po-price" class="row-margin">
       {
-        props.salePrice === null
+        props.salePrice === null || !props.salePrice
           ?
           `$ ${ props.defaultPrice }`
           :
           <span class="row">
-            <div class="sale-price">$ {props.salePrice}</div>
+            <div class="po-sale-price">$ {props.salePrice}</div>
             &nbsp;&nbsp;
-            <div class="original-price">$ {props.originalPrice}</div>
+            <div class="po-original-price">$ {props.originalPrice}</div>
           </span>
       }
-
     </div>
   );
 };

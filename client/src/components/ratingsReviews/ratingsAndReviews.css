@@ -1,0 +1,13 @@
+#rr-ratings-reviews {
+  display: flex;
+  flex-flow: row;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  padding: .5em;
+  max-height: 100vh;
+}
+
+.rr-component-title {
+  user-select: none;
+  font-weight: 400;
+}

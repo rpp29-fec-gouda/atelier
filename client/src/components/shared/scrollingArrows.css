@@ -1,12 +1,35 @@
-.scrolling-arrows{
+.scrolling-arrows {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 2em);
   height: 100%;
+  margin: 0 2em 0 2em;
   z-index: 10;
+  pointer-events: none;
 }
 
-.scrolling-arrows .right-arrow:hover, .left-arrow:hover {
+.scrolling-arrows-arrow:hover {
   cursor: pointer;
+}
+
+.scrolling-arrows-arrow {
+  width: 1em;
+  height: 1em;
+  background-size: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: auto;
+}
+
+.scrolling-arrows-arrow svg {
+  stroke: white;
+  stroke-width: 0.5em;
+}
+
+
+.scrolling-arrows-arrow svg:hover {
+  stroke: black;
+  stroke-width: 0.8em;
+  fill: white;
 }

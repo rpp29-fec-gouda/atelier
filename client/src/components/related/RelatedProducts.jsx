@@ -1,7 +1,7 @@
 import React from 'react';
+import ProductCompare from './ProductCompare.jsx';
 import ProductsCarousel from './ProductsCarousel.jsx';
 import Outfit from './Outfit.jsx';
-// import localStorage from '../../helpers/localStorage.js';
 import axios from 'axios';
 import '../css/RelatedProducts.css';
 
@@ -10,26 +10,21 @@ class RelatedProducts extends React.Component {
     super(props);
 
     this.selectProduct = this.selectProduct.bind(this);
-    this.updateOutfit = this.updateOutfit.bind(this);
+    this.compareProduct = this.compareProduct.bind(this);
 
-    this.productList = this.props.products;
-    this.toLoad = [];
+    this.offsetX = 0;
+    this.offsetY = 0;
 
-    this.store = {
-      products: new Map(),
-      related: new Map()
-    };
 
 
     this.state = {
+      selectedId: null,
       related: [],
-      outfit: [],
-      ready: true
+      compareTo: null
     };
   }
 
   collectRelatedProducts(product) {
-    // console.log('reset related products');
     this.fetchRelatedIds(product, (ids) => {
       this.collectProductsById(ids);
     });
@@ -37,8 +32,8 @@ class RelatedProducts extends React.Component {
 
   fetchRelatedIds(product, callback = () => {}) {
     const id = product.id;
-    const { related } = this.store;
-    let ids = related.get(product.id);
+    const { checkCache, updateCache } = this.props;
+    let ids = checkCache('relatedIds', id);
 
     if (ids) {
       console.log(`${ids.length} products associated with ${product.name}:`, ids);
@@ -46,11 +41,10 @@ class RelatedProducts extends React.Component {
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
-          ids = res.data;
+          ids = Array.from(new Set(res.data));
           console.log(`${ids.length} product ids associated with ${product.name}`, ids);
-          related.set(id, ids);
+          updateCache('relatedIds', id, ids);
           callback(ids);
-          // this.setState({ related: res.data });
         })
         .catch(err => {
           console.log(err.stack);
@@ -58,181 +52,79 @@ class RelatedProducts extends React.Component {
     }
   }
 
-  collectProductsById(ids) {
-    // Choose between cached data or API call on a per-product basis
-    const { products } = this.store;
-    const uniqueIds = Array.from(new Set(ids));
-
-    let cached = [];
-    let toLoad = [];
-
-    uniqueIds.forEach(id => {
-      let product = products.get(id);
-      if (product) {
-        console.log(`Related product ${product.id} (${product.name}) loaded from cache`);
-        cached.push(product);
-      } else {
-        toLoad.push(id);
-      }
-    });
-
-    this.setState({
-      related: [...cached]
-    });
-
-    console.log('Products to be retrieved from server:', toLoad);
-
-    if (toLoad.length) {
-      toLoad.forEach(id => {
-        axios.get(`/products/${id}`)
-          .then(res => {
-            const product = res.data;
-            const relatedProducts = [ ...this.state.related ];
-            console.log(`Related product ${product.id} (${product.name}) retrieved from server`);
-            this.productList.push(product);
-            products.set(id, product);
-            this.setState({
-              related: [product, ...relatedProducts]
-            });
-          })
-          .catch(err => {
-            console.log(err.stack);
-          });
-      });
-    }
-    //   return axios.get(`/multipleProducts?ids=${load.join('&ids=')}`)
-    //     .then(res => {
-    //       console.log(res.data);
-    //       if (loaded.length) {
-    //         loaded.concat(res.data);
-    //       } else {
-    //         loaded = res.data;
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.log(err.stack);
-    //     });
-    // } else {
-    //   if (loaded.length) {
-    //     return Promise.resolve(loaded);
-    //   } else {
-    //     return Promise.reject('No product data');
-    //   }
-    // }
-  }
-
-  loadOutfit() {
-    const { localStorage } = window;
-    const outfitData = localStorage.getItem('outfit');
-
-    if (outfitData) {
-      const outfit = JSON.parse(outfitData);
-      console.log('Outfit from localStorage:', outfit);
-      const { products } = this.store;
-      let cached = [];
-      let index = 0;
-
-      outfit.forEach(id => {
-        let product = products.get(id);
-
-        if (product) {
-          cached[index++] = product;
-          console.log(`Outfit product ${product.id} (${product.name}) loaded from cache`);
-          this.setState({ outfit: [ ...cached ] });
-        } else {
-          let asyncIndex = index++;
-          axios.get(`/products/${id}`)
-            .then(res => {
-              const product = res.data;
-              cached[asyncIndex] = product;
-              console.log(`Outfit product ${product.id} (${product.name}) retrived from server`);
-              this.setState({ outfit: [ ...cached ] });
-              products.set(product.id, product);
-            })
-            .catch(err => {
-              console.log('Loading outfit:', err.stack);
-            });
-        }
-      });
-    }
-  }
-
-  updateOutfit(newOutfit) {
-    // console.log('Related products updating outfit:', newOutfit);
-    this.setState({ outfit: newOutfit });
-  }
-
-  // mapAllProductsById() {
-  //   return axios.get('/products?count=1000000')
-  //     .then(res => {
-  //       const { products: map } = this.store;
-  //       const allProducts = res.data;
-  //       for (let i = 0, end = allProducts.length; i < end; i++) {
-  //         const product = allProducts[i];
-  //         map.set(product.id, product);
-  //       }
-  //       this.products = allProducts;
-  //     })
-  //     .catch(err => {
-  //       console.log(err.stack);
-  //     });
+  // updateOutfit(newOutfit) {
+  //   this.setState({ outfit: newOutfit });
   // }
 
   selectProduct(product) {
-    const { updateProductData, selectProduct } = this.props;
-    updateProductData(this.productList, this.store.products);
-    // this.collectRelatedProducts(product);
-    this.props.selectProduct(product);
-    this.setState({ ready: false });
+    this.setState({compareTo: null}, () => {
+      this.props.selectProduct(product);
+    });
+  }
+
+  compareProduct(productId) {
+    if (productId) {
+      const product = this.props.checkCache('products', productId);
+      console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
+      this.setState({ compareTo: product });
+    } else {
+      this.setState({ compareTo: null });
+    }
   }
 
   componentDidMount() {
-    // In the future this will also need to identify the user and bring up their selected outfit from their past session
-    // this.mapAllProductsById()
-    //   .then(() => {
-    //     this.props.updateProductData(this.products, this.store.products);
-    //     this.collectRelatedProducts(this.props.selectedProduct);
-    //   })
-    //   .catch(err => {
-    //     console.log(err.stack);
-    //   });
-    this.loadOutfit();
-    this.collectRelatedProducts(this.props.selectedProduct);
+    // this.loadOutfit();
+    this.fetchRelatedIds(this.props.selectedProduct, (ids) => {
+      this.setState({
+        selectedId: this.props.selectedProduct.id,
+        related: ids
+      });
+    });
   }
 
   componentDidUpdate() {
-    if (!this.state.ready) {
-      this.setState({ ready: true });
-      this.collectRelatedProducts(this.props.selectedProduct);
+    const { selectedProduct } = this.props;
+    const matchId = selectedProduct.id;
+    if (this.state.selectedId !== matchId) {
+      this.setState({ selectedId: matchId });
+      console.log(this.state.selectedId, matchId);
+      this.fetchRelatedIds(selectedProduct, (ids) => {
+        this.setState({ related: ids });
+      });
     }
   }
 
   render() {
-    const { related, outfit } = this.state;
-    const { selectedProduct, selectProduct } = this.props;
+    const { compareProduct } = this;
+    const { related, outfit, compareTo } = this.state;
+    const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
-    // console.log('Related products:', related);
-
-    // console.log('RelatedProducts re-render');
     return (
-      <div id='RelatedProdcuts'>
+      <div id='RelatedProducts' >
         <ProductsCarousel
-          // key={ selectedProduct }
-          products={ related }
+          productIds={ related }
           selectedProduct={ selectedProduct }
-          selectProduct={ this.selectProduct }
+          selectProduct={ selectProduct }
+          checkCache={ checkCache }
+          updateCache={ updateCache }
+          compare={compareProduct}
         />
         <Outfit
-          outfit={ outfit }
-          updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
-          selectProduct={ this.selectProduct }
+          selectProduct={ selectProduct }
+          checkCache={ checkCache }
+          updateCache={ updateCache }
         />
-        {/* <RelatedProductsOutfit /> */}
+        <ProductCompare
+          selectedProduct={selectedProduct}
+          compareTo={compareTo}
+          resetCompare={compareProduct}
+          checkCache={checkCache}
+          updateCache={updateCache}
+        />
       </div>
     );
   }
 }
-
 
 export default RelatedProducts;

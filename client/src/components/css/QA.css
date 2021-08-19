@@ -1,9 +1,9 @@
-.question_table {
+.qa-question-table {
   table-layout: fixed;
   width: 100%;  
 }
 
-.answer_table{
+.qa-answer-table{
   table-layout: fixed;
   width: 100%;  
 }
@@ -12,67 +12,131 @@ td {
   vertical-align: top;
 }
 
-.character {
+.qa-character {
   font-weight: bold;
 }
-.answerby {
-  margin: 5px;
-  font-size: 14px;
+.qa-answer-by {
+  margin: 0.5em;
+  font-size: 1em;
 }
 
-#addquestion, #morequestions {
-  height: 50px;
-  margin: 8px;
-  font-weight: 550 ; 
+.qa-add-question, .qa-more-questions {
+  height: 5em;
+  margin: 0.5em;
+  font-weight: bold ; 
   display: inline-block; 
 }
 
-#addquestion {
-  width: 200px
-}
-#morequestion {
-  width: 250px
+#qa-add-question, #qa-more-question{
+  border-radius: 0.6em;
+  height: 2em;
+  margin: 0.5em;
 }
 
-.helpfulness {
-  text-align: right;
-}
-.inline {
+#qa-add-question, #qa-more-question, .plus {
   display: inline;
 }
-.warningtext {
-  font-size: 10px;
+
+.qa-question-body{
+  font-weight: bold;
+}
+
+.qa-more-answer {
+  font-weight: bold;
+  color: rgb(18, 17, 17);
+  user-select: none;
+}
+
+.qa-more-answer :hover{
+  font-size: 1.2em;
+  color: rgba(29, 29, 28, 0.413);
+}
+
+.qa-helpfulness {
+  text-align: right;
+}
+
+.inline {
+  display: inline;  
+}
+
+.qa-warning-text {
+  font-size: 0.8em;
 }
   
-.popup {
+.qa-popup {
   position: fixed;
+  z-index: 5;
   left: 25%;
   right: 25%;
   top: 25%;
-  bottom: 25%;
+  bottom: 20%;
   margin: auto;
   background: rgb(199, 196, 196);
 }
 
-.search_bar {
-  width: 80%;
-  height: 30px;
+.qa-search-bar {
+  width: 100%;
+  height: 1.5em;
+  font-size: 1.5em;
 }
 
-.close {
+.qa-close {
+  position: sticky;
   float: right;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 2em;
   padding: 0.4em;
   color: black;
-  text-decoration: none;
+  user-select: none;
 }
 
-.answerslist {
-  overflow: scroll;
-  max-height:50%; 
+.qa-close:hover {
+  color: gray;
 }
 
-.questionslist {
+.qa-answers-scrolling {
   overflow: scroll;
-  max-height: 400px; 
+  max-height: 18em; 
 }
+
+.qa-questions-scrolling {
+  overflow: scroll;
+  max-height: 40em;
+}
+
+.qa-thumbnail {
+  width: 5em;
+  height: 5em;
+}
+
+.qa-photos-inline {
+  display: inline-block;
+  padding: 0.2em;
+} 
+
+ a.qa-add-answer {
+   font-size: 1em;
+ }
+
+ .qa-upload-imgthumbnail{
+   width: 5em;
+   height: 5em;
+   padding: 0.2em;
+ }
+
+ .yes-link ,
+ .report-link {
+   font-size: 1em;
+ }
+
+ .qa-input-username, 
+ .qa-input-email {
+  width: 15em;
+  height: 2em;
+ } 
+
+ .qa-text-box {
+   width: 20em;
+   height: 10em;
+ }

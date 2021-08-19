@@ -1,23 +1,58 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Outfit from './Outfit.jsx';
+import { mount } from 'enzyme';
+import Outfit from '../../../../../client/src/components/related/Outfit.jsx';
 
-test('Product is added to outfit when "Add to Outfit" card is clicked', () => {
-  const outfit = shallow(<Outfit selectedProduct={{name: 'Product'}} products={[]} />);
+describe('<Outfit />', () => {
+  const updateOutfit = jest.fn();
+  const removeFromOutfit = jest.fn();
+  jest.mock('axios', () => ({
+    __esModule: true,
+    default: jest.fn()
+  }));
 
-  expect(outfit.state('products').length).toEqual(0);
+  const outfit = mount(<Outfit selectedProduct={{name: 'Product', id: 11}} productIds={[]} checkCache={ () => {}} />);
+  it('Renders', () => {
+    expect(outfit.find('div#Outfit')).toHaveLength(1);
+  });
 
-  outfit.find('.addToOutfit').simulate('click');
+  test('Outfit should be empty before Add to Outfit is clicked', () => {
+    expect(outfit.state('outfit')).toHaveLength(0);
+  });
+
+  test('Should add a product to Outfit when Add to Outfit card is clicked', () => {
+    outfit.find('div.add-to-outfit').simulate('click');
+    expect(outfit.state('outfit')).toHaveLength(1);
+  });
+
+  test('Should not remove a product from Outfit when removeFromOutfit is called without a matching id', () => {
+    const instance = outfit.instance();
+    instance.removeFromOutfit(12);
+    expect(outfit.state('outfit')).toHaveLength(1);
+  });
+
+  test('Should remove a product from Outfit when removeFromOutfit is called with a matching id', () => {
+    const instance = outfit.instance();
+    instance.removeFromOutfit(11);
+    expect(outfit.state('outfit')).toHaveLength(0);
+  });
+
+  // const element = outfit.find('#Outfit');
+
   // console.log(outfit.state);
 
-  expect(outfit.state('products').length).toEqual(1);
+  // expect(outfit.props('outfit').length).toEqual(1);
 });
+/*
+const wrapper = mount(<MyComponent />);
+expect(wrapper.find('.foo')).to.have.lengthOf(1);
+expect(wrapper.find('.bar')).to.have.lengthOf(3);
 
-test('Product is removed from outfit when "action" button is clicked', () => {
-  const outfit = shallow(<Outfit selectedProduct={{name: 'Product'}} products={[{name: 'Product'}]} />);
-  const instance = outfit.instance();
+// compound selector
+expect(wrapper.find('div.some-class')).to.have.lengthOf(3);
 
-  instance.removeFromOutfit({name: 'Product'});
+// CSS id selector
+expect(wrapper.find('#foo')).to.have.lengthOf(1);
 
-  expect(outfit.state('products').length).toEqual(0);
-});
+// property selector
+expect(wrapper.find('[htmlFor="checkbox"]')).to.have.lengthOf(1);
+*/
