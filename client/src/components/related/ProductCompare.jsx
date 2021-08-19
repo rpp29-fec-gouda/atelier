@@ -7,21 +7,30 @@ class ProductCompare extends React.Component {
     this.handleHide = this.handleHide.bind(this);
     // this.handleMouseMove = this.handleMouseMove.bind(this);
     // this.handleBlur = this.handleBlur.bind(this);
-    // this.handleDragStart = this.handleDragStart.bind(this);
-    // this.handleDragOver = this.handleDragOver.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    // this.handleDrag = this.handleDrag.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
+    this.handleDragOver = this.handleDragOver.bind(this);
     // this.handleDrop = this.handleDrop.bind(this);
+
+    this.offsetX = 0;
+    this.offsetY = 0;
 
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      x: 0,
-      y: 0
+      x: window.innerWidth * .25,
+      y: window.innerHeight * .75
     };
   }
 
   handleHide(event) {
     event.preventDefault();
     this.props.resetCompare(null);
+    this.setState({
+      x: undefined,
+      y: undefined
+    });
   }
 
   // handleMouseMove(event) {
@@ -39,20 +48,34 @@ class ProductCompare extends React.Component {
   //   }
   // }
 
-  // handleDragStart(event) {
-  //   // event.stopPropagation();
-  //   let x = event.nativeEvent.offsetX;
-  //   let y = event.nativeEvent.offsetY;
+  handleDragStart(event) {
+    // event.preventDefault();
+    this.offsetX = event.nativeEvent.offsetX;
+    this.offsetY = event.nativeEvent.offsetY;
+  }
 
-  //   console.log(`Grabbed at: ${x}, ${y}`);
-  //   this.offsetX = event.nativeEvent.offsetX;
-  //   this.offsetY = event.nativeEvent.offsetY;
+  // handleDrag(event) {
+  //   // event.preventDefault();
+  //   let x = event.clientX - this.offsetX;
+  //   let y = event.clientY - this.offsetY;
+
+  //   this.setState({ x: x, y: y });
   // }
 
-  // handleDragOver(event) {
-  //   event.stopPropagation();
-  //   event.preventDefault();
-  // }
+  handleDragEnd(event) {
+    // event.preventDefault();
+    let x = event.clientX - this.offsetX;
+    let y = event.clientY - this.offsetY;
+
+    console.log(`New position: ${x}, ${y}`);
+
+    this.setState({ x: x, y: y });
+  }
+
+  handleDragOver(event) {
+    // event.stopPropagation();
+    event.preventDefault();
+  }
 
   // handleDrop(event) {
   //   // event.stopPropagation();
@@ -92,14 +115,16 @@ class ProductCompare extends React.Component {
       alternateFeatures[featureName] = feature.value || String.fromCharCode(10003);
     });
 
-    const modalPosition = {
-      x: this.state.width * .5,
-      y: this.state.height * .3
-    };
+    let modalPosition = {};
+
+    if (this.state.x !== undefined && this.state.y !== undefined) {
+      modalPosition.left = this.state.x;
+      modalPosition.top = this.state.y;
+    }
 
     let key = 0;
     return (
-      <form id='ProductCompare' draggable='true'>
+      <form id='ProductCompare' style={modalPosition} draggable='true' onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnd={this.handleDragEnd} >
         <div className='rp-compare-title-bar'>
           <span className='rp-component-title'>COMPARING</span>
           <div className='rp-compare-exit' onClick={ this.handleHide }>+</div>
