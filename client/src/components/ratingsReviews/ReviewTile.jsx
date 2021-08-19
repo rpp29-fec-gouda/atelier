@@ -7,6 +7,12 @@ import './reviewTile.css';
 
 const ReviewTile = (props) => {
   const { reviews, averageRating } = props;
+  if (reviews) {
+
+    reviews.map((review) => (
+      console.log('reviews', review.body.slice(0, 20))
+    ));
+  }
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   let key = 0;
 
@@ -24,8 +30,15 @@ const ReviewTile = (props) => {
           <div id='rr-review' className='rr-review'>
             <div id='rr-review-summary' className='rr-review-summary'>{review.summary}</div>
             <br></br>
-            <div id='rr-review-body' className='rr-review-body'>{review.body}</div>
+            {review.body.length < 250 ?
+              <div id='rr-review-body' className='rr-review-body'>{review.body}</div>
+              :
+              <div id='rr-full-review-body'>
+                <div id='rr-review-body' className='rr-review-body'>{review.body.slice(0, 250)}</div>
+              </div>
+            }
             <br></br>
+
             {review.photos.length > 0 ?
               <div id='rr-review-photos' className='rr-review-photos'>
                 <DisplayPhotos photos={review.photos} />

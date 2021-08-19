@@ -28,6 +28,7 @@ const KeywordSearch = (props) => {
 
   return (
     <div id='keyword-search'>
+      <label for="rr-search-bar"></label>
       <input
         className="rr-search-bar"
         type="text"
