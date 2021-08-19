@@ -31,8 +31,6 @@ class App extends React.Component {
     };
 
     this.state = {
-      x: 0,
-      y: 0,
       ready: false,
       selectedProduct: null,
       selectedProductRating: { ratingsCount: undefined, avgRating: undefined, ratings: [] },
@@ -41,12 +39,6 @@ class App extends React.Component {
       selectedProductThumbnailURLs: []
     };
   }
-
-  // handleMouseMove(event) {
-  //   this.setState({
-  //     x: clientX,
-  //     y: clientY
-  //   });
 
   selectProduct(product) {
     if (this.state.selectedProduct.id !== product.id) {
