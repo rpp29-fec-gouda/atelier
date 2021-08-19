@@ -2,7 +2,7 @@ import React from 'react';
 import AddingForm from './AddingForm';
 import Helpfulness from '../shared/Helpfulness';
 import AnswersList from './AnswersList';
-import ClickedTracker from './ClickedTracker';
+import Report from '../shared/Report';
 
 class Question extends React.Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class Question extends React.Component {
   }
 
   addAnswerClicked(e) {
-    ClickedTracker('add Answer');
     const id = e.target ? e.target.id : '';
     this.setState({
       addAnswerClicked: !this.state.addAnswerClicked,
@@ -26,13 +25,13 @@ class Question extends React.Component {
   scrollToBottom() {
     const questionsBox = document.getElementById('qa-questions-scrolling');
     if (questionsBox) {
-      setTimeout(( ) => {
+      setTimeout(() => {
         questionsBox.scrollTop = questionsBox.scrollHeight - questionsBox.clientHeight;
       }, 10);
     }
   }
 
-  sortQuestions () {
+  sortQuestions() {
     const questions = this.props.questions;
     questions.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
     return questions;
@@ -57,9 +56,13 @@ class Question extends React.Component {
                   <td width='45%' className='qa-question-body'>{body}</td>
                   <td width='30%' className='qa-helpfulness'>
                     <Helpfulness question={question} />
+                    <a href='#!'
+                      id={questionId}
+                      className='qa-add-answer'
+                      onClick={this.addAnswerClicked}> Add answer
+                    </a>
+                    <Report questionId={questionId}/>
                   </td>
-                  <td width='20%'> |
-                    <a href='#!' id={questionId} className='qa-add-answer' onClick={this.addAnswerClicked}> Add answer </a></td>
                 </tr>
                 <tr>
                   <td width='5%' className='qa-character'>A:</td>
