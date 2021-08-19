@@ -4,6 +4,8 @@ import AddingForm from './AddingForm';
 import QuestionsList from './QuestionsList';
 import SearchQuestions from './SearchQuestion';
 import '../css/QA.css';
+import ClickedTracker from './ClickedTracker';
+import AddButton from '../shared/AddButton';
 
 class QA extends React.Component {
   constructor(props) {
@@ -72,7 +74,7 @@ class QA extends React.Component {
     if (this.state.questions.length !== 0) {
       const questions = this.state.questionsFiltered || this.state.questions;
       return (
-        <div id='question-answer'>
+        <div id='question-answer' onClick={ClickedTracker}>
           <h3>QUESTIONS & ANSWERS</h3>
           <SearchQuestions
             questions={questions}
@@ -90,7 +92,11 @@ class QA extends React.Component {
       return (
         <div id='question-answer'>
           <h3>QUESTIONS & ANSWERS</h3>
-          <button className='qa-add-question' onClick={this.addQuestionClicked}>ADD A QUESTION +</button>
+          <AddButton
+            id={'qa-add-question'}
+            onClick={this.addQuestionClicked}
+            label={'ADD A QUESTION'}
+          />
           {this.state.addingForm ?
             <div className='qa-popup'>
               <span className='qa-close' onClick={this.addQuestionClicked} >X</span>
