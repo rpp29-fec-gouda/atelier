@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductCompare from './ProductCompare.jsx';
 import ProductsCarousel from './ProductsCarousel.jsx';
 import Outfit from './Outfit.jsx';
 import axios from 'axios';
@@ -8,15 +9,69 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
 
-    this.update = false;
-
     this.selectProduct = this.selectProduct.bind(this);
-    // this.updateOutfit = this.updateOutfit.bind(this);
+    this.compareProduct = this.compareProduct.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
+    this.handleDragOver = this.handleDragOver.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
+
+    this.offsetX = 0;
+    this.offsetY = 0;
 
     this.state = {
       selectedId: null,
       related: [],
+      compareTo: null,
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight
     };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  handleBlur(event) {
+    // event.stopPropagation();
+    console.log(event.currentTarget, event.relatedTarget);
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      this.props.resetCompare(null);
+    }
+  }
+
+  handleDragStart(event) {
+    // event.stopPropagation();
+    let x = event.nativeEvent.offsetX;
+    let y = event.nativeEvent.offsetY;
+
+    console.log(`Grabbed at: ${x}, ${y}`);
+    this.offsetX = event.nativeEvent.offsetX;
+    this.offsetY = event.nativeEvent.offsetY;
+  }
+
+  handleDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  handleDrop(event) {
+    // event.stopPropagation();
+    let x = event.clientX - this.offsetX;
+    let y = event.clientY - this.offsetY;
+
+    console.log(`New position: ${x}, ${y}`);
+
+    this.setState({
+      x: x,
+      y: y
+    });
   }
 
   collectRelatedProducts(product) {
@@ -53,7 +108,12 @@ class RelatedProducts extends React.Component {
 
   selectProduct(product) {
     this.props.selectProduct(product);
-    this.update = true;
+  }
+
+  compareProduct(productId) {
+    const product = this.props.checkCache('products', productId);
+    console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
+    this.setState({ compareTo: product });
   }
 
   componentDidMount() {
@@ -71,8 +131,6 @@ class RelatedProducts extends React.Component {
     const matchId = selectedProduct.id;
     if (this.state.selectedId !== matchId) {
       this.setState({ selectedId: matchId });
-      // console.log(matchId, this.state.selectedId);
-      // this.update = false;
       console.log(this.state.selectedId, matchId);
       this.fetchRelatedIds(selectedProduct, (ids) => {
         this.setState({ related: ids });
@@ -81,17 +139,19 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    const { related, outfit } = this.state;
+    const { compareProduct } = this;
+    const { related, outfit, compareTo } = this.state;
     const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
     return (
-      <div id='RelatedProducts'>
+      <div id='RelatedProducts' >
         <ProductsCarousel
           productIds={ related }
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
+          compare={compareProduct}
         />
         <Outfit
           // productIds={ outfit }
@@ -101,10 +161,20 @@ class RelatedProducts extends React.Component {
           checkCache={ checkCache }
           updateCache={ updateCache }
         />
+        { this.state.compareTo ? (
+          <form id='ProductCompare' draggable='true' onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDrop={this.handleDrop} onBlur={this.handleBlur}>
+            <ProductCompare
+              selectedProduct={selectedProduct}
+              compareTo={compareTo}
+              resetCompare={compareProduct}
+              checkCache={checkCache}
+              updateCache={updateCache}
+            />
+          </form>
+        ) : null}
       </div>
     );
   }
 }
-
 
 export default RelatedProducts;
