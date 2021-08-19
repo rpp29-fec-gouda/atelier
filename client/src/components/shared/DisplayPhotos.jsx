@@ -26,8 +26,13 @@ class DisplayPhotos extends React.Component {
       return photos.map((photo, index) => {
         return (
           <div key={photo + index} className='shared-photos-inline'>
-            <img className='shared-thumbnail' src={photo.url ? photo.url : photo} onClick={this.popupPhoto}></img>
-            {this.state.popupPhoto ? <PopupPhoto src={this.state.src} close={this.popupPhoto}/> : null}
+            <img
+              alt='display-photo'
+              className='shared-thumbnail'
+              src={photo.url ? photo.url : photo}
+              onClick={this.popupPhoto}>
+            </img>
+            {this.state.popupPhoto ? <PopupPhoto src={this.state.src} close={this.popupPhoto} /> : null}
           </div>
         );
       });
