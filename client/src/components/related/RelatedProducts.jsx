@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductCompare from './ProductCompare.jsx';
 import ProductsCarousel from './ProductsCarousel.jsx';
 import Outfit from './Outfit.jsx';
 import axios from 'axios';
@@ -8,14 +9,18 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
 
-    this.update = false;
-
     this.selectProduct = this.selectProduct.bind(this);
-    // this.updateOutfit = this.updateOutfit.bind(this);
+    this.compareProduct = this.compareProduct.bind(this);
+
+    this.offsetX = 0;
+    this.offsetY = 0;
+
+
 
     this.state = {
       selectedId: null,
       related: [],
+      compareTo: null
     };
   }
 
@@ -52,8 +57,15 @@ class RelatedProducts extends React.Component {
   // }
 
   selectProduct(product) {
-    this.props.selectProduct(product);
-    this.update = true;
+    this.setState({compareTo: null}, () => {
+      this.props.selectProduct(product);
+    });
+  }
+
+  compareProduct(productId) {
+    const product = this.props.checkCache('products', productId);
+    console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
+    this.setState({ compareTo: product });
   }
 
   componentDidMount() {
@@ -71,8 +83,6 @@ class RelatedProducts extends React.Component {
     const matchId = selectedProduct.id;
     if (this.state.selectedId !== matchId) {
       this.setState({ selectedId: matchId });
-      // console.log(matchId, this.state.selectedId);
-      // this.update = false;
       console.log(this.state.selectedId, matchId);
       this.fetchRelatedIds(selectedProduct, (ids) => {
         this.setState({ related: ids });
@@ -81,30 +91,36 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    const { related, outfit } = this.state;
+    const { compareProduct } = this;
+    const { related, outfit, compareTo } = this.state;
     const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
     return (
-      <div id='RelatedProducts'>
+      <div id='RelatedProducts' >
         <ProductsCarousel
           productIds={ related }
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
+          compare={compareProduct}
         />
         <Outfit
-          // productIds={ outfit }
-          // updateOutfit={ this.updateOutfit }
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
         />
+        <ProductCompare
+          selectedProduct={selectedProduct}
+          compareTo={compareTo}
+          resetCompare={compareProduct}
+          checkCache={checkCache}
+          updateCache={updateCache}
+        />
       </div>
     );
   }
 }
-
 
 export default RelatedProducts;

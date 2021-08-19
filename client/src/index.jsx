@@ -77,10 +77,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/products?page=1&count=1')
+    axios.get(`/products/${this.props.init.id}`)
       .then(res => {
-        console.log(res.data);
-        const product = res.data[0];
+        const product = res.data;
+        console.log(product);
         this.cache.products.set(product.id, product);
         this.setState({
           selectedProduct: product,
@@ -91,11 +91,7 @@ class App extends React.Component {
 
   render() {
     const { products, selectedProduct, ready } = this.state;
-    if (ready) {
-      console.log('select product', selectedProduct.id);
 
-    }
-    let key = 0;
     return ready ? (
       <React.Fragment>
         <ProductOverview
@@ -107,10 +103,8 @@ class App extends React.Component {
           selectProduct={this.selectProduct}
           checkCache={ this.checkCache }
           updateCache={ this.updateCache }
-
         />
         <QA selectedProduct={selectedProduct} />
-        <br></br>
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
@@ -126,7 +120,15 @@ class App extends React.Component {
 
 export default App;
 
-const div = document.createElement('div');
-div.setAttribute('id', 'App');
-document.body.appendChild(div);
-ReactDOM.render(<App />, div);
+axios.get('/products?page=1&count=1')
+  .then(res => {
+    const product = res.data[0];
+    // this.cache.products.set(product.id, product);
+    const div = document.createElement('div');
+    div.setAttribute('id', 'App');
+    document.body.appendChild(div);
+    ReactDOM.render(<App init={product} />, div);
+  })
+  .catch(err => {
+    console.log(err.stack);
+  });

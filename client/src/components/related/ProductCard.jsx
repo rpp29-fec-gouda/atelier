@@ -96,6 +96,14 @@ class ProductCard extends React.Component {
     this.loadImages();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.product) {
+      return !(this.state.product.id === nextState.product.id && this.state.productImageURL === nextState.productImageURL);
+    } else {
+      return true;
+    }
+  }
+
   render() {
     const { product } = this.state;
 

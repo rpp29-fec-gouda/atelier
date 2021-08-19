@@ -1,7 +1,6 @@
 import React from 'react';
 import Question from './Question.jsx';
 import AddingForm from './AddingForm.jsx';
-import ClickedTracker from './ClickedTracker.jsx';
 import AddButton from '../shared/AddButton.jsx';
 
 
@@ -54,7 +53,7 @@ class QuestionsList extends React.Component {
     if (this.state.addQuestionButton) {
       return (
         <div className='qa-popup'>
-          <span className='qa-close' onClick={this.addQuestionClicked}>X</span>
+          <span id='close-add-question' className='qa-close' onClick={this.addQuestionClicked}>X</span>
           <AddingForm
             productId={this.props.productId}
             closePopup={this.addQuestionClicked}
@@ -66,7 +65,6 @@ class QuestionsList extends React.Component {
   }
 
   addQuestionClicked() {
-    ClickedTracker('add Question');
     this.setState({
       addQuestionButton: !this.state.addQuestionButton
     });
