@@ -19,13 +19,21 @@ class Report extends React.Component {
   componentDidMount() {
     if (this.props.answerId) {
       const answerId = this.props.answerId;
-      const url = '/qa/questions/' + answerId + '/report';
+      const url = `/qa/answers/${answerId}/report`;
       this.setState({
         url: url
       });
-    } if (this.props.reviewId) {
+    } 
+    if (this.props.questionId) {
+      const questionId = this.props.questionId;
+      const url = `/qa/questions/${questionId}/report`;
+      this.setState({
+        url: url
+      });
+    } 
+    if (this.props.reviewId) {
       const reviewId = this.props.reviewId;
-      const url = '/reviews/' + reviewId + '/report';
+      const url = `/reviews/${reviewId}/report`;
       this.setState({
         url: url
       });
