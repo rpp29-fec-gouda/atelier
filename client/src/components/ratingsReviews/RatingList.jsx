@@ -5,6 +5,8 @@ import './ratingList.css';
 
 const RatingList = (props) => {
   const { reviews, ratings, characteristics, recommended, handleRatingProgressFilter, ratingDetails } = props;
+  console.log('ratings:', ratings);
+  console.log('reviews:', reviews);
 
   return (
     <div id='rr-rating-list'>
