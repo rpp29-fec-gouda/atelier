@@ -19,13 +19,12 @@ class App extends React.Component {
     this.updateCache = this.updateCache.bind(this);
 
     this.cache = {
-      imageURLs: new Map(),
       products: new Map(),
       questions: new Map(),
       ratings: new Map(),
       reviews: new Map(),
       relatedIds: new Map(),
-      styles: new Map(),
+      styles: new Map()
     };
 
     this.state = {
@@ -76,6 +75,8 @@ class App extends React.Component {
       <React.Fragment>
         <ProductOverview
           selectedProduct={selectedProduct}
+          checkCache={ this.checkCache }
+          updateCache={ this.updateCache }
           isTesting={this.props.isTesting}
         />
         <RelatedProducts
@@ -84,8 +85,10 @@ class App extends React.Component {
           checkCache={this.checkCache}
           updateCache={this.updateCache}
         />
-        <QA selectedProduct={selectedProduct} />
-        <br></br>
+        <QA
+          selectedProduct={selectedProduct}
+        />
+
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
@@ -101,7 +104,9 @@ class App extends React.Component {
 
 export default App;
 
-axios.get('/products?page=1&count=1')
+const randomPage = Math.round(Math.random() * 900);
+
+axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {
     const product = res.data[0];
     // this.cache.products.set(product.id, product);

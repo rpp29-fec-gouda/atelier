@@ -105,7 +105,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { product } = this.state;
+    const { product, productImageURL } = this.state;
 
     if (!product) {
       return <div className='rp-card rp-card-placeholder' >Searching...</div>;
@@ -115,7 +115,7 @@ class ProductCard extends React.Component {
       return (
         <div className='rp-card rp-card-placeholder' onClick={this.handleActionButtonClick} >
           <span>{`Product ${this.props.productId} not found`}</span>
-          <span>{'(Click to remove)'}</span>
+          {type === 'Outfit' ? <span>{'(Click to remove)'}</span> : null}
         </div>
       );
     }
@@ -123,12 +123,13 @@ class ProductCard extends React.Component {
     console.log(`Rendering ${product.name} product card`);
 
     const { checkCache, updateCache, productId, selectedProduct, selectProduct, type, action } = this.props;
-    let hoverText, actionClass, actionSymbol;
+    const { handleActionButtonClick, handleProductClick } = this;
 
+    let hoverText, actionClass, actionSymbol;
 
     if (type === 'Outfit') {
       hoverText = `Remove ${product.name} from outfit`;
-      actionClass = 'remove-from-outfit-symbol';
+      actionClass = 'rp-remove-symbol';
       actionSymbol = '+';
     } else {
       hoverText = `Compare ${selectedProduct.name} with ${product.name}`;
@@ -147,11 +148,11 @@ class ProductCard extends React.Component {
     return (
       <div className='rp-card' title={`More details on ${product.name}`} onClick={ this.handleProductClick }>
         <div className='rp-image-backer'>
-          <img src={this.state.productImageURL}></img>
+          <img src={productImageURL}></img>
           <div className={actionClass} title={hoverText} value={productId} onClick={ this.handleActionButtonClick } >{actionSymbol}</div>
         </div>
         <div className='rp-info'>
-          <span className='rp-category' title={`${product.name} product category`}>{product.category.toUpperCase()}</span>
+          <span className='rp-category uppercase' title={`${product.name} product category`}>{product.category}</span>
           <span className='rp-title'>{trimmedTitle}</span>
           <span className='rp-price' title={`Default price for ${product.name}`}>{'$' + product.default_price}</span>
           <div className='rp-star-rating' title={`Average customer review for ${product.name}: 3.8 out of 5`}>

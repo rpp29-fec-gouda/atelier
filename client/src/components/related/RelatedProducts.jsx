@@ -63,9 +63,13 @@ class RelatedProducts extends React.Component {
   }
 
   compareProduct(productId) {
-    const product = this.props.checkCache('products', productId);
-    console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
-    this.setState({ compareTo: product });
+    if (productId) {
+      const product = this.props.checkCache('products', productId);
+      console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
+      this.setState({ compareTo: product });
+    } else {
+      this.setState({ compareTo: null });
+    }
   }
 
   componentDidMount() {

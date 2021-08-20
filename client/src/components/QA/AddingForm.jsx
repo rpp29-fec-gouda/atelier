@@ -32,7 +32,7 @@ class AddingForm extends React.Component {
     }
   }
 
-  getImgUrl (urls) {
+  getImgUrl(urls) {
     this.setState({
       imageUrls: urls
     });
@@ -104,9 +104,10 @@ class AddingForm extends React.Component {
           <table>
             <tbody>
               <tr>
-                <td> Username:</td>
+                <td > Username:</td>
                 <td>
                   <input
+                    className='qa-input-username'
                     maxlength='60'
                     placeholder='Example: Jackson11!'
                     id='username'
@@ -126,18 +127,20 @@ class AddingForm extends React.Component {
 
 
               <tr>
-                <td>Email:</td>
+                <td >Email:</td>
                 <td>
-                  <input maxlength='60'
+                  <input
+                    className='qa-input-email'
+                    maxlength='60'
                     type='email'
-                    placeholder='Why did you like the product or not?'
+                    placeholder='Example: jack@email.com'
                     id='email'
                     value={this.state.email}
                     onChange={this.handleOnChange.bind(this)}>
                   </input>
                 </td>
               </tr>
-      
+
               <tr>
                 <td></td>
                 <td className='qa-warning-text'>For authentication reasons, you will not be emailed</td>
@@ -146,11 +149,12 @@ class AddingForm extends React.Component {
                 <td></td>
                 <td style={{ color: 'red' }}>{this.state.requires.email}</td>
               </tr>
-              
+
               <tr>
                 <td>{this.state.formName}:</td>
-                <td>
+                <td >
                   <textarea maxlength='1000'
+                    className='qa-text-box'
                     placeholder='Maximum 1000 characters'
                     className='qa-text-box'
                     id='text'
@@ -166,8 +170,8 @@ class AddingForm extends React.Component {
             </tbody>
           </table>
           {this.state.formName === 'Answer' ?
-            <UploadImage getImgUrl={this.getImgUrl}/>
-            : 
+            <UploadImage getImgUrl={this.getImgUrl} />
+            :
             null
           }
           <input type="submit" value="Submit" />
