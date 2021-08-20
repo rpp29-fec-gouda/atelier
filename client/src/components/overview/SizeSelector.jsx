@@ -14,30 +14,39 @@ const SizeSelector = (props) => {
   };
 
   let key = 0;
-  if (!items || !items.length || items.length === 0) {
-    return (
-      <div id="po-size-selector">
-        <select id="po-sizes" name="sizes" defaultValue={-1} onChange={onChange} disabled>
-          {
-            <option class="uppercase" value={-1} disabled hidden>Out of Stock</option>
-          }
-        </select>
-      </div>
-    );
-  } else {
-    return (
-      <div id="po-size-selector">
-        <select id="po-sizes" name="sizes" defaultValue={-1} onChange={onChange}>
-          <option class="uppercase" value={-1} disabled hidden>Select Size</option>
-          {
+  const outOfStockMessage = 'Out of Stock';
+  const isInStock = (items && items.length > 0);
+  return (
+    <div id="po-size-selector">
+      <select
+        id="po-sizes"
+        name="sizes"
+        defaultValue={ -1 }
+        onChange={ onChange }
+        disabled
+      >
+        <option
+          class="uppercase"
+          value={ -1 }
+          disabled
+          hidden
+        >
+        {
+          isInStock ? (
             items.map(item => (
-              <option key={key++} value={item.sku}>{item.size}</option>
+              <option
+                key={ key++ }
+                value={ item.sku }>{ item.size }
+              </option>
             ))
-          }
-        </select>
-      </div>
-    );
-  }
+          ) : (
+            { outOfStockMessage }
+          )
+        }
+        </option>
+      </select>
+    </div>
+  );
 };
 
 export default SizeSelector;

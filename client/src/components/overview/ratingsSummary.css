@@ -1,15 +1,6 @@
+/* #po-product-rating min-height is implicit */
+
 #po-read-all-reviews {
   display: inline-block;
   white-space: nowrap;
-}
-
-.link {
-  font-size: .8em;
-  cursor:pointer;
-  color:blue;
-  text-decoration:underline;
-}
-
-.link:hover {
-  text-decoration:none;
 }

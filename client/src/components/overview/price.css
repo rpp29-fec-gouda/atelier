@@ -1,5 +1,6 @@
 #po-price {
   user-select: none;
+  /* min-height is implicit */
 }
 
 .po-sale-po-price {

@@ -58,6 +58,8 @@ class ImageGallery extends React.Component {
     }, currentIndex);
     const model = this.model;
     const thumbnails = model.getPhotoThumbnailUrls();
+    console.log('ImageGallery: photos', this.props?.photos);
+    console.log('ImageGallery: thumbnails', thumbnails);
     const viewId = model.getViewId();
     const attributes = model.getAttributes();
     const photoUrl = model.getSelectedPhoto();

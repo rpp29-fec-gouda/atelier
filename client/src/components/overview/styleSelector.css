@@ -1,3 +1,5 @@
+/* #po-style-selector min-height is implicit from #po-styles-list with placeholders */
+
 .po-styles {
   padding: 0.7em 0;
 }
@@ -12,14 +14,14 @@
   background-color: lightgoldenrodyellow;
 }
 
+.po-style:hover {
+  cursor: pointer;
+}
+
 .po-style-selector-image {
   position: absolute;
   top: -0.75em;
   left: -0.1em
-}
-
-.po-style:hover {
-  cursor: pointer;
 }
 
 .po-style-selected {

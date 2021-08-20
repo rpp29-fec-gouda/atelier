@@ -65,6 +65,16 @@ a {
   user-select: none;
 }
 
+.link {
+  font-size: .8em;
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
+
+.link:hover {
+  text-decoration:none;
+}
 
 /* Form Elements */
 select {
