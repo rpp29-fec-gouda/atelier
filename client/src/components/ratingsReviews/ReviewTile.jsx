@@ -3,6 +3,7 @@ import Helpfulness from '../shared/Helpfulness.jsx';
 import Report from '../shared/Report.jsx';
 import StarRating from '../shared/StarRating.jsx';
 import DisplayPhotos from '../shared/DisplayPhotos.jsx';
+import ReviewBody from './ReviewBody.jsx';
 import './reviewTile.css';
 
 class ReviewTile extends React.Component {
@@ -14,11 +15,7 @@ class ReviewTile extends React.Component {
     };
   }
 
-  expandBody() {
-    this.setState({
-      expanded: !this.state.expanded
-    });
-  }
+
 
   render() {
     const { reviews, averageRating, expandBody } = this.props;
@@ -39,25 +36,8 @@ class ReviewTile extends React.Component {
             <div id='rr-review' className='rr-review'>
               <div id='rr-review-summary' className='rr-review-summary'>{review.summary}</div>
               <br></br>
-              {review.body.length < 25 && this.state.expanded && (
-                <div id={review.review_id} className='rr-review-body'>{review.body}</div>)}
-
-              {review.body.length > 25 && this.state.expanded && (
-                <div class='rr-full-review-body'>
-                  <div id={review.review_id} className='rr-review-body'>{review.body.slice(0, 25)}</div>
-                  <div className='rr-show-more' id={review.review_id} onClick={this.expandBody.bind(this)}>{'Show more'}</div>
-                </div>)}
-
-              {review.body.length > 25 && !this.state.expanded && (
-
-                <div class='rr-full-review-body'>
-                  <div id={review.review_id} className='rr-review-body'>{review.body}</div>
-                </div>
-              )}
-
-
+              <ReviewBody reviews={reviews} review={review}/>
               <br></br>
-
               {review.photos.length > 0 ?
                 <div id='rr-review-photos' className='rr-review-photos'>
                   <DisplayPhotos photos={review.photos} />
