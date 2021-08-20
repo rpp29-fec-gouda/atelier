@@ -28,6 +28,19 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: 'Atelier' }),
+    new HtmlWebpackPlugin({
+      title: 'Atelier',
+      'meta': {
+        'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        'theme-color': '#4285f4',
+        'description': 'A cheese-inspired shopping website',
+        'keywords': 'atelier, gouda, cheese, Hack Reactor, React, RPP29',
+        'author': 'Team Gouda'
+      },
+      favicon: './client/assets/favicon-64x64.png',
+      htmlAttributes: {
+        lang: 'en'
+      }
+    }),
   ],
 };
