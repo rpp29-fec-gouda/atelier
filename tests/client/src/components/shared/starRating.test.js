@@ -64,6 +64,24 @@ describe('<StarRating />', () => {
     expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
   });
 
+  it('should have the same number of star elements as max stars for current rating with full star:', function () {
+    const props = {
+      max: 4,
+      rating: 3
+    };
+    const wrapper = shallow(<StarRating {...props} />);
+    expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
+  });
+
+  it('should have the same number of star elements as max stars for current rating with all full stars:', function () {
+    const props = {
+      max: 4,
+      rating: 4
+    };
+    const wrapper = shallow(<StarRating {...props} />);
+    expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
+  });
+
   it('should be clickable if given a callback:', function () {
     const props = {
       callback: () => {}
@@ -87,6 +105,7 @@ describe('<StarRating />', () => {
 
   it('should execute onMouseOver & onMouseOut events if clickable', () => {
     const props = {
+      max: 4,
       rating: 3.81,
       callback: () => {}
     };
@@ -94,9 +113,11 @@ describe('<StarRating />', () => {
     const wrapper = mount(<StarRating {...props} />);
     wrapper.find('img').first().simulate('mouseover');
     expect(wrapper.state().currentRating).toEqual('1');
+    expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
 
     wrapper.find('div.star-rating').first().simulate('mouseout');
     expect(wrapper.state().currentRating).toEqual(props.rating);
+    expect(wrapper.find('div.star-rating').children('img')).toHaveLength(props.max);
   });
 
   it('should not execute onMouseOver or onMouseOut events if not clickable', () => {
