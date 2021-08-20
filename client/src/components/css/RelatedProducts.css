@@ -7,6 +7,7 @@
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   padding: .5em;
+  overflow: auto;
 }
 
 .rp-component-title {
@@ -16,10 +17,9 @@
 }
 
 .rp-card-container {
-  /* box-sizing: content-box; */
   display: flex;
   flex-flow: row nowrap;
-  overflow: auto;
+  overflow: scroll;
   justify-content: stretch;
   flex: 1;
   margin: 8px 0;
@@ -31,11 +31,12 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   margin: 4px 0;
-  /* cursor: pointer; */
   flex: 2 2;
+  min-height: 2.4em;
+  overflow: hidden;
 }
 
-.rp-card {
+.rp-card, .rp-card-sticky {
   display: flex;
   flex-flow: column;
   flex: none;
@@ -46,6 +47,14 @@
   border: 1px solid #333;
   margin-right: 8px;
   user-select: none;
+}
+
+.rp-card-sticky {
+  background-color: #fffd;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  position: sticky;
+  left: 0;
 }
 
 .rp-info {
@@ -85,9 +94,8 @@
   justify-self: center;
 }
 
-.rp-compare-symbol, .remove-from-outfit-symbol {
+.rp-compare-symbol, .rp-remove-symbol {
   color: #ffff;
-  /* mix-blend-mode: difference; */
   text-shadow: 0 0 2px black;
   position: relative;
   top: -.1em;
@@ -104,17 +112,27 @@
   cursor: pointer;
 }
 
-.remove-from-outfit-symbol {
+.rp-remove-symbol {
   font-size: 2.5em;
   right: .8em;
   transform: rotate(45deg);
   border-radius: 1.25em;
-  /* border: 2px solid; */
   font-weight: 400;
   padding: 0;
   margin: 0;
-  /* background-color: #fff5; */
-  /* margin: .8em; */
+}
+
+.rp-compare-exit {
+  color: #444;
+  position: relative;
+  top: -.5em;
+  right: -.2em;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  font-size: 2.5em;
+  transform: rotate(45deg);
+  font-weight: 300;
 }
 
 .rp-star-rating {
@@ -125,7 +143,6 @@
 }
 
 .rp-card-placeholder {
-  /* border-color: #0000; */
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -136,51 +153,60 @@
 #ProductCompare {
   display: flex;
   flex-flow: column nowrap;
-  position: absolute;
+  position: fixed;
+  /* bottom: 10%; */
   align-self: center;
-  /* justify-self: stretch; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
-  overflow-y: scroll;
-  overflow-x: auto;
-  min-width: 20%;
+  min-width: 40em;
   min-height: 20%;
-  max-width: 90vw;
+  max-width: 180vw;
   max-height: 90vh;
   background: #fffd;
   backdrop-filter: blur(8px);
-  /* padding: 2em; */
   border: 4px solid #0006;
-  overflow: scroll;
+  overflow: hidden;
+  z-index: 3;
 }
 
 .rp-compare-title-bar {
+  display: flex;
+  height: 3.2em;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   background-color: #fff;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
+  position: sticky;
+  top: 0;
 }
 
-/* .rp-compare-placeholder {
-  flex-grow: 4;
-  flex-shrink: 0;
-} */
+.rp-invisible-container {
+  background-color: #fff0;
+  overflow-x: auto;
+  overflow-y: scroll;
+  position: relative;
+  top: 1em;
+  padding-bottom: 1em;
+}
 
-.rp-compare-row {
+.rp-compare-row, .rp-compare-header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  /* white-space: nowrap; */
 }
 
+.rp-compare-header {
+  height: 1.3em;
+  min-height: 1em;
+  position: sticky;
+  top: 3.2em;
+}
 
-.rp-compare-row * {
+.rp-compare-row *, .rp-compare-header * {
   justify-content: center;
   display: flex;
   white-space: nowrap;
   min-width: 15em;
   max-width: 33%;
-  overflow: scroll;
   padding: .2em;
-  /* margin: auto; */
 }
 
 .rp-compare-row:nth-of-type(odd) {
@@ -189,13 +215,22 @@
 
 .rp-compare-feature {
   min-width: 10em;
+  font-weight: 500;
 }
-/* .rp-compare-row * {
-  display: flex;
-  flex-flow: row nowrap;
-} */
 
 .rp-compare-checkmark {
   color: #296;
   text-shadow: 0 0 2px black;
+}
+
+@media all and (max-width: 40em) {
+  #ProductCompare {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .rp-card-sticky {
+    position: static;
+  }
 }
