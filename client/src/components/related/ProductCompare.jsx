@@ -13,8 +13,6 @@ class ProductCompare extends React.Component {
     this.offsetY = 0;
 
     this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight,
       x: 'calc(50% - 20em)',
       y: '50%'
     };
@@ -30,7 +28,6 @@ class ProductCompare extends React.Component {
   }
 
   handleDragStart(event) {
-    // event.dataTransfer.effectAllowed = 'none';
     this.offsetX = event.nativeEvent.offsetX;
     this.offsetY = event.nativeEvent.offsetY;
   }
@@ -44,7 +41,11 @@ class ProductCompare extends React.Component {
 
   handleDragOver(event) {
     event.preventDefault();
-    // event.dataTransfer.effectAllowed = 'none';
+  }
+
+  loadCharacteristics(productId) {
+    const { checkCache, updateCache, selectedProduct } = this.props;
+    let chrs = checkCache('ratings');
   }
 
   render() {
