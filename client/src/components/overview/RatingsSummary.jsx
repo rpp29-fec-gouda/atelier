@@ -5,7 +5,7 @@ import './ratingsSummary.css';
 const RatingsSummary = (props) => {
   const handleOnClick = () => {
     props.callback?.call();
-    document.getElementById('ratings-reviews')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('rr-ratings-reviews-widget')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

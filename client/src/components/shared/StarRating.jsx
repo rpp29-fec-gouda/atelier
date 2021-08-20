@@ -67,6 +67,10 @@ class StarRating extends React.Component {
     return `images/starRatings-${rating}.png`;
   }
 
+  getImgAlt(rating) {
+    return `Star image ${rating}% full`;
+  };
+
   getStarClasses(isClickable) {
     let imgClass = 'star';
     if (isClickable) {
@@ -99,6 +103,7 @@ class StarRating extends React.Component {
 
   render() {
     console.log('Rendering Star Rating');
+
     const starCodes = this.getStarCodes(this.state.currentRating);
     const imgClass = this.getStarClasses(this.isClickable);
 
@@ -118,6 +123,7 @@ class StarRating extends React.Component {
             <img
               key={key++}
               src={this.getImage(starCode)}
+              alt={this.getImgAlt(starCode)}
               class={imgClass}
               data-rating={key}
               {...optsStar}
