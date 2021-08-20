@@ -11,6 +11,8 @@ class RatingsAndReviews extends React.Component {
     super(props);
 
     this.reviews = [];
+    this.reviewsData = {};
+    this.ratingsData = {};
     this.displayedReviews = [];
     this.averageRating = 0;
     this.roundedAverage = 0;
@@ -45,7 +47,6 @@ class RatingsAndReviews extends React.Component {
     this.getReviews = this.getReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
     this.getDefaultRatings = this.getDefaultRatings.bind(this);
-    this.ratingDetails = this.ratingDetails.bind(this);
     this.getDefaultReviews = this.getDefaultReviews.bind(this);
     this.handleReviewSort = this.handleReviewSort.bind(this);
     this.handleRatingProgressFilter = this.handleRatingProgressFilter.bind(this);
@@ -55,35 +56,29 @@ class RatingsAndReviews extends React.Component {
     this.expandBody = this.expandBody.bind(this);
   }
 
-  getReviews(sort, count, id) {
-    console.log('Getting Reviews');
-    axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
-      .then(res => {
-        console.log('AXIOS GET REVIEWS:', res);
-        this.reviews = res.data.results;
-        this.displayedReviews = res.data.results.slice();
-        this.product_id = res.data.product;
-        this.getDefaultReviews();
-      })
-      .catch(err => {
-        console.log(err.stack);
-      });
-  }
+  getReviews(sort, count, id, callback = () => {}) {
+    const { checkCache, updateCache } = this.props;
+    let reviews = checkCache('reviews', id);
 
-  getRatings(id) {
-    console.log('Getting Ratings');
-    axios.get(`reviews/meta?product_id=${id}`)
-      .then(res => {
-        console.log('AXIOS GET RATINGS:', res);
-        this.ratings = res.data.ratings;
-        this.characteristics = res.data.characteristics;
-        console.log('this.characteristics:', this.characteristics);
-        this.recommended = res.data.recommended;
-        this.getDefaultRatings();
-      })
-      .catch(err => {
-        console.log(err.stack);
-      });
+    if (reviews) {
+      callback(reviews);
+    } else {
+      axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
+        .then(res => {
+          console.log('AXIOS GET REVIEWS:', res);
+          updateCache('reviews', id, res.data);
+          callback(reviews);
+
+          this.reviewsData = res.data;
+          this.reviews = res.data.results;
+          this.displayedReviews = res.data.results.slice();
+          this.product_id = res.data.product;
+          this.getDefaultReviews();
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+    }
   }
 
   ratingDetails(averageRating, totalRating, roundedAverage) {
@@ -92,9 +87,37 @@ class RatingsAndReviews extends React.Component {
     this.roundedAverage = roundedAverage;
   }
 
+  getRatings(id, callback = () => {}) {
+
+    const { checkCache, updateCache } = this.props;
+    let ratings = checkCache('ratings', id);
+
+    if (ratings) {
+      callback(ratings);
+    } else {
+      axios.get(`reviews/meta?product_id=${id}`)
+        .then(res => {
+          console.log('AXIOS GET RATINGS:', res);
+          updateCache('ratings', id, res.data);
+          callback(ratings);
+          this.ratingsData = res.data;
+          this.ratings = res.data.ratings;
+          this.characteristics = res.data.characteristics;
+          console.log('this.characteristics:', this.characteristics);
+          this.recommended = res.data.recommended;
+          this.getDefaultRatings();
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+    }
+  }
+
   getDefaultReviews() {
-    const { displayedReviews, reviews, product_id } = this;
-    this.props.updateReviews(reviews);
+    const { reviewsData, reviews, displayedReviews, product_id } = this;
+    const { updateCache } = this.props;
+
+    updateCache('reviews', product_id, reviewsData);
 
     if (this.reviews.length > 0) {
       this.setState({
@@ -113,8 +136,9 @@ class RatingsAndReviews extends React.Component {
   }
 
   getDefaultRatings() {
-    const { ratings, characteristics, recommended, averageRating, totalRating } = this;
-    this.props.updateRatings(ratings, characteristics, recommended, averageRating, totalRating);
+    const { ratingsData, ratings, characteristics, recommended, product_id } = this;
+    const { updateCache } = this.props;
+    updateCache('ratings', product_id, ratingsData);
 
     if (Object.keys(ratings).length) {
       this.setState({
@@ -261,6 +285,7 @@ class RatingsAndReviews extends React.Component {
           <RatingList
             ratings={this.state.ratings}
             ratingDetails={this.ratingDetails}
+            averageRating={this.averageRating}
             totalRating={this.totalRating}
             reviews={this.state.reviews}
             characteristics={this.state.characteristics}

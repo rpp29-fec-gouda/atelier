@@ -50,8 +50,8 @@ class StarRating extends React.Component {
     starsFull.forEach(() => starCodes.push(100));
 
     // Do not do this for a rating of 0 as this will introduce an extra empty star
-    if (rating !== 0) {
-      const ratingDecimalRounded25 = roundByIncrement(rating, 25) * 100;
+    const ratingDecimalRounded25 = roundByIncrement(rating, 25) * 100;
+    if (ratingDecimalRounded25 !== 0) {
       starCodes.push(ratingDecimalRounded25);
     }
 
