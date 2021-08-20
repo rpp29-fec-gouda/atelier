@@ -105,6 +105,7 @@ class ImageNavigator extends React.Component {
                 <img
                   class={itemChildClass}
                   src={item.url}
+                  alt="selected style thumbnail"
                 />
               }
               {
