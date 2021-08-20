@@ -201,13 +201,18 @@ class ProductOverview extends React.Component {
       return 0;
     }
 
-    let ratingValues = Object.keys(ratings);
+    // let ratingValues = Object.keys(ratings);
     let score = 0;
-    for (let i = 0; i < ratingValues.length; i++) {
-      const value = ratingValues[i];
+    for (const value in ratings) {
       const ratingCount = ratings[value];
       score += value * ratingCount;
     }
+
+    // for (let i = 0; i < ratingValues.length; i++) {
+    //   const value = ratingValues[i];
+    //   const ratingCount = ratings[value];
+    //   score += value * ratingCount;
+    // }
     return score / reviews;
   }
 
