@@ -108,6 +108,8 @@ class App extends React.Component {
         />
         <QA
           selectedProduct={selectedProduct}
+          checkCache={ this.checkCache}
+          updateCache={ this.updateCache}
         />
         <RatingsAndReviews
           reviews={this.state.reviews}

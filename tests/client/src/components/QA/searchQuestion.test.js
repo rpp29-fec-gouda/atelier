@@ -2,10 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import QA from '../../../../../client/src/components/QA/QA.jsx';
 import { productData, questionsData } from './data.js';
-
+import {updateCache, checkCache} from './functions.js';
 
 describe('Search question', () => {
-  const wrapper = mount(<QA selectedProduct={{id: productData.product_id}} />);
+  const wrapper = mount(<QA updateCache={updateCache} checkCache={checkCache} selectedProduct={{id: productData.product_id}} />);
   wrapper.setState({
     questions: questionsData
   });
