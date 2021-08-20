@@ -9,6 +9,7 @@ import SearchQuestion from '../../../../../client/src/components/QA/SearchQuesti
 import AnswersList from '../../../../../client/src/components/QA/AnswersList.jsx';
 import AddingForm from '../../../../../client/src/components/QA/AddingForm.jsx';
 import {productData, questionsData, answersData} from './data.js';
+import {updateCache, checkCache} from './functions.js';
 
 // ==== Test Template ====
 // ====== index.jsx ======
@@ -16,7 +17,7 @@ import {productData, questionsData, answersData} from './data.js';
 // For Enzyme usage, see: https://github.com/enzymejs/enzyme-matchers/tree/master/packages/jest-enzyme
 describe('<QA testing />', () => {
   test('renders QA', () => {
-    const wrapper = shallow(<QA selectedProduct={{id: productData.product_id}} />); // mount/render/shallow when applicable
+    const wrapper = shallow(<QA updateCache={updateCache} checkCache={checkCache} selectedProduct={{id: productData.product_id}} />); // mount/render/shallow when applicable
     const text = wrapper.find('h3').text();
     expect(text).toBe('QUESTIONS & ANSWERS');
     expect(wrapper).toMatchSnapshot();
