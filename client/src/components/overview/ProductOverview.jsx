@@ -8,16 +8,19 @@ import ProductDescription from './ProductDescription';
 import './productOverview.css';
 
 class ProductOverview extends React.Component {
-  constructor(props) {
+  constructor(props) { // = {
+  //   selectedProduct,
+  //   checkCache,
+  //   updateCache
+  // }
     super(props);
 
-    this.numberOfReviews = 0;
-    this.averageRating = 0;
-    this.styles = [];
-
     this.state = {
+      styles: [],
       selectedStyle: null,
       sizesAvailable: [],
+      numberOfReviews: 0,
+      averageRating: 0,
       isExpanded: false,
       isZoomed: false
     };
@@ -42,35 +45,65 @@ class ProductOverview extends React.Component {
   }
 
   loadAdditionalProductData(id) {
+    console.log('Loading Product Overview data...');
     if (!id || id === null) {
       console.log('Product ID is null');
       return;
     }
+
     if (this.props.isTesting) {
-      this.ratings = this.props.ratings;
-      this.updateRatingsProperties(this.ratings);
-      this.styles = this.props.styles;
-      this.updateDefaultStyle();
+      this.updateRatingsProperties(this.props.ratings);
+      this.updateDefaultStyle(this.props.styles);
       return;
     }
-    Promise.all([this.fetchRatings(id), this.fetchProductStyles(id)])
-      .then(res => {
-        this.ratings = res[0].data.ratings;
-        this.updateRatingsProperties(this.ratings);
-        this.styles = res[1].data.results;
-        this.updateDefaultStyle();
-      })
-      .catch(error => {
-        console.error(error.stack);
-      });
+
+    this.fetchRatings(id, this.updateRatingsProperties);
+    this.fetchProductStyles(id, (styles) => {
+      this.setState({ styles });
+      this.updateDefaultStyle(styles);
+    });
   }
 
-  fetchProductStyles(id) {
-    return axios.get(`/products/${id}/styles`);
+  fetchProductStyles(productId, callback) {
+    const { checkCache, updateCache } = this.props;
+    let styles = checkCache('styles', productId);
+
+    if (styles) {
+      console.log(`${styles.length} existing styles associated with product ID ${productId}:`, styles);
+      callback(styles);
+    } else {
+      axios.get(`/products/${productId}/styles`)
+        .then(res => {
+          styles = res.data.results;
+          console.log(`${styles.length} new styles associated with product ID ${productId}`, styles);
+          updateCache('styles', productId, styles);
+          callback(styles);
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+    }
   }
 
-  fetchRatings(id) {
-    return axios.get(`reviews/meta?product_id=${id}`);
+  fetchRatings(productId, callback) {
+    const { checkCache, updateCache } = this.props;
+    let ratings = checkCache('ratings', ratings);
+
+    if (ratings) {
+      console.log(`Existing ratings associated with product ID ${productId}:`, JSON.stringify(ratings));
+      callback(ratings);
+    } else {
+      axios.get(`reviews/meta?product_id=${productId}`)
+        .then(res => {
+          ratings = res.data.ratings;
+          console.log(`New ratings associated with product ID ${productId}`, JSON.stringify(ratings));
+          updateCache('ratings', productId, ratings);
+          callback(ratings);
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
+    }
   }
 
   updateState(style) {
@@ -88,25 +121,35 @@ class ProductOverview extends React.Component {
     }
   }
 
-  updateDefaultStyle() {
+  updateDefaultStyle(styles) {
     console.log('Updating default style');
-    const defaultStyle = this.getDefaultStyle();
+    const defaultStyle = this.getDefaultStyle(styles);
     this.updateState(defaultStyle);
   }
 
-  getDefaultStyle() {
-    for (const style of this.styles) {
+  updateRatingsProperties(ratings) {
+    console.log(`Product Ratings: ${JSON.stringify(ratings)}`);
+    const numberOfReviews = this.getNumberOfReviews(ratings);
+    this.setState({
+      numberOfReviews: numberOfReviews,
+      averageRating: this.getAverageRating(ratings, numberOfReviews)
+    });
+  }
+
+  // TODO: Begin model refactor section
+  getDefaultStyle(styles) {
+    for (const style of styles) {
       if (style['default?']) {
         return style;
       }
     }
     console.log('No default found! Using first style...');
-    return this.styles.length > 0 ? this.styles[0] : null;
+    return styles.length > 0 ? styles[0] : null;
   }
 
-  getStyleById(id) {
+  getStyleById(id, styles) {
     id = parseInt(id);
-    for (const style of this.styles) {
+    for (const style of styles) {
       if (style.style_id === id) {
         return style;
       }
@@ -118,16 +161,17 @@ class ProductOverview extends React.Component {
   setStyleById(id) {
     id = parseInt(id);
     if (this.state.selectedStyle.style_id !== id) {
-      const style = this.getStyleById(id);
+      const style = this.getStyleById(id, this.state.styles);
+      // TODO: Above can be refactored into model that takes in styles, selectedStyleId, and id
       if (style) {
         this.updateState(style);
       }
     }
   }
 
-  getStyleSelectorItems() {
+  getStyleSelectorItems(styles) {
     const styleItems = [];
-    this.styles.forEach(style => {
+    styles?.forEach(style => {
       styleItems.push({
         id: style.style_id,
         thumbnail: this.getStyleDefaultPhotoUrl(style)
@@ -142,12 +186,6 @@ class ProductOverview extends React.Component {
     } else {
       return style.photos[0].thumbnail_url;
     }
-  }
-
-  updateRatingsProperties(ratings) {
-    console.log(`Product Ratings: ${JSON.stringify(ratings)}`);
-    this.numberOfReviews = this.getNumberOfReviews(ratings);
-    this.averageRating = this.getAverageRating(ratings, this.numberOfReviews);
   }
 
   getNumberOfReviews(ratings) {
@@ -189,6 +227,7 @@ class ProductOverview extends React.Component {
     console.log('In stock skus: ', sizesInStock);
     return sizesInStock;
   }
+  // TODO: End model refactor section
 
   handleExpandedView(e) {
     e.stopPropagation();
@@ -233,7 +272,7 @@ class ProductOverview extends React.Component {
     const { slogan, description } = selectedProduct;
 
     const styleId = selectedStyle.style_id;
-    const selectorItems = this.getStyleSelectorItems();
+    const selectorItems = this.getStyleSelectorItems(this.state.styles);
     console.log('styles', JSON.stringify(selectorItems));
     console.log('Rendering product overview');
     return (
@@ -252,8 +291,8 @@ class ProductOverview extends React.Component {
             <div id="po-col-right" class="column">
               <ProductInformation
                 name={ selectedProduct.name }
-                averageRating={this.averageRating}
-                reviewCount={this.numberOfReviews}
+                averageRating={this.state.averageRating}
+                reviewCount={this.state.numberOfReviews}
                 category={ selectedProduct.category }
                 defaultPrice={ selectedProduct.default_price }
                 originalPrice={ selectedStyle.original_price }
