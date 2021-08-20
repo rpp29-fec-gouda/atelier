@@ -34,9 +34,7 @@ class ProductsCarousel extends React.Component {
         <h1></h1>
         <span className='rp-component-title'>RELATED PRODUCTS</span>
         <div className='rp-card-container'>
-          <div className='rp-nav-left'>
-            <button value='left' onClick={() => this.handleNav('left')}>{String.fromCharCode(3008)}</button>
-          </div>
+          <div className='rp-nav-left rp-card-sticky rp-card-placeholder' onClick={() => this.handleNav('left')}>{String.fromCharCode(12296)}</div>
           {
             productIds.length ? (
               productIds.map(id => (
@@ -54,9 +52,7 @@ class ProductsCarousel extends React.Component {
             ) : (
               <div className='rp-card rp-card-placeholder'>Searching...</div>
             )}
-          <div className='rp-nav-right'>
-            <button value='right' onClick={() => this.handleNav('right')}>{String.fromCharCode(3009)}</button>
-          </div>
+          <div className='rp-nav-right rp-card-sticky rp-card-placeholder'onClick={() => this.handleNav('right')}>{String.fromCharCode(12297)}</div>
         </div>
       </div>
     );

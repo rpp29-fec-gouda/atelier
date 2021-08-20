@@ -20,7 +20,7 @@ class Outfit extends React.Component {
 
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
-      console.log('Outfit found in localStorage:', outfit);
+      // console.log('Outfit found in localStorage:', outfit);
       this.setState({ outfit: outfit });
     }
   }
@@ -31,10 +31,10 @@ class Outfit extends React.Component {
     const { outfit } = this.state;
 
     if (!outfit.includes(selectedProduct.id)) {
-      console.log(`Add ${selectedProduct.id} (${selectedProduct.name}) to outfit`);
+      // console.log(`Add ${selectedProduct.id} (${selectedProduct.name}) to outfit`);
       let newOutfit = [ selectedProduct.id, ...outfit ];
       localStorage.setItem('outfit', JSON.stringify(newOutfit));
-      console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
+      // console.log('Outfit saved to localStorage:', localStorage.getItem('outfit'));
 
       this.setState({ outfit: newOutfit });
     }
@@ -47,7 +47,7 @@ class Outfit extends React.Component {
     const removalIndex = newOutfit.indexOf(productId);
 
     if (removalIndex > -1) {
-      console.log(`Remove ${productId} from outfit`);
+      // console.log(`Remove ${productId} from outfit`);
       newOutfit.splice(removalIndex, 1);
 
       newOutfit.length ? localStorage.setItem('outfit', JSON.stringify(newOutfit)) : localStorage.removeItem('outfit');

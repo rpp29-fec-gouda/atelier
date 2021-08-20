@@ -15,8 +15,6 @@ class RelatedProducts extends React.Component {
     this.offsetX = 0;
     this.offsetY = 0;
 
-
-
     this.state = {
       selectedId: null,
       related: [],
@@ -36,13 +34,13 @@ class RelatedProducts extends React.Component {
     let ids = checkCache('relatedIds', id);
 
     if (ids) {
-      console.log(`${ids.length} products associated with ${product.name}:`, ids);
+      // console.log(`${ids.length} products associated with ${product.name}:`, ids);
       callback(ids);
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
           ids = Array.from(new Set(res.data));
-          console.log(`${ids.length} product ids associated with ${product.name}`, ids);
+          // console.log(`${ids.length} product ids associated with ${product.name}`, ids);
           updateCache('relatedIds', id, ids);
           callback(ids);
         })
@@ -65,7 +63,7 @@ class RelatedProducts extends React.Component {
   compareProduct(productId) {
     if (productId) {
       const product = this.props.checkCache('products', productId);
-      console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
+      // console.log(`Compare ${this.props.selectedProduct.name} with ${product.name}`);
       this.setState({ compareTo: product });
     } else {
       this.setState({ compareTo: null });
@@ -87,7 +85,7 @@ class RelatedProducts extends React.Component {
     const matchId = selectedProduct.id;
     if (this.state.selectedId !== matchId) {
       this.setState({ selectedId: matchId });
-      console.log(this.state.selectedId, matchId);
+      // console.log(this.state.selectedId, matchId);
       this.fetchRelatedIds(selectedProduct, (ids) => {
         this.setState({ related: ids });
       });
