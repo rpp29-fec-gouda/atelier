@@ -68,9 +68,11 @@ class RatingsAndReviews extends React.Component {
     if (reviews) {
       callback(reviews);
     } else {
+      console.log(`🌻🌻🌻 GET request for Reviews of product id ${id} 🌻🌻🌻`);
       axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
         .then(res => {
-          console.log('🌻🌻🌻🌻 AXIOS GET REVIEWS 1 🌻🌻🌻🌻:', res);
+          // console.log('🌻🌻🌻🌻 AXIOS GET REVIEWS 1 🌻🌻🌻🌻:', res);
+          console.log(`🌻 New reviews associated with product ID ${id} 🌻`, JSON.stringify(res.data));
           updateCache('reviews', id, res.data);
           callback(reviews);
 
@@ -100,9 +102,12 @@ class RatingsAndReviews extends React.Component {
     if (ratings) {
       callback(ratings);
     } else {
+      console.log(`🌻🌻🌻 GET request for RATINGS of product id ${id} 🌻🌻🌻`);
       axios.get(`reviews/meta?product_id=${id}`)
         .then(res => {
-          console.log('🌻🌻🌻🌻 AXIOS GET RATINGS 1 🌻🌻🌻🌻:', res);
+          // console.log('🌻🌻🌻🌻 AXIOS GET RATINGS 1 🌻🌻🌻🌻:', res);
+          // console.log(`New ratings associated with product ID ${id}`, JSON.stringify(res.data.ratings));
+          console.log(`🌻 New ratings associated with product ID ${id} 🌻`, JSON.stringify(res.data));
           updateCache('ratings', id, res.data);
           callback(ratings);
           this.ratingsData = res.data;

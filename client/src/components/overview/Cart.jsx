@@ -11,6 +11,7 @@ class Cart extends React.Component {
     this.isInStock = props.skus ? Object.keys(props.skus).length > 0 : false;
 
     this.state = {
+      selectedId: props.selectedId,
       currentSku: null,
       currentQuantity: 0,
       bag: [],
@@ -20,6 +21,25 @@ class Cart extends React.Component {
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
     this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
+    this.resetSku = this.checkResetSku.bind(this);
+  }
+
+  componentDidUpdate() {
+    console.log('Cart componentDidUpdate');
+    this.checkResetSku();
+  }
+
+  checkResetSku() {
+    const matchId = this.props.selectedId;
+    if (this.state.selectedId !== matchId) {
+      console.log('Resetting SKUs');
+      this.setState({
+        selectedId: matchId,
+        currentSku: null,
+        currentQuantity: 0,
+        promptSelection: false
+      });
+    }
   }
 
   handleSizeSelect(sku) {
@@ -32,11 +52,11 @@ class Cart extends React.Component {
   }
 
   handleQuantitySelect(quantity) {
+    console.log('Setting quantity:', quantity);
     this.setState({
       currentQuantity: quantity,
       promptSelection: false
     });
-    console.log('Quantity chosen:', this.state.currentQuantity);
   }
 
   handleCheckout() {
@@ -50,7 +70,8 @@ class Cart extends React.Component {
       this.setState({
         bag: newBag
       });
-      console.log('Current order:', this.bag);
+      console.log('Current order:', JSON.stringify(this.state.bag));
+      alert('You have checked out! Order:' + JSON.stringify(this.state.bag));
     } else {
       this.setState({
         promptSelection: true
@@ -60,8 +81,16 @@ class Cart extends React.Component {
 
   render() {
     console.log('Rendering po-cart');
+
+    console.log(`%cCart current sku: ${this.state.currentSku}`, 'color: red');
+    console.log('Current State Style ID', this.state.selectedId);
+    console.log('New Props Style ID', this.props.selectedId);
+
     const skus = this.props.skus;
+    console.log('Cart skus', JSON.stringify(skus));
+
     if (!skus) {
+      console.log('No SKUS!');
       return (
       <div id="po-cart" class="column">
         Loading Cart...
@@ -70,16 +99,15 @@ class Cart extends React.Component {
     }
 
     const skusList = Object.keys(skus);
+    console.log('Cart sku #s', skusList);
+
     const sizes = [];
     skusList.forEach(sku => {
       sizes.push(skus[sku].size);
     });
+    console.log('Cart sizes', sizes);
 
     const maxQuantity = this.state.currentSku === null ? 0 : skus[this.state.currentSku].quantity;
-
-    console.log('Cart skus', JSON.stringify(skus));
-    console.log('Cart sku #s', skusList);
-    console.log('Cart sizes', sizes);
     console.log('Cart maxQuantity', maxQuantity);
 
     return (

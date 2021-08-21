@@ -66,23 +66,23 @@ class ImageGallery extends React.Component {
     const handleImageClick = model.isExpanded ? this.props.onClickZoom : this.props.onClickExpand;
 
     return (
-      <div id="po-image-gallery" {...attributes}>
-        <div id={viewId}>
+      <div id="po-image-gallery" { ...attributes }>
+        <div id={ viewId }>
           <div class="row">
             {
               !model.isZoomed &&
               <ImageNavigator
-                onClick={this.updateIndex}
-                thumbnails={thumbnails}
-                selectedId={currentIndex}
-                length={thumbnails.length}
-                useIcons={model.isExpanded}
+                onClick={ this.updateIndex }
+                thumbnails={ thumbnails }
+                selectedId={ currentIndex }
+                length={ thumbnails.length }
+                useIcons={ model.isExpanded }
               />
             }
             <div class="column">
               {
                 !model.isExpanded &&
-                <div class="image-gallery-expanded-view-toggle" onClick={this.props.onClickExpand}>
+                <div class="image-gallery-expanded-view-toggle" onClick={ this.props.onClickExpand }>
                   <svg viewBox="0 0 20 20">
                     <path
                       fill-rule="evenodd"
@@ -93,7 +93,7 @@ class ImageGallery extends React.Component {
               }
               {
                 model.isExpanded &&
-                <div class="image-gallery-collapsed-view-toggle" onClick={this.props.onClickCollapse}>
+                <div class="image-gallery-collapsed-view-toggle" onClick={ this.props.onClickCollapse }>
                   <svg viewBox="0,0,999,937">
                     <path
                       d="M687.572+406.573L968.56+406.573C986.292+406.573+999.53+392.585+999.53+374.883C999.53+357.15+986.292+344.13+968.56+344.161L718.795+344.161L718.795+93.8959C718.795+76.1631+705.308+62.676+687.575+62.676C669.842+62.676+656.355+76.1631+656.355+93.8959L656.355+374.883C656.355+374.976+656.386+375.039+656.386+375.101C656.386+375.194+656.355+375.257+656.355+375.35C656.353+392.771+670.151+406.604+687.572+406.573Z"
@@ -113,17 +113,17 @@ class ImageGallery extends React.Component {
               {
                 !model.isZoomed &&
                 <ScrollingArrows
-                  callback={this.updateIndex}
-                  max={model.length - 1}
-                  stem={true}
+                  callback={ this.updateIndex }
+                  maxIndex={ model.photos.length - 1 }
+                  stem={ true }
                 />
               }
             </div>
           </div>
-          <div id={this.containerId} onClick={handleImageClick}>
+          <div id={ this.containerId } onClick={ handleImageClick }>
             <img
-              id={this.imgId}
-              src={photoUrl}
+              id={ this.imgId }
+              src={ photoUrl }
               alt="selected style selected image"
             />
           </div>

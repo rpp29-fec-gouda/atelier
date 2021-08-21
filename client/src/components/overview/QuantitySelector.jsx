@@ -14,6 +14,7 @@ const QuantitySelector = (props) => {
   };
 
   const onChange = (e) => {
+    console.log('Quantity onChange');
     props.onSelect(e?.target?.value);
   };
 

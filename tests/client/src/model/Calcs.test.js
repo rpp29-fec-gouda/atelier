@@ -104,6 +104,15 @@ describe('incrementIndexDown', function () {
     };
     expect(incrementIndexDown(props.index, props.max, props.min, props.isCapped)).toEqual(props.min);
   });
+
+  it('should not decrement if only 1 item exists', function () {
+    const props = {
+      index: 0,
+      min: 0,
+      max: 0
+    };
+    expect(incrementIndexDown(props.index, props.max, props.min, props.isCapped)).toEqual(props.index);
+  });
 });
 
 // index, max, isCapped
@@ -132,5 +141,14 @@ describe('incrementIndexUp', function () {
       index: 2
     };
     expect(incrementIndexUp(props.index, props.max, props.min, props.isCapped)).toEqual(props.max);
+  });
+
+  it('should not increment if only 1 item exists', function () {
+    const props = {
+      index: 0,
+      min: 0,
+      max: 0
+    };
+    expect(incrementIndexUp(props.index, props.max, props.min, props.isCapped)).toEqual(props.index);
   });
 });

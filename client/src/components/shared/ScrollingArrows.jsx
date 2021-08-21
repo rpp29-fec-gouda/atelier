@@ -7,10 +7,10 @@ class ScrollingArrows extends React.Component {
   constructor(props) {
     super(props);
 
-    this.min = props.min ? props.min : 0;
+    this.minIndex = props.minIndex ? props.minIndex : 0;
 
     this.state = {
-      index: props.index ? props.index : this.min
+      index: props.index ? props.index : this.minIndex
     };
 
     this.decrementClass = 'scrolling-arrows-arrow scrolling-arrows-decrement';
@@ -46,21 +46,21 @@ class ScrollingArrows extends React.Component {
 
   incrementIndexUp() {
     let index = this.state.index;
-    let max = this.props.max;
-    let min = this.props.min;
+    let maxIndex = this.props.maxIndex;
+    let minIndex = this.props.minIndex;
     let isCapped = this.props.isCapped;
 
-    index = incrementIndexUp(index, max, min, isCapped);
+    index = incrementIndexUp(index, maxIndex, minIndex, isCapped);
     this.updateIndex(index);
   }
 
   incrementIndexDown() {
     let index = this.state.index;
-    let max = this.props.max;
-    let min = this.min;
+    let maxIndex = this.props.maxIndex;
+    let minIndex = this.minIndex;
     let isCapped = this.props.isCapped;
 
-    index = incrementIndexDown(index, max, min, isCapped);
+    index = incrementIndexDown(index, maxIndex, minIndex, isCapped);
     this.updateIndex(index);
   }
 
@@ -77,18 +77,18 @@ class ScrollingArrows extends React.Component {
     return (
       <div class="scrolling-arrows">
         {
-          !(this.props.isCapped && this.state.index === this.props.min) &&
-          <div class={this.decrementClass} onClick={this.incrementIndexDown}>
-            <svg viewBox={this.getSvgData('viewBox')}>
-              <path d={this.getSvgData('scrolling-arrows-decrement')} />
+          !(this.props.isCapped && this.state.index === this.props.minIndex) &&
+          <div class={ this.decrementClass } onClick={ this.incrementIndexDown }>
+            <svg viewBox={ this.getSvgData('viewBox') }>
+              <path d={ this.getSvgData('scrolling-arrows-decrement') } />
             </svg>
           </div>
         }
         {
-          !(this.props.isCapped && this.state.index === this.props.max) &&
-          <div class={this.incrementClass} onClick={this.incrementIndexUp}>
-            <svg viewBox={this.getSvgData('viewBox')}>
-              <path d={this.getSvgData('scrolling-arrows-increment')} />
+          !(this.props.isCapped && this.state.index === this.props.maxIndex) &&
+          <div class={ this.incrementClass } onClick={ this.incrementIndexUp }>
+            <svg viewBox={ this.getSvgData('viewBox') }>
+              <path d={ this.getSvgData('scrolling-arrows-increment') } />
             </svg>
           </div>
         }
