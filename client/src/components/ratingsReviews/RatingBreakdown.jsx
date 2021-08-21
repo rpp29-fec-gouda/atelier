@@ -48,11 +48,11 @@ const RatingBreakdown = (props) => {
     }
 
     return (
-      <div id='rr-rating-breakdown'>
+      <div className='rr-rating-breakdown'>
         <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
         <StarRating rating={averageRating} max={5} />
         <br></br><br></br>
-        <div>{averageRecommend}% of reviews recommend this product</div>
+        <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
         <h5>RATING BREAKDOWN</h5>
         {barFills.map((item, i) => (
@@ -62,7 +62,7 @@ const RatingBreakdown = (props) => {
     );
   } else {
     return (
-      <div id='rr-rating-breakdown'></div>
+      <div className='rr-rating-breakdown'></div>
     );
   }
 };

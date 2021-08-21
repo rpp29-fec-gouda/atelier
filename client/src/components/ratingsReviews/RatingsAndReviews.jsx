@@ -62,7 +62,7 @@ class RatingsAndReviews extends React.Component {
     } else {
       axios.get(`reviews?sort=${sort}&count=100&product_id=${id}`)
         .then(res => {
-          console.log('AXIOS GET REVIEWS:', res);
+          console.log('🌻🌻🌻🌻 AXIOS GET REVIEWS 1 🌻🌻🌻🌻:', res);
           updateCache('reviews', id, res.data);
           callback(reviews);
 
@@ -87,7 +87,7 @@ class RatingsAndReviews extends React.Component {
     } else {
       axios.get(`reviews/meta?product_id=${id}`)
         .then(res => {
-          console.log('AXIOS GET RATINGS:', res);
+          console.log('🌻🌻🌻🌻 AXIOS GET RATINGS 1 🌻🌻🌻🌻:', res);
           updateCache('ratings', id, res.data);
           callback(ratings);
           this.ratingsData = res.data;
@@ -245,7 +245,7 @@ class RatingsAndReviews extends React.Component {
 
     axios.post(url, data)
       .then(res => {
-        console.log('Interactions posted', res);
+        console.log('🌻🌻🌻🌻 AXIOS POST INTERACTIONS 1 🌻🌻🌻🌻: ', res);
       })
       .catch(err => console.log('Submit error', err));
   }
