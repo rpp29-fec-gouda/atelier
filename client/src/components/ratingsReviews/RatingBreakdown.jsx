@@ -4,7 +4,7 @@ import StarRating from '../shared/StarRating.jsx';
 import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
-  const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
+  const { ratings, recommended, handleRatingProgressFilter } = props;
   let key = 0;
 
   if (ratings) {
