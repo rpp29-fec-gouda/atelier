@@ -50,10 +50,10 @@ class StarRating extends React.Component {
     starsFull.forEach(() => starCodes.push(100));
 
     // Do not do this for a rating of 0 as this will introduce an extra empty star
-      const ratingDecimalRounded25 = roundByIncrement(rating, 25) * 100;
-      if (ratingDecimalRounded25 !== 0) {
-        starCodes.push(ratingDecimalRounded25);
-      }
+    const ratingDecimalRounded25 = roundByIncrement(rating, 25) * 100;
+    if (ratingDecimalRounded25 !== 0) {
+      starCodes.push(ratingDecimalRounded25);
+    }
 
     const starsEmpty = this.getStarsEmpty(rating);
     starsEmpty.forEach(() => starCodes.push(0));
@@ -66,6 +66,10 @@ class StarRating extends React.Component {
   getImage(rating) {
     return `images/starRatings-${rating}.png`;
   }
+
+  getImgAlt(rating) {
+    return `Star image ${rating}% full`;
+  };
 
   getStarClasses(isClickable) {
     let imgClass = 'star';
@@ -99,6 +103,7 @@ class StarRating extends React.Component {
 
   render() {
     console.log('Rendering Star Rating');
+
     const starCodes = this.getStarCodes(this.state.currentRating);
     const imgClass = this.getStarClasses(this.isClickable);
 
@@ -118,6 +123,7 @@ class StarRating extends React.Component {
             <img
               key={key++}
               src={this.getImage(starCode)}
+              alt={this.getImgAlt(starCode)}
               class={imgClass}
               data-rating={key}
               {...optsStar}

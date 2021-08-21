@@ -28,7 +28,8 @@ const RatingBreakdown = (props) => {
     const fourBar = parseInt(ratings[4]) || 0;
     const fiveBar = parseInt(ratings[5]) || 0;
 
-    let averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
+    let averageRating = valueRatings / totalRatings;
+    let roundedAverage = Math.round(averageRating * 10) / 10;
 
     const barFills = [
       { star: '5', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
@@ -47,10 +48,12 @@ const RatingBreakdown = (props) => {
       averageRecommend = Math.round(parseInt(recommended.true) / (parseInt(recommended.false) + parseInt(recommended.true)) * 100);
     }
 
-    return (
+
+    return averageRating ? (
       <div className='rr-rating-breakdown'>
-        <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
-        <StarRating rating={averageRating} max={5} />
+          <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(roundedAverage) ? '' : roundedAverage}</span>
+          <StarRating rating={averageRating} max={5} />
+        </div>
         <br></br><br></br>
         <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
@@ -59,6 +62,8 @@ const RatingBreakdown = (props) => {
           <RatingProgress key={i} ratings={ratings} completed={item} handleRatingProgressFilter={handleRatingProgressFilter} />
         ))}
       </div>
+    ) : (
+      <div id='rr-rating-breakdown'>Loading...</div>
     );
   } else {
     return (

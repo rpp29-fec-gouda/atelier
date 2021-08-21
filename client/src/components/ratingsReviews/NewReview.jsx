@@ -15,7 +15,7 @@ class NewReview extends React.Component {
       selectedProduct: this.props.selectedProduct,
       imageUrls: '',
       formName: 'Review',
-      'Overall Rating': 5,
+      'Overall Rating': '',
       'Recommendation': '',
       'Characteristic': '',
       reviewSummary: '',
@@ -46,6 +46,7 @@ class NewReview extends React.Component {
     };
 
     this.key = 0;
+    this.stars = 0;
     this.characteristics = {};
     this.radio = {
       Size: {
@@ -118,7 +119,7 @@ class NewReview extends React.Component {
     let id = e.target.id;
     let name = e.target.name;
     let currentCharacteristic = this.props.characteristics[e.target.name];
-    if (id === 'reviewSummary' || id === 'Email' || id === 'Nickname' || id === 'Overall Rating' || id === 'Recommendation') {
+    if (id === 'reviewSummary' || id === 'Email' || id === 'Nickname' || id === 'Recommendation') {
       this.setState({
         [id]: e.target.value
       });
@@ -195,6 +196,14 @@ class NewReview extends React.Component {
     }
   }
 
+  updateStars(e) {
+    let result = parseInt(e.target.dataset.rating);
+    this.setState({
+      'Overall Rating': result
+    });
+
+  }
+
   render() {
     return this.state.selectedProduct ? (
       <div id='rr-new-review'>
@@ -205,7 +214,9 @@ class NewReview extends React.Component {
           <form className='rr-new-review' onSubmit={this.submit.bind(this)}>
             <div className='rr-new-review-form'>
               <h3>*Overal Rating</h3>
-              <StarRating />
+
+              <StarRating rating={this.state.['Overall Rating'] !== '' ? this.state.['Overall Rating'] : 1} max={5} callback={this.updateStars} />
+
               <div style={{ color: 'red' }}>{this.state.requires['Overall Rating']}</div>
               <hr></hr>
             </div>
