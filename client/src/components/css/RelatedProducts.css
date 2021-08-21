@@ -19,7 +19,7 @@
 .rp-card-container {
   display: flex;
   flex-flow: row nowrap;
-  overflow: scroll;
+  overflow: hidden;
   justify-content: stretch;
   flex: 1;
   margin: 8px 0;
@@ -51,6 +51,7 @@
 
 .rp-card-sticky {
   background-color: #fffc;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   z-index: 2;
   position: sticky;
@@ -161,6 +162,7 @@
   max-width: 180vw;
   max-height: 90vh;
   background: #fffc;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border: 4px solid #0006;
   overflow: hidden;

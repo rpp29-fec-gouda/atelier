@@ -28,6 +28,7 @@ class ProductCompare extends React.Component {
   }
 
   handleDragStart(event) {
+    event.dataTransfer.setData();
     this.offsetX = event.nativeEvent.offsetX;
     this.offsetY = event.nativeEvent.offsetY;
   }
