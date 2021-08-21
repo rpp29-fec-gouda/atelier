@@ -57,3 +57,11 @@ Bugs: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rp
 Code Smells: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=code_smells)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
 Technical Debt: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_index)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+# Demos
+Below are some brief descriptions of the various app components, with animations showing their dynamic behavior.
+
+## Product Overview
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/demo_po.gif)
