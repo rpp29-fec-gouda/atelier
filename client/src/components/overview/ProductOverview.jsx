@@ -48,9 +48,6 @@ class ProductOverview extends React.Component {
   componentDidUpdate() {
     const { selectedProduct } = this.props;
     const matchId = selectedProduct.id;
-    console.log('Product Review: Compnent Did Update');
-    console.log('matchId', matchId);
-    console.log('this.state.selectedId', this.state.selectedId);
     if (this.state.selectedId !== matchId) {
       this.setState({ selectedId: matchId });
       this.loadAdditionalProductData(this.props.selectedProduct?.id);
@@ -304,6 +301,7 @@ class ProductOverview extends React.Component {
     const selectorItems = this.getStyleSelectorItems(this.state.styles);
     // console.log('styles', JSON.stringify(selectorItems));
     console.log('Rendering product overview');
+    console.log('styleId', styleId);
     return (
       <div id="product-overview">
         <div class="row">
@@ -334,6 +332,7 @@ class ProductOverview extends React.Component {
                 onClick={ this.handleStyleClick }
               />
               <Cart
+                selectedId = { styleId }
                 skus={ sizesAvailable }
               />
             </div>
