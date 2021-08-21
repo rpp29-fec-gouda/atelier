@@ -11,41 +11,41 @@ const ReviewTile = (props) => {
   let key = 0;
 
   return reviews ? (
-    <div id='rr-review-tile'>
+    <div className='rr-review-tile'>
       {reviews.map((review) => (
-        <div id='rr-tile' className='rr-tile' key={key++}>
-          <div id='rr-user-stamp' className='rr-user-stamp'>
-            <span id='rr-star-rating' className='rr-star-rating'>
+        <div className='rr-tile' key={key++}>
+          <div className='rr-user-stamp'>
+            <span className='rr-star-rating'>
               <StarRating rating={averageRating} max={5} />
             </span>
-            <span id='rr-review-date' className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toLocaleDateString('en-EN', options)}</span>
+            <span className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toLocaleDateString('en-EN', options)}</span>
           </div>
           <br></br>
-          <div id='rr-review' className='rr-review'>
-            <div id='rr-review-summary' className='rr-review-summary'>{review.summary}</div>
+          <div className='rr-review'>
+            <div className='rr-review-summary'>{review.summary}</div>
             <br></br>
-            <div id='rr-review-body' className='rr-review-body'>{review.body}</div>
+            <div className='rr-review-body'>{review.body}</div>
             <br></br>
             {review.photos.length > 0 ?
               <div id='rr-review-photos' className='rr-review-photos'>
                 <DisplayPhotos photos={review.photos} />
               </div> : null}
             {review.recommend ?
-              <div id='rr-review-recommend' className='rr-review-recommend'>&#10003; I recommend this product!</div>
+              <div className='rr-review-recommend'>&#10003; I recommend this product!</div>
               : null
             }
             {review.response ?
               <div>
                 <br></br>
-                <div id='rr-review-response' className='rr-review-response'>
-                  <div id='rr-review-response title' className='rr-review-response title'>Response from seller</div>
-                  <div id='rr-review-response text' className='rr-review-response text'>{review.response}</div>
+                <div className='rr-review-response'>
+                  <div className='rr-review-response title'>Response from seller</div>
+                  <div className='rr-review-response text'>{review.response}</div>
                 </div>
               </div>
               : null
             }
             <br></br>
-            <div id='rr-review-feedback' className='rr-review-feedback'>
+            <div className='rr-review-feedback'>
               <Helpfulness review={review} />
               <span> | </span>
               <Report reviewId={review.review_id} />

@@ -4,7 +4,7 @@ import StarRating from '../shared/StarRating.jsx';
 import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
-  const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
+  const { ratings, recommended, handleRatingProgressFilter } = props;
   let key = 0;
 
   if (ratings) {
@@ -28,9 +28,8 @@ const RatingBreakdown = (props) => {
     const fourBar = parseInt(ratings[4]) || 0;
     const fiveBar = parseInt(ratings[5]) || 0;
 
-    let averageRating = Math.round(valueRatings / totalRatings * 10) / 10;
-
-    ratingDetails(averageRating, totalRatings);
+    let averageRating = valueRatings / totalRatings;
+    let roundedAverage = Math.round(averageRating * 10) / 10;
 
     const barFills = [
       { star: '5', count: fiveBar, percentage: fiveBar / totalRatings * 100 },
@@ -49,22 +48,27 @@ const RatingBreakdown = (props) => {
       averageRecommend = Math.round(parseInt(recommended.true) / (parseInt(recommended.false) + parseInt(recommended.true)) * 100);
     }
 
-    return (
-      <div id='rr-rating-breakdown'>
-        <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(averageRating) ? '' : averageRating}</span>
-        <StarRating rating={averageRating} max={5} />
+
+    return averageRating ? (
+      <div className='rr-rating-breakdown'>
+        <div className='rr-average-rating'>
+          <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(roundedAverage) ? '' : roundedAverage}</span>
+          <StarRating rating={averageRating} max={5} />
+        </div>
         <br></br><br></br>
-        <div>{averageRecommend}% of reviews recommend this product</div>
+        <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
         <h5>RATING BREAKDOWN</h5>
         {barFills.map((item, i) => (
           <RatingProgress key={i} ratings={ratings} completed={item} handleRatingProgressFilter={handleRatingProgressFilter} />
         ))}
       </div>
+    ) : (
+      <div id='rr-rating-breakdown'>Loading...</div>
     );
   } else {
     return (
-      <div id='rr-rating-breakdown'></div>
+      <div className='rr-rating-breakdown'></div>
     );
   }
 };

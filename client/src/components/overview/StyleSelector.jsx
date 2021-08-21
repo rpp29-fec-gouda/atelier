@@ -71,11 +71,12 @@ const StyleSelector = (props) => {
                     {
                       item.thumbnail && item.thumbnail !== null &&
                       <img
-                        src={ item.thumbnail }
-                        key={ itemKey++ }
+                        src={item.thumbnail}
+                        alt="style default thumbnail"
+                        key={itemKey++}
                         class="po-style po-style-selector-image"
-                        data-style-id={ item.id }
-                        onClick={ handleClick }></img>
+                        data-style-id={item.id}
+                        onClick={handleClick}></img>
                     }
                     {
                       item.id === selectedId &&

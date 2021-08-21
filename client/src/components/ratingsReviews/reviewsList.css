@@ -13,7 +13,7 @@
   flex-direction: row;
   justify-content: space-between;}
 
-#rr-more-reviews {
+.rr-more-reviews {
   font-size: 1em;
   padding: 1em;
   margin: 0.7em, 0.7em, 0.7em, 0em;
