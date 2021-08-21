@@ -61,7 +61,7 @@ const RatingBreakdown = (props) => {
         <br></br><br></br>
         <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>
         <br></br>
-        <h5>RATING BREAKDOWN</h5>
+        <h2>Rating Breakdown</h2>
         {barFills.map((item, i) => (
           <RatingProgress key={i} ratings={ratings} completed={item} handleRatingProgressFilter={handleRatingProgressFilter} />
         ))}

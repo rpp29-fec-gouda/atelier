@@ -5,17 +5,18 @@ import './sort.css';
 const Sort = (props) => {
   const { reviews, fullReviews, sortOptions, handleReviewSort } = props;
 
-  return reviews ? (
+  return sortOptions ? (
     <div id='rr-sort'>
       <label for='rr-dropdown'></label>
-      {fullReviews.length} reviews, sorted by <select className='rr-dropdown' onChange={handleReviewSort}>
+      {fullReviews ? fullReviews.length : 0} reviews, sorted by <select className='rr-dropdown' onChange={handleReviewSort}>
 
         {sortOptions.map((option, i) => (
           <option className='rr-dropdown' type='submit' value={option} key={i}>{option}</option>
         ))}
       </select>
     </div>
-  ) : (null
+  ) : (
+    null
   );
 };
 

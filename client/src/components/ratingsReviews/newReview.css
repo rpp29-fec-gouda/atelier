@@ -3,22 +3,11 @@
   flex-basis: 30%;
 }
 
-.rr-new-review {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
+
 
 #rr-add-review {
-  font-size: 1em;
-  padding: 1em;
-  margin: 0.7em, 0.7em, 0.7em, 0em;
-  align-items: center;
-  font-weight: bold;
-  user-select: none;
-  flex-flow: row;
-  text-transform: uppercase;
-  border: 1px solid black;
+margin-left: 1em;
+margin-top: 0.5em;
 }
 
 .rr-options {

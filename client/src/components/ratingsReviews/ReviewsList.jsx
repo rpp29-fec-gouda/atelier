@@ -30,7 +30,7 @@ const ReviewsList = (props) => {
   };
 
   return (
-    <div className='rr-reviews-list'>
+    <div id='rr-reviews-list'>
       <Sort
         reviews={displayedReviews}
         fullReviews={reviews}
@@ -41,17 +41,19 @@ const ReviewsList = (props) => {
         reviews={reviews}
         callback={callback} />
 
-      <div className='rr-displayed-reviews'>
-        <ReviewTile
-          reviews={displayedReviews}
-          fullReviews={reviews}
-          averageRating={averageRating}
-          expanded={expanded}
-          expandBody={expandBody}/>
-      </div>
+      {reviews ?
+        <div className='rr-displayed-reviews'>
+          <ReviewTile
+            reviews={displayedReviews}
+            fullReviews={reviews}
+            averageRating={averageRating}
+            expanded={expanded}
+            expandBody={expandBody} />
+        </div>
+        : null}
       <div className='rr-review-buttons'>
         {count < reviewsLength ?
-          <div className='rr-more-reviews' class='button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
+          <div className='rr-more-reviews button uppercase' onClick={handleMoreReviews}>MORE REVIEWS</div>
           : null
         }
         <NewReview
