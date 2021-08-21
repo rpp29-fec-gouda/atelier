@@ -7,7 +7,7 @@ const Navbar = (props) => {
   return (
     <div className='shared-navbar'>
       <div className='shared-logos'>
-        <div className={document.body.classList.contains('background-dark') ? 'dark-on-orange-text' : 'dark-on-orange-text'}>Gouda</div>
+        <h2 className='dark-on-orange-text'>Gouda</h2>
         <DarkMode />
       </div>
       <div className='shared-announcements'>
