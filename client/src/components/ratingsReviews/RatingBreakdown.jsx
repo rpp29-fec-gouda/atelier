@@ -51,6 +51,7 @@ const RatingBreakdown = (props) => {
 
     return averageRating ? (
       <div className='rr-rating-breakdown'>
+        <div className='rr-average-rating'>
           <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(roundedAverage) ? '' : roundedAverage}</span>
           <StarRating rating={averageRating} max={5} />
         </div>

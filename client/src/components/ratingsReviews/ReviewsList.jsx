@@ -40,7 +40,6 @@ const ReviewsList = (props) => {
         callback={callback} />
 
       <div className='rr-displayed-reviews'>
-      <div id='rr-displayed-reviews' className='rr-displayed-reviews'>
         <ReviewTile
           reviews={displayedReviews}
           fullReviews={reviews}

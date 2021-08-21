@@ -69,7 +69,7 @@ class StarRating extends React.Component {
 
   getImgAlt(rating) {
     return `Star image ${rating}% full`;
-  };
+  }
 
   getStarClasses(isClickable) {
     let imgClass = 'star';
