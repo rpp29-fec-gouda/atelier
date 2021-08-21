@@ -100,7 +100,7 @@ class ProductCard extends React.Component {
       let productRatings = checkCache('ratings', productId);
 
       if (productRatings) {
-        avgRating = 0; // calc from productRatings
+        const avgRating = undefined; // calc from productRatings
         console.log(`${productId} ratings loaded from cache`);
         this.setState({
           avgRating: avgRating
@@ -112,7 +112,8 @@ class ProductCard extends React.Component {
             console.log(`${productId} ratings retrieved from server`);
             const ratings = res.data.ratings;
             console.log(ratings);
-            const avgRating = ratings.reduce((total, value) => (total + value)) / ratings.length; // calc from res.data
+            // const avgRating = ratings.reduce((total, value) => (total + value)) / ratings.length; // calc from res.data
+            const avgRating = undefined;
 
             this.setState({
               avgRating: avgRating
@@ -136,7 +137,7 @@ class ProductCard extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.product) {
-      return !(this.state.product.id === nextState.product.id && this.state.productImageURL === nextState.productImageURL);
+      return !(this.state.product.id === nextState.product.id && this.state.productImageURL === nextState.productImageURL && this.state.avgRating === nextState.avgRating);
     } else {
       return true;
     }
