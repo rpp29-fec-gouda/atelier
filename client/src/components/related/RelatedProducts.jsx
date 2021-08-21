@@ -39,10 +39,14 @@ class RelatedProducts extends React.Component {
     } else {
       axios.get(`/products/${id}/related`)
         .then(res => {
-          ids = Array.from(new Set(res.data));
-          // console.log(`${ids.length} product ids associated with ${product.name}`, ids);
-          updateCache('relatedIds', id, ids);
-          callback(ids);
+          if (!Array.isArray(res.data)) {
+            callback([]);
+          } else {
+            ids = Array.from(new Set(res.data));
+            // console.log(`${ids.length} product ids associated with ${product.name}`, ids);
+            updateCache('relatedIds', id, ids);
+            callback(ids);
+          }
         })
         .catch(err => {
           console.log(err.stack);
