@@ -26,8 +26,11 @@ const ProductBreakdown = (props) => {
             <label for='rr-bar-chart'></label>
             <input className='rr-bar-chart' type="range" min="1" max="5" list="tickmarks" step='any' value={characteristic[1].value ? characteristic[1].value.slice(0, 4) : ''} readonly></input>
             <datalist className="rr-breakdown-tickmarks">
-              <option className='rr-breakdown-option' value="1" id={characteristic[0]}>{chart[characteristic[0]].first}</option>
-              <option className='rr-breakdown-option' value="5" id={characteristic[0]}>{chart[characteristic[0]].fifth}</option>
+              <label for='rr-breakdown-option-1'>{chart[characteristic[0]].first}</label>
+              <option className='rr-breakdown-option-1' value="1"></option>
+              <option className='rr-breakdown-option-5' value="5"></option>
+              <label for='rr-breakdown-option-5'>{chart[characteristic[0]].fifth}</label>
+
             </datalist>
           </div>
         </div>

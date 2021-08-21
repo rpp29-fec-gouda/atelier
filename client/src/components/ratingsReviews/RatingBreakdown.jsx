@@ -4,7 +4,7 @@ import StarRating from '../shared/StarRating.jsx';
 import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
-  const { ratings, recommended, handleRatingProgressFilter } = props;
+  const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
   let key = 0;
 
   if (ratings) {
@@ -48,11 +48,15 @@ const RatingBreakdown = (props) => {
       averageRecommend = Math.round(parseInt(recommended.true) / (parseInt(recommended.false) + parseInt(recommended.true)) * 100);
     }
 
+    ratingDetails(averageRating, totalRatings, roundedAverage);
+
     return averageRating ? (
       <div className='rr-rating-breakdown'>
-        <div className='rr-average-rating'>
+        <div className='rr-overall-rating'>
           <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(roundedAverage) ? '' : roundedAverage}</span>
-          <StarRating rating={averageRating} max={5} />
+          <div className='rr-rating-breakdown rr-star-rating'>
+            <StarRating rating={averageRating} max={5} />
+          </div>
         </div>
         <br></br><br></br>
         <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>

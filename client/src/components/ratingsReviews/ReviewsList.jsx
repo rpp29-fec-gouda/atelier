@@ -20,7 +20,9 @@ const ReviewsList = (props) => {
     sortOptions,
     handleReviewSort,
     expanded,
-    expandBody
+    expandBody,
+    getReviews,
+    getRatings
   } = props;
 
   const handleMoreReviews = () => {
@@ -58,6 +60,8 @@ const ReviewsList = (props) => {
           reviews={reviews}
           selectedProduct={selectedProduct}
           characteristics={characteristics}
+          getReviews={getReviews}
+          getRatings={getRatings}
         />
       </div>
     </div>
