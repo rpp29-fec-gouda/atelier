@@ -14,6 +14,7 @@ class RatingsAndReviews extends React.Component {
     this.reviewsData = {};
     this.ratingsData = {};
     this.displayedReviews = [];
+    this.filteredRatings = [];
     this.averageRating = 0;
     this.roundedAverage = 0;
     this.totalRating = 0;
@@ -29,17 +30,18 @@ class RatingsAndReviews extends React.Component {
       reviewsLength: 0,
       displayedReviews: [],
       filteredReviews: null,
+      filteredRatings: [],
       characteristics: {},
       recommended: {},
       product_id: '',
       count: 2,
       sort: 'relevant',
       expanded: false,
-      5: false,
-      4: false,
-      3: false,
-      2: false,
-      1: false
+      '5': false,
+      '4': false,
+      '3': false,
+      '2': false,
+      '1': false
     };
 
     this.sortOptions = ['relevance', 'newest', 'helpfulness'];
@@ -54,9 +56,10 @@ class RatingsAndReviews extends React.Component {
     this.handleInteractions = this.handleInteractions.bind(this);
     this.updateReviewsList = this.updateReviewsList.bind(this);
     this.expandBody = this.expandBody.bind(this);
+    this.updateRatingsList = this.updateRatingsList.bind(this);
   }
 
-  getReviews(sort, count, id, callback = () => {}) {
+  getReviews(sort, count, id, callback = () => { }) {
     const { checkCache, updateCache } = this.props;
     let reviews = checkCache('reviews', id);
 
@@ -87,7 +90,7 @@ class RatingsAndReviews extends React.Component {
     this.roundedAverage = roundedAverage;
   }
 
-  getRatings(id, callback = () => {}) {
+  getRatings(id, callback = () => { }) {
 
     const { checkCache, updateCache } = this.props;
     let ratings = checkCache('ratings', id);
@@ -217,21 +220,59 @@ class RatingsAndReviews extends React.Component {
     });
   }
 
+  updateRatingsList(filteredList) {
+    this.setState({
+      filteredRatings: filteredList
+    }, () => {
+
+      console.log('TEST1:', this.state.filteredRatings);
+    });
+  }
+
   handleRatingProgressFilter(event) {
-    event.preventDefault();
-    let starFilter = parseInt(event.target.id);
-    console.log('TEST3', this.state[starFilter]);
-    this.state[starFilter] ?
+    let filteredRatings = [];
+    let starFilter = event.target.id;
+
+    if (this.state[starFilter]) {
+      console.log('Star Filter is true');
       this.setState({
-        starFilter: false
+        [starFilter]: false
       }, () => {
-        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
-      })
-      : this.setState({
-        starFilter: true
-      }, () => {
-        this.getReviews(this.state.sort, this.state.count, this.props.selectedProduct.id);
+        console.log('Ratings before cut:', filteredRatings);
+        this.state.reviews.forEach((review) => {
+          const rating = review.rating;
+
+          if (rating === parseInt(starFilter)) {
+            filteredRatings.splice(filteredRatings.indexOf(review), 1);
+            console.log('Cut out former ratings:', filteredRatings);
+          }
+        });
+        if (filteredRatings.length === 0) {
+          filteredRatings === null;
+          console.log('Length is zero, should be null:', filteredRatings);
+          this.updateRatingsList(filteredRatings);
+        }
       });
+    } else {
+      console.log('Star Filter is false');
+      this.setState({
+        [starFilter]: true
+      }, () => {
+        console.log('Ratings before add', filteredRatings);
+        this.state.reviews.forEach((review) => {
+          const rating = review.rating;
+          if (rating === parseInt(starFilter)) {
+            filteredRatings.push(review);
+            console.log('Ratings after add:', filteredRatings);
+
+          }
+          if (filteredRatings.length !== 0) {
+            this.updateRatingsList(filteredRatings);
+            console.log('Length is greater than zero:', filteredRatings);
+          }
+        });
+      });
+    }
   }
 
   loadMoreReviews() {
@@ -274,7 +315,13 @@ class RatingsAndReviews extends React.Component {
       return (<div>Loading...</div>);
     }
 
-    const displayedReviews = this.state.filteredReviews || this.state.displayedReviews;
+    if (this.state.filteredRatings.length !== 0) {
+      var displayedReviews = this.state.filteredRatings;
+
+    } else {
+      var displayedReviews = this.state.displayedReviews;
+    }
+
 
     return (
       <div name='rr-ratings-reviews-widget' id='rr-ratings-reviews-widget'
