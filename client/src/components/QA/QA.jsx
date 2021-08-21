@@ -12,6 +12,7 @@ class QA extends React.Component {
     super(props);
     this.addQuestionClicked = this.addQuestionClicked.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.fetchData = this.fetchData.bind(this);
     this.state = {
       productId: this.props.selectedProduct.id,
       questions: [],
@@ -20,25 +21,22 @@ class QA extends React.Component {
     };
   }
 
-  componentDidMount() {
-    axios.get(`/qa/questions?product_id=${this.state.productId}&count=1000`)
-      .then(res => {
-        this.setState({
-          questions: res.data.results
-        });
-      })
-      .catch(err => {
-        console.log(err);
+  fetchData() {
+    const { updateCache, checkCache, selectedProduct } = this.props;
+    const questionsCache = checkCache('questions', selectedProduct.id);
+    if (questionsCache) {
+      this.setState({
+        questions: questionsCache,
+        productId: selectedProduct.id
       });
-  }
-
-  componentDidUpdate() {
-    if (this.state.productId !== this.props.selectedProduct.id) {
-      axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
+    } else {
+      console.log(`❓❓❓GET request for Questions-product ID: ${selectedProduct.id}❓❓❓`)
+      axios.get(`/qa/questions?product_id=${selectedProduct.id}&count=1000`)
         .then(res => {
+          updateCache('questions', selectedProduct.id, res.data.results);
           this.setState({
             questions: res.data.results,
-            productId: this.props.selectedProduct.id
+            productId: selectedProduct.id
           });
         })
         .catch(err => {
@@ -46,7 +44,20 @@ class QA extends React.Component {
         });
     }
   }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate() {
+    const {selectedProduct} = this.props;
+    if (this.state.productId !== selectedProduct.id) {
+      this.fetchData();
+    }
+  }
+
   updateData() {
+    console.log(`❓❓❓GET request for Questions-product ID: ${this.props.selectedProduct.id}❓❓❓`)
     axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
       .then(res => {
         this.setState({

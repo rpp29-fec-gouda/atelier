@@ -1,10 +1,12 @@
 const api = require('./server/api.js');
 const path = require('path');
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 const app = express();
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
+//app.use(express.static(path.join(__dirname, '/client/dist')));
 app.use(express.static(path.join(__dirname, '/client/assets')));
+app.use('/', expressStaticGzip(path.join(__dirname, '/client/dist'), {enableBrotli: true}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Display any parameters appended to the URL:

@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.jsx',
@@ -28,6 +29,29 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: 'Atelier' }),
+    new HtmlWebpackPlugin({
+      title: 'Atelier',
+      'meta': {
+        'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
+        'theme-color': '#4285f4',
+        'description': 'A cheese-inspired shopping website',
+        'keywords': 'atelier, gouda, cheese, Hack Reactor, React, RPP29',
+        'author': 'Team Gouda'
+      },
+      favicon: './client/assets/favicon-64x64.png',
+      htmlAttributes: {
+        lang: 'en'
+      }
+    }),
+    new CompressionPlugin({
+      filename: '[base].br',
+      algorithm: 'brotliCompress',
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: {
+        level: 11,
+        threshold: 10240,
+        minRatio: 0.8,
+      },
+    }),
   ],
 };
