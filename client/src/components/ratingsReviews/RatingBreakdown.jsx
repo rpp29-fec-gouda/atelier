@@ -4,7 +4,7 @@ import StarRating from '../shared/StarRating.jsx';
 import './ratingBreakdown.css';
 
 const RatingBreakdown = (props) => {
-  const { ratings, recommended, handleRatingProgressFilter } = props;
+  const { ratings, recommended, handleRatingProgressFilter, ratingDetails } = props;
   let key = 0;
 
   if (ratings) {
@@ -47,6 +47,8 @@ const RatingBreakdown = (props) => {
     } else {
       averageRecommend = Math.round(parseInt(recommended.true) / (parseInt(recommended.false) + parseInt(recommended.true)) * 100);
     }
+
+    ratingDetails(averageRating, totalRatings, roundedAverage);
 
 
     return averageRating ? (

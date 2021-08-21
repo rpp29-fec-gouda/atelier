@@ -16,7 +16,7 @@ const ReviewTile = (props) => {
         <div className='rr-tile' key={key++}>
           <div className='rr-user-stamp'>
             <span className='rr-star-rating'>
-              <StarRating rating={averageRating} max={5} />
+              <StarRating rating={review.rating} max={5} />
             </span>
             <span className='rr-review-date'>{review.reviewer_name}, {new Date(review.date).toLocaleDateString('en-EN', options)}</span>
           </div>

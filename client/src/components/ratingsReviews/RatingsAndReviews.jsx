@@ -54,6 +54,7 @@ class RatingsAndReviews extends React.Component {
     this.handleInteractions = this.handleInteractions.bind(this);
     this.updateReviewsList = this.updateReviewsList.bind(this);
     this.expandBody = this.expandBody.bind(this);
+    this.ratingDetails = this.ratingDetails.bind(this);
   }
 
   getReviews(sort, count, id, callback = () => {}) {
@@ -253,11 +254,11 @@ class RatingsAndReviews extends React.Component {
       time: new Date()
     };
 
-    axios.post(url, data)
-      .then(res => {
-        console.log('🌻🌻🌻🌻 AXIOS POST INTERACTIONS 1 🌻🌻🌻🌻: ', res);
-      })
-      .catch(err => console.log('Submit error', err));
+    // axios.post(url, data)
+    //   .then(res => {
+    //     console.log('🌻🌻🌻🌻 AXIOS POST INTERACTIONS 1 🌻🌻🌻🌻: ', res);
+    //   })
+    //   .catch(err => console.log('Submit error', err));
   }
 
   expandBody(e) {
