@@ -57,3 +57,42 @@ Bugs: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rp
 Code Smells: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=code_smells)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
 
 Technical Debt: [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=rpp29-fec-gouda_atelier&metric=sqale_index)](https://sonarcloud.io/dashboard?id=rpp29-fec-gouda_atelier)
+
+# Demos
+Below are some brief descriptions of the various app components, with animations showing their dynamic behavior.
+
+## Atelier
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/demo_po.gif)
+
+## Product Overview
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+### Image Gallery
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/overview/po-imageGallery.gif)
+
+#### Carousel Navigation (TBD)
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+Component complete but need more than 1 thumbnail to demo...
+
+
+### Stars & Reviews
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/overview/po-starsAndReviews.gif)
+
+### Select Styles
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/overview/po-styleSelector.gif)
+
+### Shopping Cart
+Lorem ipsum, I sayum! Lorem ipsum, I sayum!
+
+![First pass at demo video](./docs/demos/overview/po-cart.gif)
+
+You are not allowed to add to cart unless a size is chosen:
+![First pass at demo video](./docs/demos/overview/po-cartPrompt.gif)
