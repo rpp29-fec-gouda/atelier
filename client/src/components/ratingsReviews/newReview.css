@@ -21,6 +21,27 @@
   border: 1px solid black;
 }
 
+.rr-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;}
+
+.rr-first-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.rr-stars {
+  display: flex;
+  flex-direction: row;
+}
+
+.rr-star-label {
+  padding-left: 1em;
+}
+
 
 
 

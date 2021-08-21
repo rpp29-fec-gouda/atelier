@@ -57,6 +57,8 @@ class RatingsAndReviews extends React.Component {
     this.updateReviewsList = this.updateReviewsList.bind(this);
     this.expandBody = this.expandBody.bind(this);
     this.updateRatingsList = this.updateRatingsList.bind(this);
+    this.ratingDetails = this.ratingDetails.bind(this);
+
   }
 
   getReviews(sort, count, id, callback = () => { }) {
@@ -248,7 +250,7 @@ class RatingsAndReviews extends React.Component {
           }
         });
         if (filteredRatings.length === 0) {
-          filteredRatings === null;
+          filteredRatings = null;
           console.log('Length is zero, should be null:', filteredRatings);
           this.updateRatingsList(filteredRatings);
         }
@@ -351,6 +353,7 @@ class RatingsAndReviews extends React.Component {
               sortOptions={this.sortOptions}
               handleReviewSort={this.handleReviewSort}
               getReviews={this.getReviews}
+              getRatings={this.getRatings}
               currentSort={this.state.sort}
               product_id={this.state.product_id}
               count={this.state.count}

@@ -10,7 +10,7 @@ const RatingProgress = (props) => {
         <div className='rr-rating-progress-bar' onClick={handleRatingProgressFilter} value={completed.star} id={completed.star} >
           <label for='rr-progress-bar rr-label' onClick={handleRatingProgressFilter} id={completed.star}>{completed.star} stars </label>
           <meter className='rr-progress-bar rr-meter' onClick={handleRatingProgressFilter} id={completed.star} value={completed.percentage} min='0' max='100'>{completed.percentage}</meter>
-          <label for='rr-progress-bar rr-label' onClick={handleRatingProgressFilter} id={completed.star}>{completed.count} </label>
+          <label for='rr-progress-bar rr-label' onClick={handleRatingProgressFilter} id={completed.star}>({completed.count}) </label>
         </div>
       }
     </div>
