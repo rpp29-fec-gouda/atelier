@@ -106,7 +106,7 @@ class App extends React.Component {
 
 export default App;
 
-const randomPage = Math.round(Math.random() * 900);
+const randomPage = Math.round(Math.random() * 12);
 
 axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {

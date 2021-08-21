@@ -29,6 +29,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      inject: false,
+      templateContent: ({htmlWebpackPlugin}) => `
+        <html lang="en-US">
+          <head>
+            ${htmlWebpackPlugin.tags.headTags}
+          </head>
+          <body>
+            <h1>Hello World</h1>
+            ${htmlWebpackPlugin.tags.bodyTags}
+          </body>
+        </html>
+      `,
       title: 'Atelier',
       'meta': {
         'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
