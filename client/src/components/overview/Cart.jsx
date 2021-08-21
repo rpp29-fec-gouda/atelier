@@ -62,7 +62,11 @@ class Cart extends React.Component {
     console.log('Rendering po-cart');
     const skus = this.props.skus;
     if (!skus) {
-      return (<div>Loading...</div>);
+      return (
+      <div id="po-cart" class="column">
+        Loading Cart...
+      </div>
+      );
     }
 
     const skusList = Object.keys(skus);
@@ -88,19 +92,19 @@ class Cart extends React.Component {
           <SizeSelector
             skus={ skusList }
             sizes={ sizes }
-            onSelect={this.handleSizeSelect}
+            onSelect={ this.handleSizeSelect }
           />
           <QuantitySelector
             maxQuantity={ maxQuantity }
-            onSelect={this.handleQuantitySelect}
+            onSelect={ this.handleQuantitySelect }
           />
         </div>
         {
           this.isInStock &&
           <AddButton
-            label={'add to bag'}
+            label={ 'add to bag' }
             id={'checkout'}
-            onClick={this.handleCheckout}
+            onClick={ this.handleCheckout }
           />
         }
       </div>
