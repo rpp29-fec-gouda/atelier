@@ -13,7 +13,8 @@ class ProductCard extends React.Component {
     this.state = {
       product: undefined,
       productImageURL: '',
-      alternateImageURLs: []
+      alternateImageURLs: [],
+      avgRating: undefined
     };
   }
 
@@ -91,9 +92,46 @@ class ProductCard extends React.Component {
     }
   }
 
+  loadRatings() {
+    const { productId, checkCache, updateCache } = this.props;
+    const product = this.state.product;
+    if (productId) {
+      let url = '';
+      let productRatings = checkCache('ratings', productId);
+
+      if (productRatings) {
+        avgRating = 0; // calc from productRatings
+        console.log(`${productId} ratings loaded from cache`);
+        this.setState({
+          avgRating: avgRating
+        });
+      } else {
+        axios.get(`/reviews/meta?product_id=${productId}`)
+          .then(res => {
+            updateCache('ratings', productId, res.data);
+            console.log(`${productId} ratings retrieved from server`);
+            const ratings = res.data.ratings;
+            console.log(ratings);
+            const avgRating = ratings.reduce((total, value) => (total + value)) / ratings.length; // calc from res.data
+
+            this.setState({
+              avgRating: avgRating
+            });
+          })
+          .catch(err => {
+            this.setState({
+              productImageURL: ''
+            });
+            console.log(err.stack);
+          });
+      }
+    }
+  }
+
   componentDidMount() {
     this.loadProductData();
     this.loadImages();
+    this.loadRatings();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
