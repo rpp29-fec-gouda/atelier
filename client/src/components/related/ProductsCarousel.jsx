@@ -16,7 +16,7 @@ const ProductsCarousel = (props) => {
       <h1></h1>
       <span className='rp-component-title'>RELATED PRODUCTS</span>
       <div className='rp-card-container'>{
-        productIds.length ? (
+        Array.isArray(productIds) && productIds.length ? (
           productIds.map(id => (
             <ProductCard
               key={ `rpCard${id}` }
