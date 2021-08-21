@@ -15,6 +15,7 @@ class RatingsAndReviews extends React.Component {
     this.ratingsData = {};
     this.displayedReviews = [];
     this.averageRating = 0;
+    this.roundedAverage = 0;
     this.totalRating = 0;
     this.ratings = {};
     this.characteristics = {};
@@ -33,6 +34,7 @@ class RatingsAndReviews extends React.Component {
       product_id: '',
       count: 2,
       sort: 'relevant',
+      expanded: false,
       5: false,
       4: false,
       3: false,
@@ -51,6 +53,7 @@ class RatingsAndReviews extends React.Component {
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
     this.handleInteractions = this.handleInteractions.bind(this);
     this.updateReviewsList = this.updateReviewsList.bind(this);
+    this.expandBody = this.expandBody.bind(this);
   }
 
   getReviews(sort, count, id, callback = () => {}) {
@@ -78,7 +81,14 @@ class RatingsAndReviews extends React.Component {
     }
   }
 
+  ratingDetails(averageRating, totalRating, roundedAverage) {
+    this.averageRating = averageRating;
+    this.totalRating = totalRating;
+    this.roundedAverage = roundedAverage;
+  }
+
   getRatings(id, callback = () => {}) {
+
     const { checkCache, updateCache } = this.props;
     let ratings = checkCache('ratings', id);
 
@@ -250,6 +260,14 @@ class RatingsAndReviews extends React.Component {
       .catch(err => console.log('Submit error', err));
   }
 
+  expandBody(e) {
+    let value = e.target.id;
+    console.log('value:', value);
+    this.setState({
+      expanded: true
+    });
+  }
+
   render() {
     const selectedProduct = this.props.selectedProduct;
     if (selectedProduct === null) {
@@ -266,6 +284,7 @@ class RatingsAndReviews extends React.Component {
         <div id='rr-ratings-reviews'>
           <RatingList
             ratings={this.state.ratings}
+            ratingDetails={this.ratingDetails}
             averageRating={this.averageRating}
             totalRating={this.totalRating}
             reviews={this.state.reviews}
@@ -277,6 +296,7 @@ class RatingsAndReviews extends React.Component {
             <ReviewsList
               selectedProduct={this.props.selectedProduct}
               averageRating={this.averageRating}
+              roundedAverage={this.roundedAverage}
               characteristics={this.state.characteristics}
               loadMoreReviews={this.loadMoreReviews}
               reviews={this.state.reviews}
@@ -289,6 +309,8 @@ class RatingsAndReviews extends React.Component {
               count={this.state.count}
               reviewsLength={this.state.reviewsLength}
               callback={(filteredList) => this.updateReviewsList(filteredList)}
+              expanded={this.state.expanded}
+              expandBody={this.expandBody}
             />
             : <NewReview
               selectedProduct={selectedProduct}

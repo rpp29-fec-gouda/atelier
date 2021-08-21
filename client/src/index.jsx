@@ -90,7 +90,6 @@ class App extends React.Component {
           checkCache={ this.checkCache}
           updateCache={ this.updateCache}
         />
-
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
