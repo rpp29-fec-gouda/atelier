@@ -46,23 +46,25 @@ describe('<ProductOverview />', () => {
     expect(wrapper.find(Price)).toHaveLength(1);
   });
 
-  it('should not have a ratings summary component if there are no reviews:', function () {
-    const props = {
-      name: 'slacker\'s slacks',
-      category: 'pants',
-      reviewCount: 0,
-      averageRating: 2.2,
-      defaultPrice: 99.99,
-      salePrice: 59.99,
-      originalPrice: 80.00
-    };
-    const wrapper = mount(<ProductInformation {...props} />);
-    expect(wrapper.find('#po-product-information')).toHaveLength(1);
-    expect(wrapper.find('h2.uppercase')).toHaveLength(1);
-    expect(wrapper.find('h2.uppercase').text()).toEqual(props.category);
-    expect(wrapper.find('h1')).toHaveLength(1);
-    expect(wrapper.find('h1').text()).toEqual(props.name);
-    expect(wrapper.find(RatingsSummary)).toHaveLength(0);
-    expect(wrapper.find(Price)).toHaveLength(1);
-  });
+  // Component now renders with 0 stars.
+  // TODO: Test that statement of # of reviews w/ link is not present
+  // it('should not have a ratings summary component if there are no reviews:', function () {
+  //   const props = {
+  //     name: 'slacker\'s slacks',
+  //     category: 'pants',
+  //     reviewCount: 0,
+  //     averageRating: 2.2,
+  //     defaultPrice: 99.99,
+  //     salePrice: 59.99,
+  //     originalPrice: 80.00
+  //   };
+  //   const wrapper = mount(<ProductInformation {...props} />);
+  //   expect(wrapper.find('#po-product-information')).toHaveLength(1);
+  //   expect(wrapper.find('h2.uppercase')).toHaveLength(1);
+  //   expect(wrapper.find('h2.uppercase').text()).toEqual(props.category);
+  //   expect(wrapper.find('h1')).toHaveLength(1);
+  //   expect(wrapper.find('h1').text()).toEqual(props.name);
+  //   expect(wrapper.find(RatingsSummary)).toHaveLength(0);
+  //   expect(wrapper.find(Price)).toHaveLength(1);
+  // });
 });

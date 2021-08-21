@@ -14,8 +14,8 @@ const SizeSelector = (props) => {
   };
 
   let key = 0;
-  const outOfStockMessage = 'Out of Stock';
   const isInStock = (items && items.length > 0);
+  const defaultMessage = isInStock ? 'Select Size' : 'Out of Stock';
   return (
     <div id="po-size-selector">
       <select
@@ -23,7 +23,7 @@ const SizeSelector = (props) => {
         name="sizes"
         defaultValue={ -1 }
         onChange={ onChange }
-        disabled
+        disabled={ !isInStock }
       >
         <option
           class="uppercase"
@@ -31,19 +31,17 @@ const SizeSelector = (props) => {
           disabled
           hidden
         >
-        {
-          isInStock ? (
-            items.map(item => (
-              <option
-                key={ key++ }
-                value={ item.sku }>{ item.size }
-              </option>
-            ))
-          ) : (
-            { outOfStockMessage }
-          )
-        }
+        { defaultMessage }
         </option>
+        {
+          isInStock &&
+          items.map(item => (
+            <option
+              key={ key++ }
+              value={ item.sku }>{ item.size }
+            </option>
+          ))
+        }
       </select>
     </div>
   );

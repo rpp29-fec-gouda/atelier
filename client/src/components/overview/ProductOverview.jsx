@@ -72,11 +72,10 @@ class ProductOverview extends React.Component {
       console.log(`${styles.length} existing styles associated with product ID ${productId}:`, styles);
       callback(styles);
     } else {
-      console.log(`⭐⭐⭐ GET request for product id ${productId} ⭐⭐⭐`);
+      console.log(`⭐⭐⭐ GET request for STYLES of product id ${productId} ⭐⭐⭐`);
       axios.get(`/products/${productId}/styles`)
         .then(res => {
           styles = res.data.results;
-          console.log('styles = res.data.results;', res.data.results);
           console.log(`${styles.length} new styles associated with product ID ${productId}`, styles);
           updateCache('styles', productId, styles);
           callback(styles);
@@ -88,12 +87,24 @@ class ProductOverview extends React.Component {
   }
 
   fetchRatings(productId, callback) {
-    const { checkCache } = this.props;
+    const { checkCache, updateCache } = this.props;
     let ratings = checkCache('ratings', ratings);
 
     if (ratings) {
       console.log(`Existing ratings associated with product ID ${productId}:`, JSON.stringify(ratings));
       callback(ratings);
+    } else {
+      console.log(`⭐⭐⭐ GET request for RATINGS of product id ${productId} ⭐⭐⭐`);
+      axios.get(`reviews/meta?product_id=${productId}`)
+        .then(res => {
+          ratings = res.data.ratings;
+          console.log(`New ratings associated with product ID ${productId}`, JSON.stringify(ratings));
+          updateCache('ratings', productId, ratings);
+          callback(ratings);
+        })
+        .catch(err => {
+          console.log(err.stack);
+        });
     }
   }
 
