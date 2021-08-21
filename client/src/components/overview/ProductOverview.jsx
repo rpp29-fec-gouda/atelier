@@ -44,6 +44,10 @@ class ProductOverview extends React.Component {
     this.loadAdditionalProductData(this.props.selectedProduct?.id);
   }
 
+  componentDidUpdate() {
+    // this.loadAdditionalProductData(this.props.selectedProduct?.id);
+  }
+
   loadAdditionalProductData(id) {
     console.log('Loading Product Overview data...');
     if (!id || id === null) {
@@ -88,7 +92,7 @@ class ProductOverview extends React.Component {
 
   fetchRatings(productId, callback) {
     const { checkCache, updateCache } = this.props;
-    let ratings = checkCache('ratings', ratings);
+    let ratings = checkCache('ratings', productId);
 
     if (ratings) {
       console.log(`Existing ratings associated with product ID ${productId}:`, JSON.stringify(ratings));
