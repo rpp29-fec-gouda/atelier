@@ -1,4 +1,4 @@
-.rr-reviews-list {
+#rr-reviews-list {
   order: 2;
   flex-basis: 70%;
 }
@@ -9,19 +9,10 @@
 }
 
 .rr-review-buttons {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;}
+}
 
-#rr-more-reviews {
-  font-size: 1em;
-  padding: 1em;
-  margin: 0.7em, 0.7em, 0.7em, 0em;
-
-  align-items: center;
-  font-weight: bold;
-  user-select: none;
-  flex-flow: row;
-  text-transform: uppercase;
-  border: 1px solid black;
+.rr-more-reviews {
+  margin-top: 0.5em;
 }

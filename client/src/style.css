@@ -7,6 +7,11 @@ body {
   /* font-size: .8em; */
 }
 
+.background-dark {
+  color:rgb(200, 200, 200);
+  background-color: rgb(25, 25, 25);
+}
+
 #app {
   display: flex;
   flex-flow: column;
@@ -65,6 +70,16 @@ a {
   user-select: none;
 }
 
+.link {
+  font-size: .8em;
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
+
+.link:hover {
+  text-decoration:none;
+}
 
 /* Form Elements */
 select {
@@ -90,12 +105,12 @@ select {
   user-select: none;
   flex-flow: row;
   text-transform: uppercase;
-  border: 1px solid black;
+  border: 1px solid #dd9944;
 }
 
 .button:hover {
   cursor: pointer;
-  background-color: yellow;
+  background-color: #dd9944;
 }
 
 .error-prompt {

@@ -39,11 +39,11 @@
   width: 1em;
 }
 
-.image-navigator-item svg.image-navigator-icon {
+.image-navigator-icon {
   background-color: seashell;
 }
 
-.image-navigator-item svg.image-navigator-icon:hover {
+.image-navigator-icon:hover {
   width: 1.1em;
   background-color: yellow;
 }
@@ -61,18 +61,18 @@
 }
 
 /* Thumbnails & Placeholders */
-.image-navigator-item img.image-navigator-thumbnail {
+.image-navigator-thumbnail {
   border: 1px black solid;
   width: 3em;
 }
 
-img.image-navigator-thumbnail:hover,  div.image-navigator-placeholder:hover  {
+.image-navigator-thumbnail:hover,  .image-navigator-placeholder:hover  {
   border: 1px white solid;
 }
 
-.image-navigator-item div.image-navigator-placeholder {
+.image-navigator-placeholder {
   height: 3em;
-  background-color: white;
+  background-color: lightgoldenrodyellow;
 }
 
 .image-navigator-thumbnail-selected {

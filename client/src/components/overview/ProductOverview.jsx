@@ -72,6 +72,7 @@ class ProductOverview extends React.Component {
       console.log(`${styles.length} existing styles associated with product ID ${productId}:`, styles);
       callback(styles);
     } else {
+      console.log(`⭐⭐⭐ GET request for STYLES of product id ${productId} ⭐⭐⭐`);
       axios.get(`/products/${productId}/styles`)
         .then(res => {
           styles = res.data.results;
@@ -93,6 +94,7 @@ class ProductOverview extends React.Component {
       console.log(`Existing ratings associated with product ID ${productId}:`, JSON.stringify(ratings));
       callback(ratings);
     } else {
+      console.log(`⭐⭐⭐ GET request for RATINGS of product id ${productId} ⭐⭐⭐`);
       axios.get(`reviews/meta?product_id=${productId}`)
         .then(res => {
           ratings = res.data.ratings;
@@ -123,12 +125,15 @@ class ProductOverview extends React.Component {
 
   updateDefaultStyle(styles) {
     console.log('Updating default style');
+    console.log('styles', styles);
     const defaultStyle = this.getDefaultStyle(styles);
     this.updateState(defaultStyle);
   }
 
   updateRatingsProperties(ratings) {
-    console.log(`Product Ratings: ${JSON.stringify(ratings)}`);
+    if (!ratings) {
+      return;
+    }
     const numberOfReviews = this.getNumberOfReviews(ratings);
     this.setState({
       numberOfReviews: numberOfReviews,
@@ -271,33 +276,38 @@ class ProductOverview extends React.Component {
     const sizesAvailable = this.state.sizesAvailable;
 
     if (selectedProduct === null || selectedStyle === null) {
-      return (<div>Loading...</div>);
+      console.log('Product Overview: First render');
+      return (
+        <div id="product-overview">
+          Loading Product Overview...
+        </div>
+      );
     }
 
     const { slogan, description } = selectedProduct;
 
     const styleId = selectedStyle.style_id;
     const selectorItems = this.getStyleSelectorItems(this.state.styles);
-    console.log('styles', JSON.stringify(selectorItems));
+    // console.log('styles', JSON.stringify(selectorItems));
     console.log('Rendering product overview');
     return (
       <div id="product-overview">
         <div class="row">
           <ImageGallery
-            photos={selectedStyle.photos}
-            isExpanded={this.state.isExpanded}
-            isZoomed={this.state.isZoomed}
-            onClickExpand={this.handleExpandedView}
-            onClickCollapse={this.handleCollapsedView}
-            onClickZoom={this.handleImageZoom}
+            photos={ selectedStyle.photos }
+            isExpanded={ this.state.isExpanded }
+            isZoomed={ this.state.isZoomed }
+            onClickExpand={ this.handleExpandedView }
+            onClickCollapse={ this.handleCollapsedView }
+            onClickZoom={ this.handleImageZoom }
           />
           {
             !this.state.isExpanded &&
             <div id="po-col-right" class="column">
               <ProductInformation
                 name={ selectedProduct.name }
-                averageRating={this.state.averageRating}
-                reviewCount={this.state.numberOfReviews}
+                averageRating={ this.state.averageRating }
+                reviewCount={ this.state.numberOfReviews }
                 category={ selectedProduct.category }
                 defaultPrice={ selectedProduct.default_price }
                 originalPrice={ selectedStyle.original_price }

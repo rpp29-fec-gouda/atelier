@@ -30,6 +30,7 @@ class QA extends React.Component {
         productId: selectedProduct.id
       });
     } else {
+      console.log(`❓❓❓GET request for Questions-product ID: ${selectedProduct.id}❓❓❓`)
       axios.get(`/qa/questions?product_id=${selectedProduct.id}&count=1000`)
         .then(res => {
           updateCache('questions', selectedProduct.id, res.data.results);
@@ -56,6 +57,7 @@ class QA extends React.Component {
   }
 
   updateData() {
+    console.log(`❓❓❓GET request for Questions-product ID: ${this.props.selectedProduct.id}❓❓❓`)
     axios.get(`/qa/questions?product_id=${this.props.selectedProduct.id}&count=1000`)
       .then(res => {
         this.setState({

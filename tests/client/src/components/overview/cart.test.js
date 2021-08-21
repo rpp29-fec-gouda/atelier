@@ -31,7 +31,7 @@ describe('<Cart />', function () {
   it('should contain loading element if data not provided:', function () {
     const wrapper = mount(<Cart />);
     expect(wrapper.find('div')).toHaveLength(1);
-    expect(wrapper.find('div').text()).toEqual('Loading...');
+    expect(wrapper.find('div').text()).toEqual('Loading Cart...');
   });
 
   it('should have expected content from provided properties:', function () {
