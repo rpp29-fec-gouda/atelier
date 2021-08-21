@@ -54,6 +54,7 @@ class RatingsAndReviews extends React.Component {
     this.handleInteractions = this.handleInteractions.bind(this);
     this.updateReviewsList = this.updateReviewsList.bind(this);
     this.expandBody = this.expandBody.bind(this);
+    this.ratingDetails = this.ratingDetails.bind(this);
   }
 
   getReviews(sort, count, id, callback = () => {}) {
@@ -304,6 +305,7 @@ class RatingsAndReviews extends React.Component {
               sortOptions={this.sortOptions}
               handleReviewSort={this.handleReviewSort}
               getReviews={this.getReviews}
+              getRatings={this.getRatings}
               currentSort={this.state.sort}
               product_id={this.state.product_id}
               count={this.state.count}
