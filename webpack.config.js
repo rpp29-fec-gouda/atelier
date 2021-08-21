@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const zlib = require('zlib');
 
 module.exports = {
   entry: './client/src/index.jsx',
@@ -41,6 +43,16 @@ module.exports = {
       htmlAttributes: {
         lang: 'en'
       }
+    }),
+    new CompressionPlugin({
+      filename: '[base].br',
+      algorithm: 'brotliCompress',
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: {
+        level: 11,
+        threshold: 10240,
+        minRatio: 0.8,
+      },
     }),
   ],
 };
