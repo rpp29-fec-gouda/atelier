@@ -7,9 +7,11 @@ const Sort = (props) => {
 
   return reviews ? (
     <div id='rr-sort'>
-      {fullReviews.length} reviews, sorted by <select id='rr-dropdown' className='rr-dropdown' onChange={handleReviewSort}>
+      <label for='rr-dropdown'></label>
+      {fullReviews.length} reviews, sorted by <select className='rr-dropdown' onChange={handleReviewSort}>
+
         {sortOptions.map((option, i) => (
-          <option type='submit' value={option} key={i}>{option}</option>
+          <option className='rr-dropdown' type='submit' value={option} key={i}>{option}</option>
         ))}
       </select>
     </div>
