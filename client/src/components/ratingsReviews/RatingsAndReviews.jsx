@@ -254,11 +254,11 @@ class RatingsAndReviews extends React.Component {
       time: new Date()
     };
 
-    // axios.post(url, data)
-    //   .then(res => {
-    //     console.log('🌻🌻🌻🌻 AXIOS POST INTERACTIONS 1 🌻🌻🌻🌻: ', res);
-    //   })
-    //   .catch(err => console.log('Submit error', err));
+    axios.post(url, data)
+      .then(res => {
+        console.log('🌻🌻🌻🌻 AXIOS POST INTERACTIONS 1 🌻🌻🌻🌻: ', res);
+      })
+      .catch(err => console.log('Submit error', err));
   }
 
   expandBody(e) {
@@ -305,6 +305,7 @@ class RatingsAndReviews extends React.Component {
               sortOptions={this.sortOptions}
               handleReviewSort={this.handleReviewSort}
               getReviews={this.getReviews}
+              getRatings={this.getRatings}
               currentSort={this.state.sort}
               product_id={this.state.product_id}
               count={this.state.count}

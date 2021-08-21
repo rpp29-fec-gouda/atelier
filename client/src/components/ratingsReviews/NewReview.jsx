@@ -48,6 +48,8 @@ class NewReview extends React.Component {
     this.key = 0;
     this.stars = 0;
     this.characteristics = {};
+
+    this.starMeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
     this.radio = {
       Size: {
         one: 'A size too small',
@@ -160,46 +162,53 @@ class NewReview extends React.Component {
   }
 
   checkingRequire() {
-    let data = {};
+    let requires = {};
 
-    for (var key in this.state.requires) {
-      console.log('TEST', this.state.requires[key]);
+    for (let key in this.state.requires) {
       if (this.state[key] === '') {
-        data[key] = `${key} is required`;
+        requires[key] = `${key} is required`;
       }
+      if (!this.props.characteristics[key]
+        && key !== 'Rating'
+        && key !== 'Recommendation'
+        && key !== 'Nickname'
+        && key !== 'Email'
+        && key !== 'Review Body') {
+        delete requires[key];
+      }
+    }
 
-      if (Object.keys(data).length === 0) {
-        return true;
-      } else {
-        this.setState({
-          requires: data
-        });
-      }
+    if (Object.keys(requires).length === 0) {
+      return true;
+    } else {
+      this.setState({
+        requires: requires
+      });
     }
   }
 
   submit() {
     event.preventDefault();
     let data, url;
-    if (this.state.formName === 'Review') {
-      url = '/reviews';
-      data = {
-        rating: this.state['Rating'],
-        summary: this.state.reviewSummary,
-        body: this.state.['Review Body'],
-        recommend: this.state.['Recommendation'],
-        name: this.state.['Nickname'],
-        email: this.state.['Email'],
-        photos: this.state.photos,
-        characteristics: this.characteristics,
-        'product_id': this.state.selectedProduct.id
-      };
-    }
+
+    url = '/reviews';
+    data = {
+      rating: parseInt(this.state['Rating']),
+      summary: this.state.reviewSummary,
+      body: this.state['Review Body'],
+      recommend: this.state['Recommendation'],
+      name: this.state['Nickname'],
+      email: this.state['Email'],
+      photos: this.state.photos,
+      characteristics: this.characteristics,
+      'product_id': this.state.selectedProduct.id
+    };
 
     if (this.checkingRequire()) {
       axios.post(url, data)
         .then(res => {
           console.log('🌻🌻🌻🌻 AXIOS POST NEW REVIEW 1 🌻🌻🌻🌻: ', res);
+          window.location.reload();
         })
         .catch(err => console.log('submit err', err));
     }
@@ -216,7 +225,10 @@ class NewReview extends React.Component {
             <div className='rr-new-review-form'>
               <h3>*Overal Rating</h3>
 
-              <StarRating rating={this.state['Rating'] === '' ? 0 : parseInt(this.state['Rating'])} max={5} callback={this.handleOnChange} />
+              <div className='rr-stars'>
+                <StarRating className='rr-star-meaning' rating={this.state['Rating'] === '' ? 0 : parseInt(this.state['Rating'])} max={5} callback={this.handleOnChange} />
+                <label className='rr-star-label' for='rr-star-meaning'>{this.starMeaning[this.state['Rating']]}</label>
+              </div>
 
               <div style={{ color: 'red' }}>{this.state.requires['Rating']}</div>
               <hr></hr>
@@ -258,19 +270,21 @@ class NewReview extends React.Component {
                     {this.state[item[0]] ? <div key={item[0]}>{this.state[item[0]] + ' selected'}</div>
                       : <div key={item[0]}>{'none selected'}</div>
                     }
-                    <div>
-                      <input
-                        type="radio"
-                        className='rr-new-review-char'
-                        key={item[0] + item[1].one}
-                        name={item[0]}
-                        title={item[1].one}
-                        value={1}
-                        onChange={this.handleOnChange}
-                      />
-                      <label for='Characteristic'>
-                        {item[1].one}
-                      </label>
+                    <div className='rr-options'>
+                      <div className='rr-first-option'>
+                        <input
+                          type="radio"
+                          className='rr-new-review-char1'
+                          key={item[0] + item[1].one}
+                          name={item[0]}
+                          title={item[1].one}
+                          value={1}
+                          onChange={this.handleOnChange}
+                        />
+                        <label for='rr-new-review-char1'>
+                          {item[1].one}
+                        </label>
+                      </div>
                       <input
                         type="radio"
                         className='rr-new-review-char'
@@ -298,16 +312,20 @@ class NewReview extends React.Component {
                         value={4}
                         onChange={this.handleOnChange}
                       />
-                      <input
-                        type="radio"
-                        className='rr-new-review-char'
-                        key={item[0] + item[1].five}
-                        name={item[0]}
-                        title={item[1].five}
-                        value={5}
-                        onChange={this.handleOnChange}
-                      />
-                      <div>{item[1].five}</div>
+                      <div className='rr-first-option'>
+                        <input
+                          type="radio"
+                          className='rr-new-review-char5'
+                          key={item[0] + item[1].five}
+                          name={item[0]}
+                          title={item[1].five}
+                          value={5}
+                          onChange={this.handleOnChange}
+                        />
+                        <label for='rr-new-review-char5'>
+                          {item[1].five}
+                        </label>
+                      </div>
                     </div>
                     <div style={{ color: 'red' }}>{this.state.requires.[item[0]]}</div>
                   </div>

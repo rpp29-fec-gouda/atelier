@@ -50,12 +50,13 @@ const RatingBreakdown = (props) => {
 
     ratingDetails(averageRating, totalRatings, roundedAverage);
 
-
     return averageRating ? (
       <div className='rr-rating-breakdown'>
-        <div className='rr-average-rating'>
+        <div className='rr-overall-rating'>
           <span id='rr-rating-breakdown rr-average-rating' className='rr-rating-breakdown rr-average-rating'>{isNaN(roundedAverage) ? '' : roundedAverage}</span>
-          <StarRating rating={averageRating} max={5} />
+          <div className='rr-rating-breakdown rr-star-rating'>
+            <StarRating rating={averageRating} max={5} />
+          </div>
         </div>
         <br></br><br></br>
         <div className='rr-rating-review-percentage'>{averageRecommend}% of reviews recommend this product</div>
