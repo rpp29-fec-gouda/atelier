@@ -392,7 +392,7 @@ class NewReview extends React.Component {
             </div>
           </form>
         </Modal >
-        <div id='add-review' class='button uppercase' onClick={this.showModal}>ADD A REVIEW<div class='plus'>+</div></div>
+        <div id='rr-add-review' class='button uppercase' onClick={this.showModal}>Add a review<div class='plus'>+</div></div>
       </div >
     ) : (
       null

@@ -56,7 +56,7 @@ class RatingsAndReviews extends React.Component {
     this.expandBody = this.expandBody.bind(this);
   }
 
-  getReviews(sort, count, id, callback = () => {}) {
+  getReviews(sort, count, id, callback = () => { }) {
     const { checkCache, updateCache } = this.props;
     let reviews = checkCache('reviews', id);
 
@@ -87,7 +87,7 @@ class RatingsAndReviews extends React.Component {
     this.roundedAverage = roundedAverage;
   }
 
-  getRatings(id, callback = () => {}) {
+  getRatings(id, callback = () => { }) {
 
     const { checkCache, updateCache } = this.props;
     let ratings = checkCache('ratings', id);
@@ -245,12 +245,13 @@ class RatingsAndReviews extends React.Component {
     e.persist();
     console.log('HANDLE INTERACTIONS ELEMENT:', e.target.id);
     let data, url;
+    let time = new Date();
 
     url = '/interactions';
     data = {
-      'element': e.target.id,
-      widget: 'Ratings & Reviews',
-      time: new Date()
+      'element': e.target.id || e.target.className,
+      widget: 'reviews',
+      time: time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + '-' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds()
     };
 
     axios.post(url, data)
@@ -277,7 +278,7 @@ class RatingsAndReviews extends React.Component {
     const displayedReviews = this.state.filteredReviews || this.state.displayedReviews;
 
     return (
-      <div name='rr-ratings-reviews-widget' id='rr-ratings-reviews-widget'
+      <div id='rr-ratings-reviews-widget' id='rr-ratings-reviews-widget'
         onClick={this.handleInteractions}
       >
         <h3 name='rr-component-title' id='rr-component-title' className='rr-component-title'>RATINGS &amp; REVIEWS</h3>
@@ -292,30 +293,27 @@ class RatingsAndReviews extends React.Component {
             recommended={this.state.recommended}
             handleRatingProgressFilter={this.handleRatingProgressFilter}
           />
-          {this.state.reviews ?
-            <ReviewsList
-              selectedProduct={this.props.selectedProduct}
-              averageRating={this.averageRating}
-              roundedAverage={this.roundedAverage}
-              characteristics={this.state.characteristics}
-              loadMoreReviews={this.loadMoreReviews}
-              reviews={this.state.reviews}
-              displayedReviews={displayedReviews}
-              sortOptions={this.sortOptions}
-              handleReviewSort={this.handleReviewSort}
-              getReviews={this.getReviews}
-              currentSort={this.state.sort}
-              product_id={this.state.product_id}
-              count={this.state.count}
-              reviewsLength={this.state.reviewsLength}
-              callback={(filteredList) => this.updateReviewsList(filteredList)}
-              expanded={this.state.expanded}
-              expandBody={this.expandBody}
-            />
-            : <NewReview
-              selectedProduct={selectedProduct}
-              characteristics={this.characteristics}
-            />}
+
+          <ReviewsList
+            selectedProduct={this.props.selectedProduct}
+            averageRating={this.averageRating}
+            roundedAverage={this.roundedAverage}
+            characteristics={this.state.characteristics}
+            loadMoreReviews={this.loadMoreReviews}
+            reviews={this.state.reviews}
+            displayedReviews={displayedReviews}
+            sortOptions={this.sortOptions}
+            handleReviewSort={this.handleReviewSort}
+            getReviews={this.getReviews}
+            currentSort={this.state.sort}
+            product_id={this.state.product_id}
+            count={this.state.count}
+            reviewsLength={this.state.reviewsLength}
+            callback={(filteredList) => this.updateReviewsList(filteredList)}
+            expanded={this.state.expanded}
+            expandBody={this.expandBody}
+          />
+
         </div>
       </div>
     );
