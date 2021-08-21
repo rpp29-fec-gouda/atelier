@@ -16,6 +16,7 @@ class ProductOverview extends React.Component {
     super(props);
 
     this.state = {
+      selectedId: props.selectedProduct?.id,
       styles: [],
       selectedStyle: null,
       sizesAvailable: [],
@@ -45,7 +46,15 @@ class ProductOverview extends React.Component {
   }
 
   componentDidUpdate() {
-    // this.loadAdditionalProductData(this.props.selectedProduct?.id);
+    const { selectedProduct } = this.props;
+    const matchId = selectedProduct.id;
+    console.log('Product Review: Compnent Did Update');
+    console.log('matchId', matchId);
+    console.log('this.state.selectedId', this.state.selectedId);
+    if (this.state.selectedId !== matchId) {
+      this.setState({ selectedId: matchId });
+      this.loadAdditionalProductData(this.props.selectedProduct?.id);
+    }
   }
 
   loadAdditionalProductData(id) {
@@ -73,15 +82,15 @@ class ProductOverview extends React.Component {
     let styles = checkCache('styles', productId);
 
     if (styles) {
-      console.log(`${styles.length} existing styles associated with product ID ${productId}:`, styles);
-      callback(styles);
+      console.log(`${styles.results.length} existing styles associated with product ID ${productId}:`, styles.results);
+      callback(styles.results);
     } else {
       console.log(`⭐⭐⭐ GET request for STYLES of product id ${productId} ⭐⭐⭐`);
       axios.get(`/products/${productId}/styles`)
         .then(res => {
           styles = res.data.results;
-          console.log(`${styles.length} new styles associated with product ID ${productId}`, styles);
-          updateCache('styles', productId, styles);
+          console.log(`⭐ ${styles.length} new styles associated with product ID ${productId} ⭐`, styles);
+          updateCache('styles', productId, res.data);
           callback(styles);
         })
         .catch(err => {
@@ -96,15 +105,15 @@ class ProductOverview extends React.Component {
 
     if (ratings) {
       console.log(`Existing ratings associated with product ID ${productId}:`, JSON.stringify(ratings));
-      callback(ratings);
+      callback(ratings.ratings);
     } else {
       console.log(`⭐⭐⭐ GET request for RATINGS of product id ${productId} ⭐⭐⭐`);
       axios.get(`reviews/meta?product_id=${productId}`)
         .then(res => {
           ratings = res.data.ratings;
-          console.log(`New ratings associated with product ID ${productId}`, JSON.stringify(ratings));
-          updateCache('ratings', productId, ratings);
-          callback(ratings);
+          console.log(`⭐ New ratings associated with product ID ${productId} ⭐`, JSON.stringify(ratings));
+          updateCache('ratings', productId, res.data);
+          callback(res.data.ratings);
         })
         .catch(err => {
           console.log(err.stack);
@@ -147,6 +156,7 @@ class ProductOverview extends React.Component {
 
   // TODO: Begin model refactor section
   getDefaultStyle(styles) {
+    console.log(styles);
     for (const style of styles) {
       if (style['default?']) {
         return style;
