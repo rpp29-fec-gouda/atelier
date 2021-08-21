@@ -18,7 +18,7 @@ describe('<ScrollingArrows />', () => {
   it('should have expected default properties & class:', function () {
     const wrapper = shallow(<ScrollingArrows />);
     expect(wrapper.state().index).toEqual(0);
-    expect(wrapper.instance().min).toEqual(0);
+    expect(wrapper.instance().minIndex).toEqual(0);
     expect(wrapper.find('.scrolling-arrows-decrement-no-stem')).toHaveLength(1);
     expect(wrapper.find('.scrolling-arrows-increment-no-stem')).toHaveLength(1);
   });
@@ -63,11 +63,11 @@ describe('<ScrollingArrows />', () => {
 
   it('should set default index to min', function () {
     const props = {
-      min: 2
+      minIndex: 2
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.state().index).toEqual(props.min);
-    expect(wrapper.instance().min).toEqual(props.min);
+    expect(wrapper.state().index).toEqual(props.minIndex);
+    expect(wrapper.instance().minIndex).toEqual(props.minIndex);
   });
 
   it('should increment/decrement from provided starting index', function () {
@@ -86,33 +86,33 @@ describe('<ScrollingArrows />', () => {
 
   it('should wrap around decrement to specified max if not capped', function () {
     const props = {
-      min: 0,
-      max: 3
+      minIndex: 0,
+      maxIndex: 3
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.state().index).toEqual(props.min);
+    expect(wrapper.state().index).toEqual(props.minIndex);
     wrapper.find('.scrolling-arrows-decrement').simulate('click');
-    expect(wrapper.state().index).toEqual(props.max);
+    expect(wrapper.state().index).toEqual(props.maxIndex);
   });
 
   it('should wrap around increment to specified min if not capped', function () {
     const props = {
-      min: 0,
-      max: 2,
+      minIndex: 0,
+      maxIndex: 2,
       index: 2
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
-    expect(wrapper.state().index).toEqual(props.max);
+    expect(wrapper.state().index).toEqual(props.maxIndex);
     wrapper.find('.scrolling-arrows-increment').simulate('click');
-    expect(wrapper.state().index).toEqual(props.min);
+    expect(wrapper.state().index).toEqual(props.minIndex);
   });
 
   it('should hide decrement icon if at min & is capped', function () {
     const props = {
       isCapped: true,
       index: 0,
-      min: 0,
-      max: 2,
+      minIndex: 0,
+      maxIndex: 2,
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);
     expect(wrapper.find('.scrolling-arrows-decrement')).toHaveLength(0);
@@ -122,8 +122,8 @@ describe('<ScrollingArrows />', () => {
   it('should hide increment icon if at max & is capped', function () {
     const props = {
       isCapped: true,
-      min: 0,
-      max: 2,
+      minIndex: 0,
+      maxIndex: 2,
       index: 2
     };
     const wrapper = shallow(<ScrollingArrows {...props} />);

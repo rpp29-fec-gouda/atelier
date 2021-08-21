@@ -24,7 +24,7 @@ const incrementIndexDown = (index, max, min = 0, isCapped) => {
   if (index < min) {
     if (isCapped) {
       index = min;
-    } else if (max) {
+    } else if (max !== undefined) {
       index = max;
     }
   }
@@ -33,7 +33,7 @@ const incrementIndexDown = (index, max, min = 0, isCapped) => {
 
 const incrementIndexUp = (index, max, min = 0, isCapped) => {
   index++;
-  if (max && index >= max) {
+  if (max !== undefined && index >= max) {
     index = isCapped ? max : min;
   }
   return index;
