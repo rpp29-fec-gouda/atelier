@@ -96,12 +96,12 @@ td {
 }
 
 .qa-answers-scrolling {
-  overflow: scroll;
+  overflow: auto;
   max-height: 18em; 
 }
 
 .qa-questions-scrolling {
-  overflow: scroll;
+  overflow: auto;
   max-height: 40em;
 }
 
