@@ -3,11 +3,11 @@ import './sort.css';
 
 
 const Sort = (props) => {
-  const { reviews, sortOptions, handleReviewSort } = props;
+  const { reviews, fullReviews, sortOptions, handleReviewSort } = props;
 
   return reviews ? (
     <div id='rr-sort'>
-      {reviews.length} reviews, sorted by <select id='rr-dropdown' className='rr-dropdown' onChange={handleReviewSort}>
+      {fullReviews.length} reviews, sorted by <select id='rr-dropdown' className='rr-dropdown' onChange={handleReviewSort}>
         {sortOptions.map((option, i) => (
           <option type='submit' value={option} key={i}>{option}</option>
         ))}
