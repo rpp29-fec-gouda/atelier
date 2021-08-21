@@ -1,4 +1,5 @@
 import React from 'react';
+import './reviewBody.css';
 
 class ReviewBody extends React.Component {
   constructor(props) {
@@ -30,14 +31,14 @@ class ReviewBody extends React.Component {
           {review.body.length > 250 && this.state.collapsed && (
             <div class='rr-full-review-body'>
               <div id={review.review_id} className='rr-review-body'>{review.body.slice(0, 250)}</div>
-              <a className='rr-show-more' id={review.review_id} onClick={this.expandBody.bind(this)}>{'Show more'}</a>
+              <a href='#!' className='rr-show-more' id={review.review_id} onClick={this.expandBody.bind(this)}>{'Show more'}</a>
             </div>
           )}
 
           {review.body.length > 250 && !this.state.collapsed && (
             <div class='rr-full-review-body'>
               <div id={review.review_id} className='rr-review-body'>{review.body}</div>
-              <a className='rr-show-less' id={review.review_id} onClick={this.expandBody.bind(this)}>{'Show less'}</a>
+              <a href='#!' className='rr-show-more' id={review.review_id} onClick={this.expandBody.bind(this)}>{'Show less'}</a>
             </div>
           )}
         </div>
