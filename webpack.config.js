@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const zlib = require('zlib');
 
 module.exports = {
   entry: './client/src/index.jsx',
