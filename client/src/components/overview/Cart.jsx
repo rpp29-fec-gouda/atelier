@@ -84,8 +84,6 @@ class Cart extends React.Component {
     console.log('Rendering po-cart');
 
     console.log(`%cCart current sku: ${this.state.currentSku}`, 'color: red');
-    console.log('Current State Style ID', this.state.selectedId);
-    console.log('New Props Style ID', this.props.selectedId);
 
     const skus = this.props.skus;
     console.log('Cart skus', JSON.stringify(skus));
@@ -134,7 +132,7 @@ class Cart extends React.Component {
           this.isInStock &&
           <AddButton
             label={ 'add to bag' }
-            id={'checkout'}
+            id={ 'checkout' }
             onClick={ this.handleCheckout }
           />
         }
