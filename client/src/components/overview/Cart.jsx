@@ -11,8 +11,8 @@ class Cart extends React.Component {
     this.isInStock = props.skus ? Object.keys(props.skus).length > 0 : false;
 
     this.state = {
-      // selectedId: props.selectedId,
       currentSku: null,
+      currentSize: '',
       currentQuantity: 0,
       bag: [],
       promptSelection: false
@@ -21,35 +21,30 @@ class Cart extends React.Component {
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
     this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
-    this.resetSku = this.checkResetSku.bind(this);
   }
 
-  getMaxQuantity(currentSku, skus) {
-    return (currentSku === null || !skus[currentSku])
-    ? 0
-    : skus[currentSku].quantity;
-  }
-
-  checkResetSku() {
-    // const matchId = this.props.selectedId;
-    // if (this.state.selectedId !== matchId) {
-      console.log('Resetting SKUs');
-      this.setState({
-        // selectedId: matchId,
-        currentSku: null,
-        currentQuantity: 0,
-        promptSelection: false
-      });
-    // }
+  getMaxQuantity(currentSize, sizesList, skusList, skus) {
+    const index = sizesList.indexOf(currentSize);
+    console.log('getMaxQuantity: currentSize', currentSize);
+    console.log('getMaxQuantity: index', index);
+    if (currentSize === '' || index < 0) {
+      return 0;
+    } else {
+      console.log('getMaxQuantity: ', skusList[index].quantity);
+      return skus[skusList[index]].quantity;
+    }
   }
 
   handleSizeSelect(sku) {
+    console.log('sku for size selected:', sku);
+    const currentSize = this.props.skus[sku]?.size;
+    console.log('size selected:', currentSize);
     this.setState({
       currentSku: sku,
+      currentSize: this.props.skus[sku]?.size,
       currentQuantity: 1,
       promptSelection: false
     });
-    console.log('sku for size selected:', this.state.currentSku);
   }
 
   handleQuantitySelect(quantity) {
@@ -100,15 +95,13 @@ class Cart extends React.Component {
     const skusList = Object.keys(skus);
     console.log('Cart sku #s', skusList);
 
-    const sizes = [];
+    const sizesList = [];
     skusList.map(sku => {
-      sizes.push(skus[sku].size);
+      sizesList.push(skus[sku].size);
     })
-    console.log('Cart sizes', sizes);
+    console.log('Cart sizes', sizesList);
 
-    const maxQuantity = this.getMaxQuantity(this.state.currentSku, skus);
-
-
+    const maxQuantity = this.getMaxQuantity(this.state.currentSize, sizesList, skusList, skus);
     console.log('Cart maxQuantity', maxQuantity);
 
     return (
@@ -120,7 +113,7 @@ class Cart extends React.Component {
         <div class="row">
           <SizeSelector
             skus={ skusList }
-            sizes={ sizes }
+            sizes={ sizesList }
             onSelect={ this.handleSizeSelect }
           />
           <QuantitySelector
