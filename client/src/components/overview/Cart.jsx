@@ -1,4 +1,5 @@
 import React from 'react';
+import POClickTracker from '../trackers/POClickTracker';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
 import AddButton from '../shared/AddButton';
@@ -143,11 +144,13 @@ class Cart extends React.Component {
         </div>
         {
           this.isInStock &&
-          <AddButton
-            label={ 'add to bag' }
-            id={ 'checkout' }
-            onClick={ this.handleCheckout }
-          />
+          <POClickTracker eventName="clickTracker" moduleName="Product Overview">
+            <AddButton
+              label={ 'add to bag' }
+              id={ 'checkout' }
+              onClick={ this.handleCheckout }
+            />
+          </POClickTracker>
         }
       </div>
     );
