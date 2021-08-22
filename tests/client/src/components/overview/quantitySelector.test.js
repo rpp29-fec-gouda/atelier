@@ -36,25 +36,34 @@ describe('<QuantitySelector />', () => {
     expect(wrapper.find('#po-quantity').children()).toHaveLength(15);
   });
 
-  it('should execute a callback:', function () {
+  it('should execute a callback when quantities available:', function () {
     const mockCallBack = jest.fn();
 
     const props = {
       maxQuantity: 5,
       onSelect: mockCallBack
     };
-    const wrapper = shallow(<QuantitySelector {...props} />);
+    const wrapper = mount(<QuantitySelector {...props} />);
+    wrapper.find('#po-quantity').find('option').at(0).instance().selected = false;
+    wrapper.find('#po-quantity').find('option').at(1).instance().selected = true;
     wrapper.find('#po-quantity').simulate('change');
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 
   it('should be disabled if no quantities available', function () {
-    const wrapper = shallow(<QuantitySelector />);
+    const mockCallBack = jest.fn();
+    const props = {
+      onSelect: mockCallBack
+    };
+
+    const wrapper = shallow(<QuantitySelector {...props} />);
     expect(wrapper.find('#po-quantity').props().disabled).toEqual(true);
     expect(wrapper.find('#po-quantity').children().first().text()).toEqual('-');
+    wrapper.find('#po-quantity').simulate('change');
+    expect(mockCallBack.mock.calls.length).toEqual(0);
   });
 
-  it('should reset to default upon re-render:', function () {
+  it('should reset to default upon re-render if available quantity size no longer exists:', function () {
     const props = {
       maxQuantity: 5
     };
@@ -71,4 +80,6 @@ describe('<QuantitySelector />', () => {
     expect(wrapper.find('#po-quantity option').at(0).props().selected).toEqual(undefined);
     expect(wrapper.find('#po-quantity option').at(2).props().selected).toEqual(undefined);
   });
+
+  // TODO: Test for when available quantity size exists after props update
 });
