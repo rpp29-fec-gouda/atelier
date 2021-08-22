@@ -72,7 +72,7 @@ Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 ### Image Gallery
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/overview/po-imageGallery.gif)
+![First pass at demo video](./docs/demos/overview/po-imageGallery.mp4)
 
 #### Carousel Navigation (TBD)
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
