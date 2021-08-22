@@ -64,7 +64,7 @@ Below are some brief descriptions of the various app components, with animations
 ## Atelier
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/demo_po.gif)
+<img alt="atelier demo" src="./docs/demos/demo_po.gif" width="50%" />
 
 ## Product Overview
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
@@ -72,7 +72,7 @@ Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 ### Image Gallery
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/overview/po-imageGallery.mp4)
+![image gallery demo](./docs/demos/overview/po-imageGallery.mp4)
 
 #### Carousel Navigation (TBD)
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
@@ -82,17 +82,18 @@ Component complete but need more than 1 thumbnail to demo...
 ### Stars & Reviews
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/overview/po-starsAndReviews.gif)
+<img alt="stars and reviews demo" src="./docs/demos/overview/po-starsAndReviews.gif" width="50%" />
 
 ### Select Styles
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/overview/po-styleSelector.gif)
+<img alt="select styles demo" src="./docs/demos/overview/po-styleSelector.gif" width="50%" />
 
 ### Shopping Cart
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![First pass at demo video](./docs/demos/overview/po-cart.gif)
+<img alt="shopping cart demo" src="./docs/demos/overview/po-cart.gif" width="50%" />
 
 You are not allowed to add to cart unless a size is chosen:
-![First pass at demo video](./docs/demos/overview/po-cartPrompt.gif)
+
+<img alt="shopping cart edge case demo" src="./docs/demos/overview/po-cartPrompt.gif" width="50%" />
