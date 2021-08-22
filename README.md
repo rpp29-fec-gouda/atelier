@@ -72,7 +72,8 @@ Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 ### Image Gallery
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
 
-![image gallery demo](./docs/demos/overview/po-imageGallery.mp4)
+https://user-images.githubusercontent.com/6684303/130370001-9988c092-f074-426a-9003-9fa844883840.mp4
+
 
 #### Carousel Navigation (TBD)
 Lorem ipsum, I sayum! Lorem ipsum, I sayum!
