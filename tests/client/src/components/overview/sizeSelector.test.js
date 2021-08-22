@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
 import SizeSelector from '../../../../../client/src/components/overview/SizeSelector.jsx';
@@ -38,7 +38,9 @@ describe('<SizeSelector />', () => {
       sizes: ['XS', 'S', 'M', 'L', 'XL', 'XL'],
       onSelect: mockCallBack
     };
-    const wrapper = shallow(<SizeSelector {...props} />);
+    const wrapper = mount(<SizeSelector {...props} />);
+    wrapper.find('#po-sizes').find('option').at(0).instance().selected = false;
+    wrapper.find('#po-sizes').find('option').at(1).instance().selected = true;
     wrapper.find('#po-sizes').simulate('change');
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
