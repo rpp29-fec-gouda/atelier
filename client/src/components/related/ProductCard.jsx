@@ -130,9 +130,9 @@ class ProductCard extends React.Component {
   }
 
   componentDidMount() {
-    this.loadProductData();
-    this.loadImages();
-    this.loadRatings();
+    // this.loadProductData();
+    // this.loadImages();
+    // this.loadRatings();
   }
 
   shouldComponentUpdate(nextProps, nextState) {

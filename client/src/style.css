@@ -4,6 +4,8 @@ body {
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: .5em;
   color: #444;
+  margin: 0;
+  padding: .5em;
   /* font-size: .8em; */
 }
 
