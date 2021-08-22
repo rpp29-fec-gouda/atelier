@@ -116,9 +116,9 @@ class Cart extends React.Component {
     console.log('Cart sku #s', skusList);
 
     const sizesList = [];
-    skusList.map(sku => {
+    skusList.forEach(sku => {
       sizesList.push(skus[sku].size);
-    })
+    });
     console.log('Cart sizes', sizesList);
 
     const maxQuantity = this.getMaxQuantity(this.state.currentSize, sizesList, skusList, skus);
