@@ -1,6 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); */
 
 #RelatedProducts {
+  box-sizing: border-box;
   display: flex;
   flex-flow: column;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -29,23 +30,34 @@
   min-height: 22em;
 }
 
-.rp-carousel-nav-left, .rp-carousel-nav-right {
+.rp-carousel-nav {
+  box-sizing: border-box;
+  z-index: 2;
   position: absolute;
-  align-items: center;
-  justify-content: center;
-  min-width: 5em;
+  line-height: 22em;
+  min-width: 10em;
+  max-width: 10em;
   min-height: 22em;
-  border: 2px solid #0003;
+  max-height: 22em;
+  border: none !important;
 }
 
-.rp-carousel-nav-left {
+.rp-carousel-nav a {
+  font-size: 3em;
+  min-width: 100%;
+  margin: 0;
+}
+
+.rp-nav-left {
   left: 0;
-  background-image: linear-gradient(0.25turn, #ffff, #fff0);
+  text-justify: left;
+  background-image: linear-gradient(to right, #fff, #fff, #ffff, #fff0);
 }
 
-.rp-carousel-nav-right {
+.rp-nav-right {
   right: 0;
-  background-image: linear-gradient(0.25turn, #fff0, #ffff);
+  text-justify: right;
+  background-image: linear-gradient(to left, #fff, #fff, #ffff, #fff0);
 }
 
 .rp-card-container {
@@ -68,7 +80,8 @@
   overflow: hidden;
 }
 
-.rp-card, .rp-card-sticky {
+.rp-card, .rp-card-sticky, .rp-card-placeholder {
+  box-sizing: border-box;
   display: flex;
   flex-flow: column;
   flex: none;
@@ -76,9 +89,16 @@
   justify-content: stretch;
   width: 15em;
   height: 22em;
+  min-height: 22em;
   border: 1px solid #333;
   margin-right: 8px;
   user-select: none;
+}
+
+.rp-card-placeholder {
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .rp-card-sticky {
@@ -175,14 +195,6 @@
   /* flex-grow: 2; */
 }
 
-.rp-card-placeholder {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 #ProductCompare {
   display: flex;
   flex-flow: column nowrap;
@@ -261,5 +273,42 @@
 
   .rp-card-sticky {
     position: static;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  .rp-carousel-nav-left, .rp-carousel-nav-right {
+    border: 2px solid #fff3;
+  }
+
+  .rp-carousel-nav-left {
+    background-image: linear-gradient(to right, #333, #333, #333f, #3330);
+  }
+
+  .rp-carousel-nav-right {
+    background-image: linear-gradient(to left, #333, #333, #333f, #3330);
+  }
+
+  #ProductCompare {
+    background: #333c;
+    border-color: #fff6;
+  }
+
+  .rp-compare-title-bar {
+    color: #ddd;
+    background-color: #0006;
+  }
+
+  .rp-image-backer {
+    background-color: #555;
+  }
+
+  .rp-card-sticky {
+    background-color: #333c;
+  }
+
+  .rp-card, .rp-card-sticky, .rp-card-placeholder {
+    border-color: #ccc;
   }
 }
