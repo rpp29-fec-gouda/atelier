@@ -55,7 +55,7 @@ describe('<StyleSelector />', () => {
     expect(wrapper.find('h2').text()).toEqual('STYLE > ' + props.name);
     expect(wrapper.find('.po-style-selected').children()).toHaveLength(1);
     expect(wrapper.find('#po-styles-list div.row')).toHaveLength(3);
-    expect(wrapper.find('div.po-style')).toHaveLength(9);
+    expect(wrapper.find('div.po-style')).toHaveLength(17);
     // console.log('MEH0', wrapper.find('div.po-style'));
     // console.log('MEH1', wrapper.find('div.po-style').instance());
     // console.log('MEH2', wrapper.find('div.po-style').first().instance());
@@ -88,7 +88,7 @@ describe('<StyleSelector />', () => {
     expect(wrapper.find('h2').text()).toEqual('STYLE > ' + props.name);
     expect(wrapper.find('.po-style-selected').children()).toHaveLength(0);
     expect(wrapper.find('#po-styles-list div.row')).toHaveLength(2);
-    expect(wrapper.find('div.po-style')).toHaveLength(8);
+    expect(wrapper.find('div.po-style')).toHaveLength(15);
     // expect(wrapper.find('.po-style-selector-image')).toHaveLength(7);
   });
 
