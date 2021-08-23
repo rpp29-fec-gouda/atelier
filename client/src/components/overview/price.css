@@ -3,10 +3,10 @@
   /* min-height is implicit */
 }
 
-.po-sale-po-price {
+.po-sale-price {
   color: red
 }
 
-.po-original-po-price {
+.po-original-price {
   text-decoration: line-through
 }

@@ -28,6 +28,7 @@ class ProductCompare extends React.Component {
   }
 
   handleDragStart(event) {
+    event.dataTransfer.setData(null, null); // stupid mozilla poly-fill
     this.offsetX = event.nativeEvent.offsetX;
     this.offsetY = event.nativeEvent.offsetY;
   }

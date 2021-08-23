@@ -13,7 +13,8 @@ class ProductCard extends React.Component {
     this.state = {
       product: undefined,
       productImageURL: '',
-      alternateImageURLs: []
+      alternateImageURLs: [],
+      avgRating: undefined
     };
   }
 
@@ -32,7 +33,7 @@ class ProductCard extends React.Component {
     if (productId) {
       let product = checkCache('products', productId);
       if (product) {
-        console.log(`${type} product ${product.id} (${product.name}) loaded from cache`);
+        // console.log(`${type} product ${product.id} (${product.name}) loaded from cache`);
         this.setState({
           product: product
         });
@@ -41,7 +42,7 @@ class ProductCard extends React.Component {
           .then(res => {
             product = res.data;
             updateCache('products', productId, product);
-            console.log(`${type} product ${product.id} (${product.name}) retrieved from server`);
+            // console.log(`${type} product ${product.id} (${product.name}) retrieved from server`);
             this.setState({
               product: product
             });
@@ -65,7 +66,7 @@ class ProductCard extends React.Component {
 
       if (productStyles) {
         url = productStyles.results[0].photos[0].thumbnail_url;
-        console.log(`${productId} image URL loaded from cache`);
+        // console.log(`${productId} image URL loaded from cache`);
         this.setState({
           productImageURL: url
         });
@@ -76,9 +77,46 @@ class ProductCard extends React.Component {
             url = res.data.results[0].photos[0].thumbnail_url;
             // console.log(res.data.results[0].photos);
 
-            console.log(`${productId} image URL retrieved from server`);
+            // console.log(`${productId} image URL retrieved from server`);
             this.setState({
               productImageURL: url || ''
+            });
+          })
+          .catch(err => {
+            this.setState({
+              productImageURL: ''
+            });
+            console.log(err.stack);
+          });
+      }
+    }
+  }
+
+  loadRatings() {
+    const { productId, checkCache, updateCache } = this.props;
+    const product = this.state.product;
+    if (productId) {
+      let url = '';
+      let productRatings = checkCache('ratings', productId);
+
+      if (productRatings) {
+        const avgRating = undefined; // calc from productRatings
+        console.log(`${productId} ratings loaded from cache`);
+        this.setState({
+          avgRating: avgRating
+        });
+      } else {
+        axios.get(`/reviews/meta?product_id=${productId}`)
+          .then(res => {
+            updateCache('ratings', productId, res.data);
+            // console.log(`${productId} ratings retrieved from server`);
+            const ratings = res.data.ratings;
+            // console.log(ratings);
+            // const avgRating = ratings.reduce((total, value) => (total + value)) / ratings.length; // calc from res.data
+            const avgRating = undefined;
+
+            this.setState({
+              avgRating: avgRating
             });
           })
           .catch(err => {
@@ -94,11 +132,12 @@ class ProductCard extends React.Component {
   componentDidMount() {
     this.loadProductData();
     this.loadImages();
+    this.loadRatings();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.product) {
-      return !(this.state.product.id === nextState.product.id && this.state.productImageURL === nextState.productImageURL);
+      return !(this.state.product.id === nextState.product.id && this.state.productImageURL === nextState.productImageURL && this.state.avgRating === nextState.avgRating);
     } else {
       return true;
     }
@@ -120,7 +159,7 @@ class ProductCard extends React.Component {
       );
     }
 
-    console.log(`Rendering ${product.name} product card`);
+    // console.log(`Rendering ${product.name} product card`);
 
     const { checkCache, updateCache, productId, selectedProduct, selectProduct, type, action } = this.props;
     const { handleActionButtonClick, handleProductClick } = this;

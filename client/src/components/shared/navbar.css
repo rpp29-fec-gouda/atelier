@@ -1,0 +1,38 @@
+.shared-navbar {
+  display: flex;
+  flex-direction: column;
+  background-color: #dd9944;
+  height: 4em;
+  margin-bottom: 3.5em;
+}
+
+.shared-logos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+.shared-announcements{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1em;
+  padding-right: 0.5em;
+  margin-bottom: 3em;
+}
+
+.shared-announcement.site-wide {
+  font-style: italic;
+  padding-right: 0.5em;
+}
+
+.shared-announcement.sale-discount {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.shared-announcement.new-product {
+  text-decoration: underline;
+
+}

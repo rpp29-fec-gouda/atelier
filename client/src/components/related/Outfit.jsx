@@ -20,7 +20,7 @@ class Outfit extends React.Component {
 
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
-      console.log('Outfit found in localStorage:', outfit);
+      // console.log('Outfit found in localStorage:', outfit);
       this.setState({ outfit: outfit });
     }
   }
@@ -74,7 +74,7 @@ class Outfit extends React.Component {
             <h1>+</h1>
             <h2>Add to Outfit</h2>
           </div>
-          {outfit.length ? (
+          {Array.isArray(outfit) && outfit.length ? (
             outfit.map(id => (
               <ProductCard
                 key={ `outfitCard${id}` }

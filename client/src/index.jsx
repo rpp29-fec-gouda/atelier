@@ -8,6 +8,8 @@ import QA from './components/QA/QA.jsx';
 import RelatedProducts from './components/related/RelatedProducts.jsx';
 import RatingsAndReviews from './components/ratingsReviews/RatingsAndReviews.jsx';
 import ProductOverview from './components/overview/ProductOverview';
+import Navbar from './components/shared/Navbar.jsx';
+import DarkMode from './components/shared/DarkMode.jsx';
 
 
 class App extends React.Component {
@@ -31,7 +33,8 @@ class App extends React.Component {
       ready: false,
       selectedProduct: null,
       selectedProductImageURLs: [],
-      selectedProductThumbnailURLs: []
+      selectedProductThumbnailURLs: [],
+      mode: 'light'
     };
   }
 
@@ -59,7 +62,7 @@ class App extends React.Component {
     axios.get(`/products/${this.props.init.id}`)
       .then(res => {
         const product = res.data;
-        console.log(product);
+        // console.log(product);
         this.cache.products.set(product.id, product);
         this.setState({
           selectedProduct: product,
@@ -73,29 +76,34 @@ class App extends React.Component {
 
     return ready ? (
       <React.Fragment>
+        <Navbar />
         <ProductOverview
           selectedProduct={selectedProduct}
           checkCache={ this.checkCache }
           updateCache={ this.updateCache }
           isTesting={this.props.isTesting}
         />
+        <hr></hr>
         <RelatedProducts
           selectedProduct={selectedProduct}
           selectProduct={this.selectProduct}
           checkCache={this.checkCache}
           updateCache={this.updateCache}
         />
+        <hr></hr>
         <QA
           selectedProduct={selectedProduct}
           checkCache={ this.checkCache}
           updateCache={ this.updateCache}
         />
+        <hr></hr>
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
           selectedProduct={selectedProduct}
           checkCache={this.checkCache}
-          updateCache={this.updateCache} />
+          updateCache={this.updateCache}
+        />
       </React.Fragment>
     ) : (
       <p>Loading...</p>
@@ -105,7 +113,8 @@ class App extends React.Component {
 
 export default App;
 
-const randomPage = Math.round(Math.random() * 900);
+const loadObscureProducts = !!(Math.random() < .33);
+const randomPage = loadObscureProducts ? Math.round(Math.random() * 900) : 1;
 axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {
     const product = res.data[0];

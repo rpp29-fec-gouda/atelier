@@ -3,8 +3,8 @@
 body {
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: .5em;
-  color: #444;
-  /* font-size: .8em; */
+  color: #333;
+  margin: 0;
 }
 
 #app {
@@ -100,16 +100,72 @@ select {
   user-select: none;
   flex-flow: row;
   text-transform: uppercase;
-  border: 1px solid black;
+  border: 1px solid #dd9944;
 }
 
 .button:hover {
   cursor: pointer;
-  background-color: yellow;
+  background-color: #dd9944;
 }
 
 .error-prompt {
   color: red;
   background-color: lightgoldenrodyellow;
   border: 1px red dashed;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+    color: #aaa;
+  }
+
+  .background-dark {
+    background-color: #333;
+    color: #aaa;
+  }
+
+  .toggle-dark, .toggle-light {
+    display: flex;
+    border-radius: 0.5em;
+    position: relative;
+  }
+
+  .toggle-dark {
+    background-color: #333;
+  }
+
+  .toggle-light {
+    background-color: #aaa;
+  }
+
+  .dark-mode, .light-mode {
+    margin: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+    text-align: center;
+  }
+  .dark-mode {
+    background-color: #333;
+    color: #aaa;
+  }
+  .light-mode {
+    background-color: #aaa;
+    color: #333;
+  }
+
+  .dark-on-orange-text {
+    color: #333;
+    font-weight: bold;
+  }
+
+  .darkness {
+    background-color: #333;
+    color: #aaa;
+  }
+
+  .brightness {
+    background-color: #aaa;
+    color: #333;
+  }
 }
