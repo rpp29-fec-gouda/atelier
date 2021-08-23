@@ -4,6 +4,7 @@ import ImageNavigator from './ImageNavigator';
 import ImageGalleryModel from './ImageGalleryModel';
 import './imageGallery.css';
 import ZoomedImageController from './ZoomedImageController.js';
+import Image from '../shared/Image';
 
 class ImageGallery extends React.Component {
   constructor(props) { // = {
@@ -121,10 +122,13 @@ class ImageGallery extends React.Component {
             </div>
           </div>
           <div id={this.containerId} onClick={handleImageClick}>
-            <img
-              id={this.imgId}
-              src={photoUrl}
-              alt="selected style selected image"
+            <Image
+              imageType="banner"
+              img={{
+                id: this.imgId,
+                src: photoUrl,
+                alt: "selected style selected image"
+              }}
             />
           </div>
         </div>

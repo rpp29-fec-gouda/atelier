@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../shared/Image';
 import './styleSelector.css';
 
 const StyleSelector = (props) => {
@@ -70,13 +71,24 @@ const StyleSelector = (props) => {
                   >
                     {
                       item.thumbnail && item.thumbnail !== null &&
-                      <img
-                        src={item.thumbnail}
-                        alt="style default thumbnail"
-                        key={itemKey++}
-                        class="po-style po-style-selector-image"
-                        data-style-id={item.id}
-                        onClick={handleClick}></img>
+                      <Image
+                        imageType="thumbnail"
+                        img={{
+                          src: item.thumbnail,
+                          alt: "style default thumbnail",
+                          key: itemKey++,
+                          class: "po-style po-style-selector-image",
+                          'data-style-id': item.id,
+                          onClick: handleClick,
+                          }}
+                      />
+                      // <img
+                      //   src={item.thumbnail}
+                      //   alt="style default thumbnail"
+                      //   key={itemKey++}
+                      //   class="po-style po-style-selector-image"
+                      //   data-style-id={item.id}
+                      //   onClick={handleClick}></img>
                     }
                     {
                       item.id === selectedId &&
