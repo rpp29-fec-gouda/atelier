@@ -104,12 +104,16 @@ describe('<Cart />', function () {
     expect(wrapper.state().currentQuantity).toEqual(0);
     expect(wrapper.state().bag).toEqual([]);
 
-    wrapper.find('#po-sizes').simulate('change', { target: { value: 941279 } });
-    expect(wrapper.state().currentSku).toEqual(941279);
+    wrapper.find('#po-sizes').simulate('change', { target: { value: "941279" } });
+    expect(wrapper.state().currentSku).toEqual("941279");
+
+    wrapper.find('#po-quantity').find('option').at(0).instance().selected = false;
+    wrapper.find('#po-quantity').find('option').at(1).instance().selected = true;
     wrapper.find('#po-quantity').simulate('change', { target: { value: 2 } });
     expect(wrapper.state().currentQuantity).toEqual(2);
+
     wrapper.find('#checkout').first().simulate('click');
-    expect(wrapper.state().bag).toEqual([{sku: 941279, quantity: 2}]);
+    expect(wrapper.state().bag).toEqual([{sku: "941279", quantity: 2}]);
   });
 
   it('should have quantity default to 1 if a new style is chosen:', function () {
@@ -125,10 +129,7 @@ describe('<Cart />', function () {
     };
     const wrapper = mount(<Cart {...props} />);
 
-    wrapper.find('#po-sizes').simulate('change', { target: { value: 941279 } });
-    wrapper.find('#po-quantity').simulate('change', { target: { value: 2 } });
-    expect(wrapper.state().currentQuantity).toEqual(2);
-    wrapper.find('#po-sizes').simulate('change', { target: { value: 941282 } });
+    wrapper.find('#po-sizes').simulate('change', { target: { value: "941279" } });
     expect(wrapper.state().currentQuantity).toEqual(1);
   });
 });

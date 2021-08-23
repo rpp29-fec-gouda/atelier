@@ -1,4 +1,5 @@
 import React from 'react';
+import POClickTracker from '../trackers/POClickTracker';
 import SizeSelector from './SizeSelector';
 import QuantitySelector from './QuantitySelector';
 import AddButton from '../shared/AddButton';
@@ -13,6 +14,7 @@ class Cart extends React.Component {
     this.state = {
       selectedId: props.selectedId,
       currentSku: null,
+      currentSize: '',
       currentQuantity: 0,
       bag: [],
       promptSelection: false
@@ -42,13 +44,28 @@ class Cart extends React.Component {
     }
   }
 
+  getMaxQuantity(currentSize, sizesList, skusList, skus) {
+    const index = sizesList.indexOf(currentSize);
+    console.log('getMaxQuantity: currentSize', currentSize);
+    console.log('getMaxQuantity: index', index);
+    if (currentSize === '' || index < 0) {
+      return 0;
+    } else {
+      console.log('getMaxQuantity: ', skusList[index].quantity);
+      return skus[skusList[index]].quantity;
+    }
+  }
+
   handleSizeSelect(sku) {
+    console.log('sku for size selected:', sku);
+    const currentSize = this.props.skus[sku]?.size;
+    console.log('size selected:', currentSize);
     this.setState({
       currentSku: sku,
+      currentSize: this.props.skus[sku]?.size,
       currentQuantity: 1,
       promptSelection: false
     });
-    console.log('sku for size selected:', this.state.currentSku);
   }
 
   handleQuantitySelect(quantity) {
@@ -83,8 +100,6 @@ class Cart extends React.Component {
     console.log('Rendering po-cart');
 
     console.log(`%cCart current sku: ${this.state.currentSku}`, 'color: red');
-    console.log('Current State Style ID', this.state.selectedId);
-    console.log('New Props Style ID', this.props.selectedId);
 
     const skus = this.props.skus;
     console.log('Cart skus', JSON.stringify(skus));
@@ -101,13 +116,13 @@ class Cart extends React.Component {
     const skusList = Object.keys(skus);
     console.log('Cart sku #s', skusList);
 
-    const sizes = [];
+    const sizesList = [];
     skusList.forEach(sku => {
-      sizes.push(skus[sku].size);
+      sizesList.push(skus[sku].size);
     });
-    console.log('Cart sizes', sizes);
+    console.log('Cart sizes', sizesList);
 
-    const maxQuantity = this.state.currentSku === null ? 0 : skus[this.state.currentSku].quantity;
+    const maxQuantity = this.getMaxQuantity(this.state.currentSize, sizesList, skusList, skus);
     console.log('Cart maxQuantity', maxQuantity);
 
     return (
@@ -119,7 +134,7 @@ class Cart extends React.Component {
         <div class="row">
           <SizeSelector
             skus={ skusList }
-            sizes={ sizes }
+            sizes={ sizesList }
             onSelect={ this.handleSizeSelect }
           />
           <QuantitySelector
@@ -129,11 +144,13 @@ class Cart extends React.Component {
         </div>
         {
           this.isInStock &&
-          <AddButton
-            label={ 'add to bag' }
-            id={'checkout'}
-            onClick={ this.handleCheckout }
-          />
+          <POClickTracker eventName="clickTracker" moduleName="Product Overview">
+            <AddButton
+              label={ 'add to bag' }
+              id={ 'checkout' }
+              onClick={ this.handleCheckout }
+            />
+          </POClickTracker>
         }
       </div>
     );
