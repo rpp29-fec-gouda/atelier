@@ -3,22 +3,32 @@
   flex-basis: 30%;
 }
 
-.rr-new-review {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
+
 
 #rr-add-review {
-  font-size: 1em;
-  padding: 1em;
-  margin: 0.7em, 0.7em, 0.7em, 0em;
+margin-left: 1em;
+margin-top: 0.5em;
+}
+
+.rr-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;}
+
+.rr-first-option {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  font-weight: bold;
-  user-select: none;
-  flex-flow: row;
-  text-transform: uppercase;
-  border: 1px solid black;
+
+}
+
+.rr-stars {
+  display: flex;
+  flex-direction: row;
+}
+
+.rr-star-label {
+  padding-left: 1em;
 }
 
 

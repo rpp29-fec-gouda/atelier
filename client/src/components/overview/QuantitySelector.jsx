@@ -1,36 +1,63 @@
 import React from 'react';
 
-const QuantitySelector = (props) => {
-  console.log('Rendering Quantity Selector');
-  // console.log('props.maxQuantity', props.maxQuantity);
-  const maxQuantityCapped = Math.min(props.maxQuantity, 15);
-  const quantitiesAvailable = props.maxQuantity && maxQuantityCapped > 0;
+class QuantitySelector extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const resetToDefaultSelected = () => {
+    this.onChange = this.onChange.bind(this);
+    this.getAttributes = this.getAttributes.bind(this);
+
+    this.state = {
+      currentQuantity: 0
+    }
+  }
+
+  static defaultProps = {
+    maxQuantityLimit: 15,
+  }
+
+  componentDidUpdate() {
+    const quantitiesAreAvailable = this.quantitiesAreAvailable(this.props.maxQuantity, this.props.maxQuantityLimit);
+    console.log('componentDidUpdate - quantitiesAreAvailable:', quantitiesAreAvailable);
+    if (this.state.currentQuantity === 0 && quantitiesAreAvailable) {
+      console.log('Resetting current quantity to: ', 1);
+      this.setState({ currentQuantity: 1 });
+    } else if (this.state.currentQuantity > 0 && !quantitiesAreAvailable) {
+      console.log('Resetting current quantity to: ', 0);
+      this.setState({ currentQuantity: 0 });
+    }
+  }
+
+  getMaxQuantityCapped(maxQuantity, maxQuantityLimit) {
+    return Math.min(maxQuantity, maxQuantityLimit);
+  }
+
+  quantitiesAreAvailable(maxQuantity, maxQuantityLimit) {
+    return !!(maxQuantity && (this.getMaxQuantityCapped(maxQuantity, maxQuantityLimit) > 0));
+  }
+
+  resetToDefaultSelected() {
+    console.log('Resetting quantity selected')
     const options = document.querySelectorAll('#po-quantity option');
     for (let i = 0; i < options.length; i++) {
       options[i].selected = options[i].defaultSelected;
     }
-  };
+  }
 
-  const onChange = (e) => {
-    props.onSelect(e?.target?.value);
-  };
-
-  const getAttributes = (quantitiesAvailable) => {
+  getAttributes(quantitiesAreAvailable) {
     const selectAttributes = {};
-    if (quantitiesAvailable) {
+    if (quantitiesAreAvailable) {
       selectAttributes['defaultValue'] = 1;
-      selectAttributes['onChange'] = onChange;
+      selectAttributes['onChange'] = this.onChange;
     } else {
       selectAttributes['disabled'] = true;
     }
     return selectAttributes;
   }
 
-  const getQuantities = (quantitiesAvailable) => {
+  getQuantities(quantitiesAreAvailable, maxQuantityCapped) {
     const quantities = [];
-    if (quantitiesAvailable) {
+    if (quantitiesAreAvailable) {
       for (let i = 1; i <= maxQuantityCapped; i++) {
         quantities.push(i);
       }
@@ -39,34 +66,57 @@ const QuantitySelector = (props) => {
     return quantities;
   }
 
-  const selectAttributes = getAttributes(quantitiesAvailable);
-  const quantities = getQuantities(quantitiesAvailable);
-  if (quantitiesAvailable) {
-    resetToDefaultSelected();
+  onChange(e) {
+    const newQuantityValue = e?.target?.value;
+    const newQuantity = parseInt(newQuantityValue);
+    if (newQuantity) {
+      console.log('Quantity onChange:', newQuantity);
+      this.setState({ currentQuantity: newQuantity})
+      this.props.onSelect(newQuantity);
+    }
   }
 
-  let key = 0;
-  return (
-    <div id="po-quantity-selector">
-      <select
-        id="po-quantity"
-        name="quantity"
-        { ...selectAttributes }
-      >
-        {
-          quantitiesAvailable ? (
-            quantities.map(quantity => (
-              <option key={ key++ } value={ quantity }>
-                  { quantity }
-              </option>
-            ))
-          ) : (
-          <option value={ -1 }>-</option>
-          )
-        }
-      </select>
-    </div>
-  );
-};
+  render() {
+    console.log('Rendering Quantity Selector');
+
+    const quantitiesAreAvailable = this.quantitiesAreAvailable(this.props.maxQuantity, this.props.maxQuantityLimit);
+    console.log('quantitiesAreAvailable', quantitiesAreAvailable);
+    const selectAttributes = this.getAttributes(quantitiesAreAvailable);
+
+    const maxQuantityCapped = this.getMaxQuantityCapped(this.props.maxQuantity, this.props.maxQuantityLimit);
+    console.log('maxQuantityCapped', maxQuantityCapped);
+    const quantities = this.getQuantities(quantitiesAreAvailable, maxQuantityCapped);
+
+    console.log('this.state.currentQuantity', this.state.currentQuantity);
+    console.log('quantities.indexOf(this.state.currentQuantity)', quantities.indexOf(this.state.currentQuantity));
+
+    if (quantitiesAreAvailable && quantities.indexOf(this.state.currentQuantity) === -1) {
+        this.resetToDefaultSelected();
+    }
+
+    let key = 0;
+    return (
+      <div id="po-quantity-selector">
+        <select
+          id="po-quantity"
+          name="quantity"
+          { ...selectAttributes }
+        >
+          {
+            quantitiesAreAvailable ? (
+              quantities.map(quantity => (
+                <option key={ key++ } value={ quantity }>
+                    { quantity }
+                </option>
+              ))
+            ) : (
+            <option value={ -1 }>-</option>
+            )
+          }
+        </select>
+      </div>
+    );
+  }
+}
 
 export default QuantitySelector;

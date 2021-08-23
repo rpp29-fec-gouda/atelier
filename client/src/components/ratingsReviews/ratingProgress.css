@@ -12,6 +12,7 @@
 
 .rr-progress-bar.rr-meter::-webkit-meter-bar {
   background: #CCCCCC;
+  border-radius: 0.5%;
 }
 
 .rr-progress-bar.rr-label:hover {

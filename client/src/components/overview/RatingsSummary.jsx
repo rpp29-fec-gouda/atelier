@@ -1,4 +1,5 @@
 import React from 'react';
+import POClickTracker from '../trackers/POClickTracker';
 import StarRating from '../shared/StarRating';
 import './ratingsSummary.css';
 
@@ -16,9 +17,11 @@ const RatingsSummary = (props) => {
             <StarRating
               rating={ props.averageRating }
             />
-            <div id="po-read-all-reviews" onClick={handleOnClick} class="row link">
-              Read all { props.reviewCount } reviews
-            </div>
+            <POClickTracker eventName="clickTracker" moduleName="Product Overview">
+              <div id="po-read-all-reviews" onClick={handleOnClick} class="row link">
+                Read all { props.reviewCount } reviews
+              </div>
+            </POClickTracker>
           </React.Fragment>
         ) : (
           <div>

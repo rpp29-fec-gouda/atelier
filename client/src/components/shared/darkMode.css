@@ -1,0 +1,43 @@
+.toggle-dark, .toggle-light {
+  display: flex;
+  border-radius: 0.5em;
+  position: relative;
+}
+
+.toggle-dark {
+  background-color: rgb(25, 25, 25);
+}
+
+.toggle-light {
+  background-color: rgb(250, 250, 250);
+}
+
+.dark-mode, .light-mode {
+  margin: 0.5em;
+  padding: 0.5em;
+  cursor: pointer;
+  text-align: center;
+}
+.dark-mode {
+  background-color: rgb(25, 25, 25);
+  color: rgb(250, 250, 250);
+}
+.light-mode {
+  background-color: rgb(250, 250, 250);
+  color: rgb(25, 25, 25);
+}
+
+.dark-on-orange-text {
+  color: rgb(25, 25, 25);
+  font-weight: bold;
+}
+
+.darkness {
+  background-color: rgb(25, 25, 25);
+  color: rgb(250, 250, 250);
+}
+
+.brightness {
+  background-color: rgb(250, 250, 250);
+  color: rgb(25, 25, 25);
+}
