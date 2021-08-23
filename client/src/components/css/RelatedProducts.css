@@ -23,29 +23,32 @@
 
 .rp-carousel-viewport {
   display: flex;
-  flex: 0 0 row nowrap;
+  box-sizing: content-box;
   min-width: 100%;
   max-width: 100%;
   margin: 8px 0;
   min-height: 22em;
+  max-height: 22em;
 }
 
 .rp-carousel-nav {
-  box-sizing: border-box;
+  /* box-sizing: content-box; */
+  color: #666;
   z-index: 2;
   position: absolute;
   line-height: 22em;
-  min-width: 10em;
-  max-width: 10em;
-  min-height: 22em;
-  max-height: 22em;
-  border: none !important;
+  min-width: 6em;
+  max-width: 6em;
+  min-height: 22.1em;
+  max-height: 22.1em;
+  /* border: none !important; */
+  cursor: pointer;
 }
 
-.rp-carousel-nav a {
+
+.rp-nav-symbol {
   font-size: 3em;
-  min-width: 100%;
-  margin: 0;
+  user-select: none;
 }
 
 .rp-nav-left {
@@ -54,10 +57,23 @@
   background-image: linear-gradient(to right, #fff, #fff, #ffff, #fff0);
 }
 
+.rp-nav-left:hover {
+  color: #000;
+  text-shadow: 6px 4px 8px #333;
+}
+
+.rp-nav-right span {
+  float: right;
+}
+
 .rp-nav-right {
   right: 0;
-  text-justify: right;
   background-image: linear-gradient(to left, #fff, #fff, #ffff, #fff0);
+}
+
+.rp-nav-right:hover {
+  color: #000;
+  text-shadow: -6px 4px 8px #333;
 }
 
 .rp-card-container {
@@ -65,6 +81,9 @@
   flex-flow: row nowrap;
   position: relative;
   left: 0;
+  /* min-width: max-content;
+  max-width: max-content; */
+  height: 23em;
   overflow: auto;
   justify-content: stretch;
   flex: 1;
@@ -81,7 +100,8 @@
 }
 
 .rp-card, .rp-card-sticky, .rp-card-placeholder {
-  box-sizing: border-box;
+  transition: all 20ms;
+  box-sizing: content-box;
   display: flex;
   flex-flow: column;
   flex: none;
@@ -282,12 +302,16 @@
     border: 2px solid #fff3;
   }
 
-  .rp-carousel-nav-left {
+  .rp-nav-left {
     background-image: linear-gradient(to right, #333, #333, #333f, #3330);
   }
 
-  .rp-carousel-nav-right {
+  .rp-nav-right {
     background-image: linear-gradient(to left, #333, #333, #333f, #3330);
+  }
+
+  .rp-carousel-nav {
+    color: #999;
   }
 
   #ProductCompare {
@@ -310,5 +334,10 @@
 
   .rp-card, .rp-card-sticky, .rp-card-placeholder {
     border-color: #ccc;
+  }
+
+  .rp-nav-left:hover, .rp-nav-right:hover, .add-to-outfit:hover, .rp-compare-symbol:hover, .rp-remove-symbol:hover, .rp-compare-row:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #aaa;
   }
 }

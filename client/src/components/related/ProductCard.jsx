@@ -33,7 +33,7 @@ class ProductCard extends React.Component {
     if (productId) {
       let product = checkCache('products', productId);
       if (product) {
-        console.log(`${type} product ${product.id} (${product.name}) loaded from cache`);
+        // console.log(`${type} product ${product.id} (${product.name}) loaded from cache`);
         this.setState({
           product: product
         });
@@ -42,7 +42,7 @@ class ProductCard extends React.Component {
           .then(res => {
             product = res.data;
             updateCache('products', productId, product);
-            console.log(`${type} product ${product.id} (${product.name}) retrieved from server`);
+            // console.log(`${type} product ${product.id} (${product.name}) retrieved from server`);
             this.setState({
               product: product
             });
@@ -66,7 +66,7 @@ class ProductCard extends React.Component {
 
       if (productStyles) {
         url = productStyles.results[0].photos[0].thumbnail_url;
-        console.log(`${productId} image URL loaded from cache`);
+        // console.log(`${productId} image URL loaded from cache`);
         this.setState({
           productImageURL: url
         });
@@ -77,7 +77,7 @@ class ProductCard extends React.Component {
             url = res.data.results[0].photos[0].thumbnail_url;
             // console.log(res.data.results[0].photos);
 
-            console.log(`${productId} image URL retrieved from server`);
+            // console.log(`${productId} image URL retrieved from server`);
             this.setState({
               productImageURL: url || ''
             });
@@ -109,9 +109,9 @@ class ProductCard extends React.Component {
         axios.get(`/reviews/meta?product_id=${productId}`)
           .then(res => {
             updateCache('ratings', productId, res.data);
-            console.log(`${productId} ratings retrieved from server`);
+            // console.log(`${productId} ratings retrieved from server`);
             const ratings = res.data.ratings;
-            console.log(ratings);
+            // console.log(ratings);
             // const avgRating = ratings.reduce((total, value) => (total + value)) / ratings.length; // calc from res.data
             const avgRating = undefined;
 
@@ -159,7 +159,7 @@ class ProductCard extends React.Component {
       );
     }
 
-    console.log(`Rendering ${product.name} product card`);
+    // console.log(`Rendering ${product.name} product card`);
 
     const { checkCache, updateCache, productId, selectedProduct, selectProduct, type, action } = this.props;
     const { handleActionButtonClick, handleProductClick } = this;
