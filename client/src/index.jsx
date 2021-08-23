@@ -62,7 +62,7 @@ class App extends React.Component {
     axios.get(`/products/${this.props.init.id}`)
       .then(res => {
         const product = res.data;
-        console.log(product);
+        // console.log(product);
         this.cache.products.set(product.id, product);
         this.setState({
           selectedProduct: product,
@@ -96,14 +96,14 @@ class App extends React.Component {
           checkCache={ this.checkCache}
           updateCache={ this.updateCache}
         />
-        <br></br>
         <hr></hr>
         <RatingsAndReviews
           reviews={this.state.reviews}
           ratings={this.state.ratings}
           selectedProduct={selectedProduct}
           checkCache={this.checkCache}
-          updateCache={this.updateCache} />
+          updateCache={this.updateCache}
+        />
       </React.Fragment>
     ) : (
       <p>Loading...</p>

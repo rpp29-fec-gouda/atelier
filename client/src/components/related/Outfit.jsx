@@ -20,7 +20,7 @@ class Outfit extends React.Component {
 
     if (outfitData) {
       const outfit = JSON.parse(outfitData);
-      console.log('Outfit found in localStorage:', outfit);
+      // console.log('Outfit found in localStorage:', outfit);
       this.setState({ outfit: outfit });
     }
   }
