@@ -4,5 +4,6 @@
 
 #po-col-right {
   padding: 2em;
-  width: 33%;
+  width: 24.9em;
+  min-width: 24.9em;
 }

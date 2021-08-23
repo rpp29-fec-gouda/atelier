@@ -1,17 +1,18 @@
 /* #po-style-selector min-height is implicit from #po-styles-list with placeholders */
 
+#po-style-Selector {
+  min-width: 20.9em;
+}
+
 .po-styles {
   padding: 0.7em 0;
 }
 
 .po-style {
-  border: 1px black solid;
-  border-radius: 50%;
   width: 4em;
   height: 4em;
   margin: 0.7em 0.7em 0.7em 0;
   position: relative;
-  background-color: lightgoldenrodyellow;
 }
 
 .po-style:hover {
@@ -19,6 +20,9 @@
 }
 
 .po-style-selector-image {
+  border: 1px black solid;
+  border-radius: 50%;
+  height: 4em;
   position: absolute;
   top: -0.75em;
   left: -0.1em
