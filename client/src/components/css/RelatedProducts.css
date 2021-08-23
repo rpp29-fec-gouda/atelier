@@ -284,6 +284,18 @@
   font-weight: 500;
 }
 
+.rp-stars {
+  display: block;
+  min-width: 100%;
+  max-width: 100%;
+  background-image: linear-gradient(to right, #dd9944 5em, #333 5em);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  overflow: hidden;
+}
+
 @media all and (max-width: 40em) {
   #ProductCompare {
     position: absolute;
@@ -334,6 +346,10 @@
 
   .rp-card, .rp-card-sticky, .rp-card-placeholder {
     border-color: #ccc;
+  }
+
+  .rp-stars {
+    background-image: linear-gradient(to right, #dd9944 5em, white 5em);
   }
 
   .rp-nav-left:hover, .rp-nav-right:hover, .add-to-outfit:hover, .rp-compare-symbol:hover, .rp-remove-symbol:hover, .rp-compare-row:hover {
