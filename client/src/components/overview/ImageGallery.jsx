@@ -1,6 +1,5 @@
 import React from 'react';
 import POClickTracker from '../trackers/POClickTracker';
-import ZoomedImageController from './ZoomedImageController.js';
 import ScrollingArrows from '../shared/ScrollingArrows';
 import ImageNavigator from './ImageNavigator';
 import ImageGalleryModel from './ImageGalleryModel.js';
