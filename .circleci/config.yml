@@ -35,7 +35,7 @@ jobs:
       - store_artifacts:
           path: coverage
       #- coveralls/upload
-    parallelism: 4
+    parallelism: 2
 
 workflows:
   # Below is the definition of your workflow.
