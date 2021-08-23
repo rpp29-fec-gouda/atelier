@@ -1,10 +1,10 @@
 import React from 'react';
 import ScrollingArrows from '../shared/ScrollingArrows';
 import ImageNavigator from './ImageNavigator';
-import ImageGalleryModel from './ImageGalleryModel';
-import './imageGallery.css';
+import ImageGalleryModel from './ImageGalleryModel.js';
 import ZoomedImageController from './ZoomedImageController.js';
 import Image from '../shared/Image';
+import './imageGallery.css';
 
 class ImageGallery extends React.Component {
   constructor(props) { // = {
