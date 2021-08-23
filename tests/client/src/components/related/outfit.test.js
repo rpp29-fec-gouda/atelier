@@ -10,7 +10,7 @@ describe('<Outfit />', () => {
     default: jest.fn()
   }));
 
-  const outfit = mount(<Outfit selectedProduct={{name: 'Product', id: 11}} productIds={[]} checkCache={ () => {}} />);
+  const outfit = mount(<Outfit selectedProduct={{name: 'Product', id: 11}} productIds={[]} checkCache={() => {}} clickTracker={() => {}} />);
   it('Renders', () => {
     expect(outfit.find('div#Outfit')).toHaveLength(1);
   });
