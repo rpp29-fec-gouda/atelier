@@ -23,6 +23,7 @@ class App extends React.Component {
     this.cache = {
       products: new Map(),
       questions: new Map(),
+      avgRatings: new Map(),
       ratings: new Map(),
       reviews: new Map(),
       relatedIds: new Map(),
@@ -40,7 +41,6 @@ class App extends React.Component {
 
   selectProduct(product) {
     if (this.state.selectedProduct.id !== product.id) {
-      // const product = this.checkCache('products', productId);
       if (product) {
         console.log(`${product.name} selected`);
         this.setState({
@@ -83,7 +83,7 @@ class App extends React.Component {
           updateCache={ this.updateCache }
           isTesting={this.props.isTesting}
         />
-        <hr></hr>
+        {/* <hr></hr> */}
         <RelatedProducts
           selectedProduct={selectedProduct}
           selectProduct={this.selectProduct}
@@ -118,7 +118,6 @@ const randomPage = loadObscureProducts ? Math.round(Math.random() * 900) : 1;
 axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {
     const product = res.data[0];
-    // this.cache.products.set(product.id, product);
     const div = document.createElement('div');
     div.setAttribute('id', 'App');
     document.body.appendChild(div);
