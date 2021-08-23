@@ -11,12 +11,23 @@ class RelatedProducts extends React.Component {
 
     this.selectProduct = this.selectProduct.bind(this);
     this.compareProduct = this.compareProduct.bind(this);
+    this.clickTracker = this.clickTracker.bind(this);
+    this.handleTracking = this.handleTracking.bind(this);
 
     this.state = {
       selectedId: null,
       related: [],
       compareTo: null
     };
+  }
+
+  handleTracking(event) {
+    event.stopPropagation();
+    this.props.clickTracker({
+      element: `<${event.target.tagName}> ${event.target.className}`,
+      widget: 'RP',
+      time: new Date()
+    });
   }
 
   collectRelatedProducts(product) {
@@ -51,6 +62,17 @@ class RelatedProducts extends React.Component {
     });
   }
 
+  clickTracker(interaction) {
+    console.log('Click tracker received:', interaction);
+    axios.post('/interactions', interaction)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err.stack);
+      });
+  }
+
   compareProduct(productId) {
     if (productId) {
       const product = this.props.checkCache('products', productId);
@@ -81,12 +103,12 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    const { compareProduct } = this;
+    const { compareProduct, clickTracker, handleTracking } = this;
     const { related, outfit, compareTo } = this.state;
     const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
 
     return (
-      <div id='RelatedProducts' >
+      <div id='RelatedProducts' onClick={handleTracking}>
         <ProductsCarousel
           productIds={ related }
           selectedProduct={ selectedProduct }
@@ -94,12 +116,14 @@ class RelatedProducts extends React.Component {
           checkCache={ checkCache }
           updateCache={ updateCache }
           compare={compareProduct}
+          clickTracker={clickTracker}
         />
         <Outfit
           selectedProduct={ selectedProduct }
           selectProduct={ selectProduct }
           checkCache={ checkCache }
           updateCache={ updateCache }
+          clickTracker={clickTracker}
         />
         <ProductCompare
           selectedProduct={selectedProduct}
@@ -107,6 +131,7 @@ class RelatedProducts extends React.Component {
           resetCompare={compareProduct}
           checkCache={checkCache}
           updateCache={updateCache}
+          clickTracker={clickTracker}
         />
       </div>
     );

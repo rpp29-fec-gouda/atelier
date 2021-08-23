@@ -8,6 +8,7 @@ class ProductCompare extends React.Component {
     this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleDragOver = this.handleDragOver.bind(this);
+    this.handleTracking = this.handleTracking.bind(this);
 
     this.offsetX = 0;
     this.offsetY = 0;
@@ -16,6 +17,16 @@ class ProductCompare extends React.Component {
       x: 'calc(50% - 20em)',
       y: '50%'
     };
+  }
+
+  handleTracking(event) {
+    event.stopPropagation();
+    console.log('Tracking ProductCompare click:', event.target);
+    this.props.clickTracker({
+      element: `<${event.target.tagName}> ${event.target.className}`,
+      widget: 'RP Product Compare Modal',
+      time: new Date()
+    });
   }
 
   handleHide(event) {
@@ -87,6 +98,7 @@ class ProductCompare extends React.Component {
         onDragStart={this.handleDragStart}
         onDrag={this.handleDrag}
         onDragOver={this.handleDragOver}
+        onClick={this.handleTracking}
       >
         <div className='rp-compare-title-bar'>
           <span className='rp-component-title'>COMPARING</span>

@@ -11,6 +11,7 @@ class ProductsCarousel extends React.Component {
     this.handleAction = this.handleAction.bind(this);
     this.handleNav = this.handleNav.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.handleTracking = this.handleTracking.bind(this);
     this.containerElement = React.createRef();
 
     window.addEventListener('resize', this.handleResize);
@@ -25,6 +26,15 @@ class ProductsCarousel extends React.Component {
       showLeftNav: false,
       showRighttNav: false
     };
+  }
+
+  handleTracking(event) {
+    event.stopPropagation();
+    this.props.clickTracker({
+      element: `<${event.target.tagName}> ${event.target.className}`,
+      widget: 'RP Products Carousel',
+      time: new Date()
+    });
   }
 
   resetState() {
@@ -124,16 +134,16 @@ class ProductsCarousel extends React.Component {
   }
 
   render() {
-    const { containerElement, navLeftSymbol, navRightSymbol, handleScroll, handleAction } = this;
-    const { productIds, selectProduct, selectedProduct, compare, checkCache, updateCache } = this.props;
+    const { containerElement, navLeftSymbol, navRightSymbol, handleScroll, handleAction, handleTracking } = this;
+    const { productIds, selectProduct, selectedProduct, compare, checkCache, updateCache, clickTracker } = this.props;
     const { containerLeftOffset, showLeftNav, showRightNav } = this.state;
 
     let key = 0;
     return (
-      <div id='ProductsCarousel'>
+      <div id='ProductsCarousel' onClick={handleTracking}>
         <span className='rp-component-title'>RELATED PRODUCTS</span>
         <div className='rp-carousel-viewport'>
-          {showLeftNav ? <div id='rp-left-nav' className='rp-carousel-nav rp-nav-left' value='left' onClick={this.handleNav}><span className='rp-nav-symbol'>{navLeftSymbol}</span></div> : null}
+          {showLeftNav ? <div id='rp-left-nav' className='rp-carousel-nav rp-nav-left' onClick={this.handleNav}><span className='rp-nav-symbol'>{navLeftSymbol}</span></div> : null}
           <div className='rp-card-container' onScroll={handleScroll} ref={containerElement} >{
             Array.isArray(productIds) && productIds.length ? (
               productIds.map(id => (
@@ -146,13 +156,14 @@ class ProductsCarousel extends React.Component {
                   action={ handleAction }
                   checkCache={ checkCache }
                   updateCache={ updateCache }
+                  clickTracker={clickTracker}
                 />
               ))
             ) : (
               <div className='rp-card rp-card-placeholder'>Searching...</div>
             )}
           </div>
-          {showRightNav ? <div id='rp-right-nav' className='rp-carousel-nav rp-nav-right' value='right' onClick={this.handleNav}><span className='rp-nav-symbol'>{navRightSymbol}</span></div> : null}
+          {showRightNav ? <div id='rp-right-nav' className='rp-carousel-nav rp-nav-right' onClick={this.handleNav}><span className='rp-nav-symbol'>{navRightSymbol}</span></div> : null}
         </div>
       </div>
     );
