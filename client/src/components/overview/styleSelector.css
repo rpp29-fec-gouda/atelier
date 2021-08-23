@@ -1,5 +1,9 @@
 /* #po-style-selector min-height is implicit from #po-styles-list with placeholders */
 
+#po-style-Selector {
+  min-width: 20.9em;
+}
+
 .po-styles {
   padding: 0.7em 0;
 }

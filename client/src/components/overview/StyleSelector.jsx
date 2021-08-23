@@ -79,7 +79,7 @@ const StyleSelector = (props) => {
                           src: item.thumbnail,
                           alt: "style default thumbnail",
                           key: itemKey++,
-                          class: "po-style po-style-selector-image",
+                          className: "po-style po-style-selector-image",
                           'data-style-id': item.id,
                           onClick: handleClick,
                           }}
