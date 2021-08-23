@@ -31,9 +31,18 @@
 #po-main-image {
   position: absolute;
   text-align: center;
+  top: 0;
+  height: 36em;
 }
 
-#po-main-image img {
+/* #po-main-image img {
+  top: 0;
+  height: 36em;
+  background-color: blanchedalmond;
+  z-index: 1;
+} */
+
+#po-image {
   top: 0;
   height: 36em;
   background-color: blanchedalmond;

@@ -1,9 +1,10 @@
 import React from 'react';
 import POClickTracker from '../trackers/POClickTracker';
-import ZoomedImageController from './ZoomedImageController.js';
 import ScrollingArrows from '../shared/ScrollingArrows';
 import ImageNavigator from './ImageNavigator';
-import ImageGalleryModel from './ImageGalleryModel';
+import ImageGalleryModel from './ImageGalleryModel.js';
+import ZoomedImageController from './ZoomedImageController.js';
+import Image from '../shared/Image';
 import './imageGallery.css';
 
 class ImageGallery extends React.Component {
@@ -131,10 +132,13 @@ class ImageGallery extends React.Component {
           </div>
           <POClickTracker eventName="clickTracker" moduleName="Product Overview">
             <div id={ this.containerId } onClick={ handleImageClick }>
-              <img
-                id={ this.imgId }
-                src={ photoUrl }
-                alt="selected style selected image"
+               <Image
+                imageType="banner"
+                img={{
+                  id: this.imgId,
+                  src: photoUrl,
+                  alt: "selected style selected image"
+                }}
               />
             </div>
           </POClickTracker>

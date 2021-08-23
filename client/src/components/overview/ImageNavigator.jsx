@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../shared/Image';
 import ImageNavigatorModel from './ImageNavigatorModel';
 import './imageNavigator.css';
 
@@ -71,13 +72,13 @@ class ImageNavigator extends React.Component {
     const { startIndex, endIndex } = model;
     const useCase = model.getUseCase();
     const items = model.getItemUrls();
+    console.log('Image Navigator Items: ', items);
 
     const itemClass = model.getItemParentClass();
     const itemChildClass = model.getItemChildClass();
     const itemChildClassSelected = itemChildClass + ' selected';
 
     let itemKey = startIndex;
-
     return (
       <div class="image-navigator-component">
         {
@@ -102,11 +103,14 @@ class ImageNavigator extends React.Component {
               onClick={this.handleClick}>
               {
                 useCase.thumbnails &&
-                <img
-                  class={itemChildClass}
-                  src={item.url}
-                  alt="selected style thumbnail"
-                />
+                  <Image
+                    imageType="thumbnail"
+                    img={{
+                        className: itemChildClass,
+                        src: item.url,
+                        alt: 'selected style thumbnail'
+                      }}
+                  />
               }
               {
                 useCase.icons &&

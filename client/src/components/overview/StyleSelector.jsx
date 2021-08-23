@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../shared/Image';
 import POClickTracker from '../trackers/POClickTracker';
 import './styleSelector.css';
 
@@ -59,37 +60,41 @@ const StyleSelector = (props) => {
       </h2>
       <POClickTracker eventName="clickTracker" moduleName="Product Overview">
         <div id="po-styles-list" class="styles column">
-          {
-            itemsByRow.map(itemsOnRow => (
-              <div key={ rowKey++ } class="row">
-                {
-                  itemsOnRow.map(item => (
-                    <div
-                      key={ itemKey++ }
-                      class="po-style"
-                      data-style-id={ item.id }
-                      onClick={ handleClick }
-                    >
-                      {
-                        item.thumbnail && item.thumbnail !== null &&
-                        <img
-                          src={item.thumbnail}
-                          alt="style default thumbnail"
-                          key={itemKey++}
-                          class="po-style po-style-selector-image"
-                          data-style-id={item.id}
-                          onClick={handleClick}></img>
-                      }
-                      {
-                        item.id === selectedId &&
-                        <div class="po-style-selected">✓</div>
-                      }
-                    </div>
-                  ))
-                }
-              </div>
-            ))
-          }
+        {
+          itemsByRow.map(itemsOnRow => (
+            <div key={ rowKey++ } class="row">
+              {
+                itemsOnRow.map(item => (
+                  <div
+                    key={ itemKey++ }
+                    class="po-style"
+                    data-style-id={ item.id }
+                    onClick={ handleClick }
+                  >
+                    {
+                      item.thumbnail && item.thumbnail !== null &&
+                      <Image
+                        imageType="thumbnail"
+                        img={{
+                          src: item.thumbnail,
+                          alt: "style default thumbnail",
+                          key: itemKey++,
+                          className: "po-style po-style-selector-image",
+                          'data-style-id': item.id,
+                          onClick: handleClick,
+                          }}
+                      />
+                    }
+                    {
+                      item.id === selectedId &&
+                      <div class="po-style-selected">✓</div>
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          ))
+        }
         </div>
       </POClickTracker>
     </div>
