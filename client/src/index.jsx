@@ -83,7 +83,7 @@ class App extends React.Component {
           updateCache={ this.updateCache }
           isTesting={this.props.isTesting}
         />
-        {/* <hr></hr> */}
+        <hr></hr>
         <RelatedProducts
           selectedProduct={selectedProduct}
           selectProduct={this.selectProduct}

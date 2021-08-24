@@ -8,10 +8,20 @@ class Outfit extends React.Component {
 
     this.addToOutfit = this.addToOutfit.bind(this);
     this.removeFromOutfit = this.removeFromOutfit.bind(this);
+    this.handleTracking = this.handleTracking.bind(this);
 
     this.state = {
       outfit: []
     };
+  }
+
+  handleTracking(event) {
+    event.stopPropagation();
+    this.props.clickTracker({
+      element: `<${event.target.tagName}> ${event.target.className}`,
+      widget: 'RP Outfit Carousel',
+      time: new Date()
+    });
   }
 
   loadOutfit() {
@@ -60,17 +70,17 @@ class Outfit extends React.Component {
   }
 
   render() {
-    const { addToOutfit, removeFromOutfit } = this;
+    const { addToOutfit, removeFromOutfit, handleTracking } = this;
     const { outfit } = this.state;
-    const { selectedProduct, selectProduct, checkCache, updateCache } = this.props;
+    const { selectedProduct, selectProduct, checkCache, updateCache, clickTracker } = this.props;
 
     let key = 0;
     return selectedProduct ? (
-      <div id='Outfit'>
+      <div id='Outfit' onClick={handleTracking}>
         <h1></h1>
         <span className='rp-component-title'>YOUR OUTFIT</span>
         <div className='rp-card-container'>
-          <div className='rp-card-sticky rp-card-placeholder add-to-outfit' title={`Add ${selectedProduct.name} to outfit`} onClick={ addToOutfit }>
+          <div className='rp-card-sticky rp-card-placeholder add-to-outfit' title={`Add ${selectedProduct.name} to outfit`} onClick={addToOutfit}>
             <h1>+</h1>
             <h2>Add to Outfit</h2>
           </div>
@@ -85,6 +95,7 @@ class Outfit extends React.Component {
                 action={ removeFromOutfit }
                 checkCache={ checkCache }
                 updateCache={ updateCache }
+                clickTracker={clickTracker}
               />
             ))
           ) : null}

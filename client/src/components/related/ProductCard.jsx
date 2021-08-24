@@ -10,6 +10,7 @@ class ProductCard extends React.Component {
 
     this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
     this.handleProductClick = this.handleProductClick.bind(this);
+    this.handleTracking = this.handleTracking.bind(this);
 
     this.state = {
       product: undefined,
@@ -19,13 +20,24 @@ class ProductCard extends React.Component {
     };
   }
 
+  handleTracking(event) {
+    event.stopPropagation();
+    this.props.clickTracker({
+      element: `<${event.target.tagName}> ${event.target.className}`,
+      widget: 'RP ProductCard',
+      time: new Date()
+    });
+  }
+
   handleActionButtonClick(event) {
     event.stopPropagation();
+    this.handleTracking(event);
     const { productId, action } = this.props;
     action(productId);
   }
 
   handleProductClick(event) {
+    this.handleTracking(event);
     this.props.selectProduct(this.state.product);
   }
 
