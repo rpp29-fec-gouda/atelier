@@ -87,6 +87,8 @@
   overflow: auto;
   justify-content: stretch;
   flex: 1;
+  scroll-behavior: smooth;
+  transition: all 4ms;
 }
 
 .rp-title {

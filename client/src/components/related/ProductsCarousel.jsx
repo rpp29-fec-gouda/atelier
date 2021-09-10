@@ -72,9 +72,9 @@ class ProductsCarousel extends React.Component {
     const cmd = event.currentTarget.id;
 
     if (cmd === 'rp-right-nav') {
-      cardContainer.scrollLeft += this.cardWidth;
+      cardContainer.scrollLeft += this.cardWidth + 8;
     } else {
-      cardContainer.scrollLeft -= this.cardWidth;
+      cardContainer.scrollLeft -= this.cardWidth - 8;
     }
   }
 

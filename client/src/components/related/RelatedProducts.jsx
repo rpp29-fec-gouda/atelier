@@ -64,13 +64,13 @@ class RelatedProducts extends React.Component {
 
   clickTracker(interaction) {
     console.log('Click tracker received:', interaction);
-    axios.post('/interactions', interaction)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err.stack);
-      });
+    // axios.post('/interactions', interaction)
+    //   .then(res => {
+    //     console.log(res.data);
+    //   })
+    //   .catch(err => {
+    //     console.log(err.stack);
+    //   });
   }
 
   compareProduct(productId) {
