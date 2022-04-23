@@ -24,6 +24,7 @@ class ImageGalleryModel {
   }
 
   getSelectedPhoto() {
+    console.log('getSelectedPhoto index: ', this.selectedPhotoIndex);
     return this.getPhotoUrl(this.selectedPhotoIndex);
   }
 
@@ -31,6 +32,7 @@ class ImageGalleryModel {
     if (!this.photos) {
       return '';
     }
+    console.log('Photo URL: ', this.photos[index]?.url);
     return this.photos[index]?.url;
   }
 

@@ -176,6 +176,7 @@ class Image extends React.Component {
     const isLoaded = this.state.isLoaded;
     const url = this.state.url;
     const attributes = this.props.img;
+    console.log('Async Photo URL: ', url);
 
     return (
       <React.Fragment>
