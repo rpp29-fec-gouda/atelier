@@ -113,8 +113,9 @@ class App extends React.Component {
 
 export default App;
 
-const loadObscureProducts = !!(Math.random() < .33);
-const randomPage = loadObscureProducts ? Math.round(Math.random() * 900) : 1;
+// const loadObscureProducts = !!(Math.random() < .33);
+// const randomPage = loadObscureProducts ? Math.round(Math.random() * 900) : 1;
+const randomPage = Math.round(Math.random() * 10);
 axios.get(`/products?page=${randomPage}&count=1`)
   .then(res => {
     const product = res.data[0];

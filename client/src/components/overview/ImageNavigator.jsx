@@ -40,6 +40,7 @@ class ImageNavigator extends React.Component {
     if (e.currentTarget.hasAttribute('data-image-id')) {
       e.stopPropagation();
       let imageId = parseInt(e.currentTarget.dataset.imageId);
+      console.log('Image ID on click: ', imageId);
       if (imageId !== this.props.selectedId) {
         this.onClick(imageId);
       }

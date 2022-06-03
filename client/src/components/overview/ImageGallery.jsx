@@ -132,6 +132,12 @@ class ImageGallery extends React.Component {
           </div>
           <POClickTracker eventName="clickTracker" moduleName="Product Overview">
             <div id={ this.containerId } onClick={ handleImageClick }>
+              {
+                console.log('%cRENDERING BANNER IMAGE!', 'color: red')
+              }
+              {
+                 console.log(photoUrl)
+              }
                <Image
                 imageType="banner"
                 img={{
@@ -140,6 +146,9 @@ class ImageGallery extends React.Component {
                   alt: "selected style selected image"
                 }}
               />
+              {
+                console.log('%cBANNER IMAGE RENDERED!', 'color: red')
+              }
             </div>
           </POClickTracker>
         </div>
