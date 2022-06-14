@@ -23,7 +23,7 @@ module.exports = {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'tests/coverage',
+  coverageDirectory: 'app/tests/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
@@ -81,8 +81,8 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/tests/__mocks__/fileMock.js',
-    '\\.(css|less)$': '<rootDir>/tests/__mocks__/styleMock.js'
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/app/tests/__mocks__/fileMock.js',
+    '\\.(css|less)$': '<rootDir>/app/tests/__mocks__/styleMock.js'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -132,7 +132,7 @@ module.exports = {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
     // 'jest-enzyme'
-    '<rootDir>/tests/setupTests.js'
+    '<rootDir>/app/tests/setupTests.js'
   ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
@@ -162,7 +162,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/docs/',
-    '<rootDir>/client/src/style.css'
+    '<rootDir>/app/client/src/style.css'
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
