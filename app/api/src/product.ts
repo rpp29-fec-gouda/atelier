@@ -9,7 +9,7 @@ type GetProductResponse = {
   data: IProduct;
 };
 
-type GetProductsResponse = {
+export type GetProductsResponse = {
   data: [IProduct];
 };
 

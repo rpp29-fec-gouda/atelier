@@ -9,7 +9,7 @@ module.exports = {
   //   inline: true // false causes page to remain the same after changes until a manual refresh is done
   // },
   output: {
-    path: path.resolve(__dirname, 'app/client/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
   mode: 'development',

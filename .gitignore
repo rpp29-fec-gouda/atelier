@@ -1,6 +1,7 @@
 config.js
 config.ts
 built
+dist
 node_modules
 *.DS_Store
 
