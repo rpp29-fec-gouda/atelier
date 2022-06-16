@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import App from '../../../client/src/index.jsx';
+import App from './index.jsx';
 
 // ==== Test Template ====
 // ====== index.jsx ======

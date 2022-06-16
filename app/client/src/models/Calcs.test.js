@@ -2,7 +2,7 @@ import {
   roundByIncrement,
   incrementIndexDown,
   incrementIndexUp
-} from '../../../../client/src/models/Calcs.js';
+} from './Calcs.js';
 
 describe('Test roundByIncrement', function () {
   it('should should equal a matching empty increment', function () {

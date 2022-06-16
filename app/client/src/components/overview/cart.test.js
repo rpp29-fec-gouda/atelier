@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import Cart from '../../../../../client/src/components/overview/Cart.jsx';
-import SizeSelector from '../../../../../client/src/components/overview/SizeSelector';
-import QuantitySelector from '../../../../../client/src/components/overview/QuantitySelector';
-import AddButton from '../../../../../client/src/components/shared/AddButton';
+import Cart from './Cart.jsx';
+import SizeSelector from './SizeSelector';
+import QuantitySelector from './QuantitySelector';
+import AddButton from '../shared/AddButton';
 
 // ==== Test Template ====
 // ====== index.jsx ======

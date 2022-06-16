@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Outfit from '../../../../../client/src/components/related/Outfit.jsx';
+import Outfit from './Outfit.jsx';
 
 describe('<Outfit />', () => {
   const updateOutfit = jest.fn();
