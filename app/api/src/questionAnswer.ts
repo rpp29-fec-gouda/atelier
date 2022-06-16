@@ -1,8 +1,10 @@
 import { requests } from './api';
-import { IQuestionWrite } from '../client/src/models/IQuestionWrite';
-import { IQuestionRead } from '../client/src/models/IQuestionRead';
-import { IAnswerWrite } from '../client/src/models/IAnswerWrite';
-import { IAnswerRead } from '../client/src/models/IAnswerRead';
+import {
+  IQuestionRead,
+  IQuestionWrite,
+  IAnswerRead,
+  IAnswerWrite
+} from '../models';
 
 // Questions & Answers API
 // Notes: https://learn-2.galvanize.com/cohorts/2592/blocks/94/content_files/Front%20End%20Capstone/project-atelier/qa.md
@@ -16,7 +18,7 @@ type GetQuestionsResponse = {
 };
 
 
-export const questions = {
+export const Question = {
   /**
   * Returns a list of reviews for a particular product. This list does not include any reported reviews.
   * @param productId ID of the product for which to retrieve reviews.
@@ -56,7 +58,7 @@ type GetAnswersResponse = {
   }
 };
 
-export const answers = {
+export const Answer = {
   /**
   * Returns a list of reviews for a particular product. This list does not include any reported reviews.
   * @param questionId ID of the question for which answers are needed.

@@ -1,7 +1,9 @@
 import { requests } from './api';
-import { IReviewRead } from '../client/src/models/IReviewRead';
-import { IReviewWrite } from '../client/src/models/IReviewWrite';
-import { IMetadataReview } from '../client/src/models/IMetadataReview';
+import {
+  IReviewRead,
+  IReviewWrite,
+  IMetadataReview
+} from '../models';
 
 // Reviews API
 // See: https://learn-2.galvanize.com/cohorts/2592/blocks/94/content_files/Front%20End%20Capstone/project-atelier/reviews.md
@@ -21,7 +23,7 @@ type GetReviewMetadataResponse = {
   data: IMetadataReview
 };
 
-export const reviews = {
+export const Review = {
   /**
    * Returns a list of reviews for a particular product. This list does not include any reported reviews.
    * @param productId ID of the product for which to retrieve reviews.

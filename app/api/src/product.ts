@@ -1,6 +1,5 @@
 import { requests } from './api';
-import { IProduct } from '../client/src/models/IProduct';
-import { IStyle } from '../client/src/models/IStyle';
+import { IProduct, IStyle } from '../models';
 
 // Products API
 // See: https://learn-2.galvanize.com/cohorts/2592/blocks/94/content_files/Front%20End%20Capstone/project-atelier/products.md
@@ -25,7 +24,7 @@ type GetRelatedProductsResponse = {
   data: [number];
 };
 
-export const products = {
+export const Product = {
   /**
   * Retrieves the list of products.
   * @param page Selects the page of results to return. Default 1.

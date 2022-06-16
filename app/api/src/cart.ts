@@ -1,5 +1,5 @@
 import { requests } from './api';
-import { ICart } from '../client/src/models/ICart';
+import { ICart } from '../models';
 
 // Cart API
 // Notes: https://learn-2.galvanize.com/cohorts/2592/blocks/94/content_files/Front%20End%20Capstone/project-atelier/cart.md
@@ -9,7 +9,7 @@ type GetCartResponse = {
   data: [ICart];
 };
 
-export const cart = {
+export const Cart = {
   /**
   * Retrieves list of products added to the cart by a user.
   * @returns

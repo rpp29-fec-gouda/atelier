@@ -1,4 +1,4 @@
-import { Product } from './server/api.js';
+import { Product } from './api/api.js';
 import path from 'path';
 import express, { Express, Request, Response } from 'express';
 import expressStaticGzip from 'express-static-gzip';
@@ -14,20 +14,20 @@ app.get('/', (res: Response) => {
   res.end();
 });
 
-app.get('/multipleProducts', (req: Request, res: Response) => {
-  console.log('Fetching', req.query.ids);
-  Product.fetchMultiple(req.query.ids)
-    .then(result => {
-      console.log(JSON.stringify(result.data));
-      res.json(result.data);
-    })
-    .catch(err => {
-      res.sendStatus(500);
-    })
-    .then(() => {
-      res.end();
-    });
-});
+// app.get('/multipleProducts', (req: Request, res: Response) => {
+//   console.log('Fetching', req.query.ids);
+//   Product.fetchMultiple(req.query.ids)
+//     .then(result => {
+//       console.log(JSON.stringify(result.data));
+//       res.json(result.data);
+//     })
+//     .catch(err => {
+//       res.sendStatus(500);
+//     })
+//     .then(() => {
+//       res.end();
+//     });
+// });
 
 app.all('*', (req: Request, res: Response) => (
   Product.fwd(req, (err, result) => {
