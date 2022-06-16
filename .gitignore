@@ -1,12 +1,15 @@
 config.js
 config.ts
+built
 node_modules
-coverage
 *.DS_Store
+
+coverage
 __snapshots__
 __archive__
 testResults
 sonar-report.xml
+
 atelierKeyPair.pem
 login.sh
 
